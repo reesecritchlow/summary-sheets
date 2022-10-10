@@ -1,0 +1,806 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=0.5in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+
+
+
+\title{Math 257 PDE Review}
+\author{reesecritchlow }
+\date{June 2022}
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\lhead{\vspace{0.75cm}\\ MATH 257 Review Package}
+\rhead{\vspace{0.75cm}\\Reese Critchlow, 2022}
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{large}
+    \noindent Common Boundary Conditions
+\end{large}\\
+\rule{\textwidth}{0.5pt}\smallskip\\
+
+\noindent Given a PDE with a separable solution $u(p, q) = P(p) \cdot Q(q)$, which can be rearranged to fit the form \[\frac{Q^{(n)}(q)}{Q(q)} + C = \frac{P''(p)}{P(p)} = -\lambda\]
+and with boundary conditions in $a$, example: $u(0, q), u(L, q)...$, we can identify a set of common solutions to the initial boundary value problem that is $P''(p) + \lambda P(p) = 0$
+
+\begin{enumerate}
+    \begin{multicols}{2}
+    \item \textbf{Dirichlet Boundary Conditions}\\
+    \medskip
+    \underline{Form}\\
+    \medskip
+    $u(0,q) = u(L,q) = 0$\\
+    \medskip
+    \underline{Solutions}\\
+    \medskip
+    $P_n = \sin\left(\frac{n\pi}{L}p\right)$, $\lambda_n = \left(\frac{n\pi}{L}\right)^2$, $\mu_n = \frac{n\pi}{L}$, $n \geq 1$
+    
+    \item \textbf{Neumann Boundary Conditions} \\
+    \medskip
+    \underline{Form}\\
+    \medskip
+    $u_p(0,q) = u_p(L,q) = 0$\\
+    \medskip
+    \underline{Solutions}\\
+    \medskip
+    $P_0 = 1$, $\lambda_0 = 0$\\
+    $P_n = \cos\left(\frac{n\pi}{L}p\right)$, $\lambda_n = \left(\frac{n\pi}{L}\right)^2$, $\mu_n = \frac{n\pi}{L}$, $n \geq 1$
+    
+    \item \textbf{Periodic Boundary Conditions} \\
+    \medskip
+    \underline{Form}\\
+    \medskip
+    $u(0,q) = u(L,q) \textrm{ and } u_p(0,q) = u_p(L,q)$\\
+    \medskip
+    \underline{Solutions}\\
+    \medskip
+    $P_0 = 1$, $\lambda_0 = 0$ \\
+    $P_n = \sin\left(\frac{n\pi}{L}p\right) + \cos\left(\frac{n\pi}{L}p\right)$, $\lambda_n = \left(\frac{n\pi}{L}\right)^2$, $n \geq 1$
+    
+    \vfill\null\columnbreak
+    
+    \item \textbf{Mixed Type 1 Boundary Conditions} \\
+    \medskip
+    \underline{Form}\\
+    \medskip
+    $u(0,q) = u_p(L,q) = 0$\\
+    \medskip
+    \underline{Solutions}\\
+    \medskip
+    $P_n = \sin\left(\frac{2n - 1}{2L} \pi p\right)$, $\lambda_n = \left(\frac{2n - 1}{2L}\right)^2$, $n \geq 1$
+    
+    \item \textbf{Mixed Type 2 Boundary Conditions}\\
+    \medskip
+    \underline{Form}\\
+    \medskip
+    $u_p(0,q) = u(L, q) = 0$\\
+    \medskip
+    \underline{Solutions}\\
+    $P_n = \cos\left(\frac{2n - 1}{2L} \pi p\right)$, $\lambda_n = \left(\frac{2n - 1}{2L}\right)^2$, $n \geq 1$
+    \end{multicols}
+\end{enumerate}
+
+\begin{large}
+    \noindent Fourier Series
+\end{large}\\
+\rule{\textwidth}{0.5pt}\smallskip\\
+
+\noindent Given a function $f(x)$, can describe it in terms of an infinite series of sine and cosine functions with varying frequencies.
+
+\[
+    f(p) = A_0 + \sum_{n=1}^\infty{A_n\cos(\mu_n p)} + \sum_{n=1}^\infty{B_n \sin(\mu_n p)}
+\]
+
+\begin{multicols}{2}
+\noindent To find the arbitrary constants $A_n$ and $B_n$ that satisfy the Fourier series, we can apply \underline{orthogonality}.
+    \[
+    \int_{-L}^L{\sin(\mu_m p)\sin(\mu_n p)dp = 
+    \begin{cases}
+        0 & \mu_m \neq \mu_n \\
+        L & \mu_m = \mu_n
+    \end{cases}}
+    \]
+    
+    \[
+    \int_{-L}^L{\cos(\mu_m p)\cos(\mu_n p)dp = 
+    \begin{cases}
+        0 & \mu_m \neq \mu_n \\
+        L & \mu_m = \mu_n \neq 0 \\
+        2L & \mu_m = \mu_n = 0
+    \end{cases}}
+    \]
+    
+    \[
+        \int_{-L}^L{\cos(\mu_m p)\sin(\mu_n p)dp} = 0
+    \]
+    
+    \small everywhere, if $\mu_n$ and $\mu_m$ are of the form $\frac{n \pi}{a}$, $a \in \mathbb{Z}$.
+    
+    \columnbreak
+    
+    \normalsize
+    \noindent If orthogonality fails, we must integrate to find our constants.
+    \medskip
+    
+    \centering Cosine Fourier Series (Even Extension)
+    \[
+        A_0 = \frac{1}{L} \int_0^Lf(p)dp
+    \]
+    \[
+        A_n = \frac{2}{L}\int_0^L f(p) \cos(\mu_n p)dp
+    \]
+    Sine Fourier Series (Odd Extension)
+    \[
+        B_n = \frac{2}{L} \int_0^L f(p) \sin(\mu_n p)dp
+    \]
+\end{multicols}
+
+\pagebreak
+\begin{large}
+    \noindent Common Forms of Partial Differential Equations
+\end{large}\\
+\rule{\textwidth}{0.5pt}\smallskip\\
+
+\begin{enumerate}
+    \item Inhomogeneous, Time Independent Dirichlet Boundary Conditions
+    \medskip\\
+    \underline{Form:}
+    \medskip\\
+    $u_t = \alpha^2 u_{xx}$
+    \smallskip\\
+    $u(0, t) = u_0$\\
+    $u(L,t) = u_1$
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{enumerate}
+        \item Choose a solution of the form $u(x,t) = w(x) + v(x,t)$
+        \item Choose $w(x)$ of the form $w(x) = Ax + B$
+        \item Directly apply the BCs to find the arbitrary constants $A$ and $B$.
+        \item Take the necessary derivatives of $w(x) = Ax + B$ and $v(x,t)$ and insert them into the original PDE. You should be left with $v_t = \alpha^2 v_{xx}$
+        \item Solve the initial boundary value problem in $x$.
+        \item Use $\lambda$ from the IBVP to find $T(t)$
+        \medskip\\
+        General form should be reached, rest is left to Fourier series.
+        \end{enumerate}
+    \underline{Expected Solution}
+    \medskip\\
+    $u(x,t) = \frac{u_1 - u_0}{L} + u_0 + \sum_{n=1}^\infty B_n \sin\left(\frac{n\pi x}{L}\right)e^{-\alpha^2 \left(\frac{n\pi}{L}\right)^2 t}$
+    
+    \item Inhomogeneous, Time Independent Neumann Boundary Conditions
+    \medskip\\
+    \underline{Form:}
+    \medskip\\
+    $u_t = \alpha^2 u_{xx}$
+    \smallskip\\
+    $u_x(0,t) = q_0$\\
+    $u_x(L,t) = q_1$
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{enumerate}
+        \item Choose a solution of the form $u(x,t) = w(x,t) + v(x,t)$
+        \item Choose $w(x,t)$ of the form $w(x,t) = Ax^2 + Bx + Dt$
+        \medskip\\
+        \underline{Remark}: We choose a solution of the form $w(x,t) = Ax^2 + Bx + Dt$ because:
+        \begin{enumerate}
+            \item $w(x) = Ax + B$ has $x$ derivative $w_x(x) = A$, which would mean that $A$ would take on values of $q_0$ and $q_1$. If $q_0 \neq q_1$, then this is impossible.
+            \item A next logical guess would be $w(x) = Ax^2 + Bx + C$, however, this fails because $w_{xx} = 2A$ in this case, which does not satisfy the PDE, as $w_t = 0$, so the original PDE $u_t = \alpha^2 u_{xx}$ is not satisfied.
+            \item Therefore, we add a time-dependent term to get $w(x,t) = Ax^2 + Bx + C + Dt$, which holds, however, because we deal with no equations that don't take an $x$ or $t$ derivative, C is never used, and therefore can be assumed to be zero.
+        \end{enumerate}
+        \item Directly apply the BCs to find the arbitrary constants $A$ and $B$, (but not $D$ yet).
+        \item Insert $w(x,t)$ into the PDE ($w_t = \alpha^2 w_{xx}$) to find the constant $D$.
+        \item Insert the entire $u(x,t) = w(x,t) + v(x,t)$ ($v(x,t)$ still unknown) into the original PDE. All the $w$ terms should cancel, and you should be left with $v_t = \alpha^2 v_{xx}$
+        \item Solve the IBVP in $x$ to find $X_n$ and $\lambda_n$
+        \item Knowing that the initial condition for $v(x,t)$ is $g(x) = f(x) - w(x,0)$, solve the fourier series.
+        \medskip\\
+        \underline{Expected Solution}
+        \medskip\\
+        $u(x,t) = \frac{q_1 - q_0}{2L}x^2 + q_1x + \alpha^2\frac{q_1 - q_0}{L}t + A_0 + \sum_{n=1}^\infty A_n\cos\left(\frac{n\pi x}{L}\right)e^{-\alpha^2 \left(\frac{n\pi}{L}\right)^2 t}$
+        \medskip\\
+        $A_0 = \frac{1}{L} \int_0^L g(x)dx$, $A_n = \frac{2}{L}\int_0^L g(x) \cos\left(\frac{n\pi x}{L}\right)dx$
+    \end{enumerate}
+    
+
+
+\pagebreak
+    \item Inhomogeneous (or Homogeneous!) Boundary Conditions with a Forcing Function
+    \medskip\\
+    \underline{Form:}
+    \medskip\\
+    $u_t = \alpha^2 u_{xx} \pm \gamma u + g(x)$
+    \smallskip\\
+    $u(0,t) \textrm{ or } u_x(0,t) = a$ or 0\\
+    $u(L,t) \textrm{ or } u_x(L,t) = b$ or 0
+    \medskip\\
+    Note: I totally may have overstepped on this problem and how general I made the initial form. At a minimum, the PDE should be expected to be $u_t = \alpha^2 - u + x$
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{enumerate}
+        \item Choose a solution of the form $u(x,t) = w(x) + v(x,t)$
+        \item Insert $w(x)$ into the PDE to find an equation of the form $w'' \pm \gamma w = -g(x)$
+        \item Use a characteristic equation and the method of undetermined coefficients, identify the homogeneous and particular solutions to find the general form of $w(x)$.
+        \item Directly employ the boundary conditions from the initial problem to find the coefficients of $w(x)$.
+        \item Insert $u(x,t) = w(x) + v(x,t)$ into the original PDE. The $w$ terms should cancel, leaving you with $v_t = v_{xx} - v$.
+        \item Using the relationship $u(x,t) = w(x) + v(x,t)$, identify the boundary and initial conditions for $v(x,t)$
+        \item Employ separation of variables to solve $v(x,t) = X(x)\cdot T(t)$
+        \item Insert into the modified $v$ PDE to obtain $XT' = X''T - \gamma XT$
+        \item Divide by $XT$ to get $\frac{T'(t)}{T(t)} + \gamma = \frac{X''(x)}{X(x)} = -\lambda$
+        \item Solve the boundary value problem in $x$.
+        \item Use the $\lambda_n$ identified in (j) to solve for $T(t)$
+        \item Combine results to get the general solution, use Fourier series to obtain the arbitrary constants.
+    \end{enumerate}
+    
+    \item Time Dependent Homogeneous Boundary Conditions
+    \medskip\\
+    \underline{Form:}
+    \medskip\\
+    $u_t = \alpha^2 u_{xx}$
+    \smallskip\\
+    $u(0,t) \textrm{ or } u_x(0,t) = At$\\
+    $u(L,t) \textrm{ or } u_x(L,t) = Bt$
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{itemize}
+        \item Choose a solution of the form $u(x,t) = w(x,t) + v(x,t)$
+        \item Choose $w(x,t) = A(t)x + B(t)$
+        \item Solve the problem like you would in (1) or (2)
+    \end{itemize}
+\pagebreak
+    \item Time-Dependent Source/Sink
+    \medskip\\
+    \underline{Form:}
+    \medskip\\
+    $u_t = \alpha^2 u_{xx} + e^{-\beta t}\cos(\gamma\pi x) + g(x)$\\
+     - or -\\
+    $u_t = \alpha^2 u_{xx} + e^{-\beta t}\sin(\gamma\pi x) + g(x)$
+    \medskip\\
+    where the extra term is the source/sink ($S(x,t)$)
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{enumerate}
+        \item Choose the appropriate $w(x)$ or $w(x,t)$ for $u(x,t) = w(x,t) + v(x,t)$ to satisfy the inhomogeneous boundary conditions (if the BCs are inhomogeneous).
+        \item Insert $u(x,t) = w(x,t) + v(x,t)$ into the original PDE to obtain a PDE of the form $v_t = \alpha^2 v_{xx} + e^{-\beta t}\sin(\gamma\pi x)$
+        \item Transform the original boundary and initial conditions to get boundary conditions for $v(x,t)$ given the relationship $u(x,t) = w(x,t) + v(x,t)$
+        \item Solve the [homogeneous] initial boundary value problem for $v_t = \alpha^2 v_{xx}$ (no source/sink term) to obtain $X_n$ and $\lambda_n$ (finding $T(t)$ is unnecessary).
+        \item Use the method of eigenfunction expansion to derive an expression for the source term in terms of a Fourier series with a time-dependent arbitrary constant
+        \[
+            S(x,t) = e^{-\beta t}\sin(\gamma\pi x) = \sum_{n=1}^\infty S_n(t)\sin(\mu_n x)
+        \]
+        \item $S_n(t)$ will take on the form of a delta function: $\delta_{n\epsilon}$, where $\epsilon$ is the $n$ which satisfies the equality that $\gamma = \mu_n$. If it doesn't you will have to integrate and cry.
+        \item Because the source term denies the correctness of the homogeneous solution in time, we don't know the time dependence of our solution from solving the homogeneous problem. Therefore, we must describe $v(x,t)$ in terms of a Fourier series with a time-dependent arbitrary function.
+        \[
+            v(x,t) = \sum_{n=1}^\infty V_n(t)\sin(\mu_n x)
+        \]
+        \item From this, we can take the derivatives of the $v(x,t)$ series as well as our source series and insert them into our modified PDE for $v$.
+        \[
+            v_t = \sum_{n=1}^\infty V_n'(t)\sin(\mu_n x)
+        \]
+        \[
+            v_{xx} = \sum_{n=1}^\infty -V_n(t)\mu_n^2\sin(\mu_n x)
+        \]
+        \item Substituting this all into the modified PDE and rearranging all terms to be in a single sum yields a series of the form:
+        \[
+            \sum_{n=1}^\infty \left[V_n'(t) - \alpha^2\mu_n^2V_n(t) - \delta_{n\epsilon}e^{-\beta t}\right]\sin(\mu_n x) = 0
+        \]
+        \item Knowing that sending the sinusoidal function to zero would yield a trivial solution, we can solve the differential equation for $V_n(t)$, using the integrating factor method.
+        \[
+            V_n'(t) - \alpha^2\mu_n^2V_n(t) = \delta_{n\epsilon}e^{-\beta t}
+        \]
+        \item Armed $V_n(t)$, we obtain an expression for $v(x,t)$, which we can impose our initial conditions on.
+        \[
+            v(x,t) = \sum_{n=1}^\infty\left[\frac{\delta_{n\epsilon}}{\mu_n^2 - \beta}e^{-\beta t} + C_ne^{-\mu_n^2t}\right]\sin(\mu_n x)\, \, \,\to \, \, \, v(x,0) = \sum_{n=1}^\infty\left[\frac{\delta_{n\epsilon}}{\mu_n^2 - \beta}+ C_n\right]^\star\sin(\mu_n x) = \sin(a\pi x)
+        \]
+        \item We can consider the $\star$ term to be it's own arbitrary constant $D_n$, which we can solve for using orthogonality, then solve for $C_n$ to find our general solution.
+        \item $C_n$ will likely take the form of another delta ($\delta$) function, so we can eliminate our sum and set the appropriate $n$ terms to those agreeing with our $\delta$ functions.
+    \end{enumerate}
+    
+\pagebreak
+    \item Wave Equations
+    \medskip\\
+    \underline{Form}
+    \medskip\\
+    $u_{tt} = c^2u_{xx}$\\
+    ... but unlike heat equations, they have two initial conditions.
+    \medskip\\
+    \underline{Solving Tactics}
+    \begin{enumerate}
+        \item Solve your IBVPs in $x$ as per usual
+        \item Solve $T(t)$ with the $\lambda_n$ that was obtained in (a)
+        \item Combine $X(x)$ and $T(t)$ and impose the two initial conditions to find the two arbitrary constants in T(t).
+    \end{enumerate}
+    
+    \item D’Alembert's Solution to the Wave Equation
+    \medskip\\
+    Given a wave equation of the form $u_{tt} = c^2u_{xx}$, and initial conditions $u(x,0) = f(x)$ and $u_t(x,0) = g(x)$, the solution to the \textit{unbounded} problem is:
+    \[
+        u(x,t) = \frac{1}{2}\left[f(x-ct) + f(x+ct)\right] + \frac{1}{2c} \int_{x-ct}^{x+ct}g(s)ds
+    \]
+    
+    \item Graphical Solutions to Wave Equations
+    \medskip\\
+    Given a wave equation of the form $u_{tt} = c^2u_{xx}$, and initial conditions $u(x,0)=f(x)$ and $u_t(x,0) = g(x) = 0$, with $f(x)$ of the form:
+    \[
+        u(x,0) = f(x) = 
+        \begin{cases}
+            g(x) & a \leq x < b\\
+            h(x) & b \leq x \leq c\\
+            0 & x < a,\, x > c
+        \end{cases}
+    \]
+    We know that by D'Alembert's Solution that the solution to the wave equation is
+    \[
+        u(x,t) = \frac{1}{2}\left[f(x-ct) + f(x+ct)\right] = \frac{1}{2}\left[f(\zeta) + f(\eta)\right]
+    \]
+    Therefore, we can break $f(x)$ into two pieces:
+    \[
+        u(x,t) = \frac{1}{2}\left[
+        \begin{cases}
+            g(\zeta) & a \leq \zeta < b\\
+            h(\zeta) & b \leq \zeta \leq c\\
+            0 & \zeta < a, \zeta > c
+        \end{cases}
+        +
+        \begin{cases}
+            g(\eta) & a \leq \eta < b \\
+            h(\eta) & b \leq \eta \leq c \\
+            0 & \eta < a, \eta > c
+        \end{cases}
+        \right]
+    \]
+    From the equation above, we can create a graph that has axes of $x$ and $t$, but also has constant lines in $\zeta$ and $\eta$ corresponding to regions of dependency for the solutions. Overlapping regions in these plots correspond to regions of dual dependency (dependency on both $\zeta$ and $\eta$ functions).
+    \bigskip\\
+    We can also insert $\zeta = x-ct$ and $\eta = x+ct$ into our functions and rearrange them to get a solution that corresponds to a real solution space.
+    \[
+        u(x,t) = \frac{1}{2}\left[
+        \begin{cases}
+            g(x-ct) & a \leq x-ct < d\\
+            h(x-ct) & d \leq x-ct \leq b\\
+            0 & x-ct < a, x-ct > b
+        \end{cases}
+        +
+        \begin{cases}
+            g(x+ct) & a \leq x+ct < d \\
+            h(x+ct) & d \leq x+ct \leq b \\
+            0 & x+ct < a, x+ct > b
+        \end{cases}
+        \right]
+    \]
+    \[
+        u(x,t) = \frac{1}{2}\left[
+        \begin{cases}
+            g(x-ct) & a+ct \leq x < d + ct\\
+            h(x-ct) & d+ct \leq x \leq b + ct\\
+            0 & x < a+ct, x > b+ct
+        \end{cases}
+        +
+        \begin{cases}
+            g(x+ct) & a-ct \leq x < d-ct \\
+            h(x+ct) & d-ct \leq x \leq b-ct \\
+            0 & x-ct < a, x > b - ct
+        \end{cases}
+        \right]
+    \]
+    This provides us with an easily attainable graphical interpretation of the solution.
+    
+\pagebreak
+    \item 2D Cartesian Laplace Equations
+    Given a rectangular domain on $0 \leq x \leq a$ and $0 \leq y \leq b$, with the partial differential equation $\nabla^2u = u_{xx} + u_{yy} = 0$ with any of the boundary condition
+    \begin{center}
+        $u(x, 0) = f_1(x)$ \hspace{3em} $u(0, y) = g(y)$ \hspace{3em} $u(x, b) = f_2(x)$ \hspace{3em} $u(a, y) = g_2(y)$
+        \medskip\\
+        - or -
+        \medskip\\
+        $u_y(x, 0) = f_1(x)$ \hspace{3em} $u_x(0, y) = g(y)$ \hspace{3em} $u_y(x, b) = f_2(x)$ \hspace{3em} $u_x(a, y) = g_2(y)$
+    \end{center}
+    We can divide up the problem into $n$ subproblems, where $n$ is the number of inhomogeneous boundary conditions in the problem.
+    \bigskip\\
+    To solve one of these subproblems, $u^N$, we set all of the other inhomogeneous boundary conditions to be homogeneous (zero), and solve the problem in the secondary coordinate to the inhomogeneous boundary condition.
+    \bigskip\\\
+    
+    \underline{Reese's Laplacian Shortcut}
+    \medskip\\
+    Take a solution to a subproblem to always be of the form:
+    \[
+        u^N(x,y) = \sum_{n=1}^\infty \frac{a_n^{g_m}}{h(\pm\mu_na)}g(\mu_n(x-a^\dagger))f(\mu_n y)
+    \]
+    \begin{center}
+        - or -
+    \end{center}
+    \[
+        u^N(x,y) = \sum_{n=1}^\infty \frac{b_n^{f_m}}{h(\pm\mu_nb)}g(\mu_n(y-b^\dagger))f(\mu_n x)
+    \]
+    \[
+        0 \leq x \leq a \,\,\,\,\,\,\,\,\,\,\, 0 \leq y \leq b
+    \]
+    Given a subproblem with four boundary conditions, we can characterize each one of the boundary conditions:
+    \begin{enumerate}
+        \item 1st homogeneous secondary-axis $u_?(x,0) = 0$
+        \item 2nd homogeneous secondary-axis $u_?(x,b) = 0$
+        \item Homogeneous primary-axis $u_?(\sigma, y) = 0$
+        \item Inhomogeneous primary-axis $u_?(\rho, y) = g(y)$
+    \end{enumerate}
+    Now, knowing that we find our $\lambda_n$ and $\mu_n$ from (a) and (b), we know that $\mu_n$ must be the $\mu_n$ that satisfies the boundary value problem in $w$, produced by (a) and (b). In addition, $f$ will be the sinusoidal function in $Y_n$.
+    \medskip\\
+    We also know that $g$ is either $\sinh$ or $\cosh$ based on the (c) boundary condition, with the given criteria:
+    \begin{enumerate}[i.]
+        \item If $\sigma = a$, then the function represented by $g$ is $\cosh$, and $a^\dagger = a$
+        \medskip\\
+        If $\sigma = 0$, $a^\dagger = 0$ and $g$ can take two forms:
+        \item If (c) is a Neumann boundary condition (derivative), then $g = \sinh$
+        \item If (c) is a Dirichlet boundary condition (no derivative), then $g = \cosh$
+    \end{enumerate}
+    We can also know $h$ based on the (d) boundary condition, with the given criteria.
+    \begin{enumerate}[i.]
+        \item If (d) is a Dirichlet boundary condition (no derivative), then $h$ is the same as $g$
+        \item If (d) is a Neumann boundary condition (derivative), then $h$ will be the opposite function of $g$.
+    \end{enumerate}
+    Finally, the sign inside $h$ is based on the following criteria:
+    \begin{enumerate}[i.]
+        \item $(+)$ if $a^\dagger = 0$
+        \item $(-)$ if $a^\dagger = a$
+    \end{enumerate}
+    
+    \pagebreak
+    % \underline{Steps for Solving a Laplacian Subproblem}
+    % \begin{enumerate}
+    %     \item Identify your boundary conditions. In this example, let's use:
+    %     \medskip\\
+    %     $u_y(x,0) = f_1 (x)$ \hspace{3em} $u(x,b) = 0$
+    %     \medskip\\
+    %     $u(0,y) = 0$ \hspace{5.25em} $u_x(a,y) = 0$\\
+    %     \item For this problem, we have homogeneous boundary conditions in $y$, so we will solve the IBVP in $y$, assuming a separable form of $X(x) \cdot Y(y)$.
+    %     \[
+    %         -\frac{X''(x)}{X(x)} = \frac{Y''(y)}{Y(y)} = -\lambda
+    %     \]
+    %     \begin{center}
+    %         (Mixed Type 1 Boundary Condition)
+    %     \end{center}
+    %     \[
+    %         Y_n = \sin\left(\frac{2n - 1}{2L} \pi y\right) \,\,\,\,\,\,\,\,\, \lambda_n = \left(\frac{2n-1}{2L}\pi\right)^2 \,\,\,\,\,\,\,\,\, \mu_n = \frac{2n-1}{2L}\pi
+    %     \]
+    %     \item From our $\lambda_n$, we can then solve for $X_n$.
+    %     \[
+    %         X_n(x) = A_n\cosh(\mu_n x) + B_n\cosh(\mu_n x)
+    %     \]
+    %     \item Combining\\
+    %     I dont care.
+        
+        
+    % \end{enumerate}
+    
+    % \pagebreak
+    
+    \item General Laplacian Equations on Polar Coordinates
+    \medskip\\
+    Given a partial differential equation on polar coordinates of the form:
+    \[
+        \nabla^2 u = u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\theta \theta}
+    \]
+    \[
+        a \leq r \leq b \,\,\,\,\,\,\,\,\, 0 \leq \theta \leq \alpha
+    \]
+    With standard boundary conditions, and the addition of three additional possible boundary conditions:
+    \[
+        u(0,\theta) = \gamma, \,\,\, \gamma \in \mathbb{R} \hspace{2cm} \lim_{\rho \to \infty}u(\rho, \theta) = \gamma, \,\,\, \gamma \in \mathbb{R}
+    \]
+    \[
+        u(r,\pi) = u(r,-\pi) \hspace{0.5cm} \textrm{ and } \hspace{0.5cm} \frac{\partial u}{\partial \theta}(r, \pi) = \frac{\partial u}{\partial \theta}(r, -\pi)
+    \]
+    
+    We can assume a separable form of the equation to be
+    \[
+        u(r, \theta) = R(r) \cdot \Theta(\theta)
+    \]
+    Which when inserted into the original PDE, multiplied by $r^2$ and divided by $R\Theta$ we obtain:
+    \[
+        -\left(r^2\frac{R''(r)}{R(r)} + r \frac{R'(r)}{R(r)}\right) = \frac{\Theta''(\theta)}{\Theta(\theta)} = -\lambda
+    \]
+    Because the equations in $r$ appear to be hellish, we can only solve the IVBP in $\theta$.
+    \medskip\\
+    From solving the IBVP, we get a $\Theta_n$, as well as a $\lambda_n$ and $\mu_n$, which can be used to solve $R(r)$:
+    \[
+        r^2\frac{R''(r)}{R(r)} + r \frac{R'(r)}{R(r)} = \lambda
+    \]
+    \[
+        r^2R'' + rR' - \lambda R = 0
+    \]
+    This equation has the form of a \underline{Cauchy-Euler Equation}, which has a characteristic equation of the form $s(s-1) + \alpha s + \beta = 0$, where $\alpha$ is the $R'$ coefficient, and $\beta$ is the $R$ coefficient.
+    
+    In all (hopefully) cases of this problem type, our characteristic equation will be of the form:
+    \[
+        s^2 - \lambda_n = 0
+    \]
+    Therefore, our corresponding $R_n(r)$ will be of the following form:
+    \[
+        R_n(r) = 
+        \begin{cases}
+            C_0 + D_0\ln r & \lambda = 0\\
+            C_n r^\mu_n + D_n r^{-\mu_n} & \lambda_n \neq 0, \, \lambda \in \mathbb{R}
+        \end{cases}
+    \]
+    We can then use the homogeneous boundary condition in $r$ to simplify our forms of $R(r)$. \\(same BC for both $R_0$ and $R_n$)
+    \medskip\\
+    Finally, we can combine $R(r)$ and $\Theta(\theta)$ to find our general solution, which should have only one arbitrary constant, for which we can use orthogonality, a Fourier series, and the final inhomogeneous boundary condition to find.
+    
+\pagebreak
+    \item Inhomogeneous Laplacian Equations
+    \medskip\\
+    \underline{Form}
+    \medskip\\
+    $\nabla^2 u = u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\theta\theta}$
+    \smallskip\\
+    $u(r,\alpha) = u_1$
+    \medskip\\
+    \underline{Solving Tactic}
+    \begin{enumerate}
+        \item Choose a solution of the form $u(r,\theta) = w(\theta) + v(r, \theta)$, where $w(\theta)$ satisfies the inhomogeneous boundary conditions.
+        \item Choose $w(\theta) = A\theta + B$, and solve for $A$ and $B$ using the direct boundary conditions in $\theta$ (use the inhomogeneous).
+        \item Solve the initial boundary value problem $\Theta'' + \lambda\Theta = 0$
+        \item Use the $\mu_n$ and $\lambda_n$ found from the IBVP in $\theta$ to solve the corresponding Cauchy-Euler equation.
+        \item Given the relationship $u(r, \theta) = w(\theta) + v(r, \theta)$, a second inhomogeneous boundary condition in $\theta$ will present itself.
+        \item Using the two inhomogeneous boundary conditions in $\theta$, we can solve for a single arbitrary constant in each equation ($P_n$ and $Q_n$).
+        \[
+            P_n = \frac{2}{L_\theta}\int_0^{L_\theta}f(\theta)\cos(\mu_n \theta)d\theta = A_nb^{\mu_n} + B_nb^{-\mu_n}
+        \]
+        \[
+            Q_n = \frac{2}{L_\theta}\int_0^{L_\theta}g(\theta)\cos(\mu_n \theta)d\theta = A_na^{\mu_n} + B_na^{-\mu_n}
+        \]
+        \begin{center}
+            Where $g(\theta)$ is the "synthetic inhomogenous boundary condition"\\ and $f(\theta)$ is the original inhomogeneous boundary condition
+        \end{center}
+        \item Knowing that the $A_n$ and $B_n$ terms in both equations are the same, we can identify that there exists a matrix solution for $A_n$ and $B_n$.
+        \[
+            \begin{bmatrix}
+                    b^{\mu_n} & b^{-\mu_n}\\
+                    a^{\mu_n} & a^{-\mu_n}
+            \end{bmatrix}
+            \begin{bmatrix}
+                    A_n\\
+                    B_n
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                    P_n\\
+                    Q_n
+            \end{bmatrix}
+        \]
+        \item Employing matrix algebra ($A^{-1}b = \vec{N}$), we can find $A_n$ and $B_n$, and insert them into our general solution to find the solution to the initial PDE.
+    \end{enumerate}
+    
+    \pagebreak
+    
+    \item Forwards/Backwards Finite Difference Approximations
+    \medskip\\
+    Given a series of equal steps away from a reference point, we can Taylor expand them to find an approximation for a chosen derivative.
+    \medskip\\
+    If we have $f(x + \Delta x), f(x + 2\Delta x), \cdots, f(x + N\Delta x)$ terms, then we can Taylor expand them up until the $N^\textrm{th}$ derivative, with the addition of a $f(x)=f(x)$ equation.
+    \[
+        f(x) = f(x) \hspace{12.75cm} \textrm{(a)}
+    \]
+    \[ 
+        f(x + \Delta x) = f(x) + f'(x)\Delta x + \frac{1}{2}f''(x)\Delta x^2 + \cdots + \frac{f^{(N)}(x)\Delta x^N}{N!} + \mathcal{O}(\Delta x)^{(N + 1)} \hspace{2.3cm} \textrm{(b)}
+    \]
+    \begin{center}
+        $\vdots$
+    \end{center}
+    \[
+        f(x +\alpha\Delta x) = f(x) + \alpha f'(x)\Delta x + \frac{\alpha^2}{2}f''(x) \Delta x^2 + \cdots + \frac{\alpha^N}{N!}f^{(N)}(x)\Delta x^N + \mathcal{O}(\Delta x)^{(N + 1)} \hspace{1cm} (\eta)
+    \]
+    \begin{center}
+        where $\alpha = N$ in the last equation
+    \end{center}
+    We can then find a linear combination of all of these terms to obtain a finite difference approximation for the $M^{\textrm{th}}$ derivative about $x$.
+    \medskip\\
+    To do this, we can form a matrix algebra problem of the form:
+    \[
+        \begin{bmatrix}
+                a_0 & b_0 & c_0 & \cdots & \eta_0\\
+                a_1 & b_1 & c_1 & \cdots & \eta_1\\
+                 & \vdots &     &        & \vdots\\
+                a_N & b_N & c_N & \cdots & \eta_N
+        \end{bmatrix}
+        \begin{bmatrix}
+                a\\
+                b\\
+                \vdots\\
+                \eta
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+                0\\
+                1_M\\
+                \vdots\\
+                0\\
+        \end{bmatrix}
+    \]
+    Where $a_n, b_n, c_n, \cdots, \eta_n$ are the coefficients of the n-th derivative in the equation labelled by $a, b, c, \cdots, \eta$, and $1_M$ is the number 1 in the the position of whichever M-th derivative we are searching for. (In this case it's the 1st derivative)
+    \medskip\\
+    To find the order of this solution, we know that we expanded up until the Nth derivative, so our higher order terms are of N+1th order. However, in order to fully find our solution, we remove whatever $\Delta X^M$ coefficient that is attached to the derivative that we are searching for. In this case, we divide our higher order terms as well by $\Delta X^M$, reducing our order of accuracy by $M$. Therefore, we can say our order of accuracy is:
+    \[
+        N + 1 - M
+    \]
+    
+    \item Central Finite Difference Approximations
+    \medskip\\
+    Central schemes are essentially the same, with the exception that when finding the even-th derivatives, can use half the number of equations that we would normally require, because the alternating terms cancel.
+    \bigskip\\
+    \underline{Common Difference Approximations}
+    \medskip\\
+    Forward: $f'(x_0)=\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}+\mathcal{O}(\Delta x)$
+    \medskip\\
+    Backward: $f'(x_0)=\frac{f(x_0)-f(x_0-\Delta x)}{\Delta x}+\mathcal{O}(\Delta x)$
+    \medskip\\
+    Center: $f'(x_0)=\frac{f(x_0+\Delta x)-f(x_0-\Delta x)}{2\Delta x}+\mathcal{O}(\Delta x^2)$
+    \medskip\\
+    2nd Derivative: $f''(x_0)=\frac{f(x_0+\Delta x)-2f(x_0)+f(x_0-\Delta x)}{\Delta x^2}+\mathcal{O}(\Delta x^2)$
+    \medskip\\
+    Heat Equation FDA: $u_i^{k+1}=\alpha^2\frac{\Delta t}{\Delta x^2}\left({u_{i+1}^k-2u_i^k+u_{i-1}^k}\right)+u_i^k$
+    Coefficient of Fluid Dynamics: $\frac{\Delta t}{\Delta x^2} \leq \frac{1}{2} $
+    \medskip\\
+    \underline{Note:} You can use a central scheme with $f'(x_0) = 0$ to find a "ghost cell" point if the boundary condition is Neumann at $x_0$.
+    
+    
+    
+
+\end{enumerate}
+
+\pagebreak
+\begin{large}
+    \noindent Ordinary Differential Equations
+\end{large}\\
+\rule{\textwidth}{0.5pt}\smallskip\\
+\begin{center}
+\underline{Cauchy-Euler Equations}
+\end{center}
+\begin{multicols}{2}
+    \begin{center}
+        Given an ODE of the Form:
+        \[
+            x^2y'' + \alpha x y' + \beta y = 0
+        \]
+        We can extrapolate a characteristic equation of the form:
+        \[
+            s(s-1) + \alpha s + \beta = 0
+        \]
+        The roots to the characteristic equation can be used to find the general solution of the problem.
+        
+    
+    \vfill\null\columnbreak
+    \underline{Solution Cases}
+    \medskip\\
+    $s_1$, $s_2$ are distinct real roots
+    \[
+        y(x)=Ax^{s_1} + Bx^{s_2}
+    \]
+    $s_1$, $s_2$ are distinct complex roots of the form $\lambda \pm \mu i$
+    \[
+        y(x)=x^\lambda\left[A\cos\left(\mu\ln(x)\right) + B\sin\left(\mu\ln(x)\right)\right]
+    \]
+    $s_1$, $s_2$ are repeated real roots
+    \[
+        y(x) = Ax^s + B\ln(x) x^s
+    \]
+    \end{center}
+\end{multicols}
+
+\begin{center}
+    \underline{Integrating Factor Method of ODEs}    
+\end{center}
+
+\begin{multicols}{2}
+    \begin{center}
+        Given an ODE of the Form:
+        \[
+            y' + p(x)y = g(x)
+        \]
+        We can write an "integrating factor" of the form:
+        \[
+            \mu(x) = e^{\int p(x)dx}
+        \]
+        \vfill\null\columnbreak
+        Which can be used to find a solution of the form
+        \[
+            \frac{d}{dx}(\mu(x)y) = \mu(x)g(x)
+        \]
+    \end{center}
+\end{multicols}
+
+
+\begin{center}
+    \underline{Linear Second Order ODEs}
+    \begin{multicols}{2}
+    Given an ODE of the Form:
+        \[
+            ay'' + by' + cy = 0
+        \]
+        We can extrapolate a characteristic equation of the form:
+        \[
+            ar^2 + br + c = 0
+        \]
+        The roots to the characteristic equation can be used to find the general solution of the problem.
+        
+    
+    \vfill\null\columnbreak
+    \underline{Solution Cases}
+    \medskip\\
+    $r_1$, $r_2$ are distinct real roots
+    \[
+        y(x) = Ae^{r_1x} + Be^{r_2x}
+    \]
+    $r_1$, $r_2$ are distinct complex roots of the form $\lambda \pm \mu i$
+    \[
+        y(x) = e^{\lambda x}\left[A\sin(\mu x) + B\cos(\mu x)\right]
+    \]
+    $r_1$, $r_2$ are repeated real roots
+    \[
+        y(x) = Ae^{rx} + Bxe^{rx}
+    \]
+        
+    \end{multicols}
+\end{center}
+
+\begin{center}
+    \underline{Method of Particular Solutions}
+    \begin{multicols}{2}
+        Given an ODE of the Form:
+        \[
+            Ay'' + By' + Cy = g(t)
+        \]
+        We can determine a particular solution to the problem of the form:
+        \[
+            y_p(t) = -y_1\int{\frac{y_2g(t)}{W(y_1,y_2)}dt} + y_2\int{\frac{y_1 g(t)}{W(y_1,y_2)}dt}
+        \]
+        \vfill\null\columnbreak
+        Where $y_1$ and $y_2$ are homogeneous solutions to the ODE,
+        and $W(y_1, y_2)$, or the Wronksian is:
+        \[
+            W(y_1,y_2) = \det
+            \begin{bmatrix}
+                    y_1 & y_2\\
+                    y_1' & y_2'
+            \end{bmatrix}
+            = y_1y_2' = y_2y_1'
+        \]
+    \end{multicols}
+\end{center}
+
+\begin{center}
+    \underline{Method of Reduction of Order}
+    \begin{enumerate}
+        \item Assuming $y_1(t)$ is a solution to a second order linear ODE, we can say that $y_2(t) = v(t)y_1(t)$
+        \item If we take the derivatives of $y_2(t)$ and subsitute them into the original ODE, we can get an equation in terms of $v''$ and $v'$.
+        \item To solve this, we can call $v' = w$, solve for w, then re-integrate to get $v(x)$
+    \end{enumerate}
+\end{center}
+
+\pagebreak
+\begin{large}
+    \noindent Appendix
+\end{large}\\
+\rule{\textwidth}{0.5pt}\smallskip\\
+
+\begin{multicols*}{3}
+    \begin{center}
+        \underline{2x2 Inverse Matrix}
+    \end{center}
+    \[
+        \begin{bmatrix}
+                a & b\\
+                c & d
+        \end{bmatrix}^{-1}
+        =
+        \frac{1}{ad -bc}
+        \begin{bmatrix}
+                d & -b\\
+                -c & a
+        \end{bmatrix}
+    \]
+\end{multicols*}
+
+\end{document}
