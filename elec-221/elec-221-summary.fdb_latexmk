@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1665435872 "/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex" "elec-221-summary.pdf" "elec-221-summary" 1665435874
-  "/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex" 1665435872 13650 6e974e39c499fcd290d66d08076afc80 ""
+["pdflatex"] 1665437096 "/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex" "elec-221-summary.pdf" "elec-221-summary" 1665437097
+  "/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex" 1665437096 14639 67b11991d6d5e78fe27a48e5446af02f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -122,8 +122,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1663733917 2826440 c64f88e675154be29d2433531c98b65d ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "elec-221-summary.aux" 1665435874 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
-  "elec-221-summary.tex" 1665435872 13650 6e974e39c499fcd290d66d08076afc80 ""
+  "elec-221-summary.aux" 1665437097 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
+  "elec-221-summary.tex" 1665437096 14639 67b11991d6d5e78fe27a48e5446af02f ""
   (generated)
   "elec-221-summary.aux"
   "elec-221-summary.log"

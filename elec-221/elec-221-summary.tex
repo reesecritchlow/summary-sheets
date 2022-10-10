@@ -21,7 +21,8 @@
 \newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
 \newcommand{\hgap}{\hspace{0.5cm}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\jomega}{j\omega}
+\newcommand{\jomega}{{j\omega}}
+\newcommand{\domega}{d\omega}
 
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
 
@@ -346,7 +347,27 @@ Thus, the equations governing it are:
     \]
     \vfill\null
 \end{multicols}
+A more physical intuition of the Fourier transform is that it takes
+a signal and decomposes it into a spectrum of its frequencies. This
+is called the \underline{Fourier Spectrum}.
+\gap
+\underline{Fourier Transform and Impulse Response:} The Fourier
+transform can be used to obtain the frequency response from the impulse response
+and vice versa. This forwards direction of this was already known however.
 
-
+\begin{multicols}{2}
+    \centertext{\underline{Continuous Time}}
+    \begin{align*}
+        H(\jomega) &= \int_{-\infty}^\infty e^{-\jomega \tau}h(\tau)d\tau \\ 
+        H(e^{\jomega}) &= \sum_{n = -\infty}^\infty e^{-\jomega n }h[n]
+    \end{align*}
+    \vfill\null\columnbreak
+    \centertext{\underline{Discrete Time}}
+    \begin{align*}
+        h(t) &= \frac{1}{2\pi}\int_{-\infty}^\infty e^{j\omega t}H(\jomega)\domega \\ 
+        h[n] &= \frac{1}{2\pi}\int_{2\pi}H(e^\jomega)e^{\jomega n} \domega
+    \end{align*}
+    \vfill\null
+\end{multicols}
 
 \end{document}
