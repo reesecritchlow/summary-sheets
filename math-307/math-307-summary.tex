@@ -75,7 +75,16 @@
         \]
         \vfill\null
     \end{multicols}
-
+    It is also important to note that $L = E_1^{-1}E_2^{-1}E_3^{-1}$.
+    \gap
+    To find the LU decomposition:
+    \begin{enumerate}
+        \item Perform Gaussian elimination to obtain the row echelon form of the matrix,
+        by using matrix multiplication, noting each $E$ along the way. The matrix in REF
+        is the $U$ part of the LU decomposition.
+        \item Compute the inverse of all of the $E$ matricies.
+        \item Multiply the inverse matricies in reverse order together to obtain $L$. 
+    \end{enumerate} 
 
     \header{Elementary Row Operations as Matrix Multiplications}
 
@@ -295,10 +304,10 @@ To find a cubic spline interpolation, one must use the coefficient matrix of a c
 spline, which has the following form:
 \[
     C = \begin{bmatrix}
-        a_1 & a_2 & \cdots a_N\\
-        b_1 & b_2 & \cdots b_N\\
-        c_1 & c_2 & \cdots c_N\\
-        d_1 & d_2 & \cdots d_N
+        a_1 & a_2 & \cdots & a_N\\
+        b_1 & b_2 & \cdots & b_N\\
+        c_1 & c_2 & \cdots & c_N\\
+        d_1 & d_2 & \cdots & d_N
     \end{bmatrix}    
 \]
 Hence, it can be concluded from this that every cubic spline interpolation coefficient

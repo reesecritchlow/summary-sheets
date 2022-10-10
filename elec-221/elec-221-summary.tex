@@ -1,0 +1,351 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\jomega}{j\omega}
+
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\title{ELEC 221 Notes}
+\author{reesecritchlow }
+\date{September 2022}
+
+\begin{document}
+
+\begin{center}
+    \Large ELEC 221 Notes\\
+    \normalsize Reese Critchlow
+\end{center}
+
+\header{Notation}
+
+\begin{align*}
+    \textrm{Continuous Signals} && \textrm{Discrete Signals}\\
+    x(t) && x(n)\\
+    \textrm{Continuous-Time Systems} && \textrm{Discrete-Time Systems}\\
+    x(t) \to y(t) && x[n] \to y[n]
+\end{align*}
+The arrow for systems means that for a given signal, say $x(t)$ when in putted into a system ($\to$) yields an output signal $y(t)$.
+\\\gap
+An equals sign ($=$) simply indicates equality between two signals.
+\\\gap
+\header{System Properties}
+\begin{enumerate}
+    \item \textbf{Memory}\\
+    A system is \underline{memoryless} if the output at each time depends only on the input at the same time.\\
+    Examples:
+    \begin{align*}
+        \textrm{Example: Voltage Through a Resistor} && V(t) = RI(t)\\
+        \textrm {Counter Example: Voltage through a Capacitor} && V(t) = \frac{1}{C}\int_{-\infty}^tI(\tau)d\tau \\
+        \textrm{Counter Example: A Delay System} && y[n] = x[n-1]
+    \end{align*}
+    Generally, a system where the function has some sort of time depenence which is not in the instantaneous current time period has a memory.
+    
+    \item \textbf{Invertibility}\\
+    A system is \underline{invertible} if distinct inputs lead to distinct outputs.\\
+    An example of a noninvertible system is $y(t) = x^2(t)$, because the square destroys a negative sign that may have existed in the input signal.
+    
+    \item \textbf{Causality}\\
+    A system is \underline{causal} if the output at \textit{any time} depends only on the input at the present time or in the past. A comparison between causal systems and systems with memories may be able to be drawn, but they are not the same.
+    \begin{multicols}{2}
+        \underline{Causal Systems}
+        \begin{itemize}
+            \item Dependent events can only be in the present or in the past.
+        \end{itemize}
+        \vfill\null\columnbreak
+        \underline{Memory-Bearing Systems}
+        \begin{itemize}
+            \item Dependent events can be in the present or in the future.
+        \end{itemize}
+        \vfill\null
+    \end{multicols}
+    A capacitor is causal, but a moving average, or time reversal is not.
+    \item \textbf{Stability}\\
+    A system is \underline{stable} if small changes in input do not cause the output to diverge.\\
+    A stable system can also be described as one where bounded inputs lead to bounded outputs; essentially that the system never reaches an unbounded value.\\
+    A system is also stable if \underline{the impulse response is absolutley integrable}.
+    \item \textbf{Time Invariance}\\
+    A system is \underline{time invariant} if time shifts in the input lead to identical time shifts in the output.\\
+    \gap
+    \underline{Proving Time Invariance}: Shift the input signal by a time period $a$, and pass it through the system. Shift the un-shifted output signal of the system by the same time period $a$. If they are the same signal, the system is time invariant.
+    \item \textbf{Linearity}
+    A \underline{linear} system has the following properties:
+    
+    \begin{center}
+        \begin{multicols}{2}
+            \underline{Additivity}
+            \[
+                x_1(t) + x_2(t) \to y_1(t) + y_2(t)
+            \]
+            \vfill\null\columnbreak
+            \underline{Homogeneity}
+            \[
+                ax_1(t) \to ay_1(t)
+            \]
+            \vfill\null
+        \end{multicols}
+    \end{center}
+    
+    These two properties can also be combined:
+    \[
+        ax_1(t) + bx_2(t) \to ay_1(t) + by_2(t)
+    \]
+    
+\end{enumerate}
+
+\header{Harmonics}
+A signal that has \textbf{only odd harmonics} requires that:
+\[
+    f\left(t+\frac{T}{2}\right) = -f(t)
+\]
+Whereas a signal that has \textbf{only even harmonics} requires that:
+\[
+    f\left(t + \frac{T}{2}\right) = f(t)
+\]
+
+\header{Impulse Response}
+
+The \textbf{Impulse Response} of a system is the signal a system produces after a
+unit impulse signal is passed through it. The unit impulse response is denoted by:
+\begin{align*}
+     h(n) && h[n].
+\end{align*}
+The impulse response is generally used to determine the ouput of a system 
+by means of the convolution.
+\gap
+\header{Convolution}
+
+The \textbf{Convolution} operation multiplies the entries of one signal by another in
+a systematic fashion. It is defined by:
+\begin{align*}
+    x(t) \ast h(t) = \int_{-\infty}^\infty x(\tau) h(t- \tau) {d}\tau && x[n] \ast h[n] = \sum_{k=-\infty}^\infty x[k]h[n-k]    
+\end{align*}
+In this context, the convolution operator is being used to determine the output of a
+signal through a system, given the system's impulse response.
+\gap
+\underline{Properties of the Convolution:} The convolution is:
+\begin{itemize}
+    \item Associative: $x \ast (y \ast z) = (x \ast y) \ast z$
+    \item Commutative: $x \ast y = y \ast x$
+    \item Distributive: $x \ast (y + z) = x \ast y + x \ast z$
+\end{itemize}
+
+\pagebreak
+
+\header{Fourier Series (Continuous Time)}
+
+Given a correct periodic signal, one can describe it as a sum of complex exponentials,
+called a \textbf{Fourier Series}. 
+\gap
+Signals that can be expressed as a fourier series must obey the \underline{Dirichlet Conditions}:
+\gap
+If over one period, a signal $x(t)$:
+\begin{enumerate}
+    \item Is single-valued
+    \item Is absolutley integrable
+    \item Has a finite number of maxima and minima
+    \item Has a finite number of discontinuities
+\end{enumerate}
+The Dirichlet conditions are sufficient but \underline{not necessary}, however. This
+being said, they can tell us that the Fourier series \underline{converges} to:
+\begin{itemize}
+    \item $x(t)$ where it is continuous
+    \item half the value of the jump if it is discontinuous.
+\end{itemize}
+
+
+The Fourier Series has two parts to it:
+\begin{multicols}{2}
+    \centertext{\underline{Fourier Synthesis Equation}}
+    \[
+        x(t) = \sum_{k = -\infty}^\infty c_k e^{jk\omega t}    
+    \]
+    \centertext{where $\omega$ is the fundamental frequency of the function.}
+    \vfill\null\columnbreak
+    \centertext{\underline{Fourier Analysis Equation}}
+    \[
+        c_k = \frac{1}{T}\int_T e^{-jk\omega t}x(t){d}t    
+    \]
+    \centertext{where $T$ is the period of the function.}
+    \vfill\null
+\end{multicols}
+
+\underline{Gibbs Phenomena:} If a function represented by a Fourier series has discontinuities,
+there will be ``imperfections'' or ``ringings'' in the Fourier series. This is known
+as the Gibbs Phenomena, where it is known that there will be ``spikes'' of about $9\%$
+the height of the discontinuity around the bounds of the discontinuity itself.
+\gap
+\header{Operations on Fourier Series}
+
+\underline{Summation of Signals}
+\smallskip\\
+Given two signals with the same period:
+\begin{align*}
+    x_1(t) = \sum_{k = -\infty}^\infty c_{k(1)}e^{jk\omega t} && x_2(t) = \sum_{k = -\infty}^\infty c_{k(2)}e^{jk\omega t}
+\end{align*}
+Then we can find their sum as:
+\begin{align*}
+    y(t) = Ax_1(t) + Bx_2(t) = \sum_{k = -\infty}^\infty c_k e^{jk\omega t} && c_k = Ac_{k(1)} + Bc_{k(2)}
+\end{align*}
+\underline{Time Shifting}
+\smallskip\\
+Given a signal, its timeshift, $x(t) \to x(t - t_0)$ can be obtained by:
+\begin{align*}
+    x(t - t_0) = \sum_{k = -\infty}^\infty c'_k e^{jk\omega t} && c'_k = e^{-jk\omega t_0}\cdot c_k
+\end{align*}
+\underline{Convolution of Signals}
+Given two signals with the same fundamental frequency*:
+\begin{align*}
+    x_1(t) = \sum_{k = -\infty}^\infty c_{k(1)}e^{jk\omega t} && x_2(t) = \sum_{k = -\infty}^\infty c_{k(2)}e^{jk\omega t}
+\end{align*}
+Then the convolution of the signals takes the form of:
+\begin{align*}
+    y(t) = x_1(t) \ast x_2(t) = \sum_{k = -\infty}^\infty c_k' e^{jk\omega t} && c'_k = \sum_{l = -\infty}^\infty a_l b_{k - l}
+\end{align*}
+\gap
+\header{Signal Power and Energy}
+
+We can define the power and energy of a periodic function over a single period. 
+\begin{multicols}{2}
+    \centertext{\underline{Energy of a Signal}}
+    \[
+        E = \int_T \left|x(t)\right|^2 dt    
+    \]
+    \vfill\null\columnbreak
+    \centertext{\underline{Power of a Signal}}
+    \[
+        P = \frac{1}{T}\int_T \left|x(t)\right|^2 dt    
+    \]
+    \vfill\null
+\end{multicols}
+
+Power and energy can also be used to show \underline{Parseval's Relation}.
+
+\[
+    \frac{1}{T}\int_T\left|x(t)\right|^2 dt = \sum_{k = -\infty}^\infty |c_k|^2    
+\]
+
+\header{Discrete Time Fourier Series}
+\underline{Precursor -- Differences between DT and CT periodic signals}: There are 
+two main differences between DT and CT periodic signals. 
+\begin{enumerate}
+    \item Frequency does not increase infinitley with $\omega$.
+    \smallskip\\
+    For some $x[n]$ with period T:
+    \begin{align*}
+        x[n] &= e^{\frac{2\pi n}{T}j}\\
+        &= e^{\frac{2\pi (n + N)}{T}j}\\
+        &= e^{\frac{2\pi n}{T}j}e^{\frac{2\pi N}{T}j}\\
+        & \textrm{But if } N > T,\\
+        &= e^{\frac{2\pi n}{T}j}e^{\frac{2\pi (T\alpha + N')}{T}j}\\
+        &= e^{\frac{2\pi n}{T}j}e^{\frac{2\pi (N')}{T}j}e^{{2\pi \alpha}j}\\
+        &= e^{\frac{2\pi n}{T}j}e^{{2\pi (N')}}
+    \end{align*}
+    It is important to note that this same result does not hold in CT because the
+    resolution of $\alpha$ is not restricted to $\mathbb{Z}$.
+    \item $\frac{\omega}{2\pi}$ must be rational for the signal to be periodic.
+    \gap
+    \underline{Note:} If $\frac{\omega}{2\pi}$ is a fraction, the numerator is the period.
+\end{enumerate}
+Now, we can define the Fourier synthesis and analysis equations for discrete time.
+\begin{multicols}{2}
+    \centertext{\underline{Fourier Synthesis Equation}}
+    \[
+        x[n] = \sum_{k = 0}^{N - 1}c_k e^{jk \frac{2\pi n}{N}}   
+    \]
+    \centertext{where $N$ is the period or number of samples of the function.}
+    \vfill\null\columnbreak
+    \centertext{\underline{Fourier Analysis Equation}}
+    \[
+        c_k = \frac{1}{N}\sum_{n = 0}^{N - 1}x[n]e^{-jk \frac{2\pi n}{N}}   
+    \]
+    \centertext{where $N$ is the period or number of samples of the function.}
+    \vfill\null
+\end{multicols}
+
+\header{The Frequency Response}
+
+The \textbf{Frequency Response} or the \textbf{System Response} of a system, denoted
+by $H(j\omega)$ describes how frequencies are attenuated, amplified, and phase shifted
+in a system. 
+\smallskip\\
+It is computed by:
+\begin{align*}
+    H(j\omega) = \int_{-\infty}^\infty e^{j\omega \tau}h(\tau){d}\tau 
+\end{align*}
+\underline{Question:} Are there frequency responses in DT?
+\gap
+\underline{Using the Frequency Response:} To use the frequency response, to compute
+how a system changes a signal, there are three steps.
+\begin{enumerate}
+    \item Compute the frequency response (if it isn't already given).
+    \item Compute the Fourier coefficients of the signal.
+    \item Apply the frequency response to each of the Fourier coefficents to obtain
+    the output signal.
+\end{enumerate}
+This can be generalized to:
+\begin{align*}
+    x(t) \to y(t) = \sum_{k = -\infty}^\infty c_k H(jk \omega)e^{jk\omega t} &&
+    x[n] \to y[n] = \sum_{k = 0}^{N - 1}c_k H(e^{jk\omega})e^{jk\omega n}
+\end{align*}
+
+\header{Filters}
+We can characterize filters by their frequency responses, $H$.
+\gap
+\underline{Filters in Discrete Time:} It is important to note that a filter in DT
+is mirrored across zero. Frequencies increase up until $\omega = \pi$ and then
+subsequently decrease.
+\gap
+\underline{Categories of Filters:} Filters can be broken up into two main categories:
+\begin{enumerate}
+    \item Infinite Impulse Response (IIR)\\
+    Infinite impulse response filters are those whose impulse response \underline{does not}
+    become zero over a finite amount of time.
+    \item Finite Impulse Response (FIR)\\
+    Finite impulse response filters are thos whose impulse response \underline{does} 
+    become zero over a finite amount of time.
+\end{enumerate}
+
+\pagebreak
+
+\header{The Fourier Transform}
+The \textbf{Fourier Transform}, not to be confused with the \textit{Fourier series}
+employs the principles of the \textit{Fourier series} to \underline{aperiodic signals}.
+Thus, the equations governing it are:
+
+\begin{multicols}{2}
+    \centertext{\underline{Inverse Fourier Transform}}
+    \[
+        x(t) = \frac{1}{2\pi}\int_{-\infty}^\infty X(j\omega)e^{j\omega t}{d}\omega
+    \]
+    \vfill\null\columnbreak
+    \centertext{\underline{Fourier Transform (Fourier Spectrum)}}
+    \[
+        X(\jomega) = \int_{-\infty}^\infty x(t)e^{-\jomega t}{d}t  
+    \]
+    \vfill\null
+\end{multicols}
+
+
+\end{document}
