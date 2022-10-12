@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+
+\newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+
+\newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
+
+\newcommand{\scripty}[1]{\ensuremath{\mathcalligra{#1}}}
+
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\jomega}{{j\omega}}
+\newcommand{\domega}{d\omega}
+
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\smallgap}{\smallskip\\}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\title{PHYS 301 Notes}
+\author{reesecritchlow }
+\date{September 2022}
+
+\begin{document}
+
+\begin{center}
+    \Large PHYS 301 Notes\\
+    \normalsize Reese Critchlow
+\end{center}
+
+\section*{Midterm 1}
+
+\header{Calculus Review}
+
+\sheader{Spherical Coordinates}
+\smallskip\\
+Sometimes, spherical coordinates are easier to work with than cartesian coordinates.
+When using spherical coordinates, there are some key things to note:
+\begin{enumerate}
+    \item \sheader{The coordinates themselves:} 
+    \smallgap
+    $\phi$: Equitorial Azimuth $[0, 2\pi]$ (from the ``$x$'' axis)\\
+    $\theta$: Axial Azimuth $[0, \pi]$ (from the ``$z$'' axis)\\
+    $r$: Radial Distance
+    \item \underline{The infinitesimal displacement is different:}
+    \smallgap
+    $d\vec{l} = dr \, \hat{r} + r d\theta \, \hat{\theta} + r \sin \theta d\phi \, \hat{\phi}$
+    \item \underline{The volume element is different:}
+    \smallgap
+    $d\tau = r^2 \sin \theta \, dr \, d\theta \, d\phi$
+\end{enumerate}
+
+\sheader{Cylindrical Coordinates:} See textbook, this would be too redundant.
+\gap
+\sheader{Rules for Irrotational Fields/Conservative Fields}
+\begin{enumerate}
+    \item $\vec{\nabla} \times \vec{F} = \vec{0}$ everywhere.
+    \item $\int_a^b\vec{F}\cdot d\vec{l}$ is independent of path, for any given end points.
+    \item $\oint \vec{F}\cdot d\vec{l} = 0$ for any closed loop.
+    \item $\vec{F}$ is the gradient of some scalar function: $\vec{F} = -\nabla V$.
+\end{enumerate}
+It is important to note that since $\vec{E} = -\nabla V$, then all electrostatic fields 
+are irrotational.
+\sgap
+\sheader{Rules for Divergence-less fields.}
+\begin{enumerate}
+    \item $\vec{\nabla} \cdot \vec{F} = 0$ everwhere.
+    \item $\int \vec{F} \cdot d\vec{a}$ is independent of surface, for any given boundary line.
+    \item $\oint \vec{F} \cdot d\vec{a} = 0$ for any closed surface.
+    \item $\vec{F}$ is the curl of some vector function.
+\end{enumerate}
+\pagebreak
+\header{Electric Fields}
+
+It is important to recognize the notation in the Griffith's textbook, which is used
+primarily for this course when working with Fields and directions:
+\sgap
+$\vec{r}$: distance from the origin to a ``field point''.\\
+$\vec{r'}$: distance from the origin to the charge\\
+$\sepvec$ : distance from the charge to the ``field point''\\
+Thus, it is given that $\sepvec = \vec{r} - \vec{r'}$.
+\gap
+Now, while working with Coulomb's law, we can define the electric field due to a point charge to be:
+\[
+    \vec{E} = \frac{1}{4\pi \epsilon_0} \frac{q}{||\sepvec||^2}\sepvec    
+\]
+\sheader{Types of Field Integrations} There exist three main types of field integrations:
+\begin{multicols}{3}
+    \centertext{\underline{Line Charge}}
+    \[
+        \vec{E}(\vec{r}) = \frac{1}{4 \pi \epsilon_0}\int{\frac{\lambda(\vec{r'})}{||\sepvec||^2}\sepvec \, dl'}    
+    \]
+    \vfill\null\columnbreak
+    \centertext{\underline{Surface Charge}}
+    \[
+        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sepvec \, da'}    
+    \]
+    \vfill\null\columnbreak
+    \centertext{\underline{Volume Charge}}
+    \[
+        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sepvec \, d\tau'}    
+    \]
+    \vfill\null
+\end{multicols}
+\sheader{Gauss's Law} Gauss's law is as follows:
+\begin{align*}
+    \oint{\vec{E} \cdot d\vec{a}} = \frac{Q_\textrm{encl}}{\epsilon_0} && \vec{\nabla} \cdot \vec{E} = \frac{\rho}{\epsilon_0}
+\end{align*}
+By knowing the geometry and symmetry of a situation however, Gauss's law can require
+no integration whatsoever. This is when we know that field is the same for every point
+on a surface. 
+\gap
+\header{Electric Potential}
+The potential of a point in a field relative to another is defined as:
+\[
+    V(\vec{r}) \equiv - \int_{\mathcal{O}}^r \vec{E} \cdot d\vec{l}    
+\]
+Which is often referred to as the potential difference between two points:
+\[
+    V(\vec{b}) - V(\vec{a}) = - \int_{\vec{a}}^{\vec{b}}{\vec{E} \cdot d\vec{l}}
+\]
+It is also to be noted the relation between field and potential:
+\[
+    \vec{E} = - \nabla V    
+\]
+\sheader{Remark} it is important to note that unlike electric field, electric potential
+is a \underline{scalar}. It has no direction, and should be handled accordingly.
+\gap
+Potential can also be obtained for a volume charge:
+\[
+    V(\vec{r}) = \kfrac \int{\frac{\rho(\vec{r'})}{||\sepvec||}d\tau'}
+\]
+Similar formulae can be extrapilated for line and surface charge distributions, analogous
+to those for electric fields.
+\pagebreak
+\gap
+\header{Work and Energy in Electrostatics}
+To calculate the work that it takes to get from one point to another in a field,
+we can use a \underline{work integral}. We can also employ the potential difference.
+\[
+    W = \int_{\textbf{a}}^{\textbf{b}} \vec{F} \cdot d\vec{l} = -Q\int_{\textbf{a}}^{\textbf{b}}{\vec{E} \cdot d\vec{l}} = Q[V(\vec{b}) - Q(\vec{a})]
+\]
+It is important to note that for the second form of this integral uses \textbf{negative} $Q$,
+not positive. This is because the integral by default describes the amount of work that
+the \underline{field does}, not the work that \underline{is required}. One can use 
+a positive value of $Q$ if trying to find out how much work the field does.
+\gap
+It is also to be noted that the potential of a system is the work that is required
+to create the system \underline{per unit charge}.
+\gap
+\sheader{Work and Point Charges} We can also describe the amount of work that it takes
+to assemble a collection of point charges:
+\[
+    W = \frac{1}{2}\sum_{i = 1}^n{q_i V(\vec{r_i})}    
+\]
+
+
+
+\end{document}
