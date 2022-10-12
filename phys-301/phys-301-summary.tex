@@ -64,7 +64,7 @@ When using spherical coordinates, there are some key things to note:
 \begin{enumerate}
     \item \sheader{The coordinates themselves:} 
     \smallgap
-    $\phi$: Equitorial Azimuth $[0, 2\pi]$ (from the ``$x$'' axis)\\
+    $\phi$: Equatorial Azimuth $[0, 2\pi]$ (from the ``$x$'' axis)\\
     $\theta$: Axial Azimuth $[0, \pi]$ (from the ``$z$'' axis)\\
     $r$: Radial Distance
     \item \underline{The infinitesimal displacement is different:}
@@ -89,11 +89,24 @@ are irrotational.
 \sgap
 \sheader{Rules for Divergence-less fields.}
 \begin{enumerate}
-    \item $\vec{\nabla} \cdot \vec{F} = 0$ everwhere.
+    \item $\vec{\nabla} \cdot \vec{F} = 0$ everywhere.
     \item $\int \vec{F} \cdot d\vec{a}$ is independent of surface, for any given boundary line.
     \item $\oint \vec{F} \cdot d\vec{a} = 0$ for any closed surface.
     \item $\vec{F}$ is the curl of some vector function.
 \end{enumerate}
+\sheader{Taylor Expansions} Often, it is difficult to obtain limits for when one quantity
+gets significantly larger than another in equations describing fields or potentials.
+Thus, the \underline{Taylor Expansion} is helpful for this. Take for example a quantity $a$
+and a quantity $b$. For $b >> a$, it is useful to try to bring the equation into a form
+such that $\left(\frac{a}{b}\right)^n, n \in \mathbb{N}$. Since $b >> a$, then we can say that $\frac{a}{b} \approx 0$
+Thus, a Taylor series centered around $x = 0$ is obtained, which can be evaluated with
+the expression:
+\[
+    f(x) \approx f(0) + f'(0) \cdot x  + f''(0) \cdot \frac{x^2}{2} + \cdots + \frac{f^{(n)}x^n}{n!}   
+\]
+Generally, it is best practice to evaluate the Taylor series up until the degree of the
+largest polynomial in the original function.
+
 \pagebreak
 \header{Electric Fields}
 
@@ -155,7 +168,7 @@ Potential can also be obtained for a volume charge:
 \[
     V(\vec{r}) = \kfrac \int{\frac{\rho(\vec{r'})}{||\sepvec||}d\tau'}
 \]
-Similar formulae can be extrapilated for line and surface charge distributions, analogous
+Similar formulae can be extrapolated for line and surface charge distributions, analogous
 to those for electric fields.
 \pagebreak
 \gap
@@ -178,7 +191,61 @@ to assemble a collection of point charges:
 \[
     W = \frac{1}{2}\sum_{i = 1}^n{q_i V(\vec{r_i})}    
 \]
+\sheader{Work of a Continuous Charge Distribution} To describe the amount of energy
+that a charge distribution has, or the amount of energy required to create it in 
+empty space, the following formula can be used:
+\[
+    W = \frac{\epsilon_0}{2}\int\limits_{\textrm{all space}}E^2 d\tau    
+\]
 
+\header{Boundary Conditions}
+One of the important equations in the relationships between $\rho$, $V$, and $E$ is 
+$\nabla^2 V = - \frac{\rho}{\epsilon_0}$. However, this equation often leaves one 
+with a number of undetermined coefficients from the integration. Thus, it is important
+to investigate the boundary conditions of fields and potentials.
+\gap
+From this, a set of important boundary conditions emerges for a boundary at $a$.
+\begin{itemize}
+    \item \sheader{Continuity of Potential} Since $\nabla V = -\vec{E}$, it is known 
+    that potential should be continuous along all space. Thus,
+    \[
+        V_\textrm{above}(a) = V_\textrm{below}(a)
+    \]
+    \item \sheader{Preservation of Field} For any field interacting with a surface charge,
+    by Gauss's law, it is known that the difference between the field above and the field
+    below is simply the surface charge density over the permittivity of free space:
+    \[
+        \vec{E}_\textrm{above} - \vec{E}_\textrm{below} = \frac{\sigma}{\epsilon_0}\hat{n}    
+    \]
+    Where $\hat{n}$ is the normal vector of the boundary surface. The presence of the
+    normal vector is important, because it requires the boundary surface to have 
+    symmetry with the field above and the field below.
+    \item \sheader{Bounding of Potential (not general)} Since it is known that potential should generally 
+    be bounded over all space (except in some cases), it is appropriate to say that
+    \[
+        V(0) \textrm{ is bounded.}    
+    \]
+    This is generally more true for configurations with spherical symmetry.
+    \item \sheader{Zero Potential at Infinity (not general)} For many spherically-symmetric
+    examples, it is known that the potential at infinity is zero. Thus, it can be said that:
+    \[
+        V(\infty) = 0.    
+    \]
+\end{itemize}
+\pagebreak
+
+\header{Uniqueness of Solutions}
+Given the relationship $\nabla^2 V = -\frac{\rho}{\epsilon_0}$, there exists the case
+that $\rho =0$, for which a distinct set of attributes arise:
+\begin{enumerate}
+    \item $V$ has no local maxima nor minima inside. The maxima and minima are located
+    on the surrounding boundaries.
+    \item $V$ is smooth and continuous, everywhere.
+    \item $V(\vec{r})$ is the average of $V$ over surface of any surrounding sphere:
+    $V(\vec{r}) = \frac{1}{4\pi R^2}\oint VdA$.
+    \item $V$ is unique, as the solution of the Laplace equation is uniquely determined
+    if $V$ is specified on the boundary surface around the volume.
+\end{enumerate}
 
 
 \end{document}
