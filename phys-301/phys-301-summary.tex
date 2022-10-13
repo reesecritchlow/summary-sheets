@@ -17,6 +17,7 @@
 \DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
 
 \newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+\newcommand{\sephat}{\hat{r}_{\textrm{sep}}}
 
 \newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
 
@@ -126,17 +127,17 @@ Now, while working with Coulomb's law, we can define the electric field due to a
 \begin{multicols}{3}
     \centertext{\underline{Line Charge}}
     \[
-        \vec{E}(\vec{r}) = \frac{1}{4 \pi \epsilon_0}\int{\frac{\lambda(\vec{r'})}{||\sepvec||^2}\sepvec \, dl'}    
+        \vec{E}(\vec{r}) = \frac{1}{4 \pi \epsilon_0}\int{\frac{\lambda(\vec{r'})}{||\sepvec||^2}\sephat \, dl'}    
     \]
     \vfill\null\columnbreak
     \centertext{\underline{Surface Charge}}
     \[
-        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sepvec \, da'}    
+        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sephat \, da'}    
     \]
     \vfill\null\columnbreak
     \centertext{\underline{Volume Charge}}
     \[
-        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sepvec \, d\tau'}    
+        \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sephat \, d\tau'}    
     \]
     \vfill\null
 \end{multicols}

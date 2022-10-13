@@ -16,6 +16,7 @@
 \usepackage[document]{ragged2e}
 
 \newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+\newcommand{\sephat}{\hat{r}_{\textrm{sep}}}
 \newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
 
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
@@ -41,11 +42,11 @@
 \doubleformula{Taylor Expansion}{f(x) \approx \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}}{f(x) \approx f(0) + f'(0) \cdot x + f''(0) \cdot \frac{x^2}{2} + \cdots}
 \formbox{Field Integrals}{
 \centertext{Line Charge}
-\[\vec{E}(\vec{r}) = \frac{1}{4 \pi \epsilon_0}\int{\frac{\lambda(\vec{r'})}{||\sepvec||^2}\sepvec \, dl'}\]
+\[\vec{E}(\vec{r}) = \frac{1}{4 \pi \epsilon_0}\int{\frac{\lambda(\vec{r'})}{||\sepvec||^2}\sephat \, dl'}\]
 \centertext{Surface Charge}
-\[\vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sepvec \, da'}\]
+\[\vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sephat \, da'}\]
 \centertext{Volume Charge}
-\[\vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sepvec \, d\tau'}\]
+\[\vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sephat \, d\tau'}\]
 }
 
 \formula{Potential Difference}{V(\vec{b}) - V(\vec{a}) = - \int_{\vec{a}}^{\vec{b}}{\vec{E} \cdot d\vec{l}}}
