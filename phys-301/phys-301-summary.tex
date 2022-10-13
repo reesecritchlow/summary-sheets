@@ -170,6 +170,11 @@ Potential can also be obtained for a volume charge:
 \]
 Similar formulae can be extrapolated for line and surface charge distributions, analogous
 to those for electric fields.
+\gap
+However, the formula for point charges is important to note:
+\[
+    V(\vec{r}) = \kfrac \sum_{i = 0}^n\frac{q_i}{||\sepvec||}
+\]
 \pagebreak
 \gap
 \header{Work and Energy in Electrostatics}
@@ -247,5 +252,43 @@ that $\rho =0$, for which a distinct set of attributes arise:
     if $V$ is specified on the boundary surface around the volume.
 \end{enumerate}
 
+\sheader{Earnshaw's Theorem} As a sidenote, is important to note \underline{Earnshaw's Theorem},
+which states that: 
+\centertext{A charged particle cannot be held in a stable equilibrium by electrostatic forces alone.}
+This can be analyzed using divergence amongst other methods of analysis.
+\gap
+\header{Conductors}
+At a base level, conductors are materials in which electrons are free to move inside 
+of the material. Because of this, [ideal] conductors are able to rearrange their
+charges, allowing them to have special properties:
+\begin{enumerate}
+    \item \underline{$\vec{E} = 0$ inside a conductor}. In short, charges move to oppose any external $\vec{E}$ fields.
+    This can also be interpreted under the principle that if there was any field inside
+    a conductor, the free electrons would be moving, and hence not \textit{electrostatic}.
+    \item \underline{Any net charges reside on the surface of a conductor.}
+    \item \underline{$\rho = 0$ inside a conductor}. Since there is no field inside a conductor,
+    Gauss's law requires that there is no enclosed charge, thus, there is no charge density.
+    One may make the argument for the surface charges, however, since they are equal in magnitude,
+    they cancel.
+    \item \underline{A conductor is an equipotential}. Since there is no field inside
+    a conductor, given the relationship $\nabla V = -\vec{E}$, the potential $V$ must
+    be a constant.
+    \item \underline{$\vec{E}$ is normal to the surface of a conductor.} This is because
+    any non-normal direction of field would result in fields inside the conductor. (Unsure of this)
+\end{enumerate} 
+
+\header{Capacitance}
+
+As a purely geometrical property, we can define \textbf{capacitance} as the ratio of
+charge to voltage. Thus, it is defined as:
+\[
+    C \equiv \frac{Q}{V}.    
+\]
+As a practical device, \underline{capacitors} are capable of storing energy. Thus, it
+is important to define the amount of energy that a capacitor can store for a given 
+charge $Q$ and capacitance $C$:
+\begin{align*}
+    W = \int_0^Q{\bfrac{q}{C}dq} = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2} CV^2
+\end{align*}
 
 \end{document}
