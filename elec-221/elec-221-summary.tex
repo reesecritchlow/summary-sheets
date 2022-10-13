@@ -358,14 +358,14 @@ and vice versa. This forwards direction of this was already known however.
 \begin{multicols}{2}
     \centertext{\underline{Continuous Time}}
     \begin{align*}
-        H(\jomega) &= \int_{-\infty}^\infty e^{-\jomega \tau}h(\tau)d\tau \\ 
-        H(e^{\jomega}) &= \sum_{n = -\infty}^\infty e^{-\jomega n }h[n]
+        h[n] &= \frac{1}{2\pi}\int_{2\pi}H(e^\jomega)e^{\jomega n} \domega\\
+        H(\jomega) &= \int_{-\infty}^\infty e^{-\jomega \tau}h(\tau)d\tau
     \end{align*}
     \vfill\null\columnbreak
     \centertext{\underline{Discrete Time}}
     \begin{align*}
         h(t) &= \frac{1}{2\pi}\int_{-\infty}^\infty e^{j\omega t}H(\jomega)\domega \\ 
-        h[n] &= \frac{1}{2\pi}\int_{2\pi}H(e^\jomega)e^{\jomega n} \domega
+        H(e^{\jomega}) &= \sum_{n = -\infty}^\infty e^{-\jomega n }h[n]
     \end{align*}
     \vfill\null
 \end{multicols}
