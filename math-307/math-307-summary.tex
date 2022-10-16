@@ -189,7 +189,16 @@
             leading coefficient of the row above it.
     \end{itemize}
 
-    \underline{Inverting a Matrix:} To invert a matrix $A$, create a matix $[A \mid I]$ and
+    \underline{Notes on Rank:}
+    \begin{itemize}
+        \item If $\textrm{rank}(A) = \textrm{rank}(A|B) =$ the number of rows in $\vec{x}$, then
+        the system has a \underline{unique solution}.
+        \item If $\textrm{rank}(A) = \textrm{rank}(A|B) <$ the number of rows in $\vec{x}$, then the system has \underline{infinite solutions}.
+        \item If $\textrm{rank}(A) <$ the number of rows in $A$.
+        \item \underline{Overarching theory:} $\dim(N(A)) = \textrm{cols}_A - \textrm{rank}(A)$.
+    \end{itemize}
+
+    \underline{Inverting a Matrix:} To invert a matrix $A$, create a amtrix $[A \mid I]$ and
     use row operations to transform the matrix to a form of $[I \mid A^{-1}]$.
 \gap
 \header{Error Analysis and Matrix Norms}

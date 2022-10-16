@@ -150,18 +150,32 @@ This can be analyzed using divergence amongst other methods of analysis.
     \begin{enumerate}
         \item Choose a coordinate system.
         \item Identify $\vec{r}$, the vector from the origin to the point of interest.
-        \item Identify $\vec{r'}$, the vector from the origin to the charge distribution.
+        \item Identify $\vec{r'}$, the vector from the origin to the charge distribution. Convert this to your target coordinate system.
         \item Identify $\sepvec$, the vector separating the charge distribution and the point of interest:
         $(\sepvec = \vec{r} - \vec{r'})$
         \item If possible, identify any symmetries to try to solve the problem with.
         \item Integrate.
     \end{enumerate}
+    \underline{Notes:}
+    \begin{itemize}
+        \item Switch your coordinate systems as early as possible
+        \item The $\vec{r'}$ vector should be in the alternate coordinate system
+        \item The values in the $\vec{r}$ vector are \textbf{constants}
+        \item Leave everything in its purest form.
+    \end{itemize}
 }
 
 \formbox{The Electricity and Magnetism Triangle}{
     \begin{center}
         \includegraphics[scale=0.145]{em-triangle}
     \end{center}
+}
+
+\formbox{Other Notes}{
+    \begin{itemize}
+        \item For conductor problems, \textbf{always} check with
+        Gauss's Law afterwards!
+    \end{itemize}
 }
 
 \end{multicols*}
