@@ -12,6 +12,8 @@
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
 
+\newcommand{\suchthat}{\textrm{ s.t. }}
+
 \usepackage{calligra}
 \DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
 \DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
@@ -53,5 +55,313 @@
     \Large MATH 220 Notes\\
     \normalsize Reese Critchlow
 \end{center}
+
+\header{Sets}
+
+\sheader{Sets} A \textbf{set} is a collection of objects. The objects are referred to 
+as \textbf{elements} of \textbf{members} of the set.
+\sgap
+For sake of notation, sets are generally described as capital letters $A, B, C, X, Y$, and
+members of a set are described as their respective lowercase letters $a,b,c,x,y$.
+\sgap
+Integers are generally referred to as $i,j,k,l,m,n$ and reals are generally referred to 
+as $x,y,z,w$.
+\sgap
+\sheader{Set Notation} Sets can also describe membership by means of curly braces. 
+\[
+    A = \{1, 2, 3\}    
+\]
+Ellipses can also be used to demonstrate that a pattern continues, however, this often
+can be hazardous as the pattern must be obvious to the reader.
+\[
+    B = \{1, 2, 3, \ldots\}    
+\]
+The \textbf{empty set} is also important to note, which defines the set which contains
+no elements. It is denoted as $\emptyset$, where for any $x$, $x \notin \emptyset$, and $\emptyset = \{\}$.
+\sgap
+\sheader{Set Builder Notation} Set builder notation is the general approach to describing sets
+with a general rule. A standard form of a set described by set builder notation is as follows:
+\begin{align*}
+    S = \{\textrm{some expression} \mid \textrm{some rule}\} && S = \{\textrm{a function} \mid \textrm{a domain}\}.
+\end{align*}
+For example, we can have: 
+\begin{align*}
+    E &= \{n : n \textrm{ is an even integer}\}\\
+    E &= \{n \mid n = 2k \textrm{ for some } k \in \mathbb{Z}\}\\
+    E &= \{2n \mid n \in \mathbb{Z}\}.
+\end{align*}
+
+\header{Statements and Open Sentences}
+\sheader{Statements} A statement is an declarative sentence that can be assigned a truth value.
+\gap
+\sheader{Open Sentences} An open sentence is a sentence whose truth value depends on another 
+``thing'' inside of the sentence. For example, take the sentence/equation:
+\[
+    x^2 -5x + 4 = 0.
+\]
+Because no information on the value of $x$ is provided, the truth value of the sentence is unknown.
+\gap
+\sheader{Negations} Negating a statement requires a full inversion of the \underline{truth table}. 
+A negation of a statement $P$ can be denoted as $\sim P$, $!P$ or $\neg P$.
+\gap
+\header{Logical Operations}
+\sheader{Disjunction (Or)} The \textbf{disjunction} of two statements $P$ and $Q$ is 
+the statement ``$P$ or $Q$'' and is denoted $P \vee Q$. The disjunction is true if 
+at least one of $P$ and $Q$ are true. The disjunction is only false if both $P$ and $Q$ are false.
+\sgap
+\sheader{Conjunction (And)} The \textbf{conjunction} of two statements $P$ and $Q$ is 
+the statement ``$P$ and $Q$'' and is denoted $P \wedge Q$. The conjunction is true when both
+$P$ and $Q$ are true. It is false if at least one of $P$ and $Q$ are false.
+\gap
+\sheader{The Implication} For statements $P$ and $Q$, the \textbf{implications} or \textbf{conditional}
+is the statement: if $P$ then $Q$, and is denoted $P \Rightarrow Q$. In this context, we define
+\begin{itemize}
+    \item $P$ is called the \textbf{hypothesis}
+    \item $Q$ is called the \textbf{conclusion}
+\end{itemize}
+Thus, the only case in which the implication is false is when the hypothesis is true, and
+the conclusion is false.
+\gap
+It is important to note that the implication shares the same truth table as the statement:
+\[
+    (\sim P) \vee Q .
+\]
+It is also important to note that the implication is not symmetric. Thus, $P \Rightarrow Q$
+is not the same as $Q \Rightarrow P$.
+\gap
+\header{Implications of the Implication}
+\sheader{Modus Ponens} By the truth table of the implication, there is one crucial entry
+that makes the basis for proofs. That is when both the hypothesis and the conclusion are true.
+Thus, we introduce \textbf{Modus Ponens}, which is the deduction that:
+\begin{itemize}
+    \item $P$ implies $Q$ is true, and
+    \item $P$ is true
+    \item Hence, $Q$ must be true
+\end{itemize}
+Thus, if one can prove that $Q$ is true under the assumption that $P$ is true, then the 
+implication is proven. 
+\sgap
+Modus Ponens also opens the door to chaining conditionals together to prove the original implication.
+\gap
+\sheader{Modus Tollens} Extrapolating off of Modus Ponens, we can introduce \textbf{Modus Tollens},
+which is the deduction:
+\begin{itemize}
+    \item $P$ implies $Q$ is true, and
+    \item $Q$ is false
+    \item hence $P$ must be false.
+\end{itemize}
+This will later be the foundation for the \textit{contrapositive}.
+\gap
+\sheader{Affirming the Consequent} A common logical error is the \underline{false}
+deduction:
+\begin{itemize}
+    \item $P$ implies $Q$ is true, and
+    \item $Q$ is true,
+    \item and hence $P$ must be true.
+\end{itemize}
+This is called \textbf{affirming the consequent} and it is wrong because the flow of logic
+is wrong.
+\gap
+\sheader{Denying the Antecedent} Is another common logical error in which the \textbf{false}
+deduction is made that:
+\begin{itemize}
+    \item $P$ implies $Q$ is true, and
+    \item $P$ is false,
+    \item and hence $Q$ must be false.
+\end{itemize}
+\sheader{Negating the Conditional} Since the conditional has the same truth table as
+$(\sim P) \vee Q$, we can write the negation of the conditional as $P \wedge (\sim Q)$.
+\gap
+\sheader{Contrapositive} The \textbf{contrapositive} of an implication is $(\sim Q) \Rightarrow (\sim P)$.
+It has the same truth table as the implication, and thus can be used as another method
+to prove an implication.
+\gap
+\sheader{Converse} The \textbf{converse} of an implication is $Q \Rightarrow P$. 
+It does not share the same truth table as the implication.
+\gap
+\sheader{Inverse} The \textbf{inverse} of an implication is $(\sim P) \Rightarrow (\sim Q)$.
+It does not share the same truth table as the implication.
+\gap
+\sheader{Biconditional} The \textbf{biconditional} is where for statements $P$ and $Q$,
+$P$ implies $Q$ and $Q$ implies $P$. This can be written as:
+\begin{itemize}
+    \item $P$ if and only if $Q$
+    \item $P$ iff $Q$
+    \item $P \Longleftrightarrow Q$.
+\end{itemize}
+
+\header{General Overview of Direct Proofs}
+Most proofs start with the a conditional that must be proven. Thus, one must demonstrate that
+under the hypothesis, the conclusion holds. Many of these proofs have the following form:
+\begin{enumerate}
+    \item Assume the original statement is true.
+    \item Provide an alternative form for the original statement.
+    \item Manipulate both sides of the equation until you reach a form that fits the conclusion.
+\end{enumerate}
+
+There exist some common methods for proving such 
+statements.
+\begin{enumerate}
+    \item \sheader{Proving the Contrapositive} Instead of proving $P \Rightarrow Q$, one can 
+    prove $(\sim Q) \Rightarrow (\sim P)$.
+    \sgap
+    \sheader{Use Cases}
+    \begin{itemize}
+        \item To escape having to prove non-divisibilities. 
+        \item To escape having to prove something does not have membership.
+        \item For when the negation of a statement is simply easier to prove.
+    \end{itemize}
+    \item \sheader{Proof by Cases} In the case that a statement cannot be proven directly,
+    introducing multiple cases which fit the problem favourably can be of assistance.
+    \sgap
+    \sheader{Use Cases}
+    \begin{itemize}
+        \item Exploiting divisibilities (cases stem from varying remainder values)
+        \item Using all odd/even integers (cases for odd or even integers)
+        \item Having permanent signs in statements with \textbf{absolute values}
+        \item Proving cases for which a value is in different ranges (generally positive or negative)
+    \end{itemize}
+\end{enumerate}
+
+There also exist some common practices which are common with many general proofs:
+\begin{enumerate}
+    \item Using terms to complete the square (often useful with \textbf{inequalities} to demonstrate that a term is positive)
+    \item Performing ``ghost operations'' where equations are manipulated in seemingly
+    counterintuitive ways $(3 + 2) = 5$ to achieve the desired form.
+    \item Exploiting subsets, for example, if you need to prove something for all primes, $P$
+    but you can prove it for all odd numbers and 2 ($S$), since all primes are either odd or two,
+    then $P \subset S$, so the statement holds for all primes.
+\end{enumerate}
+
+\header{Quantifiers}
+\underline{Quantifiers} come in two main forms:
+\gap
+\sheader{The Universal Quantifer} Denoted $\forall$ and is read ``for all''.
+\gap
+\sheader{The Existential Quantifer} Denoted $\exists$ and is read ``there exists'' or ``at least one''
+\gap
+Quantifiers help describe how many members of a set fit a certain condition.
+\gap
+\sheader{Negation of Quantifiers} To negate a quantifier, it is important to note some
+main points
+\begin{itemize}
+    \item The two main quantifiers, $\forall$ and $\exists$ swap.
+    \item The domains do not change.
+    \item The condition for the members is negated as well.
+\end{itemize} 
+
+\header{Bounding Proofs}
+A function is \underline{bounded} if it satisfies the following statement:
+\[
+    \exists M \in \mathbb{R} \suchthat \forall x \in f: A \to \mathbb{R}, |f(x)| \leq M.
+\]
+\sheader{Bounded Proofs} A bounded proof generally follows the form of:
+\begin{enumerate}
+    \item Choose an $M(x)$ such that $|f(x)| \leq M$ is satisfied. 
+\end{enumerate}
+\sheader{Unbounded Proofs} An unbounded proof needs to satisfy the statement:
+\[
+    \forall M \in \mathbb{R}, \exists x \in f:A \to \mathbb{R} \suchthat |f(x)| > M.
+\]
+Thus an unbounded proof takes the form of:
+\begin{enumerate}
+    \item Let $M$ be arbitrary, such that $M \in \mathbb{R}$.
+    \item Carefully choose an $x$ value, \underline{generally dependant on $M$}, such that
+    $|f(x)| > M$.
+\end{enumerate}
+
+\header{Sequence Convergence Proofs}
+A sequence $(x_n)$ is said to \underline{converge} to the value $L$ if it satisfies
+the following statement:
+\[
+    \forall \epsilon > 0, \exists N \in \mathbb{N} \suchthat \forall n \in \mathbb{N}, \left(n \geq N \Rightarrow |x_n - L| \leq \epsilon\right).    
+\]
+\sheader{Convergence Proofs} A convergence proof can generally take the following form:
+\begin{enumerate}
+    \item Let $\epsilon > 0$ be arbitrary.
+    \item Carefully choose some $N$, which is generally \underline{a function of $\epsilon$}. This
+    can generally be achieved by holding $|x_n - L| \leq \epsilon$ and solving for $n$.
+    \item Assume $n \geq N$ and substitute values to show that $|x_n - L| \leq \epsilon$.
+\end{enumerate}
+\sheader{Non-Convergence Proofs} The negation of the convergence statement is as follows:
+\[
+    \exists \epsilon > 0 \suchthat \forall N \in \mathbb{N} , \exists n \in \mathbb{N} \suchthat (n \geq N) \wedge (|x_n -L| > \epsilon).
+\]
+Common proofs for non-convergence proofs generally resemble:
+\begin{enumerate}
+    \item Let $N \in \mathbb{N}$ be arbitrary.
+    \item Carefully choose $\epsilon$, which is \underline{generally a constant}.
+    This is usually obtained by solving $|x_n - L| > \epsilon$.
+    \item Choose some value for $n$ such that it fits the inequality $|x_n -L| >\epsilon$.
+    Since $n \geq N$ for all $N$, generally, a max function is required, generally of the form:
+    $\max\{a, N\}$, where $a$ is some number that minimally satisfies $|x_n - L| > \epsilon$.
+\end{enumerate}
+\pagebreak
+\header{Limit Proofs}
+A function $f:A \to R$ has the limit $L$ as $x$ goes to $a$, as denoted by:
+\[
+    \lim_{x\to a}f(x) = L.    
+\]
+Thus, to prove a limit, we need to prove the \underline{limit statement} true:
+\[
+    \forall \epsilon > 0, \exists \delta > 0 \suchthat (0 < |x - a| < \delta) \Rightarrow (|f(x) - L| < \epsilon)    
+\]
+\sheader{Limit Proofs} A limit proof can generally take the following form:
+\begin{enumerate}
+    \item Let $\epsilon > 0$ be arbitrary.
+    \item Choose $\delta > 0$, which is generally a function of $\epsilon$. It is 
+    usually case that to find your $\delta$, one must:
+    \begin{itemize}
+        \item First try to directly solve $|f(x) - L|< \epsilon$, such that the inequality
+        takes the form of $|x - a| < \delta(\epsilon)$. 
+        \item However, this is not always the case, generally, when $\delta$ is a function of both 
+        $\epsilon$ and $x$, so, it is possible to choose $\delta$ to be a minimum function 
+        such that we can manipulate $x$ terms.
+    \end{itemize}
+    So $\delta$ is generally either some function of $\epsilon$, or some minimum function
+    $\delta = \min\{c, g(\epsilon)\}$, where $c$ is some value to make algebra easier.
+    \item Starting with $0 < |x - a| < \delta$, use the minimum and/or rearrange the 
+    expression to gain information on $x$.
+    \item From the minimum function, we can also extrapolate that $|x - a| < \delta \leq g(\epsilon)$.
+    \item Using both pieces of information from (3) and (4), $|f(x) - L| < \epsilon$ can be manipulated
+    to prove the statement.
+\end{enumerate}
+\sheader{Triangle Inequality} For limit proofs, and many other proofs, it is important
+to note the \underline{triangle inequality}, which states that:
+\[
+    |x + y| \leq |x| + |y|
+\] 
+for any real valued $x$, $y$.
+\gap
+\header{Normal Induction}
+Normal Induction proofs rely on being able to prove a \textbf{base case} and then an \textbf{inductive step}.
+Normal Induction proofs come in the following forms:
+\begin{itemize}
+    \item \sheader{Bounding} use the base case and surrounding values to bound the inductive step.
+    \item \sheader{Explicit Statements} such as a Fibonacci Series use a recursive definition of a 
+    series. Using prior elements of these series generally are the solution to solving these problems.
+    \item \sheader{Series} generally use the original series plus an additional term to solve them.
+\end{itemize}
+\sheader{Inductive Proofs} An inductive proof has the following form:
+\gap
+\sheader{Statement} 
+\[
+    \forall n > a, n \in \mathbb{Z}, P(n).
+\]
+\centertext{Where $a$ is the base case.}
+\begin{enumerate}
+    \item \sheader{Prove the Base Case} Let $n = a$. Show the reader that $P(a)$ is true.
+    \item \sheader{Assume the hypothesis} Assume that $P(k)$ is true. 
+    \item \sheader{Prove the Inductive Step} Manipulate $P(k + 1)$ such that $P(k + 1)$ is true.
+\end{enumerate}
+\sheader{Remark} Often, it is easy to confuse yourself where you are in the proof.
+Say that for $P(n)$ to be true, $P(n) = f(n)$. It is important to note that you are
+going to be searching for $P(n + 1) = f(n + 1)$, not $P(n + 1) = f(n)$. Thus, it is 
+often helpful to write out what $f(n + 1)$ is first, so that you know where you want 
+to end up.
+
+\header{Strong Induction}
+Strong induction is where \underline{all} prior cases imply the next case in an
+inductive proof.
 
 \end{document}
