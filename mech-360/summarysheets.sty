@@ -1,0 +1,47 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{summarysheets}
+
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+
+\newcommand{\suchthat}{\textrm{ s.t. }}
+
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+
+\newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+\newcommand{\sephat}{\hat{r}_{\textrm{sep}}}
+
+\newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
+
+\newcommand{\scripty}[1]{\ensuremath{\mathcalligra{#1}}}
+
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\jomega}{{j\omega}}
+\newcommand{\domega}{d\omega}
+
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\smallgap}{\smallskip\\}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
