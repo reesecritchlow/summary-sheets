@@ -10,4 +10,202 @@
     \normalsize Reese Critchlow
 \end{center}
 
+\header{Overview}
+
+There exist four main ways to generate stresses in solid mechanics:
+\gap
+\sheader{Normal Stress} Normal stress occurs when a force is applied to the normal
+face of an object.
+\[
+    \sigma = \frac{F}{A_\perp}    
+\]
+\sheader{Shear Stress} Shear stress occurs when a force is applied perpendicular
+to the normal face of an object.
+\[
+    \tau = \frac{V}{A_\parallel}
+\]
+\sheader{Torsional Stress} Torsional stress occurs when an equitorial moment is applied
+about an object. It produces a shear stress.
+\[
+    \tau = \frac{Tr}{J} = \frac{G\phi}{l}
+\]
+where $J$ is the polar moment of area and $r$ is the distance from the neutral axis.
+\gap
+\sheader{Bending Stress} Bending stress occurs when an axial moment is applied about
+an object. It produces a normal stress.
+\[
+    \sigma = \frac{My}{I} = \frac{E}{\rho} 
+\]
+It is also important to note that $J = I_x + I_y$, so $I = \frac{1}{2} J$.
+\gap
+\header{Bending Moment Diagrams}
+Bending moment diagrams appear to be the heart and soul of solid mechanics. There exists
+a standard convention drawing bending moment diagrams:
+\begin{enumerate}
+    \item Define a coordinate system starting from one of the ends of the beam. Set counterclockwise
+    rotation as positive, and downwards shear as positive. 
+    \item Make cuts at different points of the beam where different forces behave differently,
+    where the ``segment'' that you extract has one end at the coordinate system origin,
+    and the other end of the cut.
+    \item At the non-origin side of the cut, $p$, draw a counterclockwise moment and a downwards shear
+    let the moment be $M$ and the shear be $V$. 
+    \item Using the force equilibirum that $\sum M_p = 0$ and $\sum F_y= 0$ for the 
+    segment, derive formulae for $M$ and $V$.
+    \item Use the formulae for $M$ and $V$ to plot as functions on a graph, and determine
+    the max/min values.
+    \item Use the fact that $\frac{\partial M}{\partial x} = V$ to check your work.
+\end{enumerate}
+
+\header{Beam Deflection}
+The deflection of a beam can be calculated using the following formula:
+\[
+    \frac{d^2y}{dx^2} = \frac{M(x)}{EI}    
+\]
+However, it is to be noted that this contains a second derivative, so two boundary
+conditions are required to solve the problem. Generally, these boundary conditions take
+the following forms:
+\begin{itemize}
+    \item The deflection at a point $a$ is known to be zero $y(a) = 0$.
+    \item The deflection at a point $a$ is known to be maximal $y'(a) = 0$.
+\end{itemize}
+
+Using the boundary conditions, we can solve the differential equation and solve for
+the overall deflection of the beam.
+\gap
+We can also use superposition to of various deflections to calculate the total deflection.
+\gap
+\header{Buckling}
+
+For a column/object that is being loaded in compression, it can experience buckling
+if the load is large enough. To calculate this, we can follow a similar process as 
+beam deflections, with one key difference: we assume there is a $y$ deflection 
+such that a moment is induced from the load and the $y$ deflection.
+
+\begin{enumerate}
+    \item Define a coordinate system starting from one of the ends of the beam. Set counterclockwise
+    rotation to be positive. 
+    \item Make a cut at some arbitrary point in the beam, where the ``segment'' starts
+    at the origin, and ends at slicing point.
+    and the other end of the cut.
+    \item At the slicing point of the cut, $p$, draw a counterclockwise moment and a downwards shear
+    let the moment be $M$ and the shear be $V$. Assume that the slicing point has 
+    a deflection, $y$, which produces a moment.
+    \item Using the force equilibirum that $\sum M_p = 0$ for the 
+    segment, derive formulae for $M(y)$.
+    \item Rearranging the formula from beam deflection: $\frac{d^2y}{dx^2} = \frac{M(x)}{EI}$
+    we can obtain:
+    \[
+        M(y) = EIy''.
+    \]
+    Thus, we are generally left with an equation of the form:
+    \[
+        EIy'' + Py = 0
+    \]
+    \item Given a second order homogenous ODE, one can guess a solution of the form 
+    \[
+        y(x) = A\cos(\lambda x) + B\sin(\lambda x)
+    \]
+    \item Solving this differential equation, we can employ the boundary conditions that:
+    \begin{enumerate}
+        \item $x = 0 \to y = 0$
+        \item $x = L \to y = L$
+    \end{enumerate}
+    \item The solution of this ODE will bring the $P_{\textrm{cr}}$, or the critical
+    load that results in bending.
+\end{enumerate}
+
+\sheader{Off-Center Loads} In the event of an off-center load, where the load $P$
+is off center by a distance $d$, there is a moment $M_0 = Pd$ induced at the top.
+This moment causes bending stress in the beam as well. This bending stress is important
+for calculating the normal stress for yield strength in the beam, However
+\underline{$P_\textrm{cr}$ stays the same}.
+
+\pagebreak
+\header{Shearing Stress and Shear Flow}
+
+When a transverse load is applied to a a beam, there exists a shear stress on each
+layer \underline{along} of the beam. This is called the ``shear flow'' and is 
+denoted by $q$, whose units are force/area. Shear flow is useful, because it can 
+allow one to find two important quantities:
+\begin{itemize}
+    \item Total shearing force on the layer of length $l$: $F = q \cdot l$
+    \item Shearing stress at any point on the layer of \textbf{width} $t$: $\tau = \frac{q}{t}$
+\end{itemize}  
+To calculate $q$, we can use the formula for shear flow.
+\begin{multicols}{2}
+    \[
+        q = \frac{VQ}{I}
+    \]
+    \columnbreak
+    \begin{itemize}
+        \item $I$: [Second] Moment of Area with respect to neutral axis
+        \item $V$: Shearing force at the section of the beam desired
+        \item $Q$: First moment of area, where $Q = (A)(L)$, where $A$ is the 
+        area of a section, and $L$ is its distance from the neutral axis.
+    \end{itemize}
+\end{multicols}
+
+From this concept of shear flow, we can also derive more precise values for the 
+maximal shearing stress in various cross sections:
+\begin{itemize}
+    \item \sheader{Rectangular Cross Sections} $\tau_\textrm{max} = \frac{3}{2} \frac{V}{A}$
+    \item \sheader{Cylindrical Cross Sections} $\tau_\textrm{max} = \frac{4}{3} \frac{V}{A}$
+    \item \sheader{Thin-Walled Cylindrical Cross Sections} $\tau_\textrm{max} = 2 \frac{V}{A}$
+\end{itemize}
+
+\header{Combined Loading}
+
+In the case that an object has both normal and shear stresses in multiple dimensions,
+we can define the \underline{stress tensor}, which defines all of the stress at a point
+on an object.
+
+\begin{multicols}{2}
+    \begin{center}\underline{2D Stress Tensor}\end{center}
+    \[
+        \begin{bmatrix}
+            \sigma_x & \tau_{xy}\\
+            \tau_{yx} & \sigma_y
+        \end{bmatrix}    
+    \]
+    \vfill\null\columnbreak
+    \begin{center}\underline{3D Stress Tensor}\end{center}
+    \[
+        \begin{bmatrix}
+            \sigma_x & \tau_{xy} & \tau_{xz}\\
+            \tau_{yx} & \sigma_y & \tau_{yz}\\
+            \tau_{zx} & \tau_{zy} & \sigma_z
+        \end{bmatrix}    
+    \]
+\end{multicols}
+It is important to note that the eigenvalues of the stress tensors correspond to 
+\underline{principal stresses} of the point of interest. The principal stresses
+are the maximum normal stresses of the point of interest. 
+\gap
+If one orders the stresses from smallest to largest, we can define the maximum shearing
+stress as:
+\[
+    \tau_\textrm{max} = \frac{\sigma_1 - \sigma_3}{2}
+\]
+
+\header{Pressure Vessels}
+
+\begin{align*}
+    \sigma_\textrm{hoop} = \frac{Pr}{t} && \sigma_\textrm{axial} = \frac{Pr}{2t}
+\end{align*}
+
+\pagebreak
+
+\header{Failiure Criteria}
+We can also define two types of failiure criteria for a body:
+\gap
+\sheader{Von Mises} Failiure happens if $\sigma_v$ reaches $S_y$:
+\begin{align*}
+    f_s = \frac{S_y}{\sigma_V} && \sigma_V = \sqrt{\frac{(\sigma_1 - \sigma_2)^2 + (\sigma_1 - \sigma_3)^2 + (\sigma_2 - \sigma_3)^2}{2}} 
+\end{align*}
+
+\sheader{Tresca} Failiure happens if $\tau_\textrm{max}$ reaches $0.5S_y$:
+\[
+    f_s = \frac{0.5S_y}{\tau_\textrm{max}}    
+\]
+
 \end{document}
