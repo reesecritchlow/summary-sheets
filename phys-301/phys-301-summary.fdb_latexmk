@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1665635589 "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/phys-301-summary.tex" "phys-301-summary.pdf" "phys-301-summary" 1665635590
-  "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/phys-301-summary.tex" 1665635588 13065 f1e94e0fdb832dbcbd94acf34052848d ""
+["pdflatex"] 1667681643 "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/phys-301-summary.tex" "phys-301-summary.pdf" "phys-301-summary" 1667681644
+  "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/phys-301-summary.tex" 1667681642 22515 e0efd689278b908a10269b919859e733 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -109,6 +109,8 @@
   "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty" 1622581934 2671 4de6781a30211fe0ea4c672e4a2a8166 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/trig.sty" 1636758526 4009 187ea2dc3194cd5a76cd99a8d7a6c4d0 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1644269979 29921 d0acc05a38bd4aa3af2017f0b7c137ce ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/l3kernel/expl3.sty" 1645736062 6107 e082261f9677386795d8bf6b6254fa9d ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/l3packages/xparse/xparse.sty" 1642022539 6758 7d9d899cbbfc962fbc4bb93f4c69eec2 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg" 1279039959 678 4792914a8f45be57bb98413425e4c7af ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty" 1601326656 1090 bae35ef70b3168089ef166db3e66f5b2 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty" 1601326656 410 615550c46f918fcbee37641b02a862d9 ""
@@ -116,6 +118,7 @@
   "/usr/local/texlive/2022/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty" 1601326656 989 c49c8ae06d96f8b15869da7428047b1e ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty" 1601326656 443 8c872229db56122037e86bcda49e14f3 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty" 1601326656 325 f9f16d12354225b7dd52a3321f085955 ""
+  "/usr/local/texlive/2022/texmf-dist/tex/latex/physics/physics.sty" 1356048875 29610 a9597219b282d9c78b02393dcd7d4322 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty" 1641594609 90399 93200a4832e517564b5aa5dc46e12177 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/tools/enumerate.sty" 1622581934 3468 068d84ef9735e15f11c5a120c0a1a139 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/tools/multicol.sty" 1636758526 32262 2bb622a0aa56c4a7a5cbdfe9d122c15a ""
@@ -126,8 +129,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1663733917 2826440 c64f88e675154be29d2433531c98b65d ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "phys-301-summary.aux" 1665635590 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
-  "phys-301-summary.tex" 1665635588 13065 f1e94e0fdb832dbcbd94acf34052848d ""
+  "phys-301-summary.aux" 1667681644 32 f852561997c05a7d986acd1deeb530ec "pdflatex"
+  "phys-301-summary.tex" 1667681642 22515 e0efd689278b908a10269b919859e733 ""
   (generated)
   "phys-301-summary.aux"
   "phys-301-summary.log"
