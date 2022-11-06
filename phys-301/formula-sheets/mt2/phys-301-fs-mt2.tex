@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=0.2in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {../images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage[fontsize=8pt]{fontsize}
+\usepackage[none]{hyphenat}
+\usepackage[document]{ragged2e}
+
+\newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+\newcommand{\sephat}{\hat{r}_{\textrm{sep}}}
+\newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[2]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] $$#2$$\end{tcolorbox}\end{center}}
+\newcommand{\doubleformula}[3]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] $$#2$$\\$$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\formulax}[2]{\underline{#1}\smallskip\centering $#2$ \raggedleft}
+\newcommand{\tripleformula}[4]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] \begin{align*} #2 \\ #3 \\ #4\end{align*}
+    \end{tcolorbox}\end{center}}
+
+\newcommand{\formbox}[2]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] #2\end{tcolorbox}\end{center}}
+
+
+\newcommand{\where}{\hspace{0.3cm} \textrm{where} \hspace{0.3cm}}
+
+\begin{document}
+    \begin{multicols}{2}
+        \formula{Generalized Multipole Expansion}{V(r) = \frac{1}{4\pi \epsilon_0}\sum_{n = 0}^\infty \frac{1}{r^{n + 1}} \int_{V} ||\vec{r'}|| P_n(\cos \alpha)\rho(\vec{r'})d\tau'}
+        \begin{multicols}{2}
+            \formula{Monopole Voltage}{V(r) = \kfrac\frac{Q}{r}}
+            \formula{Dipole Voltage}{V(r) = \kfrac \frac{\vec{p}\cdot \hat{r}}{r^2}}
+        \end{multicols}
+        \begin{multicols}{2}
+            \formula{Dipole Moment -- Continuous Charge Distribution}{\vec{p} \equiv \int_V \vec{r'}\rho(\vec{r'})d\tau'   }
+            \formula{Dipole Moment -- Change of Origin}{\vec{p'} = \vec{p} - Q\vec{a}}
+            \formula{Torque of a Dipole}{\vec{N} = \vec{p} \times \vec{E}}
+            \formula{Dipole Moment -- Point Charge Distribution}{\vec{p} = \sum_{i = 1}^n q_i \vec{r'}_i}
+            \formula{Force on a Dipole}{\vec{F} = (\vec{p} \cdot \nabla)\vec{E}}
+            \formula{Energy of a Dipole in an Electric Field}{U = -\vec{p} \cdot \vec{E}}
+        \end{multicols}
+        
+        \begin{multicols}{2}
+            \formula{Bound Surface Charge Density}{\sigma_\textrm{bound} = \vec{P} \cdot \hat{n}}
+            \tripleformula{Linear Dielectrics}{\vec{P} &= \epsilon_0 \chi_e \vec{E}}{\vec{D} &= \epsilon \vec{E}}{\epsilon &= \epsilon_0 (1 + \chi_e) = \epsilon_0 \epsilon_r}
+            \formula{Displacement Boundary Condition}{D_\textrm{above}^\perp - D_\textrm{below}^\perp = \sigma_\textrm{free}}
+            \vfill\columnbreak
+            \noindent
+            \formula{Bound Volume Charge Density}{\rho_\textrm{bound} \equiv -\nabla \cdot \vec{P}}
+            \doubleformula{Gauss's Law for Electric Displacement }{\nabla \cdot \vec{D} = \rho_f}{\oint\vec{D} \cdot d\vec{A} = Q_{f_\textrm{encl}}}
+            \formula{Electric Displacement}{\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}}
+        \end{multicols}
+        \formula{Solution for For Spherical Laplacians}{f(r, \theta) = \sum_{l = 0}^\infty{\left(A_l r^l + \frac{B_l}{r^{l + 1}}\right)P_l(\cos \theta)}}
+        \begin{multicols}{2}
+            \formbox{Legendre Polynomials}{\begin{align*}
+                P_0(\cos \theta) &= 1\\
+                P_1(\cos \theta) &= \cos\theta \\
+                P_2(\cos \theta) &= \frac{3}{2} \cos^2 \theta - \frac{1}{2}\\
+                P_3(\cos \theta) &= \frac{5}{2} \cos^3 \theta - \frac{3}{2} \cos \theta
+            \end{align*}}
+        \end{multicols}
+        \vfill\null\columnbreak
+        \formbox{Common Boundary Conditions}{
+            \begin{itemize}
+                \item $\vec{D}_\textrm{above}^\perp - \vec{D}_\textrm{below}^\perp = \sigma_f$
+                \item $\vec{D}_\textrm{above}^\parallel - \vec{D}_\textrm{below}^\parallel = \vec{P}_\textrm{above}^\parallel - \vec{P}_\textrm{below}^\parallel$
+                \item $\vec{E}_\textrm{above}^\perp - \vec{E}_\textrm{below}^\perp = \frac{\sigma_\textrm{surf}}{\epsilon_0}$
+                \item $V_\textrm{above} = V_\textrm{below}$
+                \item $\epsilon_\textrm{above}E_\textrm{above}^\perp - \epsilon_\textrm{below}E_\textrm{below}^\perp = \sigma_f$
+                \item $\epsilon_\textrm{above}\frac{\partial V_a}{\partial n}^\perp - \epsilon_\textrm{below}\frac{\partial V_b}{\partial n}^\perp = \sigma_f$
+                \item $V(r = 0) = $ finite
+                \item $V(r \to \infty) = $ finite or zero.
+            \end{itemize}
+        }
+    \end{multicols}
+
+
+
+
+
+\end{document}
