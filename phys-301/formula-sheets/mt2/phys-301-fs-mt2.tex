@@ -36,7 +36,7 @@
 
 \begin{document}
     \begin{multicols}{2}
-        \formula{Generalized Multipole Expansion}{V(r) = \frac{1}{4\pi \epsilon_0}\sum_{n = 0}^\infty \frac{1}{r^{n + 1}} \int_{V} ||\vec{r'}|| P_n(\cos \alpha)\rho(\vec{r'})d\tau'}
+        \formula{Generalized Multipole Expansion}{V(r) = \frac{1}{4\pi \epsilon_0}\sum_{n = 0}^\infty \frac{1}{r^{n + 1}} \int_{V} ||\vec{r'}||^n P_n(\cos \alpha)\rho(\vec{r'})d\tau'}
         \begin{multicols}{2}
             \formula{Monopole Voltage}{V(r) = \kfrac\frac{Q}{r}}
             \formula{Dipole Voltage}{V(r) = \kfrac \frac{\vec{p}\cdot \hat{r}}{r^2}}
@@ -53,12 +53,12 @@
         \begin{multicols}{2}
             \formula{Bound Surface Charge Density}{\sigma_\textrm{bound} = \vec{P} \cdot \hat{n}}
             \tripleformula{Linear Dielectrics}{\vec{P} &= \epsilon_0 \chi_e \vec{E}}{\vec{D} &= \epsilon \vec{E}}{\epsilon &= \epsilon_0 (1 + \chi_e) = \epsilon_0 \epsilon_r}
+            \formula{Electric Displacement}{\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}}
             \formula{Displacement Boundary Condition}{D_\textrm{above}^\perp - D_\textrm{below}^\perp = \sigma_\textrm{free}}
-            \vfill\columnbreak
-            \noindent
+            \formula{Image Charge Surface Charge}{\sigma = - \epsilon_0 \frac{\partial V}{\partial n}}
             \formula{Bound Volume Charge Density}{\rho_\textrm{bound} \equiv -\nabla \cdot \vec{P}}
             \doubleformula{Gauss's Law for Electric Displacement }{\nabla \cdot \vec{D} = \rho_f}{\oint\vec{D} \cdot d\vec{A} = Q_{f_\textrm{encl}}}
-            \formula{Electric Displacement}{\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}}
+            \formula{Force on a Dielectric}{F = -\nabla U}
         \end{multicols}
         \formula{Solution for For Spherical Laplacians}{f(r, \theta) = \sum_{l = 0}^\infty{\left(A_l r^l + \frac{B_l}{r^{l + 1}}\right)P_l(\cos \theta)}}
         \begin{multicols}{2}
@@ -82,6 +82,8 @@
                 \item $V(r \to \infty) = $ finite or zero.
             \end{itemize}
         }
+        \doubleformula{Method of Images Voltage}{V(r, \theta) = \kfrac \left(\frac{q_1}{||\vec{r}_{\textrm{sep}_1}||} + \frac{q_2}{||\vec{r}_{\textrm{sep}_2}||}\right)}{\frac{-q_1}{q_2} = \frac{||\vec{r}_{\textrm{sep}_1}||}{||\vec{r}_{\textrm{sep}_2}||}}
+        
     \end{multicols}
 
 
