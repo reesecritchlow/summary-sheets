@@ -11,6 +11,10 @@
 \graphicspath{ {./images/} }
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
+\usepackage{mathtools}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\ftrans}{\xleftrightarrow[]{f}}
+\newcommand{\ejw}{{e^\jomega}}
 
 
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
@@ -369,5 +373,311 @@ and vice versa. This forwards direction of this was already known however.
     \end{align*}
     \vfill\null
 \end{multicols}
+
+\pagebreak
+
+\section*{Midterm 2}
+
+\header{Properties of Fourier Transforms}
+
+\sheader{Multiplication Property} We can shift the frequency spectrum of a signal by using the \underline{multiplication property}.
+This comes in the form:
+\begin{align*}
+    x(t) \cdot e^{j\omega_c t} \xleftrightarrow[]{f}  X(j(\omega - \omega_0))
+\end{align*}
+
+\sheader{Differentiation} Differentiation also is made easy under 
+Fourier transforms.
+
+\begin{align*}
+    \frac{dx(t)}{dt} \ftrans \jomega X(jw)
+\end{align*}
+
+\sheader{Integration}
+
+\begin{align*}
+    \int_{-\infty}^t x(\tau) d\tau \ftrans \frac{1}{\jomega}X(\jomega) + \pi X(0)\delta(\omega)
+\end{align*}
+
+We can also chain all of these together with successive multiplications
+in the frequency domain.
+\gap
+\sheader{Differential Equations under Fourier Transforms} One can obtain
+the transfer function of a differential equation under a fourier transform.
+Given a differential equation of the form:
+\begin{align*}
+    \sum_{k = 0}^N \alpha_k \frac{d^ky(t)}{dt^k} = \sum_{k = 0}^M \beta_k \frac{d^k x(t)}{dt^k}
+\end{align*}
+We can obtain its transfer function:
+\begin{align*}
+    H(j\omega) = \frac{Y(\jomega)}{X(\jomega)} = \frac{\sum_{k = 0}^M \beta_k (\jomega)^k}{\sum_{k = 0}^N\alpha_k(\jomega)^k}
+\end{align*}
+This formula is kind of confusing. It's important to just note it as:
+\begin{align*}
+    H(\jomega) = \frac{\sum x\textrm{ coeffs}\cdot (\jomega)^k}{\sum y \textrm{ coeffs} \cdot (\jomega)^k}
+\end{align*}
+\sheader{Difference Equations under Fourier Transforms} 
+We can also apply the same formulae to difference equations:
+\begin{align*}
+    \sum_{k = 0}^N \alpha_k y[n - k] = \sum_{k = 0}^M \beta_k x[n - k]
+\end{align*}
+Thus, resulting in a similar formula:
+\begin{align*}
+    H(e^\jomega) = \frac{Y(\jomega)}{X(\jomega)} = \frac{\sum_{k = 0}^M \beta_k e^{-jk\omega}}{\sum_{k = 0}^M \alpha_k e^{-jk\omega}} = \frac{\sum x \textrm{ coeffs} \cdot e^{-jk\omega}}{\sum y \textrm{ coeffs} \cdot e^{-jk\omega}}
+\end{align*}
+
+\pagebreak
+
+\header{The Discrete Time Fourier Transform}
+
+The \underline{Discrete Time Fourier Transform} is used for transforming
+\textbf{discrete, aperiodic signals}. It is as follows:
+\begin{multicols}{2}
+    \centertext{\underline{Inverse DTFT (Synthesis)}}
+    \begin{align*}
+        x[n] = \frac{1}{2\pi}\int_{2\pi}X(e^\jomega)e^{\jomega n}d\omega
+    \end{align*}
+    \vfill\null\columnbreak
+    \centertext{\underline{DTFT (Analysis)}}
+    \begin{align*}
+        X(e^\jomega) = \sum_{n = -\infty}^\infty x[n] e^{-j\omega n}
+    \end{align*}
+    \vfill\null
+    
+\end{multicols}
+
+We also require \underline{convergence criteria} in the DTFT. It is as follows:
+\begin{align*}
+    \sum_{n=-\infty}^\infty | x[n] | < \infty && \sum_{n = -\infty}^\infty |x[n]|^2 < \infty
+\end{align*}
+Only \underline{one} of these criteria must be satisfied.
+\gap
+There exist the same properites for the CT Fourier transform, however, some more
+properties aries in the DTFT:
+\gap
+\sheader{Conjugation} 
+
+\begin{align*}
+    \textrm{Even}(x[n]) \ftrans \textrm{Re}(X(\ejw)) && \textrm{Odd}(x[n]) \ftrans j\cdot \textrm{Im}(X(\ejw))
+\end{align*}
+
+\sheader{Periodicity}
+\begin{align*}
+    X(e^{j(\omega + 2\pi)} = X(\ejw))
+\end{align*}
+
+\sheader{Differentiation in Frequency} (Warning: this is \underline{very} different.)
+\begin{align*}
+    n \cdot x[n] \ftrans j \frac{d X(\ejw)}{d\omega}
+\end{align*}
+
+\sheader{Differencing}
+\begin{align*}
+    x[n] - x[n - 1] \ftrans (1 - e^{-\jomega} )X(\ejw)
+\end{align*}
+
+\sheader{Accumulating}
+\begin{align*}
+    \sum_{m = -\infty}^n x[m] \ftrans  \frac{1}{1 - e^{-\jomega}}X(\ejw) + \pi X(e^{j0})\sum_{k = -\infty}^\infty \delta(w - 2\pi k)
+\end{align*}
+
+\sheader{Parseval's Theorem} We can also define Parseval's theorem in the DTFT.
+\begin{align*}
+    \sum_{n = -\infty}^\infty |x[n]|^2 = \frac{1}{2\pi} |X(\ejw)|^2 d\omega
+\end{align*}
+
+\header{The Fast Fourier Transform}
+
+It's cool. It has $N\log_2{N}$ time complexity.
+
+\pagebreak
+
+\header{Frequency Responses of LTI Systems}
+
+We can look at the frequency responses of LTI systems with a slightly different prespective.
+\gap
+Since a transfer function, $H(\jomega)$ or $H(\ejw)$ has both a magnitude and a phase,
+we can write a transfer function, or any frequency spectrum as:
+\begin{align*}
+    H(\jomega) = |H(\jomega)| e^{\angle H(\jomega)}
+\end{align*}
+
+Hence, we can write input and ouptut signals as follows:
+\begin{align*}
+    |Y(\jomega)| &= |H(\jomega)||X(\jomega)| \\
+    \angle Y(\jomega) &= \angle H(\jomega) + \angle X(\jomega)
+\end{align*}
+
+\sheader{Group Delay} We can also define how much a system delays its input signal
+through the \underline{group delay}. 
+\begin{align*}
+    \tau(\omega) = -\frac{d}{d\omega} \left(\angle H(\jomega)\right)
+\end{align*}
+
+\header{Step Response}
+
+Under an ideal filter, a step function attains some sort of ``ringing'' in the
+graph. Thus, we find it important to define the \underline{step response}
+for systems.
+\gap
+Computing the step response is as follows:
+\begin{align*}
+    s(t) = \int_{-\infty}^t h(\tau) d\tau
+\end{align*}
+
+\header{Bode Plots}
+
+Often, we find ourselves in situations where plotting phase and magnitudes of transfer
+functions is difficult because of multiplication/division. Thus, we can use a 
+\underline{Bode Plot}. The process for obtaining a Bode Plot is as follows:
+
+\begin{multicols}{2}
+    \centertext{\underline{Magnitude}}
+    \begin{enumerate}
+        \item Take $-20\log_{10}|H(\jomega)|$
+        \item Identify the point(s), $\tau_n$ for which the function has an 
+        ``inflection point''.
+        \item Take $\omega \gg \tau_n$ and $\omega \ll \tau_n$, and plot 
+        the two behaviours.
+    \end{enumerate}
+    \vfill\null\columnbreak
+    \centertext{\underline{Phase}}
+    \begin{enumerate}
+        \item Plot against $\log_{10}\omega$.
+    \end{enumerate}
+\end{multicols}
+
+\pagebreak
+
+\header{Sampling Theory}
+Given a signal $x(t)$, we can define an ``impulse train'' $p(t)$, which is a train
+of impulses that ``sample'' our signal at a given interval $T$. We can also
+define our \underline{sampling frequency} to be:
+\begin{align*}
+    \omega_s = \frac{2\pi}{T}.
+\end{align*}
+
+Hence, we can define our \underline{sampled signal} $x_p(t) = x(t) \cdot p(t)$.
+\begin{align*}
+    x_p(t) = \sum_{n = - \infty}^\infty x(nT) \cdot \delta(t - nT).
+\end{align*} 
+
+Given a sampled signal, it is natural to investigate the frequency spectrum of 
+$x(t)$, $p(t)$, and $x_p(t)$. Hence, we can derive the Fourier transforms for each:
+\begin{multicols}{3}
+    \centertext{\underline{$X(\jomega)$}}
+    \begin{align*}
+        X(\jomega) = X(\jomega)
+    \end{align*}
+    \vfill\null\columnbreak
+    \centertext{\underline{$P(\jomega)$}}
+    \begin{align*}
+        P(\jomega) = \frac{2\pi}{T}\sum_{k = \infty}^\infty \delta(\omega - k\omega_s)
+    \end{align*}
+    \vfill\null\columnbreak
+    \centertext{\underline{$X_p(\jomega)$}}
+    \begin{align*}
+        X_p(\jomega) = \frac{1}{T} \sum_{k = -\infty}^\infty X(j(\omega - k\omega_s))
+    \end{align*}
+    \vfill\null
+\end{multicols}
+
+It's also very important to get a grasp on the graphs that result from these functions:
+\\
+\begin{center}
+    \includegraphics[scale=0.45]{sampling-graphs.png}    
+\end{center}
+Note that for the graph of $X_p(j\omega)$ has the $\omega_s - \omega_m$, which will
+be important later. $\omega_m$ is defined as the maximum frequency contained in the
+input signal.
+\gap
+Hence, the question may be posed: How can retrieve the original signal from the
+sampled signal? The answer to this question is the \textbf{Sampling Theorem}:
+\gap
+\sheader{Sampling Theorem (condensed)}
+Any signal can be reconstructed if the sampling frequency is \textit{strictly} larger than twice
+the maximum frequency in the sampled signal. In math, this looks like:
+\begin{align*}
+    \omega_s > 2\omega_m
+\end{align*} 
+Hence, we can also define:
+\begin{itemize}
+    \item \sheader{Nyquist Rate} $\omega_s = 2\omega_M$
+    \item \sheader{Nyquist Frequency} $\omega_M = \omega_s / 2$
+\end{itemize}
+
+\pagebreak
+
+\header{Interpolation}
+Often, we cannot always fully reconstruct our signal from the sampled signal, due
+to a sampling rate that is too low. Hence, there are some methods in which 
+we can \textit{interpolate} the sampled signal to attempt to reconstruct the 
+original signal. Some of these methods include, but are not limited to:
+\begin{itemize}
+    \item \sheader{Zero Order Hold} Assume each point maintains the same value
+    until the next sample is available.
+    \item \sheader{Band Limited Interpolation} Apply a lowpass filter to the 
+    system, with cutoff $\omega_c$ and gain $T$.
+    \begin{align*}
+        x_r(t) = \sum_{n = \infty}^\infty x(nT)\frac{\omega_c T \sin(\omega_c(t - nT))}{\pi \omega_c(t - nT)}
+    \end{align*}
+\end{itemize}
+
+\header{Aliasing}
+
+An important phenomena arises when you don't sample at a high enough rate: \textbf{aliasing}.
+\gap
+Essentially, the frequencies in $X_p(\jomega)$ begin to overlap, and the frequency
+spectrum of the original spectrum becomes distorted.
+\gap
+\header{Conversions Between DT and CT}
+
+Many common computing practices see the conversion of a signal from CT to DT and then
+back to CT in order to employ computational methods of signal processing. For such
+a process, we define a standard process for such signal processing.
+
+\begin{enumerate}
+    \item Original signal $x_c(t)$ is sampled by an impulse train $p(t)$ to form
+    the sampled signal $x_p(t)$.
+    \item Sampled signal is converted to a discrete time signal $x_d[n]$.
+    \item Discrete signal is processed through $H_d(\ejw)$.
+    \item Processed, discrete signal is transformed back into a CT signal.
+    \item CT signal is low-passed to recover the original signal.
+\end{enumerate}
+
+Hence, when converting to a DT signal, we find ourselves with a new frequency 
+defining our Fourier spectrum, $\Omega$.
+\gap
+Thus, the Fourier spectrum for the transformed signal ends up being defined as:
+\begin{align*}
+    X_d(\ejw) = X_p(j\Omega / T)
+\end{align*}
+Thus, we can also define the new frequency, $\Omega$.
+\begin{align*}
+    \Omega = \omega T.
+\end{align*}
+It's also important to define the signal in discrete time:
+\begin{align*}
+    x_c[n] = x_c(nT)
+\end{align*}
+
+\header{Decimation/Downsampling}
+Downsampling occurs when samples are removed from a DT signal in a process as such:
+\begin{align*}
+    x_p[n] = \begin{cases}
+        x[n] & $N \mid \textrm{n}$\\
+        0 & \textrm{otherwise}
+    \end{cases}
+\end{align*}
+Where $N$ describes every $N$th sample to take. 
+\gap
+In the case of downsampling, we find that the frequency spectrum is altered.
+\begin{align*}
+    X_b(\ejw) = X_p(e^{\frac{\jomega}{N}})
+\end{align*}
+Upsampling also exists:
+\begin{align*}
+    X_u(\ejw) = X_p(e^{\jomega N})
+\end{align*}
 
 \end{document}

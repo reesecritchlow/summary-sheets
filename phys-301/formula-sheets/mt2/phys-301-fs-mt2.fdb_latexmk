@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1667883725 "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex" "phys-301-fs-mt2.pdf" "phys-301-fs-mt2" 1667883727
+["pdflatex"] 1668138757 "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex" "phys-301-fs-mt2.pdf" "phys-301-fs-mt2" 1668138760
   "../images//em-triangle.png" 1665626157 403469 389ba8462ee67dfe8deecfe7c1c3122f ""
-  "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex" 1667883722 14204 0985bbcc5d84103119c81c9e6129a0c7 ""
+  "/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex" 1668138756 14246 0b69d6c0f45ae4d7c1d412a588053a2e ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm" 1136768653 1536 05df9db6aeccc4eea94fec15c9024f79 ""
@@ -138,8 +138,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1663733917 2826440 c64f88e675154be29d2433531c98b65d ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "phys-301-fs-mt2.aux" 1667883727 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
-  "phys-301-fs-mt2.tex" 1667883722 14204 0985bbcc5d84103119c81c9e6129a0c7 ""
+  "phys-301-fs-mt2.aux" 1668138759 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "phys-301-fs-mt2.tex" 1668138756 14246 0b69d6c0f45ae4d7c1d412a588053a2e ""
   (generated)
   "phys-301-fs-mt2.aux"
   "phys-301-fs-mt2.log"

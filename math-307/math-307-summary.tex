@@ -21,8 +21,10 @@
 \newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
 \newcommand{\hgap}{\hspace{0.5cm}}
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
-
+\newcommand{\sheader}[1]{\underline{#1:}}
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}}
 
 \newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
 
@@ -515,5 +517,271 @@ and let $r = \textrm{rank}(A)$.
 \smallskip\\
 Then, $R(A) = \textrm{span}\{\vec{l_1}, \cdots, \vec{l_r} \}$ where $\vec{l_n}$ are
 the first $r$ columns of $L$.
+
+\pagebreak
+
+\section*{Midterm 2}
+
+\header{Inner Product}
+
+The \underline{inner product} or \underline{dot product} has some important
+properties:
+\begin{itemize}
+    \item If two vectors are orthogonal, the inner product is zero.
+    \item If two vectors are colinear, their inner product is the product of the 
+    magnitude of the two vectors.
+\end{itemize}
+\gap
+\header{Orthogonal Stuff}
+\sheader{Orthogonal Sets} A set is orthogonal if all vectors in the set 
+are orthogonal to each other.
+\gap
+\sheader{Orthonormal Sets} A set is orthonormal if all vectors in the set 
+are orthogonal to each other \textbf{and} the length of each vector is 1.
+\gap
+\sheader{Remark} If vectors are orthogonal, they are linearly independent. 
+\gap
+\header{Orthogonal Complements}
+\sheader{Orthogonal Subspaces} Two subspaces, $S_1$ and $S_2$ are are considered to be 
+\underline{orthogonal subspaces} if
+\begin{align*}
+    \forall \vec{x} \in S_1, \vec{y} \in S_2, \langle\vec{x}, \vec{y}\rangle = 0.
+\end{align*}
+
+\sheader{Orthogonal Complements} An orthogonal complement of 
+a matrix $U$, $U^\perp$ is the set of vectors:
+\begin{align*}
+    U^\perp = \curly{\vec{x} \in \mathbb{R}^n : \langle\vec{x}, \vec{u}\rangle = 0, \forall \vec{u} \in U}. 
+\end{align*}
+\gap
+\sheader{Remark} For a subspace $U \in \mathbb{R}^n$, $\dim(U) + \dim(U^\perp) = n$.
+\gap
+\sheader{Finding an Orthogonal Complement} The orthogonal complement is 
+simply the null space of the matrix. Hence, $U^\perp = N(A)$.
+\gap
+\sheader{Properties of Orthogonal Complements}
+\begin{align*}
+    N(A) &= R(A^T)^\perp & R(A) &= N(A^T)^\perp\\
+    N(A)^\perp &= R(A^T) & R(A)^\perp &= N(A^T)
+\end{align*}
+
+\header{Projections}
+
+The projection of a vector $\vec{x}$ onto another vector $\vec{u}$ 
+is given by:
+\begin{align*}
+    \textrm{proj}_{\vec{u}}(\vec{x}) = \frac{\langle \vec{x}, \vec{u}\rangle}{\langle \vec{u}, \vec{u}\rangle} \cdot \vec{u}.
+\end{align*}
+Vector projections can also be given by matrix multiplication:
+\begin{align*}
+    \textrm{proj}_{\vec{u}}(\vec{x}) = \frac{1}{\langle \vec{u}, \vec{u}\rangle} \vec{u}\vec{u}^T \vec{x}.
+\end{align*}
+Hence, we can also define a \underline{projection matrix} onto a 
+vector, $\vec{u}$ as:
+\begin{align*}
+    P = \frac{1}{||\vec{u}||^2} \vec{u}\vec{u}^T
+\end{align*}
+The projection matrix has some interesting properties:
+\begin{itemize}
+    \item $P^T = P$ (symmetric)
+    \item $P^2 = P$
+    \item $\textrm{rank}(P) = 1$
+\end{itemize}
+\sheader{Projecting Vectors onto Subspaces} To project a vector onto
+a subspace U, we define $\textrm{proj}_U(\vec{x})$ as a linear 
+combination of projections of $\vec{x}$ onto basis vectors of U.
+\gap
+We also would like to have an \underline{orthogonal} basis of $U$,
+such that:
+\begin{align*}
+    \vec{x} - \textrm{proj}_U(\vec{x}) \in U^\perp
+\end{align*}
+
+\sheader{Projecting onto the Orthogonal Complement}
+Let $U$ be a subspace. The projection matrix $P^\perp$ onto the 
+orthogonal complement of $U^\perp$ is given by:
+\begin{align*}
+    P^\perp = I - P.
+\end{align*}
+\gap
+\sheader{Projection Theorem} From the projection, we can state that
+\begin{align*}
+    ||\vec{x} - \proj{U}{\vec{x}} || = ||\proj{U^\perp}{\vec{x}}||  \leq ||\vec{x} - \vec{u}||
+\end{align*}
+for $\vec{u} \in U$. In other words, the vector $\proj{U}{\vec{x}}$
+is the vector in $U$ that is closest to $\vec{x}$.
+\gap
+\header{Constructing Orthogonal Bases}
+A set of vectors $A$ is an \underline{orthogonal basis} of a set of vectors,
+$U$, if 
+\begin{enumerate}
+    \item $A$ is a basis of $U$.
+    \item $A$ is an orthogonal set of vectors.
+\end{enumerate}
+
+An important tool for constructing orthogonal bases is the 
+\underline{Gram-Schmidt Algorithm}. For a set of vectors $\curly{\vec{u_1}, \ldots, \vec{u_m}}$,
+a basis of $U \subseteq \mathbb{R}^n$, the Gram-Schmidt Algorithm produces
+the following vectors:
+\begin{align*}
+    \vec{v}_1 &= \vec{u}_1\\
+    \vec{v}_2 &= \vec{u}_2 - \proj{\vec{v}_1}{\vec{u}_2}\\
+    \vec{v}_3 &= \vec{u}_3 - \proj{\vec{v}_1}{\vec{u}_3} - \proj{\vec{v}_2}{\vec{u}_3}\\
+    &\vdots\\
+    \vec{v}_m &= \vec{u}_m - \proj{\vec{v}_1}{\vec{u}_m} - \cdots - \proj{\vec{v}_{m - 1}}{\vec{u}_m}
+\end{align*}
+Hence, it is implied that $\curly{\vec{v}_1, \ldots, \vec{v}_m}$
+is an orthogonal basis of $U$.
+\gap
+Furthermore, we can also define
+\begin{align*}
+    \vec{w}_i = \frac{\vec{v}_i}{||\vec{v}_i||} & i = 1, \ldots, m
+\end{align*}
+Thus, we get that $\curly{\vec{w}_1 , \ldots, \vec{w}_m}$ is an 
+\underline{orthnormal basis} of $U$.
+
+\pagebreak
+
+\header{QR Decompositions}
+
+A QR decomposition on an $m \times n$ matrix with $\textrm{rank}(A) = n$
+gives an alternate representation $A = QR$, which contains orthonormal
+bases of $R(A)$ and $R(A)^\perp$. This can be seen in $Q = [Q_1 Q_2]$,
+where $Q_1$ is the first $n$ columns of $Q$, and is the orthonormal
+basis of $R(A)$, and the remaining columns form an orthonormal basis
+of $R(A)^\perp$. 
+\gap
+It is also to be noted that $Q$ is an orthogonal matrix with the same
+dimensions of the original matrix $(m \times n)$ and $R$ is an upper
+triangular matrix with the same dimensions of the original matrix.
+\gap
+\sheader{Finding the QR Decomposition}
+\begin{enumerate}
+    \item Obtain $R(A)$ and $R(A)^\perp$
+    \item Use the Gram-Schmidt algorithm to get an orthogonal basis
+    of both $R(A)$ and $R(A)^\perp$, $\curly{\vec{w}}$. These form $Q_1$ and $Q_2$, respectivley.
+    \item Construct $R_1$ given the following formula:
+    \begin{align*}
+        \begin{bmatrix}
+            \langle \vec{w}_1, \vec{a}_1 \rangle & \langle \vec{w}_1, \vec{a}_2 \rangle & \cdots & \langle \vec{w}_1, \vec{a}_1 \rangle \\
+            0 & \langle \vec{w}_2, \vec{a}_2 \rangle & \cdots & \vdots \\
+            0 & 0 & \cdots & \vdots \\
+            \vdots & \vdots & \ddots & \vdots\\
+            0 & 0 & \cdots & \langle \vec{w}_n, \vec{a}_n \rangle
+        \end{bmatrix}
+    \end{align*}
+    \item For $R_2$, expand $R_1$ with zeroes until its dimensions
+    are $m \times n$.
+\end{enumerate}
+
+Just finding $Q_1$ and $R_1$ such that $A = Q_1 R_1$ is called the 
+\underline{Thin QR Decomposition} of the matrix $A$.
+\gap
+\header{Least Squares Approximations}
+
+The \underline{least squares approximation} is used for finding an exact solution 
+for a system that has infinite solutions. In this, we seek to minimize $||A\vec{x} - \vec{b}||$.
+\gap
+By the \underline{projection theorem}, we can visualize the least squares approximation
+as finding the vector in the range of our system $R(A)$ which is closest to $\vec{b}$.
+This is the orthogonal projection of $\vec{b}$ onto $R(A)$.
+\gap
+There exist two ways in which we can find a least squares solution to a problem:
+\begin{enumerate}
+    \item \sheader{Normal Equations} The least squares approximation to $A\vec{x} = \vec{b}$
+    is the solution to the \underline{normal equations} system $A^TA\vec{x} = A^T \vec{b}$.
+    \item \sheader{QR Decompositions} The least squares approximation to $A\vec{x} = \vec{b}$
+    is simply $R_1\vec{x} = Q_1^T\vec{b}$.
+\end{enumerate}
+\sheader{Remark} The QR decomposition method \textit{apparently} has a lower condition number.
+\gap
+\header{Eigenvalues and Eigenvectors}
+Most of this is review from earlier linear algebra courses but, there exist some 
+important points:
+\begin{itemize}
+    \item An eigenvalue is called \underline{defective} if it is repeated in 
+    the characteristic equation.
+\end{itemize}
+\pagebreak
+\header{Diagonalization}
+Another method for matrix decomposition is diagonalization. A matrix $A$ is diagonalizable
+if you can bring it into the form:
+\begin{align*}
+    A = PDP^{-1}
+\end{align*}
+Where for eigenvectors of the matrix $A$ are $\vec{v}_k$ and eigenvalues for corresponding
+eigenvectors are $\lambda_k$, and
+\begin{align*}
+    P = [\vec{v}_1 \cdots \vec{v}_n] && D = \begin{bmatrix}
+        \lambda_1 & & \\
+         & \ddots & \\
+        & & \lambda_n
+    \end{bmatrix}.
+\end{align*}
+Diagonalizable matricies have a special subcase, which is outlined in the
+\underline{spectral theorem}. The spectral theorem states that:
+For a real, symmetric matrix $A$, there exists an orthogonal matrix $P$ and a 
+diagonal matrix $D$ such that:
+\begin{align*}
+    A = PDP^T.
+\end{align*}
+Where $P$ and $D$ are defined in the same way as a normal diagonalizable matrix.
+\gap
+\header{Singular Value Decomposition}
+Another decomposition that we can use is the \underline{singular value decomposition}
+The singular value decomposition, or SVD, is similar to a diagonalization, but is
+different in some ways. Its form is given as:
+\begin{align*}
+    A = P\Sigma Q^T 
+\end{align*}
+Where a \underline{singular value} $\sigma_k = \sqrt{\lambda_k}$, for $\lambda_k$
+being an eigenvalue of the matrix $AA^T$, and where $AA^T$ has $r$ eigenvalues. Hence,
+we can describe each matrix as the following:
+\begin{align*}
+    P = [\vec{p}_1 \cdots \vec{p}_r \, \, \vec{p}_{r + 1} \cdots \vec{p}_m]_{m \times n}
+&&
+    \vec{p}_k = \begin{cases}
+        \frac{1}{\sigma_k} A \vec{q}_k & 0 \leq k \leq r\\
+        \textrm{orthonormal basis of }N(AA^T) & r < k \leq m
+    \end{cases}
+\end{align*}
+
+\begin{multicols}{2}
+    \begin{align*}
+        \Sigma = \begin{bmatrix}
+            \sigma_1 & & & 0\\
+            & \ddots & & \vdots \\
+            & & \sigma_r & 0\\
+            0 & \cdots & 0 & 0
+        \end{bmatrix}_{m \times n}
+    \end{align*}
+    Where $\sigma_1$ is the largest singular value, and $\sigma_r$ is the smallest singular value.
+    \vfill\null\columnbreak
+    \begin{align*}
+        Q = [\vec{q}_1 \cdots \vec{q}_r \, \, \vec{0} \cdots \vec{0}]_{m \times n}
+    \end{align*}
+    \begin{align*}
+        A^TA \vec{q}_k = \sigma_k^2 \vec{q}_k
+    \end{align*}
+    \vfill\null
+\end{multicols}
+$Q$ can also be characterized as a matrix containing the eigenvectors of $AA^T$,
+in order of smallest to largest corresponding eigenvalue.
+\gap
+The ``extension vectors'' of $P$ $(\vec{p}_k, k > r)$ can also be characterized
+as the vectors in the nullspace of $(\vec{p}_k, k \leq r)$. 
+\gap
+It is important to note that the elements of a SVD can be characterized as the
+following:
+\begin{itemize}
+    \item $P$: Rotation/Reflection
+    \item $\Sigma$: Stretch
+    \item $Q$: Rotation/Reflection
+\end{itemize}
+Hence, the singular values provide us with important information on the norm 
+and condition number of the matrix. 
+\gap
+Thus, it can be said that $||A|| = \sigma_1$ and $||A^{-1}|| = \frac{1}{\sigma_n}$,
+so $\textrm{cond}(A) = \frac{\sigma_1}{\sigma_n}$.
 
 \end{document}
