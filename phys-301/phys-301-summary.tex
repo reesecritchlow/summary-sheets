@@ -8,10 +8,12 @@
 \setlength\parindent{0pt}
 \usepackage{enumerate}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\graphicspath{ {./formula-sheets/images} }
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
 \usepackage{physics}
+\usepackage{enumitem}
+
 
 \usepackage{calligra}
 \DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
@@ -516,6 +518,170 @@ surface charge of the grounded plane:
     \sigma = - \epsilon_0 \frac{\partial V}{\partial n}
 \]
 where $n$ is the normal direction of the surface which is being integrated over.
+
+\section*{Final Exam}
+
+\header{Magnetic Fields}
+Moving charges generate not only electric fields but also magnetic fields.
+This magnetic field produces a magnetic force on an object, which can be
+described by the \textbf{Lorentz force law}:
+\begin{align*}
+    \vec{F}_\textrm{mag} = Q(\vec{v} \times \vec{B})
+\end{align*}
+It is important to note that the Lorentz force law implies that 
+\textbf{magnetic forces do no work}.
+\gap
+\header{Currents}
+The \textbf{current} in an object is the \underline{charge per unit time}
+passing through a given point. It is measured in amperes, which are coulombs-per-second.
+We can also define other dimensions of current:
+\gap
+\sheader{Surface Current Density} Surface current density, described by $\vec{K}$
+describes the current in an ``infinitesimal ribbon'' across the surface
+of an object. Hence, for some ``infinitesimal ribbon'' with width $dl_\perp$,
+with current inside of it $d\vec{I}$, then we can define $\vec{K}$ as:
+\begin{align*}
+    \vec{K} \equiv \frac{d\vec{I}}{dl_\perp}.
+\end{align*}
+In other words, $\vec{K}$ is the \underline{current per unit width}. We 
+can also define it in terms of surface current density:
+\begin{align*}
+    \vec{K} = \sigma \vec{v}
+\end{align*}
+\sheader{Volume Current Density} Volume current density, described by $\vec{J}$
+can be thought of as the current flowing through some ``infinitesimal tube'' 
+of area $da_\perp$. Hence, the current in this tube can be thought of as 
+$d\vec{I}$, and thus $\vec{J}$ is defined as:
+\begin{align*}
+    J \equiv \frac{d\vec{I}}{da_\perp}
+\end{align*}
+Hence, the same analgies can be drawn, $\vec{J}$ is the \underline{current per unit area}
+and we can also describe it as:
+\begin{align*}
+    \vec{J} = \rho\vec{v}.
+\end{align*}
+From these definitions, we can find the magnetic force for all of these current
+configurations:
+\begin{align*}
+    \vec{F}_\textrm{mag} = \int I(d\vec{I} \times \vec{B}) &&
+    \vec{F}_\textrm{mag} = \int (\vec{K} \times \vec{B})da &&
+    \vec{F}_\textrm{mag} = \int (\vec{J} \times \vec{B}) d\tau.
+\end{align*}
+
+\pagebreak
+\header{The Biot-Savart Law}
+The Biot-Savart Law describes the field that results from a steady charge.
+As axioms of this, we require that $\frac{\partial \vec{J}}{\partial t} = \vec{0}$
+and as a consequence, $\vec{\nabla} \cdot \vec{J} = 0$.
+\gap
+Hence, to calculate magnetic fields, we use the \underline{Biot-Savart Law}:
+\begin{align*}
+    \vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int \frac{\vec{I} \times \hat{r}_\textrm{sep}}{||\sepvec||^2} dl' = 
+    \frac{\mu_0}{4\pi}I \int \frac{d\vec{I}'\times \hat{r}_\textrm{sep}}{||\sepvec||^2}
+\end{align*}
+
+The integration is along the path of the current and in the direction of the flow.
+$d\vec{I}'$ is an element of length along the wire. 
+\gap
+Hence, we define the units of measurement for magnetic field to be in Teslas,
+which are newtons per ampere-meter:
+\begin{align*}
+    1 \,\,\textrm{T} = 1 \, \,\textrm{N}(\textrm{A} \cdot \textrm{m})
+\end{align*} 
+\header{Ampere's Law}
+The derivation of Ampere's law has some interesting implications. The first,
+is that the divergence of $\vec{B}$ is zero:
+\begin{align*}
+    \vec{\nabla} \cdot \vec{B} = 0
+\end{align*}
+\begin{center}
+    \underline{\textbf{Since a magnetic monopole does not exist, all magnetic fields are divergence-less.}}
+\end{center}
+The next is the curl of $\vec{B}$:
+\begin{align*}
+    \vec{\nabla} \times \vec{B} = \mu_0\vec{J}.
+\end{align*}
+\begin{center}
+    \underline{\textbf{Since magnetic fields always form loops, then those loops, and their subsequent curl}}\\
+    \underline{\textbf{ must come from currents and changing electric fields.}}
+\end{center}
+Finally, from this we can also find the integral form of the curl:
+\begin{align*}
+    \oint \vec{B} \cdot d\vec{l} = \mu_0 I_\textrm{encl}.
+\end{align*}
+
+Ampere's law generally is used for a small subset of problems:
+\begin{enumerate}
+    \item Infinite straight lines
+    \item Infinite planes
+    \item Infinite solenoids
+    \item Toroids
+\end{enumerate}
+
+\header{Magnetic Vector Potential}
+
+Similar to how the gradient of the voltage produces the electric field in 
+electrostatics, there exists a vector potential, $\vec{A}$ in magnetostatics.
+\begin{align*}
+    \vec{B} = \vec{\nabla} \times \vec{A}.
+\end{align*}
+This also implies that:
+\begin{align*}
+    \vec{\nabla} \cdot \vec{A} = 0
+\end{align*}
+
+Through some math, we can find a Poisson's equation in magnetostatics:
+\begin{align*}
+    \nabla^2 \vec{A} = -\mu_9 \vec{J}.
+\end{align*}
+Which, with the assumption that $\vec{J}$ goes to zero at infinity, we obtain that:
+\begin{align*}
+    \vec{A}(\vec{r}) = \frac{\mu_0}{4\pi} \int \frac{\vec{J}(\vec{r'})}{||\sepvec||}d\tau'.
+\end{align*}
+
+\pagebreak
+We can also expand this to line and surface currents:
+\begin{align*}
+    \vec{A} = \frac{\mu_0}{4\pi} \int \frac{\vec{I}}{||\sepvec||}dl' = \frac{\mu_0 I}{4\pi} \int \frac{1}{||\sepvec||}d \vec{l}' && \vec{A} = \frac{\mu_0}{4\pi}\int \frac{\vec{K}}{||\sepvec||}da'
+\end{align*}
+Typically, the vector potential $\vec{A}$ mimics the direction of the current. 
+\gap
+\header{The Triangle of Magnetostatics}
+\begin{center}
+    \includegraphics[scale=0.35]{magnetic-triangle.png}
+\end{center}
+\header{Boundary Conditions}
+There also exist a set of boundary conditions for magnetostatics:
+\begin{enumerate}[label=(\alph*)]
+    \item $B_\textrm{above}^\perp = B_\textrm{below}^\perp$
+    \item $B_\textrm{above}^\parallel - B_\textrm{below}^\parallel = \mu_0 K$
+    \item $\vec{B}_\textrm{above} - \vec{B}_\textrm{below} = \mu_0 (\vec{K} \times \hat{n})$
+    \item $\vec{A}_\textrm{above} = \vec{A}_\textrm{below}$
+    \item $\frac{\partial \vec{A}_\textrm{above}}{\partial n} - \frac{\partial \vec{A}_\textrm{below}}{\partial n} = - \mu_0 \vec{K}$
+\end{enumerate}
+
+\header{Multipole Expansion of the Vector Potential}
+There also exists a multipole expansion for the vector potential. The principle with the 
+cosine law is the same as in electrostatics.
+\sgap
+First, we define the \underline{magnetic dipole moment}, $\vec{m}$ to be:
+\begin{align*}
+    \vec{m} \equiv I \int d\vec{a} = I \vec{a}
+\end{align*}
+Where $\vec{a}$ is the ``vector area'' of the loop, where the area of the loop is it's 
+magnitude, and the direction is the normal direction of the loop, based on current
+and the right hand rule.
+\sgap
+Since there exists no monopole in magnetostatics, the choice of origin is irrelevant in 
+magnetostatics. 
+\sgap
+With this information, we can find the potential of a magnetic dipole:
+\begin{align*}
+    \vec{A}_\textrm{dip}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{m} \times \hat{r}}{r^2}.
+\end{align*}
+
+
+
 
 
 \end{document}
