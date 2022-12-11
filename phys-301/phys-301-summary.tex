@@ -679,9 +679,149 @@ With this information, we can find the potential of a magnetic dipole:
 \begin{align*}
     \vec{A}_\textrm{dip}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{m} \times \hat{r}}{r^2}.
 \end{align*}
+\pagebreak
 
+\header{Magnetization}
+Magnetization occurs when the ``current loops'' of electrons orbitin nuclei in an object
+align and create a magnetic field. In magnetization, there exists three different types of 
+matter which behave differently in the presence of a magnetic field.
+\begin{itemize}
+    \item \underline{Paramagnets} obtain a magnetization \textbf{parallel} to $\vec{B}$.
+    \item \underline{Diamagnets} obtain a magnetization \textbf{opposite} to $\vec{B}$.
+    \item \underline{Ferromagnets} \textbf{retain} magnetization outside of the presence 
+    of an external magnetic field.
+\end{itemize}
+\sheader{Magnetic Torque} The magnetic torque on a magnetic dipole is:
+\begin{align*}
+    \vec{N} = \vec{m} \times \vec{B}.
+\end{align*}
+For an infinitesimal loop, with dipole moment $\vec{m}$ in a field $\vec{B}$, we can get 
+its \textit{force}:
+\begin{align*}
+    \vec{F} = \nabla(\vec{m} \cdot \vec{B})
+\end{align*}
+In general, we can define the concept of \underline{magnetization} as the magnetic dipole 
+per unit volume:
+\begin{align*}
+    \vec{M} \equiv \textrm{magnetic dipole per unit volume.}
+\end{align*}
+\sheader{Bound Currents} We can also define the bound currents resulting from magnetization, 
+much similar to how bound charges appear in electrostatics.
+\begin{align*}
+    \vec{J}_\textrm{bound} = \vec{\nabla} \times \vec{M}. && \vec{K}_\textrm{bound} = \vec{M} \times \hat{n}.
+\end{align*}
+As a little test, we can also note that $\vec{\nabla} \cdot \vec{J}_\textrm{bound} = 0$.
+\gap
+Similarly to electrostatics, we can also define a \underline{free current} in magnetostatics,
+such that:
+\begin{align*}
+    \vec{J} = \vec{J}_b + \vec{J}_f.
+\end{align*}
+Hence, we can define a quantity analogous to the displacement field in electrostatics, 
+which is called the \underline{auxillary field}, $\vec{H}$ in magnetostatics.
+\begin{align*}
+    \vec{H} \equiv \frac{1}{\mu_0}\vec{B} - \vec{M}/
+\end{align*}
+Which from we can extract another Amperian form:
+\begin{align*}
+    \vec{\nabla} \times \vec{h} = \vec{J}_f && \oint \vec{H} \cdot d\vec{I} = I_{f_\textrm{encl}}.
+\end{align*}
+Finally, we can also determine boundary conditions:
+\begin{enumerate}[label=(\alph*)]
+    \item $H^\perp_\textrm{above} - H_\textrm{below}^\perp = - (M^\perp_\textrm{above} - M^\perp_\textrm{below})$
+    \item $\vec{H}_\textrm{above}^\parallel - \vec{H}_\textrm{below}^\parallel = \vec{K}_f \times \hat{n}$
+\end{enumerate}
+\sheader{Linear Magnetics} We also have linear magnetics, for which we define $\chi_m$ as the 
+\underline{magnetic susceptibility} of a substance. 
+\begin{align*}
+    \vec{M} = \chi_m\vec{H}
+\end{align*}
+Hence, we can also define the \underline{permeability} of a material, $\mu$:
+\begin{align*}
+    \mu \equiv \mu_0(1 + \chi_m).
+\end{align*}
+And thus we can also write:
+\begin{align*}
+    \vec{B} = \mu \vec{H}.
+\end{align*}
 
+\pagebreak
 
+\header{Electrodynamics}
+\sheader{Circuits Review} 
+\begin{itemize}
+    \item \sheader{Ohm's Law} $V = IR$
+    \item \sheader{Power in a Circuit/Joule Heating} $P = VI = I^2 R$
+\end{itemize}
+In a setting in which there is some force being done due to E+M, we can define the 
+\underline{electromotive force} or emf ($\mathcal{E}$) as the integral of forces over 
+a circuit:
+\begin{align*}
+    \mathcal{E} = \oint \vec{f} \cdot d \vec{I} = \oint \vec{f}_s \cdot d \vec{I}
+\end{align*}
+With a bunch of other work in between, we can draw upon the \underline{flux rule}
+for motional emf:
+\begin{align*}
+    \mathcal{E} = - \frac{d\Phi}{dt}.
+\end{align*}
+\sheader{Faraday's Law} A changing magnetic field induces an electric field.
+\begin{align*}
+    \vec{\nabla} \cross \vec{E} = - \frac{\partial \vec{B}}{\partial t}
+\end{align*}
+\sheader{Lenz's Law} Nature abhors a change in flux.
+ \gap
+\sheader{Inductance} Inductance describes the amount of magnetic flux a system produces
+in response to a current. It is given by and used in:
+\begin{align*}
+    \Phi = LI && \mathcal{E} = -L \frac{dI}{dt}
+\end{align*}
+We can also define the amount of work to build a field as:
+\begin{align*}
+    W = \frac{1}{2}LI^2
+\end{align*}.
+Or:
+\begin{align*}
+    W = \frac{1}{2\mu_0}\int_\textrm{all space}B^2 d\tau.
+\end{align*}
 
+\header{Displacement Current and Maxwell's Equations}
+Due to the math not quite working out with Ampere's law, chiefly that 
+$\vec{\nabla} \cdot \vec{J} \neq 0$, Maxwell found that there needed to be some sort 
+of ``adjustment'' for Ampere's law. Hence, he came up with the notion of a 
+\underline{displacement current}, $\vec{J}_d$, defined as:
+\begin{align*}
+    \vec{J}_d \equiv \epsilon_0\frac{\partial \vec{E}}{\partial t}
+\end{align*}
+Which combined with Ampere's law yields:
+\begin{align*}
+    \vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0\epsilon_0 \frac{\partial \vec{E}}{\partial t}
+\end{align*}
+Finally, we arrive at the conclusion: \textbf{A changing electric field induces a magnetic field.}
+
+\pagebreak
+
+\header{Maxwell's Equations in Matter} 
+Finally, we can also see that Maxwell's equations hold for situations involving $\vec{D}$
+or $\vec{H}$ fields and free charges/currents:
+
+\begin{enumerate}[label=(\roman*)]
+    \item $\vec{\nabla} \cdot \vec{D} = \rho_f$
+    \item $\vec{\nabla} \cdot \vec{B} = 0$
+    \item $\vec{\nabla} \times \vec{E} = - \frac{\partial \vec{B}}{\partial t}$
+    \item $\vec{\nabla} \times \vec{H} = \vec{J}_f + \frac{\partial \vec{D}}{\partial t}$
+\end{enumerate}
+In this case, we define displacement current to be:
+\begin{align*}
+    \vec{J}_d \equiv \frac{\partial \vec{D}}{\partial t}.
+\end{align*}
+\sheader{A Final Note on Boundary Conditions}
+\begin{enumerate}
+    \item $D_1^\perp - D_2^\perp = \sigma_f$
+    \item $B_1^\perp - B_2^\perp = 0$
+    \item $E^\parallel_1 - E^\parallel_2 = \vec{0}$
+    \item $\vec{H}^\parallel_1 - \vec{H}_2^\parallel = \vec{K}_f \times \hat{n}$
+\end{enumerate}
+
+\includegraphics[scale=0.4]{boundary-conditions.png}
 
 \end{document}
