@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  10 NOV 2022 19:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  11 DEC 2022 12:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex
-(/Users/reesecritchlow/Firestone/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex
+**/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex
+(/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/mt2/phys-301-fs-mt2.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -546,12 +546,12 @@ Overfull \vbox (11.67603pt too high) has occurred while \output is active []
  [2] (./phys-301-fs-mt2.aux) ) 
 Here is how much of TeX's memory you used:
  14248 strings out of 478268
- 282666 string characters out of 5846347
+ 282636 string characters out of 5846347
  675909 words of memory out of 5000000
  32200 multiletter control sequences out of 15000+600000
  474623 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,12n,89p,538b,697s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,12n,89p,528b,697s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb>
 Output written on phys-301-fs-mt2.pdf (2 pages, 381303 bytes).
 PDF statistics:
