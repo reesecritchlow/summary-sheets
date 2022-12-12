@@ -1,9 +1,9 @@
 # Fdb version 3
-["pdflatex"] 1670790927 "/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/final/phys-301-fs-final.tex" "phys-301-fs-final.pdf" "phys-301-fs-final" 1670790930
+["pdflatex"] 1670869082 "/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/final/phys-301-fs-final.tex" "phys-301-fs-final.pdf" "phys-301-fs-final" 1670869083
   "../images//boundary-conditions.png" 1670739848 67890 9d0d732d50e150c9957a545c7bbbe56a ""
   "../images//em-triangle.png" 1665626157 403469 389ba8462ee67dfe8deecfe7c1c3122f ""
   "../images//magnetic-triangle.png" 1670711171 200906 0fe83a27e05678c0850588d94c6cbbf4 ""
-  "/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/final/phys-301-fs-final.tex" 1670790926 17520 9a1f76275b21f018ccd839e19e68b2b8 ""
+  "/Users/reesecritchlow/summary-sheets/phys-301/formula-sheets/final/phys-301-fs-final.tex" 1670869081 17792 b1853e2ec01332ba172a7af94c3e6267 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
@@ -134,8 +134,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1663733917 2826440 c64f88e675154be29d2433531c98b65d ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "phys-301-fs-final.aux" 1670790929 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
-  "phys-301-fs-final.tex" 1670790926 17520 9a1f76275b21f018ccd839e19e68b2b8 ""
+  "phys-301-fs-final.aux" 1670869083 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "phys-301-fs-final.tex" 1670869081 17792 b1853e2ec01332ba172a7af94c3e6267 ""
   (generated)
   "phys-301-fs-final.aux"
   "phys-301-fs-final.log"
