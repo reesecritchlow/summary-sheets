@@ -52,9 +52,9 @@
             Potential of a Volume Charge: & $\displaystyle V(\vec{r}) = \kfrac \int{\frac{\rho(\vec{r'})}{||\sepvec||}d\tau'}t$\\
             Potential of a Collection of Point Charges: & $\displaystyle V(\vec{r}) = \kfrac \sum_{i = 0}^n\frac{q_i}{||\sepvec||}$\\
             Work to Move a Charge: & $\displaystyle {W = \int_{\textbf{a}}^{\textbf{b}} \vec{F} \cdot d\vec{l} = -Q\int_{\textbf{a}}^{\textbf{b}}{\vec{E} \cdot d\vec{l}}}$\\
-            Work to Move a Charge (Potential): & $\displaystyle {W= Q[V(\vec{b}) - Q(\vec{a})]}$\\
+            Work to Move a Charge (Potential): & $\displaystyle {W= Q[V(\vec{b}) - V(\vec{a})]}$\\
             Energy of a Collection of Point Charges: & $\displaystyle W = \frac{1}{2}\sum_{i = 1}^n{q_i V(\vec{r_i})}$\\
-            Energy of a Continuous Charge Distribution: & $\displaystyle W = \frac{\epsilon_0}{2}\int\limits_{\textrm{univ}}E^2 d\tau$\\
+            Energy of a Continuous Charge Distribution: & $\displaystyle W = \frac{\epsilon_0}{2}\int\limits_{\textrm{univ}}E^2 d\tau = \frac{1}{2}\iiint \rho V d\tau$\\
             Field at a Charged Surface: & $\displaystyle \vec{E}_\textrm{surf} = \frac{1}{2} \left( \vec{E}_\textrm{above} + \vec{E}_\textrm{below}\right)$\\
             Parallel Plate Voltage: & $\displaystyle V = \frac{Q}{A\epsilon_0}d$\\
             Capacitance: & $\displaystyle C \equiv \frac{Q}{V}$\\
@@ -171,14 +171,16 @@
                 \\
                 $\displaystyle  \nabla^2 \vec{A} = -\mu_0 \vec{J}$
             \end{tabular}}\\
-            Vector Potential -- Line: & $\displaystyle \vec{A} = \frac{\mu_0}{4\pi} \int \frac{\vec{I}}{||\sepvec||}dl' = \frac{\mu_0 I}{4\pi} \int \frac{1}{||\sepvec||}d \vec{l}'$\\
+            Vector Potential -- Line: & $\displaystyle \vec{A} = \frac{\mu_0}{4\pi} \int \frac{\vec{I}}{||\sepvec||}dl' = \frac{\mu_0 I}{4\pi} \int \frac{1}{||\sepvec||}d \vec{l'}$\\
             Vector Potential -- Surface: & $\displaystyle \vec{A} = \frac{\mu_0}{4\pi}\int \frac{\vec{K}}{||\sepvec||}da'$\\
             Vector Potential -- Volume: & $\displaystyle \vec{A} = \frac{\mu_0}{4\pi} \int \frac{\vec{J}(\vec{r'})}{||\sepvec||}d\tau'$\\
             Magnetic Dipole Moment: & $ \displaystyle  \vec{m} \equiv I \int d\vec{a} = I \vec{a}$\\
             Magnetic Dipole Potential Expansion: & $\displaystyle \vec{A}_\textrm{dip}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{m} \times \hat{r}}{r^2}$\\
             Magnetic Torque: & $\displaystyle \vec{N} = \vec{m} \times \vec{B}$\\
+            Energy of a Dipole: & $\ds U = -\vec{m} \cdot \vec{B}$\\
             Force on a Magnetic Dipole: & $\displaystyle \vec{F} = \nabla(\vec{m} \cdot \vec{B})$\\
-            Force Between Two Current-Carrying Wires: & $\displaystyle \frac{F}{l} = \frac{\mu_0 I_1 I_2}{2\pi r}$
+            Force Between Two Current-Carrying Wires: & $\displaystyle \frac{F}{l} = \frac{\mu_0 I_1 I_2}{2\pi r}$\\
+            Linear Current: & $\ds \vec{I} = \int \vec{K} \cdot d \vec{l} = \iint \vec{J}\cdot d\vec{a}$
         \end{tabular}}
     }
     \formbox{Maxwell's Equations}{
@@ -211,7 +213,9 @@
             \end{tabular}}\\
             Linear Magnetics: & $\displaystyle \vec{M} = \chi_m\vec{H}$\\
             Permeability: & $\displaystyle \mu \equiv \mu_0(1 + \chi_m)$\\
-            Linear Magnetics with E and H Fields: & $\displaystyle \vec{B} = \mu \vec{H}$.
+            Relative Permeability: & $\ds \mu_r 1 + \chi_m$\\
+            Linear Magnetics with E and H Fields: & $\displaystyle \vec{B} = \mu \vec{H}$.\\
+            Dipole Field: & $\ds \vec{B} = \frac{\mu_0 \vec{m}}{4\pi r^3}(2\cos(\theta)\hat{r} + \sin(\theta)\hat{\theta})$, for $\vec{m} = m\hat{z}$\\
         \end{tabular}}
     }
     \formbox{Electrodynamics}{
@@ -298,7 +302,8 @@
         \begin{tabular}{ m{12em} m{25em}  }
             Magnetic Finite Wire: & $\displaystyle \frac{\mu_0}{4\pi}\frac{I}{R}(\sin (\theta_1) - \sin (\theta_2))$\\
             Magnetic Field of an Arc: & $\displaystyle \frac{\mu_0 I \theta}{4\pi R}$\\
-            Magnetic Field of an Infinite Wire: & $\displaystyle \frac{\mu_0 I}{2\pi R}$
+            Magnetic Field of an Infinite Wire: & $\displaystyle \frac{\mu_0 I}{2\pi R}$\\
+            Magnetic Field of a Solenoid: & $\ds \mu_0 n I$
         \end{tabular}}
     }
     
