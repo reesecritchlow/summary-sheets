@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1670788732 "/Users/reesecritchlow/summary-sheets/phys-301/phys-301-summary.tex" "phys-301-summary.pdf" "phys-301-summary" 1670788734
-  "/Users/reesecritchlow/summary-sheets/phys-301/phys-301-summary.tex" 1670788732 35053 dab62fa75ac0b7fe29a07f4a24c37b7f ""
+["pdflatex"] 1670871413 "/Users/reesecritchlow/summary-sheets/phys-301/phys-301-summary.tex" "phys-301-summary.pdf" "phys-301-summary" 1670871415
+  "/Users/reesecritchlow/summary-sheets/phys-301/phys-301-summary.tex" 1670871413 35053 7823b30fbed80eeb08fdcba875e6119e ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -139,8 +139,8 @@
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
   "formula-sheets/images/boundary-conditions.png" 1670739848 67890 9d0d732d50e150c9957a545c7bbbe56a ""
   "formula-sheets/images/magnetic-triangle.png" 1670711171 200906 0fe83a27e05678c0850588d94c6cbbf4 ""
-  "phys-301-summary.aux" 1670788734 33 caafbda2f246531a72f60df9bc4c0d5b "pdflatex"
-  "phys-301-summary.tex" 1670788732 35053 dab62fa75ac0b7fe29a07f4a24c37b7f ""
+  "phys-301-summary.aux" 1670871415 33 caafbda2f246531a72f60df9bc4c0d5b "pdflatex"
+  "phys-301-summary.tex" 1670871413 35053 7823b30fbed80eeb08fdcba875e6119e ""
   (generated)
   "phys-301-summary.aux"
   "phys-301-summary.log"
