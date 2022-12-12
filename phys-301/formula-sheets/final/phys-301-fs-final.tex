@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage[letterpaper, portrait, margin=0.1in]{geometry}
+\usepackage[letterpaper, portrait, margin=0.2in]{geometry}
 \usepackage{multicol}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -123,7 +123,7 @@
     }
     \formbox{Magnetostatics}{
         {\renewcommand{\arraystretch}{2}%
-        \begin{tabular}[t]{ m{12em} m{25em}  }
+        \begin{tabular}[t]{ m{13em} m{25em}  }
             Lorentz Force Law: & $\displaystyle \vec{F}_\textrm{mag} = Q(\vec{v} \times \vec{B})$\\
             Surface Current Density: & 
             {\renewcommand{\arraystretch}{1}%       
@@ -143,8 +143,12 @@
             Magnetic Force (Surface): & $\displaystyle \vec{F}_\textrm{mag} = \int (\vec{K} \times \vec{B})da$\\
             Magnetic Force (Volume): & $\displaystyle \vec{F}_\textrm{mag} = \int (\vec{J} \times \vec{B}) d\tau$\\
             Biot-Savart Law: & 
-            $\displaystyle \vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int \frac{\vec{I} \times \hat{r}_\textrm{sep}}{||\sepvec||^2} dl' = 
-            \frac{\mu_0}{4\pi}I \int \frac{d\vec{I}'\times \hat{r}_\textrm{sep}}{||\sepvec||^2}$\\
+            {\renewcommand{\arraystretch}{1}%       
+            \begin{tabular}[t]{l}          
+                $\displaystyle \vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int \frac{\vec{I} \times \hat{r}_\textrm{sep}}{||\sepvec||^2} dl'$
+                \\$\displaystyle \vec{B}(\vec{r}) = 
+                \frac{\mu_0}{4\pi}I \int \frac{d\vec{I}'\times \hat{r}_\textrm{sep}}{||\sepvec||^2}$
+            \end{tabular}}\\
             Ampere's Law: &
             {\renewcommand{\arraystretch}{1}%       
             \begin{tabular}[t]{l}          

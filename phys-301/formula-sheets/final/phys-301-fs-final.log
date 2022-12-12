@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  12 DEC 2022 10:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  12 DEC 2022 10:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -482,15 +482,15 @@ LaTeX Font Info:    ... okay on input line 41.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(7.22743pt, 599.84013pt, 7.22743pt)
-* v-part:(T,H,B)=(7.22743pt, 780.51512pt, 7.22743pt)
+* h-part:(L,W,R)=(14.45377pt, 585.38747pt, 14.45377pt)
+* v-part:(T,H,B)=(14.45377pt, 766.06245pt, 14.45377pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=599.84013pt
-* \textheight=780.51512pt
-* \oddsidemargin=-65.04256pt
-* \evensidemargin=-65.04256pt
-* \topmargin=-102.04256pt
+* \textwidth=585.38747pt
+* \textheight=766.06245pt
+* \oddsidemargin=-57.81622pt
+* \evensidemargin=-57.81622pt
+* \topmargin=-94.81622pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -536,83 +536,83 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 64--64
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 64--64
 [][]  
  []
 
 
-Overfull \hbox (58.7874pt too wide) in paragraph at lines 81--81
+Overfull \hbox (66.01373pt too wide) in paragraph at lines 81--81
 [][] 
  []
 
 
-Overfull \hbox (34.87067pt too wide) in paragraph at lines 81--81
+Overfull \hbox (42.097pt too wide) in paragraph at lines 81--81
 []  
  []
 
 
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 96--96
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 96--96
 [][]  
  []
 
 
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 123--123
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 123--123
 []  
  []
 
 
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 173--173
+Overfull \hbox (66.01373pt too wide) in paragraph at lines 177--177
 [][]  
  []
 
 
-Overfull \hbox (10.95393pt too wide) in paragraph at lines 197--197
+Overfull \hbox (18.18027pt too wide) in paragraph at lines 201--201
 [][]  
  []
 
 [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 225--225
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 229--229
 [][]  
  []
 
 
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 234--234
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 238--238
 [][]  
  []
 
 
-Overfull \hbox (50.81516pt too wide) in paragraph at lines 243--243
+Overfull \hbox (58.04149pt too wide) in paragraph at lines 247--247
 [][]  
  []
 
 <../images//em-triangle.png, id=17, 1113.15875pt x 945.5325pt>
 File: ../images//em-triangle.png Graphic file (type png)
 <use ../images//em-triangle.png>
-Package pdftex.def Info: ../images//em-triangle.png  used on input line 272.
+Package pdftex.def Info: ../images//em-triangle.png  used on input line 276.
 (pdftex.def)             Requested size: 127.28868pt x 108.12054pt.
 <../images//magnetic-triangle.png, id=19, 662.475pt x 561.09625pt>
 File: ../images//magnetic-triangle.png Graphic file (type png)
 <use ../images//magnetic-triangle.png>
-Package pdftex.def Info: ../images//magnetic-triangle.png  used on input line 272.
+Package pdftex.def Info: ../images//magnetic-triangle.png  used on input line 276.
 (pdftex.def)             Requested size: 127.65065pt x 108.12054pt.
 <../images//boundary-conditions.png, id=20, 696.6025pt x 392.46625pt>
 File: ../images//boundary-conditions.png Graphic file (type png)
 <use ../images//boundary-conditions.png>
-Package pdftex.def Info: ../images//boundary-conditions.png  used on input line 277.
+Package pdftex.def Info: ../images//boundary-conditions.png  used on input line 281.
 (pdftex.def)             Requested size: 256.0748pt x 144.27002pt.
 [2 <../images//em-triangle.png> <../images//magnetic-triangle.png> <../images//boundary-conditions.png>] (./phys-301-fs-final.aux) ) 
 Here is how much of TeX's memory you used:
  14916 strings out of 478268
  290680 string characters out of 5846347
- 642617 words of memory out of 5000000
+ 643618 words of memory out of 5000000
  32863 multiletter control sequences out of 15000+600000
  472725 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,21n,89p,532b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,23n,89p,532b,615s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb>
-Output written on phys-301-fs-final.pdf (2 pages, 512454 bytes).
+Output written on phys-301-fs-final.pdf (2 pages, 512481 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream
