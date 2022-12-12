@@ -94,7 +94,12 @@
             Energy of a Dielectric: & $W = \frac{1}{2}\int \vec{D} \cdot \vec{E} d\tau$
         \end{tabular}}
     }
-    \vfill \null \columnbreak
+    \formbox{Names of Stuff}{
+        $\epsilon_0$: Permittivity of Free Space\\
+        $\epsilon_r$: Dielectric Constant or Relative Permittivity\\
+        $\epsilon$: Permittivity of a Material
+    }
+
     \formbox{Techniques for Solving Problems}{
         {\renewcommand{\arraystretch}{1.75}%
         \begin{tabular}{ l }
@@ -176,7 +181,15 @@
             Force Between Two Current-Carrying Wires: & $\displaystyle \frac{F}{l} = \frac{\mu_0 I_1 I_2}{2\pi r}$
         \end{tabular}}
     }
-    \vfill \null \columnbreak
+    \formbox{Maxwell's Equations}{
+        {\renewcommand{\arraystretch}{1.75}%
+        \begin{tabular}{ m{12em} m{25em}  }
+            Gauss's Law: & $\displaystyle \vec{\nabla} \cdot \vec{E} = \frac{1}{\epsilon_0}\rho$\\
+            (unnamed) & $\displaystyle \vec{\nabla} \cdot \vec{B} = 0$\\
+            Faraday's Law: & $\displaystyle \vec{\nabla} \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$\\
+            Ampere's Law with Maxwell's Correction: & $\displaystyle \vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0\ \epsilon_0 \frac{\partial \vec{E}}{\partial t}$\\
+        \end{tabular}}
+    }
     \formbox{Magnetostatics in Matter}{
         {\renewcommand{\arraystretch}{1.75}%
         \begin{tabular}{ m{12em} m{20em}  }
@@ -229,15 +242,6 @@
             Displacement Current: & $\vec{J}_d \equiv \epsilon_0\frac{\partial \vec{E}}{\partial t}$
         \end{tabular}}
     }
-    \formbox{Maxwell's Equations}{
-        {\renewcommand{\arraystretch}{1.75}%
-        \begin{tabular}{ m{12em} m{25em}  }
-            Gauss's Law: & $\displaystyle \vec{\nabla} \cdot \vec{E} = \frac{1}{\epsilon_0}\rho$\\
-            (unnamed) & $\displaystyle \vec{\nabla} \cdot \vec{B} = 0$\\
-            Faraday's Law: & $\displaystyle \vec{\nabla} \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$\\
-            Ampere's Law with Maxwell's Correction: & $\displaystyle \vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0\ \epsilon_0 \frac{\partial \vec{E}}{\partial t}$\\
-        \end{tabular}}
-    }
     \formbox{Maxwell's Equations in Matter}{
         {\renewcommand{\arraystretch}{1.75}%
         \begin{tabular}{ m{12em} m{25em}  }
@@ -247,7 +251,20 @@
             Ampere's Law with Maxwell's Correction: & $\displaystyle \vec{\nabla} \times \vec{H} = \vec{J}_f + \frac{\partial \vec{D}}{\partial t}$\\
         \end{tabular}}
     }
-    \vfill \null \columnbreak
+    \formbox{Triangles}{
+        \begin{center}
+            \includegraphics[height=3.8cm]{em-triangle.png}
+            \includegraphics[height=3.8cm]{magnetic-triangle.png}
+        \end{center}
+    }
+    \formbox{Takeaways from Practice}{
+        \begin{itemize}
+            \item Gauss's law inside a dielectric always includes both $\rho_b$ and $\sigma_b$.
+            \item Use the definition for displacement where ever possible: $\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}$.
+            \item The potential is constant below an image plane and the field is always zero. 
+        \end{itemize}
+    }
+
     \formbox{Boundary Conditions in Electrostatics}{
         {\renewcommand{\arraystretch}{1.75}%
         \begin{tabular}{ l }
@@ -271,30 +288,12 @@
             $\vec{H}_\text{above}^\parallel - \vec{H}_\text{below}^\parallel = \vec{K}_f \cross \vu{n}$
         \end{tabular}}
     }
-    \formbox{Triangles}{
-        \begin{center}
-            \includegraphics[height=3.8cm]{em-triangle.png}
-            \includegraphics[height=3.8cm]{magnetic-triangle.png}
-        \end{center}
-    }
     \formbox{More Boundary Conditions}{
         \begin{center}
             \includegraphics[width=9cm]{boundary-conditions.png}
         \end{center}
     }
-    \formbox{Takeaways from Practice}{
-        \begin{itemize}
-            \item Gauss's law inside a dielectric always includes both $\rho_b$ and $\sigma_b$.
-            \item Use the definition for displacement where ever possible: $\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}$.
-            \item The potential is constant below an image plane and the field is always zero. 
-        \end{itemize}
-    }
-    \formbox{Names of Stuff}{
-        $\epsilon_0$: Permittivity of Free Space\\
-        $\epsilon_r$: Dielectric Constant or \\
-        \hspace{0.5cm}Relative Permittivity\\
-        $\epsilon$: Permittivity of a Material
-    }
+
     \vfill\null
 \end{multicols*}
 
