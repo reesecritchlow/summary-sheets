@@ -145,7 +145,7 @@
                 \\
                 $\displaystyle \vec{J} = \rho\vec{v}$
             \end{tabular}}\\
-            Magnetic Force (General): & $\displaystyle \vec{F}_\textrm{mag} = \int I(d\vec{I} \times \vec{B}) = I \int (d\vec{I} \times \vec{B})$\\
+            Magnetic Force (General): & $\displaystyle \vec{F}_\textrm{mag} = \int I(d\vec{l} \times \vec{B}) = I \int (d\vec{l} \times \vec{B})$\\
             Magnetic Force (Surface): & $\displaystyle \vec{F}_\textrm{mag} = \int (\vec{K} \times \vec{B})da$\\
             Magnetic Force (Volume): & $\displaystyle \vec{F}_\textrm{mag} = \int (\vec{J} \times \vec{B}) d\tau$\\
             Biot-Savart Law: & 
@@ -293,7 +293,15 @@
             \includegraphics[width=9cm]{boundary-conditions.png}
         \end{center}
     }
-
+    \formbox{Common Fields}{
+        {\renewcommand{\arraystretch}{2}%
+        \begin{tabular}{ m{12em} m{25em}  }
+            Magnetic Finite Wire: & $\displaystyle \frac{\mu_0}{4\pi}\frac{I}{R}(\sin (\theta_1) - \sin (\theta_2))$\\
+            Magnetic Field of an Arc: & $\displaystyle \frac{\mu_0 I \theta}{4\pi R}$\\
+            Magnetic Field of an Infinite Wire: & $\displaystyle \frac{\mu_0 I}{2\pi R}$
+        \end{tabular}}
+    }
+    
     \vfill\null
 \end{multicols*}
 
