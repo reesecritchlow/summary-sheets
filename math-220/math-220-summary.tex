@@ -25,10 +25,29 @@
 
 \newcommand{\scripty}[1]{\ensuremath{\mathcalligra{#1}}}
 
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+%% We also redfine the negation symbol:
+\renewcommand{\neg}{\sim}
 
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
 \newcommand{\gap}{\medskip\\}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\reals}{\mathbb{R}}
+\newcommand{\ints}{\mathbb{Z}}
 \newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+
+
+
+\newcommand{\curly}[1]{\left\{#1\right\}}
+
+\newcommand{\sgap}{\smallskip\\}
+\newcommand{\zeroset}{\curly{0}}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+
+
+
 \newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
 \newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
 \newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
@@ -36,10 +55,6 @@
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\jomega}{{j\omega}}
 \newcommand{\domega}{d\omega}
-
-\newcommand{\sheader}[1]{\underline{#1:}}
-\newcommand{\smallgap}{\smallskip\\}
-\newcommand{\sgap}{\smallskip\\}
 
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
 
@@ -359,9 +374,215 @@ Say that for $P(n)$ to be true, $P(n) = f(n)$. It is important to note that you 
 going to be searching for $P(n + 1) = f(n + 1)$, not $P(n + 1) = f(n)$. Thus, it is 
 often helpful to write out what $f(n + 1)$ is first, so that you know where you want 
 to end up.
+\gap
 
 \header{Strong Induction}
 Strong induction is where \underline{all} prior cases imply the next case in an
 inductive proof.
+
+\section*{Final Exam}
+
+\header{Returning to Sets}
+
+\sheader{Power Sets} A power set of a set $A$, denoted $\mathcal{P}(A)$
+is the set of all subsets of $A$. We can also note that if $|A| = n$,
+then $|\mathcal{P}(n) = 2^n$.
+
+\sheader{Set Operations}
+\begin{itemize}
+    \item \sheader{Union} The union of two sets $A$ and $B$ are all of the 
+    elements that are in \underline{either} $A$ \textbf{or} $B$, denoted $A \cup B$.
+    \item \sheader{Intersection} The intersection of two sets $A$ and $B$ are 
+    the elements that are in \underline{both} $A$ \textbf{and} $B$, denoted $A \cap B$.
+    \item \sheader{Difference} The difference of two sets $A$ and $B$ is the elements
+    which are in $A$, less the elements that are in $B$, denoted $A - B$.
+    \item \sheader{Complement} Given a set $A$ which is a subset of a larger set,
+    $U$, then the complement of $A$ is all of the elements in $U$ which are not in 
+    $A$, denoted $\overline{A}$.
+\end{itemize}
+\sheader{Cartesian Product} The Cartesian product of two sets $A$ and $B$ is the 
+set of ordered pairs containing elements of $A$ and $B$.
+\gap
+\header{Relations}
+We can say that two elements of a set $A$ bear a \underline{relation} to each other 
+when they satisfy some rule outlined by the given relation.
+\gap
+\sheader{Equivalence Relations} Most problems surrounding relations will be in 
+the form of equivalence proofs. To prove that a relation is an \underline{equivalence relation},
+we must prove the following properties:
+\begin{itemize}
+    \item \sheader{Reflexivity} $\forall a \in A, aRa$ or $(a, a) \in R$
+    \item \sheader{Symmetry} $\forall a, b \in A, aRb \implies bRa$.
+    \item \sheader{Transitivity} $\forall a, b, c \in A, ((aRb) \wedge (bRc))\implies aRc$.
+\end{itemize}
+\sheader{Equivalence Classes} Equivalence classes are all of the elements in a given 
+set $A$ which bear an equivalence relation to a chosen element $x$. This is denoted $[x]$.
+\begin{align*}
+    [x] = \{ a \in A : aRx \}
+\end{align*}
+
+\header{Partitions}
+
+A \underline{partition} of a set $A$ is a \textbf{set} $\mathcal{P}$, of non-empty 
+subsets of $A$, such that:
+\begin{itemize}
+    \item If $x \in A$, then there is $X \in \mathcal{P}$ with $x \in X$.
+    \item If $X, Y \in \mathcal{P}$, then either $X \cap Y = \emptyset$ or $X = Y$.
+\end{itemize}
+As a sidenote, the set of equivalence classes on a set $A$ forms a set partition.
+\pagebreak
+\gap
+\sheader{Integers modulo $n$} The equivalence relation $\equiv \Mod{n}$
+describes the integers that have the same remainder when divided by $n$.
+Hence, we can devine interesting properties on these classes, given some 
+$x \in [a]$ and $y \in [b]$, then:
+\begin{align*}
+    x + y \in [a + b] && xy \in [ab]
+\end{align*}
+Often, such relations are written $[r]_n$, for $\equiv r \Mod{n}$.
+\gap
+\header{Functions}
+A \underline{function} between two sets, $A$ and $B$ is a non empty subset $f \subseteq A \times B$
+such that:
+\begin{itemize}
+    \item For every $a \in A$, there exists a $b \in B$ such that $(a, b) \in f$.
+    \sgap
+    \underline{Every input has an output.}
+    \item If $(a, b) \in f$ and $(a, c) \in f$, then $b = c$. 
+    \sgap
+    \underline{Every input has a distinct output.}
+\end{itemize}
+\sheader{Function Definitions} Given a function $f: A \to B$:
+\begin{itemize}
+    \item \sheader{Domain} The domain, in this case, $A$, is the \underline{writer-defined}
+    set of valid inputs to the function.
+    \item \sheader{Codomain} The codomain, in this case, $B$, is the \underline{writer-defined}
+    set of valid outputs to the function.
+    \item \sheader{Range} The range is all of the \underline{actual} outputs of the 
+    function yielded by the domain. We can formalize this by:
+    \begin{align*}
+        \textrm{rng}(f) = \curly{b \in B \suchthat \exists a \in A \suchthat f(a) = b}
+    \end{align*}
+    We note that $\textrm{rng}(f) \subseteq B$, or \underline{the range is a subset of the codomain}.
+    \sgap
+    If we define some additional sets, $C \subseteq A$ and $D \subseteq B$, then we 
+    can add some additional definitions:
+    \item \sheader{Image} The image of $C$ in $B$ is $f(C) = \curly{f(x) \suchthat x \in C}$.
+    In simpler terms, \\\underline{the image is the range of some chosen subset of the domain.}
+    \item \sheader{Preimage} The preimage of $D$ in $A$ are all of the elements in $A$ 
+    which correspond to outputs in $D$. To formalize:
+    \begin{align*}
+        f^{-1}(D) = \curly{x \in A \suchthat f(x) \in D}
+    \end{align*}
+    It is important to note that \underline{the preimage is not the inverse.}
+\end{itemize}
+\sheader{Identities in Images and Preimages} I feel like these could come in handy.
+\sgap
+Given some $f: A \to B$, and $C_1, C_2 \subseteq A$ and $D_1, D_2 \subseteq B$:
+\begin{align*}
+    f(C_1 \cap C_2) &\subseteq f(C_1) \cap f(C_2) & f(C_1 \cup C_2) &= f(C_1) \cup f(C_2)\\
+    f^{-1}(D_1 \cap D_2) &= f^{-1}(D_1) \cap f^{-1}(D_2) & f^{-1}(D_1 \cup D_2) &= f^{-1}(D_1) \cup f^{-1}(D_2)
+\end{align*}
+\pagebreak
+
+\header{Properties of Functions and Function Operations}
+We can define some important properties on a given function $f: A \to B$, $a, a_1, a_2 \in A$ and $b, b_1, b_2 \in B$:
+\begin{itemize}
+    \item \sheader{Injective} We call a function ``injective'' if it follows that 
+    \begin{align*}
+        (a_1 \neq a_2) \implies (f(a_1) \neq f(a_2))
+    \end{align*}
+    The contrapositive of this statement is often more useful.
+    \item \sheader{Surjective} We call a function ``surjective'' if it follows that 
+    \begin{align*}
+        \forall b \in B, \exists a \in A \suchthat b = f(a).
+    \end{align*}
+    \item \sheader{Bijective} We call a function ``bijective'' if it is both 
+    injective and surjective. 
+\end{itemize}
+
+\sheader{Function Compositions} Given some functions $f: A \to B$ and $g: B \to C$,
+we can obtain the \underline{composition} of $f$ and $g$ as $g \circ f: A \to C$.
+This can be rewritten as:
+\begin{align*}
+    (g \circ f)(a) = g(f(a)), \forall a \in A.
+\end{align*}
+It is important to note that compositions are associative: $h\circ (g\circ f) = (h \circ g) \circ f$.
+\gap
+Compositions also preserve properties: if a $f$ and $g$ are both in/sur/bi-jective then
+$f \circ g$ is also in/sur/bi-jective. 
+\gap
+We can also define the \underline{partial converses}, which state that:
+\begin{itemize}
+    \item If $g \circ f$ is an injection, then $f$ is an injection.
+    \item If $g \circ f$ is a surjection, then $g$ is a surjection.
+\end{itemize}
+
+\header{Proof by Contradiction}
+Proof by contradiction is a proof method that generally uses the following logic:
+\begin{enumerate}
+    \item Assume, to the contrary, a given statemnt is false
+    \item Imply that some false statement is true.
+    \item By contradiction, the original assumption must be true, as required.
+\end{enumerate}
+There are some common ways that ``false statements'' present themselves:
+\begin{itemize}
+    \item \sheader{Equality Contradictions} $0 = 1$ or something of the like.
+    \item \sheader{Divisibility Contradictions} $3 \mid 1$ or something of the like.
+    \item \sheader{Set Inclusion Contradictions} $1 \in \mathbb{I}$ or something of the like.
+\end{itemize}
+
+\header{Inverse Functions}
+We can also define different inverses of functions, given some functions $f: A \to B$ and $g: B \to A$:
+\begin{itemize}
+    \item If $g\circ f = i_A$, we say that $g$ is a \underline{left-inverse} of $f$.
+    \item If $f \circ g = i_B$, we say that $g$ is a \underline{right-inverse} of $f$.
+    \item If $g$ is \underline{both} a left-inverse and a right-inverse of $f$, then
+    we can call $g$ an \underline{inverse} of $f$.
+\end{itemize}
+Note: $i_A$ denotes the original element in $A$ given to some function when passed
+through the function. 
+\gap
+Inverses have nice relations to function properties, given some $f: A\to B$:
+\begin{itemize}
+    \item $f$ has a left-inverse iff $f$ is injective.
+    \item $f$ has a right-inverse iff $f$ is surjective.
+    \item $f$ has an inverse iff $f$ is bijective.
+    \item If $f$ has a left-inverse, $g$, and a right-inverse, $h$, then $g = h$.
+\end{itemize}
+
+\header{Cardinality of Sets}
+We can also discuss the size of sets, or their \underline{cardinalities}.
+\gap
+As a very important result, we know that for two sets $A$ and $B$, we can state that 
+they have the same \underline{cardinality} if $A = B = \emptyset$, or if there exists
+a bijection from $A$ to $B$.
+\gap
+The properties of functions have important implications for cardinality. Given 
+some function $f: A \to B$, then 
+\begin{itemize}
+    \item If $f$ is injective, then $|A| \leq |B|$.
+    \item If $f$ is surjective, then $|A| \geq |B|$.
+    \item If $f$ is bijective, then $|A| = |B|$.
+\end{itemize}
+
+\sheader{Denumerable Sets} We call a set $B$ \underline{denumerable} if we can list 
+out its elements. Hence, we can state that there exists a bijection $f: \mathbb{N} \to B$.
+Hence, the list has some nice properties:
+\begin{itemize}
+    \item The list does not repeat ($f$ injective).
+    \item Every entry appears at some finite position ($f$ surjective).
+\end{itemize}
+From this, we can draw some important conclusions:
+\begin{itemize}
+    \item If $B$ is denumerable, then $A \subseteq B$ implies $A$ is denumerable.
+    \item If $A$ and $B$ are denumerable, then $A \cap B$ and $A \cup B$ are denumerable.
+    \item If $A$ and $B$ are denumerable, then $A \times B$ is denumerable.
+    \item The sets $\mathbb{N}, \mathbb{Z}, \mathbb{Q}$ are all denumerable.
+    \item $|A| < |\mathcal{P}(A)|$
+\end{itemize}
+It is also known that the reals are uncountable.
+
+
 
 \end{document}
