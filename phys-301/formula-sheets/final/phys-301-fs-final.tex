@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{enumerate}
+\usepackage{esint}
 \setlength\parindent{0pt}
 \usepackage{enumerate}
 \usepackage{graphicx}
@@ -33,7 +34,7 @@
 \newcommand{\tripleformula}[4]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] \begin{align*} #2 \\ #3 \\ #4\end{align*}
     \end{tcolorbox}\end{center}}
 
-\newcommand{\formbox}[2]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] #2\end{tcolorbox}\end{center}}
+\newcommand{\formbox}[2]{\begin{center} \begin{tcolorbox}[colback=white, title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] #2\end{tcolorbox}\end{center}}
 
 
 \newcommand{\where}{\hspace{0.3cm} \textrm{where} \hspace{0.3cm}}
@@ -49,7 +50,8 @@
             Surface Charge: & $\displaystyle \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\sigma(\vec{r'})}{||\sepvec||^2}\sephat \, da'}$\\
             Volume Charge: & $\displaystyle \vec{E}(\vec{r}) = \frac{1}{4\pi\epsilon_0}\int{\frac{\rho(\vec{r'})}{||\sepvec||^2}\sephat \, d\tau'}$\\
             Potential Difference: & $\displaystyle V(\vec{b}) - V(\vec{a}) = - \int_{\vec{a}}^{\vec{b}}{\vec{E} \cdot d\vec{l}}$\\
-            Potential of a Volume Charge: & $\displaystyle V(\vec{r}) = \kfrac \int{\frac{\rho(\vec{r'})}{||\sepvec||}d\tau'}t$\\
+            Potential of a Volume Charge: & $\displaystyle V(\vec{r}) = \kfrac \int{\frac{\rho(\vec{r'})}{||\sepvec||}d\tau'}
+            $\\
             Potential of a Collection of Point Charges: & $\displaystyle V(\vec{r}) = \kfrac \sum_{i = 0}^n\frac{q_i}{||\sepvec||}$\\
             Work to Move a Charge: & $\displaystyle {W = \int_{\textbf{a}}^{\textbf{b}} \vec{F} \cdot d\vec{l} = -Q\int_{\textbf{a}}^{\textbf{b}}{\vec{E} \cdot d\vec{l}}}$\\
             Work to Move a Charge (Potential): & $\displaystyle {W= Q[V(\vec{b}) - V(\vec{a})]}$\\
@@ -99,7 +101,7 @@
         $\epsilon_r$: Dielectric Constant or Relative Permittivity\\
         $\epsilon$: Permittivity of a Material
     }
-
+    PHYS 301 Formula Sheet. Critchlow/Wilson/Predinchuk 2022.
     \formbox{Techniques for Solving Problems}{
         {\renewcommand{\arraystretch}{1.75}%
         \begin{tabular}{ l }
@@ -108,12 +110,12 @@
             B + \sum_{n = 1}^\infty \left(A_n s^n + \frac{B_n}{s^n}\right)
             \left(C_n \cos (\phi n) + D_n \sin(\phi n)\right)$\\
         \end{tabular}
-        \begin{tabular}{ m{12em} m{25em}  }
-            Solution for Spherical Laplacians: & $\displaystyle f(r, \theta) = \sum_{l = 0}^\infty{\left(A_l r^l + \frac{B_l}{r^{l + 1}}\right)P_l(\cos \theta)}$\\
+        \begin{tabular}{ m{12em} m{20em}  }
+            Solution for Spherical Laplacians: & $\displaystyle V(r, \theta) = \sum_{l = 0}^\infty{\left(A_l r^l + \frac{B_l}{r^{l + 1}}\right)P_l(\cos \theta)}$\\
             Method of Images General Principle: & $\displaystyle \sum \frac{q_i}{||\sepvec_i||} = 0$\\
             Method of Images for Two Points: & $\displaystyle -\frac{q_1}{q_2} = \frac{||\sepvec_1||}{||\sepvec_2||}$\\
             Image Charge Surface Charge: & $\displaystyle \sigma = - \epsilon_0 \frac{\partial V}{\partial n}$\\
-            Binomial Expansion: & $\displaystyle (1 + x)^k = \sum_{n = 0}^\infty{\left(\frac{k!}{n!(k - n)!}\right)}x^n$\\
+            Binomial Expansion: & $(1+x)^n = 1 + n x + \frac{n(n-1)}{2!}x^2 + \frac{n(n-1)(n-2)}{3!}x^3 + \cdots + n x^{n-1} + x^n.$\\
             Taylor Expansion: & $\displaystyle f(x) \approx \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!}$\\
             Because I can't remember: & $\displaystyle f(x) \approx f(0) + f'(0) \cdot x + f''(0) \cdot \frac{x^2}{2} + \cdots$\\
             Legendre Polynomials: &
@@ -153,8 +155,12 @@
             \begin{tabular}[t]{l}          
                 $\displaystyle \vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int \frac{\vec{I} \times \hat{r}_\textrm{sep}}{||\sepvec||^2} dl'$
                 \\$\displaystyle \vec{B}(\vec{r}) = 
-                \frac{\mu_0}{4\pi}I \int \frac{d\vec{I}'\times \hat{r}_\textrm{sep}}{||\sepvec||^2}$
+                \frac{\mu_0}{4\pi}I \int \frac{d\vec{l}'\times \hat{r}_\textrm{sep}}{||\sepvec||^2}$
             \end{tabular}}\\
+            Biot-Savart -- Surface: &
+            $\ds \vec{B}(\vec{r}) =  \frac{\mu_0}{4\pi}\int \frac{\vec{K}(\vec{r'}) \times \sephat}{||\sepvec||^2}da'$\\
+            Biot-Savart -- Volume: &
+            $\ds \vec{B}(\vec{r}) = \frac{\mu_0}{4\pi}\int \frac{\vec{J}(\vec{r'}) \times \sephat}{||\sepvec||^2}d\tau'$\\
             Ampere's Law: &
             {\renewcommand{\arraystretch}{1}%       
             \begin{tabular}[t]{l}          
@@ -185,11 +191,11 @@
     }
     \formbox{Maxwell's Equations}{
         {\renewcommand{\arraystretch}{1.75}%
-        \begin{tabular}{ m{12em} m{25em}  }
-            Gauss's Law: & $\displaystyle \vec{\nabla} \cdot \vec{E} = \frac{1}{\epsilon_0}\rho$\\
-            (unnamed) & $\displaystyle \vec{\nabla} \cdot \vec{B} = 0$\\
-            Faraday's Law: & $\displaystyle \vec{\nabla} \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$\\
-            Ampere's Law with Maxwell's Correction: & $\displaystyle \vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0\ \epsilon_0 \frac{\partial \vec{E}}{\partial t}$\\
+        \begin{tabular}{ m{7em} m{10em} m{12em}  }
+            Gauss's Law: & $\displaystyle \vec{\nabla} \cdot \vec{E} = \frac{1}{\epsilon_0}\rho$ & $\displaystyle\oiint \vec{E}\cdot\vec{da} = \frac{Q_{enc}}{\epsilon_0}$\\
+            No monopoles: & $\displaystyle \vec{\nabla} \cdot \vec{B} = 0$ & $\displaystyle \oiint\vec{B}\cdot d\vec{a}=0$\\
+            Faraday's Law: & $\displaystyle \vec{\nabla} \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$ & $\displaystyle\oint\vec{E}\cdot\vec{dl} = \frac{-\partial \Phi_{B}}{\partial t}$\\
+            \small{Ampere's Law with Maxwell's Correction:} & \small{$\displaystyle \vec{\nabla} \times \vec{B} = \mu_0 \vec{J} + \mu_0\ \epsilon_0 \frac{\partial \vec{E}}{\partial t}$} & \small{$\displaystyle \oint\vec{B}\cdot d\vec{l}=\mu_0I_{enc}+\mu_0\epsilon_0\frac{\partial \Phi_E}{\partial t}$}\\
         \end{tabular}}
     }
     \formbox{Magnetostatics in Matter}{
@@ -209,13 +215,17 @@
             \begin{tabular}[t]{l}          
                 $\displaystyle \vec{\nabla} \times \vec{H} = \vec{J}_f$
                 \\
-                $\displaystyle \oint \vec{H} \cdot d\vec{I} = I_{f_\textrm{encl}}$
+                $\displaystyle \oint \vec{H} \cdot d\vec{l} = I_{f_\textrm{encl}}$
             \end{tabular}}\\
             Linear Magnetics: & $\displaystyle \vec{M} = \chi_m\vec{H}$\\
             Permeability: & $\displaystyle \mu \equiv \mu_0(1 + \chi_m)$\\
-            Relative Permeability: & $\ds \mu_r = 1 + \chi_m$\\
+            Relative Permeability: & $\ds \mu_r =  1 + \chi_m$\\
             Linear Magnetics with E and H Fields: & $\displaystyle \vec{B} = \mu \vec{H}$.\\
-            Dipole Field: & $\ds \vec{B} = \frac{\mu_0 \vec{m}}{4\pi r^3}(2\cos(\theta)\hat{r} + \sin(\theta)\hat{\theta})$, for $\vec{m} = m\hat{z}$\\
+            Dipole Field: & $\ds \vec{B} = \frac{\mu_0 m}{4\pi r^3}(2\cos(\theta)\hat{r} + \sin(\theta)\hat{\theta})$, for $\vec{m} = m\hat{z}$\\
+            Field Inside a Uniformly Magnetized Sphere: &
+            $\vec{B} = \frac{2}{3}\mu_0 \Vec{M}$\\
+            Really?: & $\vec{J}_b = \chi_m \vec{J}_f$\\
+            Force on a dipole moment: & $\Vec{F} = \nabla (\vec{m} \cdot \Vec{B})$
         \end{tabular}}
     }
     \formbox{Electrodynamics}{
@@ -225,7 +235,7 @@
             Power in a Circuit: & $\displaystyle P = VI = I^2R = \frac{V^2}{R}$\\
             Electromotive Force: &
             \begin{tabular}[t]{l}          
-                $\displaystyle \mathcal{E} = \frac{F_\textrm{mag, tot}}{Q} = \int (\vec{v} \times \vec{B}) d \vec{l}$\\
+                $\displaystyle \mathcal{E} = \frac{F_\textrm{mag, tot}}{Q} = \int (\vec{v} \times \vec{B})\cdot d \vec{l}$\\
                 $\displaystyle  \mathcal{E} = \oint \vec{f} \cdot d \vec{I}$
                 \\
                 $\displaystyle \mathcal{E} = - \frac{d\Phi}{dt}$
@@ -243,7 +253,9 @@
                 \\
                 $\displaystyle W = \frac{1}{2\mu_0}\int_\textrm{all space}B^2 d\tau$
             \end{tabular}\\
-            Displacement Current: & $\vec{J}_d \equiv \epsilon_0\frac{\partial \vec{E}}{\partial t}$
+            Displacement Current: & $\vec{J}_d \equiv \epsilon_0\frac{\partial \vec{E}}{\partial t}$\\
+            Faraday's Law in Integral Form: &
+            $\ds \oint \vec{E} \cdot d \vec{l} = - \frac{d \Phi}{dt}$
         \end{tabular}}
     }
     \formbox{Maxwell's Equations in Matter}{
@@ -261,34 +273,28 @@
             \includegraphics[height=3.8cm]{magnetic-triangle.png}
         \end{center}
     }
-    \formbox{Takeaways from Practice}{
-        \begin{itemize}
-            \item Gauss's law inside a dielectric always includes both $\rho_b$ and $\sigma_b$.
-            \item Use the definition for displacement where ever possible: $\vec{D} \equiv \epsilon_0 \vec{E} + \vec{P}$.
-            \item The potential is constant below an image plane and the field is always zero. 
-        \end{itemize}
-    }
 
     \formbox{Boundary Conditions in Electrostatics}{
         {\renewcommand{\arraystretch}{1.75}%
-        \begin{tabular}{ l }
-            $\vec{D}_{\text{above}}^{\perp} - \vec{D}_{\text{below}}^{\perp}  = \sigma_f$\\
-            $\vec{D}_{\text{above}}^{\parallel} - \vec{D}_{\text{below}}^{\parallel} = \vec{P}_{\text{above}}^{\parallel} - \vec{P}_{\text{below}}^{\parallel}$\\
-            $\vec{E}_{\text{above}}^{\perp} - \vec{E}_{\text{below}}^{\perp}  = \sigma_{\text{tot}}/\epsilon_0$\\
+        \begin{tabular}{ l l }
+            $\vec{D}_{\text{above}}^{\perp} - \vec{D}_{\text{below}}^{\perp}  = \sigma_f$&
+            $V_\text{above} = V_\text{below}$
+            \\
+            $\vec{E}_{\text{above}}^{\perp} - \vec{E}_{\text{below}}^{\perp}  = \sigma_{\text{tot}}/\epsilon_0$&
             $\vec{E}_{\text{above}}^{\parallel} - \vec{E}_{\text{below}}^{\parallel}  = \vec{0}$\\
-            $V_\text{above} = V_\text{below}$\\
+            $\vec{D}_{\text{above}}^{\parallel} - \vec{D}_{\text{below}}^{\parallel} = \vec{P}_{\text{above}}^{\parallel} - \vec{P}_{\text{below}}^{\parallel}$&
             $\epsilon_\text{above}\vec{E}_\text{above}^\perp - \epsilon_\text{below}\vec{E}_\text{below}^\perp = \sigma_f$\\
             $\ds \epsilon_\text{above}\pdv{V_\text{above}}{n} - \epsilon_\text{below}\pdv{V_\text{below}}{n} = -\sigma_f$
         \end{tabular}}
     }
     \formbox{Boundary Conditions in Magnetostatics}{
         {\renewcommand{\arraystretch}{1.75}%
-        \begin{tabular}{ l }
-            $\vec{B}_\text{above}^\parallel - \vec{B}_\text{below}^\parallel = \mu_0\vec{K}$\\
+        \begin{tabular}{ l l }
+            $\vec{B}_\text{above}^\parallel - \vec{B}_\text{below}^\parallel = \mu_0\vec{K}$ &
             $\vec{B}_\text{above} - \vec{B}_\text{below} = \mu_0(\vec{K}\cross\vu{n})$\\
-            $\vec{A}_\text{above} = \vec{A}_\text{below}$\\
+            $\vec{A}_\text{above} = \vec{A}_\text{below}$&
             $\ds \pdv{A_\text{above}}{n} - \pdv{A_\text{below}}{n} = -\mu_0\vec{K}$\\
-            $\vec{H}_\text{above}^\perp - \vec{H}_\text{below}^\perp = - (\vec{M}_\text{above}^\perp - \vec{M}_\text{below}^\perp) $\\
+            $\vec{H}_\text{above}^\perp - \vec{H}_\text{below}^\perp = - (\vec{M}_\text{above}^\perp - \vec{M}_\text{below}^\perp) $&
             $\vec{H}_\text{above}^\parallel - \vec{H}_\text{below}^\parallel = \vec{K}_f \cross \vu{n}$
         \end{tabular}}
     }
@@ -300,14 +306,32 @@
     \formbox{Common Fields}{
         {\renewcommand{\arraystretch}{2}%
         \begin{tabular}{ m{12em} m{25em}  }
-            Magnetic Finite Wire: & $\displaystyle \frac{\mu_0}{4\pi}\frac{I}{R}(\sin (\theta_1) - \sin (\theta_2))$\\
-            Magnetic Field of an Arc: & $\displaystyle \frac{\mu_0 I \theta}{4\pi R}$\\
-            Magnetic Field of an Infinite Wire: & $\displaystyle \frac{\mu_0 I}{2\pi R}$\\
-            Magnetic Field of a Solenoid: & $\ds \mu_0 n I$
+            E and V for inf line: & $\displaystyle E(s) = \frac{\lambda}{2\pi\epsilon_0 s}, V(s) = \frac{\lambda}{2\pi\epsilon_0}\ln{|\frac{s_0}{s}|}$\\
+            E and V for inf plane: & $E = \frac{|\sigma|}{2\epsilon_0}, V = \mp\frac{\sigma z}{2\epsilon_0} $\\
+            E and V at $(0,0,z)$ of ring: & $E(z) = \frac{\lambda z R}{2\epsilon_0(R^2+z^2)^{\frac{3}{2}}}, V(z) = \frac{\lambda \cdot R}{2\epsilon_0\sqrt{R^2+z^2}}$\\
+            E and V at $(0,0,z)$ of disk: & 
+            \begin{tabular}[t]{l}          
+                $E(z) = \frac{\sigma}{2\epsilon_0}[1 - \frac{z}{\sqrt{z^2+R^2}}]$
+                \\
+                $V(z) = \frac{\sigma}{2\epsilon_0}[\sqrt{R^2+z^2} - |z|]$
+            \end{tabular}\\
+            E and V for uniform hollow sphere: & 
+            \begin{tabular}[t]{l}          
+                $E(r) = \frac{\sigma R^2}{\epsilon_0 r^2}u(r-R)$
+                \\
+                $V(r) = \frac{\sigma R}{\epsilon_0 }u(R-r) + \frac{\sigma R^2}{\epsilon_0 r}u(r-R)$
+            \end{tabular}\\
+        
+            Magnetic Wire: & $\displaystyle \frac{\mu_0}{4\pi}\frac{I}{r}(\sin (\theta_1) - \sin (\theta_2))$\\
+            Magnetic Sheet: & $B = \frac{\mu_0K}{2}$\\
+            Magnetic Field of an Arc Along z: & $\displaystyle \frac{\mu_0 I R^2 \theta}{4\pi (z^2+R^2)^{3/2}}$\\
+            % Magnetic Field of an Infinite Wire: & $\displaystyle \frac{\mu_0 I}{2\pi R}$\\
+            Magnetic Field of a Solenoid: & $\ds \mu_0 n I$\\
+            B-field in thin magnetized cylinder: & $B = \mu_0M$\\
+            B-field in magnetized sphere: & $B = \frac{2}{3}\mu_0M = \frac{2}{3}\mu_0\sigma R \omega \text{ for spinning sphere}$
+            
         \end{tabular}}
     }
-    
-    \vfill\null
 \end{multicols*}
 
 
