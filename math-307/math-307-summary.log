@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  20 NOV 2022 16:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  14 DEC 2022 17:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/reesecritchlow/Firestone/summary-sheets/math-307/math-307-summary.tex
-(/Users/reesecritchlow/Firestone/summary-sheets/math-307/math-307-summary.tex
+**/Users/reesecritchlow/summary-sheets/math-307/math-307-summary.tex
+(/Users/reesecritchlow/summary-sheets/math-307/math-307-summary.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -388,14 +388,7 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \tcb@temp=\box109
 \tcb@temp=\box110
 \tcb@temp=\box111
-)
-/Users/reesecritchlow/Firestone/summary-sheets/math-307/math-307-summary.tex:27: Too many }'s.
-l.27 ...}[2]{{}\textrm{proj}_{#1}\left(#2\right)}}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-(/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+) (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count300
 \l__pdf_internal_box=\box112
@@ -492,39 +485,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 151--168
 
  []
 
-[2] [3] [4] [5] [6] [7]
-
-/Users/reesecritchlow/Firestone/summary-sheets/math-307/math-307-summary.tex:535: LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.535 \header
-             {Orthogonal Stuff}
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[8] [9] [10]
+[2] [3] [4] [5] [6] [7] [8] [9] [10]
 Overfull \hbox (0.4403pt too wide) in paragraph at lines 727--734
 \OT1/cmr/m/n/10 Another decomposition that we can use is the $[]$ The singular value decomposition,
  []
 
-[11] (./math-307-summary.aux) ) 
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 875--879
+
+ []
+
+[13] [14] [15] [16] (./math-307-summary.aux) ) 
 Here is how much of TeX's memory you used:
  13513 strings out of 478268
- 268589 string characters out of 5846347
- 570074 words of memory out of 5000000
+ 268559 string characters out of 5846347
+ 570076 words of memory out of 5000000
  31501 multiletter control sequences out of 15000+600000
  477197 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,16n,89p,504b,267s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,16n,89p,494b,267s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on math-307-summary.pdf (11 pages, 215303 bytes).
+Output written on math-307-summary.pdf (16 pages, 236986 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

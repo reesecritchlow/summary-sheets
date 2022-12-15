@@ -24,7 +24,7 @@
 \newcommand{\sheader}[1]{\underline{#1:}}
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
 \newcommand{\curly}[1]{\left\{#1\right\}}
-\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
 
 \newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
 
@@ -531,7 +531,7 @@ properties:
     \item If two vectors are colinear, their inner product is the product of the 
     magnitude of the two vectors.
 \end{itemize}
-\gap
+
 \header{Orthogonal Stuff}
 \sheader{Orthogonal Sets} A set is orthogonal if all vectors in the set 
 are orthogonal to each other.
@@ -766,7 +766,8 @@ we can describe each matrix as the following:
     \vfill\null
 \end{multicols}
 $Q$ can also be characterized as a matrix containing the eigenvectors of $AA^T$,
-in order of smallest to largest corresponding eigenvalue.
+in order of smallest to largest corresponding eigenvalue. However, these eigenvectors 
+must be given as an orthonormal basis. 
 \gap
 The ``extension vectors'' of $P$ $(\vec{p}_k, k > r)$ can also be characterized
 as the vectors in the nullspace of $(\vec{p}_k, k \leq r)$. 
@@ -783,5 +784,289 @@ and condition number of the matrix.
 \gap
 Thus, it can be said that $||A|| = \sigma_1$ and $||A^{-1}|| = \frac{1}{\sigma_n}$,
 so $\textrm{cond}(A) = \frac{\sigma_1}{\sigma_n}$.
+
+\pagebreak
+
+\section*{Final Exam}
+
+\header{Principle Component Analysis}
+Some matricies do not have inverses. Thus, we introduce the concept of a \underline{pseudoinverse},
+which builds off of the SVD to make something that's ``good enough''.
+Given some data matrix $X$ which has dimensions $n \times p$,
+comprised of a set of vectors $\vec{x_1}, \ldots, \vec{x_n} \in \mathbb{R}^p$, assuming that the 
+data is normalized such that 
+\begin{align*}
+    \sum_{k = 1}^n \vec{x_n} = \vec{0}.
+\end{align*}
+The \underline{Principle Component Analysis} gives the vectors $\vec{w_q}, \ldots, \vec{w_n}$
+Where $\vec{w}_1$ is the vector that maximizes $\sum_{k = 1}^n ||\proj{\vec{w_1}}{\vec{x_k}}||^2 = ||X\vec{w_1}||^2$
+\gap
+More generally, we can say that with the set of weight vectors $\curly{\vec{w_k}}$,
+the $k$-th weight vector $\vec{w}_k$ is the unit vector which maximizes $||X_k \vec{w}_k||$,
+Where $X_k$ is the projection of the data matrix onto $\textrm{span}\curly{\vec{w}_1, \ldots, \vec{w}_{k - 1}}$.
+This can also be written as:
+\begin{align*}
+    X_k = X - \sum_{i = 1}^{k = 1} X\vec{w}_i \vec{w}_i^T
+\end{align*}
+Hence, we can define the weight vectors as the \underline{right singular vectors of $X$}, 
+which are the columns of the $Q$ matrix in the singular value decomposition.
+\begin{align*}
+    \vec{w}_k = \vec{q}_k.
+\end{align*}
+It's also important to note that each vector $\vec{w}_k$ is part of an orthonormal basis,
+thus for each $\vec{w}_k$, $||\vec{w}_k|| = 1$.
+\gap
+\header{Pseudoinverses}
+
+Given an $m \times n$ matrix $A$, with SVD $A = P\Sigma Q^T$, the \underline{pseudoinverse}
+of $A$, denoted $A^+$ is:
+\begin{align*}
+    A^+ = Q \Sigma^+ P^T
+\end{align*}
+Where $\Sigma^+$ is given by:
+\begin{align*}
+    \Sigma^+ = \begin{bmatrix}
+        \sigma_1^{-1} & & & \vdots\\
+         & \ddots & & 0\\
+         & & \sigma_r^{-1} & \vdots\\
+         \cdots & 0 & \cdots & 0  
+    \end{bmatrix}_{n \times m}
+\end{align*}
+We can paraphrase this as $\Sigma^+$ being $\Sigma$, but with every singular value its
+reciprocal.
+\gap
+Thus, if $A$ is invertible, then $A^+ = A^{-1}$.
+\gap
+The pseudoinverse has some interesting properties:
+\begin{align*}
+    AA^+A = A && A^+ A A^+ = A^+.
+\end{align*}
+
+The pseudoinverse also provides a new way to compute a least squares approximation:
+\begin{align*}
+    \vec{x} = A^+ \vec{b}.
+\end{align*}
+An interesting implication of all things that we've done with the SVD is that we can take only
+the largest singular values in a SVD and get a result that has minimal data loss compared 
+to our original matrix.
+\pagebreak
+
+\header{Complex Numbers}
+
+A complex number is of the form $z = a + ib$, where $a,b \in \mathbb{R}$ and $i = \sqrt{-1}$.
+\gap
+We can define some properties of a complex number $z$:
+\begin{itemize}
+    \item \underline{Real Part} The real part of $z$, is $a$, denoted $\textrm{Re}(z) = a$.
+    \item \underline{Imaginary Part} The imaginary part of $z$, is $b$, denoted $\textrm{Im}(z) = b$.
+    \item \underline{Modulus} The modulus, or length of $z$ is given by $|z| = \sqrt{a^2 + b^2} = r$.
+    \item \underline{Argument} The argument, or angle of $z$ is given by $\arg(z) = \arctan\left(\frac{b}{a}\right) = \theta$.
+\end{itemize}
+Given these definitions, we can express complex numbers in different ways:
+\begin{itemize}
+    \item \sheader{Euler's Formula} $z = r \cos \theta + i r \sin \theta = r(\cos \theta + i \sin \theta)$.
+    \item \sheader{Polar Form} $z = re^{i \theta}$
+\end{itemize}
+We can also define the \underline{conjugate} of $z$, denoted by $\overline{z}$ or $z^*$. 
+\begin{align*}
+    \overline{z} = a - ib = re^{-i \theta}.
+\end{align*}
+
+\header{Complex Vectors}
+Building off of the work done with complex numbers, we can now define \underline{complex vectors}.
+A complex vector $\vec{v} \in \mathbb{C}^n$ is a vector with $n$ complex entries.
+\gap
+
+\sheader{Conjugates of Complex Vectors} We can define the conjugate of a complex vector, which for some complex vector $\vec{v}$
+is given by:
+\begin{align*}
+    \vec{v^*} = \begin{bmatrix}
+        v_1 \\
+        \vdots \\
+        v_n
+    \end{bmatrix}^*
+    = \begin{bmatrix}
+        v_1^*\\
+        \vdots\\
+        v_n^*
+    \end{bmatrix}
+\end{align*}
+To paraphrase, a conjugate of a complex vector is just the original matrix with all of 
+its entries conjugated.
+\gap
+\sheader{Complex Inner Product} We can also define the inner product for two complex vectors
+$\vec{v}, \vec{w} \in \mathbb{C}^n$:
+\begin{align*}
+    \langle \vec{v}, \vec{w} \rangle = \vec{v_1^T} \vec{w^*} = \langle \vec{v}, \vec{w^*} \rangle.
+\end{align*}
+The complex inner product has some nice properties too:
+\begin{itemize}
+    \item $\langle c\vec{v}, \vec{w} \rangle = c \langle \vec{v}, \vec{w} \rangle$
+    \item $\langle \vec{v}, c\vec{w} \rangle = c \langle \vec{v}, \vec{w} \rangle$
+    \item $\langle \vec{v}, \vec{w} \rangle = \langle \vec{w}, \vec{v} \rangle^*$
+    \item $\langle \vec{v}, \vec{v} \rangle = |v_1|^2 + \cdots + |v_n|^2$.
+\end{itemize}
+Hence, with the last property, we can say that the norm of a complex vector can be expressed by:
+\begin{align*}
+    ||\vec{v}|| = \sqrt{\langle \vec{v}, \vec{v} \rangle}
+\end{align*}
+We can also define another property for an $m \times n$ complex matrix, $A$, 
+and two complex vectors $\vec{v} \in \mathbb{C}^m, \vec{w} \in \mathbb{C}^n$:
+\begin{align*}
+    \langle A\vec{v}, \vec{w} \rangle = \langle \vec{v}, A^{T*} \vec{w} \rangle.
+\end{align*}
+\pagebreak
+
+\sheader{Hermetian Matricies} We call a complex matrix \underline{Hermetian} if $A = A^{T*} = \overline{A^T}$
+\gap
+If $A$ is Hermetian, then:
+\begin{itemize}
+    \item $\langle A\vec{x}, \vec{y} \rangle = \langle \vec{x}, A\vec{y} \rangle$.
+    \item $A$ has only real eignevalues and $A$ is diagonalizable.
+    \item The diagonal entries of $A$ are real numbers.
+\end{itemize}
+
+\header{Roots of Unity}
+We define a complex number $\omega in \mathbb{C}$ as an $N$th root of unity if $\omega^N = 1$.\\
+Generally, these are given in the form $\omega_n = e^{i \frac{2\pi}{N}}$.
+\gap
+Hence, we can define some important properties on roots of unity $\omega$.
+\begin{enumerate}
+    \item $\omega_N^N = 1$
+    \item $\omega_N^{N - 1} = \overline{\omega_N} = \omega_N^*$
+    \item $\overline{\omega_N} = \omega_N^{-1}$
+    \item $\sum_{k = 0}^{N - 1}\omega_N^{kl} = 0, 0 < l < N$
+\end{enumerate}
+
+\header{Fourier Bases}
+As seen prior, a \underline{standard basis} of $\mathbb{C}^n$ is $\vec{e}_0, \ldots, \vec{e}_{N-1}$ where $\vec{c}_k$
+is given by:
+\begin{align*}
+    \vec{e}_k = \begin{bmatrix}
+        0 \\
+        \vdots\\
+        0\\
+        1\\
+        0\\
+        \vdots\\
+        0
+    \end{bmatrix}
+\end{align*}
+Where the $1$ is at entry $k$.
+\gap
+However, now we introduce the concept of a \underline{Fourier basis} of $\mathbb{C}^n$,
+given by $\vec{f}_0, \ldots, \vec{f}_{N - 1}$, where 
+\begin{align*}
+    \vec{f}_k = \begin{bmatrix}
+        1 \\ 
+        \omega_N^k\\
+        \omega_N^2k\\
+        \vdots \\
+        \omega_N^{(N-1)k}
+    \end{bmatrix}
+\end{align*}
+Where $\omega_N = e^{i \frac{2\pi}{N}}$, and $n = N$.\gap
+\sheader{Remark} A Fourier basis is an orthogonal basis of $\mathbb{C}^n$, where 
+\begin{align*}
+    \langle \vec{f}_k, \vec{f}_n \rangle = \begin{cases}
+        N & k = n\\
+        0 & k = n
+    \end{cases}
+\end{align*}
+\sheader{Remark} $\vec{f^*_k} = \vec{f}_{N - k}$ for $0 < k < N$.
+
+\pagebreak
+
+\header{Discrete Fourier Transform}
+The Discrete Fourier Transform, or DFT, is the vector coefficients of $\vec{x}$ 
+with respect to a Fourier basis. Hence, we can define the DFT as:
+\begin{align*}
+    \textrm{DFT}(\vec{x}) = F_N \vec{x} = \begin{bmatrix}
+        \vec{f^*_0}^T \\
+        \vdots \\
+        \vec{f^*_{N-1}}^T
+    \end{bmatrix} 
+    = 
+    \begin{bmatrix}
+        \vec{f_0}^T\\
+        \vec{f_{N-1}}^T\\
+        \vdots \\
+        \vec{f_1}^T
+    \end{bmatrix}
+\end{align*}
+Due to the properties of complex conjugates, a nice symmetry emerges from a Fourier transform.
+Given some $\vec{x} \in \mathbb{R}^n$ and $\vec{y} = \textrm{DFT}(\vec{x})$, then 
+$\vec{y}[k] = \vec{y}[N - k]$ for $1 \leq k \leq N - 1$ or $0 < k < N$.
+\gap
+Finally, we can also reconstruct $\vec{x}$ from $\textrm{DFT}(\vec{x})$, since $F_N$ 
+is invertible. Thus, we can obtain the inverse of $F_N$ as 
+\begin{align*}
+    F_N^{-1} = \frac{1}{N}{F_N^*}^T.
+\end{align*}
+Hence, the \underline{inverse discrete Fourier transform} of $\vec{y} \in \mathbb{C}^N$
+is:
+\begin{align*}
+    \textrm{IDFT}(\vec{y}) = \frac{1}{N}{F_N^*}^T \vec{y}.
+\end{align*}
+
+\header{Sinusoids}
+If we divide a time range $N$ into discrete time points such that:
+\begin{align*}
+    \vec{t} = \begin{bmatrix}
+        0\\
+        \frac{1}{N}\\
+        \frac{2}{N}\\
+        \vdots \\
+        \frac{N - 1}{N}
+    \end{bmatrix}.
+\end{align*}
+Hence, we can also use this to turn functions into discretized vectors. For example, given 
+a function $f(x)$, then $f(\vec{t})$ is given by:
+\begin{align*}
+    f(\vec{t}) = 
+    \begin{bmatrix}
+        f(0)\\
+        f\left(\frac{1}{N}\right)\\
+        f\left(\frac{2}{N}\right)\\
+        \vdots\\
+        f\left(\frac{N-1}{N}\right)
+    \end{bmatrix}.
+\end{align*}
+Hence for a sinusoid of the form:
+\begin{align*}
+    f(t) = A\cos(2\pi k\vec{t} + \phi)
+\end{align*}
+Where:
+\begin{itemize}
+    \item $A$ is the \underline{amplitude}.
+    \item $k$ is the \underline{frequency}.
+    \item $\phi$ is the \underline{phase shift}.
+\end{itemize}
+We can express sinusoids using the Fourier Basis:
+\begin{itemize}
+    \item $\vec{f_k} = \cos(2 \pi k \vec{t}) + i \sin (2 \pi k \vec{t})$
+    \item $\frac{1}{2}\left(\vec{f_k} + {\vec{f_k}}^* \right) = \cos(2\pi k \vec{t})$
+    \item $\frac{1}{2i}\left(\vec{f_k} - \vec{f_k}^*\right) = \sin(2\pi k\vec{t})$
+\end{itemize}
+Finally, we can define the Discrete Fourier transform for a cosine function:
+\begin{align*}
+    \textrm{DFT}(A \cos (2\pi k \vec{t} + \phi)) = \frac{AN}{2}e^{i\phi}\vec{e}_k + \frac{AN}{2}e^{-i\phi}\vec{e}_{N - k}
+\end{align*}
+
+\header{Stemplots and Reconstructions}
+
+Given a Discrete Fourier Tranform output, $\vec{y} \in \mathbb{C}^n$, we can obtain a plot
+of it's frequencies in the form of a \underline{stemplot}. To obtain a stemplot, we 
+divide the modulus of each entry by $N$ if the entry is at index 0 or $\frac{N}{2}$, and if it is not
+at either of these entries, then we divide the modulus by $\frac{N}{2}$. This completes 
+a magnitude stemplot. For a angle plot, we plot the argument of each entry. If the entry is 
+positive and real, the argument or angle is 0. If the entry is negative and real, then 
+the argument is $\pi$.
+
+In order to reconstruct the signal as a sum of sinusoids, we can take every entry of the 
+Fourier transform and take the stemplot amplitude as the amplitude of the signal $A$, the 
+index of the entry $k$ as the frequency, and the argument $\phi$ as the phase shift.
+Hence, we can reconstruct the signal as a sum of cosines. An important remark is that 
+we shall only do this up until the $N/2$th entry.
 
 \end{document}
