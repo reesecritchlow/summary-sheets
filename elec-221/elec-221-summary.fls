@@ -1,8 +1,8 @@
-PWD /Users/reesecritchlow/Firestone/summary-sheets/elec-221
+PWD /Users/reesecritchlow/summary-sheets/elec-221
 INPUT /usr/local/texlive/2022/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex
+INPUT /Users/reesecritchlow/summary-sheets/elec-221/elec-221-summary.tex
 OUTPUT elec-221-summary.log
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
@@ -537,6 +537,11 @@ INPUT ./images//sampling-graphs.png
 INPUT ./images//sampling-graphs.png
 INPUT ./images//sampling-graphs.png
 INPUT ./images//sampling-graphs.png
+INPUT ./images//exponential-modulation.jpg
+INPUT ./images//exponential-modulation.jpg
+INPUT ./images//exponential-modulation.jpg
+INPUT ./images//exponential-modulation.jpg
+INPUT ./images//exponential-modulation.jpg
 INPUT elec-221-summary.aux
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb

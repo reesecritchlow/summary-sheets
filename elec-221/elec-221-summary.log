@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  11 NOV 2022 23:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.20)  17 DEC 2022 12:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex
-(/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex
+**/Users/reesecritchlow/summary-sheets/elec-221/elec-221-summary.tex
+(/Users/reesecritchlow/summary-sheets/elec-221/elec-221-summary.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (/usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
@@ -515,53 +515,26 @@ File: ./images//sampling-graphs.png Graphic file (type png)
 <use ./images//sampling-graphs.png>
 Package pdftex.def Info: ./images//sampling-graphs.png  used on input line 588.
 (pdftex.def)             Requested size: 240.29553pt x 192.41708pt.
-[10 <./images//sampling-graphs.png>]
-/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex:671: Missing $ inserted.
-<inserted text> 
-                $
-l.671 \end{align*}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex:671: Missing $ inserted.
-<inserted text> 
-                $
-l.671 \end{align*}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex:671: Missing $ inserted.
-<inserted text> 
-                $
-l.671 \end{align*}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/Users/reesecritchlow/Firestone/summary-sheets/elec-221/elec-221-summary.tex:671: Missing $ inserted.
-<inserted text> 
-                $
-l.671 \end{align*}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-[11] (./elec-221-summary.aux) ) 
+[10 <./images//sampling-graphs.png>] [11] [12]
+<./images//exponential-modulation.jpg, id=64, 1969.3575pt x 1477.52pt>
+File: ./images//exponential-modulation.jpg Graphic file (type jpg)
+<use ./images//exponential-modulation.jpg>
+Package pdftex.def Info: ./images//exponential-modulation.jpg  used on input line 713.
+(pdftex.def)             Requested size: 256.02547pt x 192.08434pt.
+ [13 <./images//exponential-modulation.jpg>] (./elec-221-summary.aux) ) 
 Here is how much of TeX's memory you used:
- 14103 strings out of 478268
- 279993 string characters out of 5846347
- 566644 words of memory out of 5000000
- 32086 multiletter control sequences out of 15000+600000
+ 14112 strings out of 478268
+ 280278 string characters out of 5846347
+ 566646 words of memory out of 5000000
+ 32093 multiletter control sequences out of 15000+600000
  472850 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,18n,89p,507b,294s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,18n,89p,497b,294s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on elec-221-summary.pdf (11 pages, 297094 bytes).
+Output written on elec-221-summary.pdf (13 pages, 590290 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

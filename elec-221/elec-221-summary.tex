@@ -665,7 +665,7 @@ It's also important to define the signal in discrete time:
 Downsampling occurs when samples are removed from a DT signal in a process as such:
 \begin{align*}
     x_p[n] = \begin{cases}
-        x[n] & $N \mid \textrm{n}$\\
+        x[n] & N \mid \textrm{n}\\
         0 & \textrm{otherwise}
     \end{cases}
 \end{align*}
@@ -679,5 +679,45 @@ Upsampling also exists:
 \begin{align*}
     X_u(\ejw) = X_p(e^{\jomega N})
 \end{align*}
+
+\pagebreak
+
+\section*{Final Exam}
+
+\header{Amplitude Modulation}
+
+To send and recieve signals, a technique called \underline{amplitude modulation} is often 
+utilized. The main principle behinde amplitude modulation is that a band-limited frequency
+can be frequency-shifted up such that multiple different signals can be broadcasted on the 
+same summed signal. Hence, for this technique, there generally is a ``carrier signal''
+which is responsible for the modulation of frequency. Generally, these carrier signals 
+(in this course) come in two forms:
+\begin{itemize}
+    \item \sheader{Complex Exponential Signals} $\displaystyle c(t) = e^{j(\omega_c t + \theta_c)}$
+    \item \sheader{Sinusoidal Signals} $\displaystyle c(t) = \cos(\omega_c t + \theta_c)$
+\end{itemize}
+The original signal is then multiplied with the carrier signal $x(t)c(t)$, since 
+multiplication in the time domain implies convolution in the frequency domain.
+\gap
+\sheader{Amplitude Modulation using Complex Exponentials} Amplutde modulation using 
+complex exponentials is relativley straightfoward. Since the amplitude is preserved,
+then the frequency is only shifted up by $\omega_c$. Hence, we can outline a process:
+\begin{enumerate}
+    \item Original signal $x(t)$ is multiplied by the carrier signal $c(t) = e^{\jomega_c t}$, $y(t) = x(t)c(t)$.
+    The frequency domain of $y(t)$ is then simply the original signal shifted up by $\omega_c$.
+    \item Signal is broadcasted.
+    \item Signal is demodulated using a similar carrier signal $c'(t) = e^{-\jomega_c t}$, $x(t) = c'(t)y(t)$.
+    \item The original signal is recovered.
+\end{enumerate}
+
+\includegraphics[scale=0.13]{exponential-modulation.jpg}
+
+\sheader{Amplitude Modulation using Sinusoids} When using sinusoids, there exist some 
+more uances. Since the frequency spectrum of a sinusoid has both a positive and 
+a negative part, then two signals are outputs of the convolution of the carrier signal 
+and the original signal. It also is more challenging since a the frequency spectrum of a 
+sinusoid is also scaled down by $\frac{1}{2}$. Hence, when demodulating the signal,
+we require that it is subsequently band-pass filtered and applied a gain of 2.
+
 
 \end{document}
