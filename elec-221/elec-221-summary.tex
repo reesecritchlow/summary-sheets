@@ -15,7 +15,8 @@
 \newcommand{\sheader}[1]{\underline{#1:}}
 \newcommand{\ftrans}{\xleftrightarrow[]{f}}
 \newcommand{\ejw}{{e^\jomega}}
-
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\usepackage{tabularx}
 
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
 \newcommand{\gap}{\medskip\\}
@@ -27,6 +28,12 @@
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\jomega}{{j\omega}}
 \newcommand{\domega}{d\omega}
+\usepackage[scr]{rsfso}
+
+\newcommand{\Laplace}{\mathscr{L}}
+\newcommand{\Fourier}{\mathcal{F}}
+\newcommand{\Laplacearrow}{\xleftrightarrow{\Laplace}}
+\newcommand{\zarrow}{\xleftrightarrow{\mathcal{Z}}}
 
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
 
@@ -711,6 +718,8 @@ then the frequency is only shifted up by $\omega_c$. Hence, we can outline a pro
 \end{enumerate}
 
 \includegraphics[scale=0.13]{exponential-modulation.jpg}
+\pagebreak
+
 
 \sheader{Amplitude Modulation using Sinusoids} When using sinusoids, there exist some 
 more uances. Since the frequency spectrum of a sinusoid has both a positive and 
@@ -721,8 +730,335 @@ we require that it is subsequently band-pass filtered and applied a gain of 2.
 
 \begin{enumerate}
     \item Original signal $x(t)$ is multiplied by the carrier signal $c(t) = \cos(\omega_c t)$ $y(t) = x(t)c(t)$.
-    \item 
+    \item Frequency spectrum of the broadcast $y(t)$ has two parts, one centered at $\omega_c$ and $-\omega_c$. 
+    Both parts have amplitude of $A/2$, where $A$ was the original amplitude of $x(t)$.
+    \item Modulated signal is broadcasted/transmitted.
+    \item Modulated signal is demodulated with a signal $c'(t) = \cos(\omega_c t)$, which
+    produces a signal with frequency bands centered at $-2\omega_c$, $0$, and $2\omega_c$.
+    Bands centered at $\pm 2\omega_c$ have amplitude $A/4$, whereas the frequency band 
+    centered at $0$ has amplitude $A/2$.
+    \item To elimate the unwanted bands and return the signal to the correct amplitude, 
+    the frequencies are low passed with a cutoff frequency of $\omega_C$, and 
+    applied a gain of 2.
 \end{enumerate}
+
+For calculations involving sinusoidal amplitude modulations, sine and cosine functions are
+often multiplied together. Hence, it is important to remember some key trigonemetric identities:
+\begin{align*}
+    \sin\theta\cos\theta = \frac{1}{2}\sin(2 \theta) && \cos^2\theta = \frac{1}{2}\left( 1 + \cos(2 \theta)\right)\\
+    && \sin^2\theta = \frac{1}{2}\left(1 - \cos(2\theta)\right) 
+\end{align*}
+
+\header{Asynchronous Demodulation}
+For all of the instances above, we assumed that there was no phase shift in the signal $\theta_c = 0$.
+Hence, since phase cannot always be synchronized, we must consider the case in which 
+there exists some phase shift. An analysis of asynchronous demodulation is as follows,
+for a carrier signal $c(t)$ with phase shift $\theta_c$, and a demudlating signal $c'(t)$
+with a phase shift of $\phi_c$.
+\begin{align*}
+    w(t) &= \cos(\omega_c t + \theta_c)\cos(\omega_c t + \phi_c)x(t)\\
+    &= \left[\frac{1}{2} \cos (\theta_c - \phi_c) + \frac{1}{2} \cos \left(2 \omega_c t + \omega_c + \phi_c\right)\right] x(t)\\
+    &\textrm{(after application of the low pass filter)}\\
+    x_r(t) &= \frac{1}{2}\cos(\theta_c - \phi_c)x(t)
+\end{align*}
+Since this yields undesireable effects throughout a system to deal with inconsistent gains,
+which could decrease signal fidelity, we introduce the idea of amplitude modulation, which 
+involves sending a copy of the carrier signal alongside the original signal. Given some assumptions:
+\begin{itemize}
+    \item $x(t)$ is always positive
+    \item $\omega_c$ is much larger than $\omega_m$,
+\end{itemize}
+an ``envelope detector'' can be constructed, which has the effect of detecting the carrier 
+signal sent along with the modulated signal, so that the modulated signal can be 
+effectively demodulated using the original carrier signal. This synchronizes the 
+modulation and demodulation processes so no signal is lost.
+\gap
+\sheader{Modulation Index} For a transmission signal of the form $(A + x(t))\cos(\omega_c t)$.
+Then the \textit{modulation index} is defined as:
+\begin{align*}
+    m = \frac{K}{A}
+\end{align*}
+Where $K$ is the maximal amplitude of $x(t)$ such that $|x(t)| \leq K$. 
+
+\pagebreak
+
+\header{Frequency Division Multiplexing}
+A common implementation of modulation is the concept of \underline{frequency division multiplexing}.
+Frequency division multiplexing is where band limited signals are modulated to different 
+frequencies, such that they can all occupy different, distinct, and non-overlapping regions 
+of a frequency spectrum of a single signal. Hence, thre needs to be some way of 
+extracting certain signals out of the composite signal. For this there are generally two 
+phases:
+\begin{enumerate}
+    \item A bandpass filter before demodulation.
+    \item A low pass filter after demodulation.
+\end{enumerate}
+
+\header{Single-Sideband Modulation}
+When sending multiple signals on one signal, modulation by a sinusoid results in the 
+transmission of both positive and negative frequencies, and hence a waste in energy required 
+to send both frequencies. Hence, we introduce the concept of single-sideband modulation.
+In single sideband modulation, we eliminate half of the frequencies of a given signal, such that
+only one half of the band is actually transmitted. The mechanism for how this happens can
+be observed:
+
+\includegraphics[scale=0.2]{single-sideband.jpg}
+\includegraphics[scale=0.1]{single-sideband-2.jpg}
+
+\header{Discrete Time Sinusoidal Amplitude Modulation}
+There exist some important differences when modulating in discrete time. The first is that 
+due to everything being in discrete time, one must be cognisant of frequency replication and 
+aliasing. It is also important to note what a cosine wave looks like in the frequency 
+domain:
+
+\begin{center}
+    \includegraphics[scale=0.2]{cosine-dt.jpg}
+\end{center}
+
+Thus, we are required to impose some conditions on $\omega_c$ and $\omega_n$:
+\begin{itemize}
+    \item $\omega_c > \omega_n$
+    \item $\omega_c < \pi - \omega_n$
+\end{itemize}
+without these conditions, the signal will suffer from aliasing effects.
+
+\pagebreak
+
+\header{The Laplace Transform}
+As we saw with the Fourier transform, there were places in which the Fourier transform 
+was not always possible since the integral defining the Fourier transform diverged. 
+Hence, we can introduce the \underline{Laplace Transform}, which outlines a more general 
+case of the Fourier transform, adding a real constant instead of the purely imaginary 
+$\jomega$ which defined the Fourier transform. With this additional real term $\sigma$,
+more signals/functions can be transformable, however, there are additional conditions 
+which arise, which will be explored while discussing regions of convergence. Hence,
+we can define the Laplace transform as:
+\begin{align*}
+    X(s) = \Laplace\curly{x(t)}  \equiv \int_{-\infty}^\infty e^{-st}x(t)dt
+\end{align*}
+Where $s = \sigma + \jomega$.
+\gap
+Since the Fourier and Laplace transforms differ by only the $\sigma$ term in the 
+complex exponential, we can take out the complex exponential, and write the Laplace
+transform in terms of the the Fourier transform.
+\begin{align*}
+    \Laplace\curly{x(t)} = \Fourier\curly{e^{-\sigma t} x(t)}
+\end{align*}
+\sheader{Regions of Convergence} Due to the ``adjustment factor'' that $\sigma$ is, it allows the Laplace transform to 
+exist in some regions, where a Fourier transform does not. Hence, we introduce the concept 
+of a \underline{region of convergence} of a function, that describes where a function's 
+Laplace transform may exist. However, it is important to note that functions may have the 
+same algebraeic Laplace transform, but differing regions of convergence. 
+\gap
+It is also important to note that if a function is a sum of functions, then the region 
+of convergence is the region of convergence that allows all of the functions' Laplace 
+transforms to exist.
+\gap
+\sheader{Pole-Zero Plots} Oftentimes, the Laplace transform results in rational 
+polynomials of $s$. Generally, under factorization, the roorts of these polynomials are 
+shown on a \underline{pole-zero plot}. In such plots:
+\begin{itemize}
+    \item Numerator factors are called \textbf{zeroes} and symbolized as $\circ$ on plots.
+    \item Denominator factors are called \textbf{poles} and symbolized as $\times$ on plots.
+\end{itemize}
+The region of convergence also has some nice properties:
+\begin{itemize}
+    \item If the region of convergence does not contain the $\jomega$ axis, then the 
+    Fourier tranform does not converge.
+    \item The region of convergence of a rational Laplace transform contains no poles.
+\end{itemize}
+We can also extrapolate signal attributes from various patterns on a region of convergence plot
+(pole-zero plot):
+\begin{itemize}
+    \item \sheader{Finite Length Signals} The reigon of convergence plot spans the 
+    entire real axis.
+    \item \sheader{Left Sided Signals} For signals that only exist on the left side of 
+    some boundary (they are infinite in the negative direction), then the region of 
+    convergence exists only to the left of some value $s < \sigma_L$.
+    \item \sheader{Right Sided Signals} For signals that only exist on the right side 
+    of some boundary (they are infinite in the positive direction), then the region of
+    convergence exists only to the right of some value $s > \sigma_R$.
+    \item \sheader{Infinite Signals} For signals with no bounds, there \textit{may} exist 
+    a region of convergence between some $\sigma_L < s < \sigma_R$.
+\end{itemize}
+Since these are all biconditionals, then the converse is also true.
+\gap
+Since a region of convergence can never contain a pole, then for each region between 
+poles, there is a possible region of convergence for a given signal, and thus a 
+different time domain signal that could represent a Laplace transform.
+
+\pagebreak
+
+\sheader{Properties of the Laplace Transform}\\
+\begin{tabular}{| l | c | c | c|}
+\hline
+Property & Unmodified Transform & Modified Transform & ROC \\
+\hline 
+Linearity & $\displaystyle x_1(t) \Laplacearrow X_1(s)$ \,\,\, $\displaystyle x_2(t) \Laplacearrow X_2(s)$ & $\displaystyle ax_1(t) + bx_2(t) \xleftrightarrow{\Laplace} aX_1(s) + bX_2(s)$ & contains $R_1 \cap R_2$\\
+\hline
+Time Shifting & $x(t) \Laplacearrow X(s) $ & $\displaystyle x(t - t_0) \Laplacearrow e^{-st_o}X(s)$ & $R$\\
+\hline
+$s$ Shifting & $\displaystyle x(t) \Laplacearrow X(s)$ & $\displaystyle e^{s_0 t}x(t) \Laplacearrow X(s- s_0)$ & $R + \textrm{Re}(s_0)$\\
+\hline
+Time Scaling & $\displaystyle x(t) \Laplacearrow X(s)$ & $\displaystyle x(at) \Laplacearrow \frac{1}{|a|}X\left(\frac{s}{a}\right)$ & $aR$\\
+\hline 
+Time Reversal & $\displaystyle x(t) \Laplacearrow X(s)$ & $\displaystyle x(-t) \Laplacearrow X(-s)$ & $-R$\\
+\hline
+Conjugation & $\displaystyle x(t) \Laplacearrow X(s)$ & $\displaystyle x^*(t) \Laplacearrow X^*(s^*)$ & $R$\\
+\hline 
+Convolution & $\displaystyle x_1(t) \Laplacearrow X_1(s)$ \,\,\, $\displaystyle x_2(t) \Laplacearrow X_2(s)$ & $\displaystyle x_1(t) \ast x_2(t) \Laplacearrow X_1(s)X_2(s)$ & contains $R_1 \cap R_2$\\
+\hline
+Time Differentiation & $\displaystyle x(t) \Laplacearrow X(s)$ & $\frac{dx(t)}{dt} \Laplacearrow sX(s)$ & contains $R$\\
+\hline 
+$s$ Differentiation & $\displaystyle x(t) \Laplacearrow X(s)$ & $-tx(t) \Laplacearrow \frac{dx(s)}{ds}$ & $R$\\
+\hline
+\end{tabular}
+\gap
+\sheader{Causality} For a signal to be causal, the transfer function $H(s)$
+of its impulse resoponse $h(t)$ has to be right sided. That is, the ROC is the right-half 
+plane to the right of the right-most pole.
+\gap
+\sheader{Stability} For a signal to be stable, the transfer function $H(s)$ 
+must contain the entire $\jomega$ axis $\textrm{Re}(s) = 0$, \textbf{and} there are 
+not more zeros than poles.
+\gap
+\sheader{Differential Equations} The same principle for differential equations holds in 
+the Laplace domain as the Fourier domain:
+\begin{align*}
+    H(s) = \frac{Y(s)}{X(s)} = \frac{\sum_k{x \textrm{ coeffs} \cdot s^k} }{\sum_k{y \textrm{ coeffs} \cdot s^k}}
+\end{align*}
+
+\header{Applications of Laplace Transforms}
+An important application of Laplace tranforms are in the implmentation of Feedback systems.
+A feedback system takes the following form:
+\begin{center}
+    \includegraphics[scale=0.15]{feedback-system.jpg}
+\end{center}
+Hence, through some algebra, we cand define the transfer function for the overall system
+$Q(s)$ to be:
+\begin{align*}
+    Q(s) = \frac{Y(s)}{X(s)} = \frac{H(s)}{1 + G(s)H(s)}
+\end{align*}
+Given the form of this transfer function $Q(s)$, we can create systems that solve important 
+problems:
+
+\pagebreak
+
+\sheader{Inverse Systems} An inverse system has the ability to reverse a system. They 
+are generally laid out in the following form:
+
+\includegraphics[scale=0.3]{inverse-system.jpg}\\
+Where $K$ denotes a gain of $K$. Hence, under analysis of the transfer function $Q(s)$,
+we can deduce that:
+\begin{align*}
+    \lim_{K \gg P(s)} Q(s) = \lim_{K \gg P(s)}{\frac{K}{1 + KP(s)}} \approx \frac{1}{P(s)}.
+\end{align*}
+Hence, this has the effect of ``inverting the signal''.
+\gap
+\sheader{Stabilizing Systems} The other system that is useful is a stabilizing system. Given 
+some signal with a pole $H(s) = \frac{b}{s-a}$, then it follows that:
+\begin{align*}
+    Q(s) &= \frac{H(s)}{1 + KH(s)}\\
+    &= \frac{b}{(s-a)(1 + K \frac{b}{s-a})}\\
+    &= \frac{b}{s - a + Kb}\\
+    Q(s) &= \frac{b}{s - (a - Kb)}.
+\end{align*}
+Hence, if we make $kB > a$, we can move the pole to be on the left side of the $\jomega$ axis,
+such that the system is stable.
+\gap
+\header{Z-Transforms}
+Like much of the techniques in this course, there is a discrete time analouge for the 
+Laplace transform, called the \underline{Z-transform}. We define the $Z$ transform as:
+\begin{align*}
+    X(z) = \sum_{n = - \infty}^\infty x[n]z^{-n}.
+\end{align*}
+Where $z = re^\jomega$. \gap
+This can also be put in terms of a discrete-time Fourier transform:
+\begin{align*}
+    X(re^\jomega) = X(z) = \Fourier\curly{x[n]r^{-n}}.
+\end{align*}
+\header{Regions of Convergence} However, it is to be said that regions of convergence look
+different in Z-transforms as opposed to Laplace transforms. Since $z$ is in the form of 
+a complex exponential, the regions of convergence find themselves on a circular domain. 
+Hence, the unit circle is the $z$ axis, which is analogous to the $\jomega$ axis in the 
+Laplace transform.\\
+\includegraphics[scale=0.2]{z-roc.jpg}
+
+\pagebreak
+
+Hence, we can define some properties for the regions of convergence of the Z-transform:
+\begin{itemize}
+    \item The ROC must contain the unit circle for the DTFT to converge.
+    \item All ROCs do not contain poles.
+    \item All ROCs are rings in the $z$-plane centered around the origin.
+\end{itemize}
+Patterns of convergence are also similar for the Z-Transform:
+\begin{itemize}
+    \item If $x[n]$ is of finite duration, then the ROC is the entire $z$-plane,
+            except possibly $z = 0$ and $z = \infty$.
+    \item If $x[n]$ is a right-sided sequence, and the circle $|z| = r_0$ is in the ROC
+            then all finite values of $z$ for which $|z| > r_0$ will also be in the ROC.
+    \item if $x[n]$ is a left-sided sequence, and if the circle $|z| = r_0$ is in the ROC,
+            then all values of $z$ for which $0 < |z| < r_0$ will also be in the ROC.
+    \item if $x[n]$ is two-sided, and if the circle $|z| = r_0$ is in the ROC,
+            then the ROC will consist of a ring in the $z$-plane that includes the circle 
+            $|z| = r_0$.
+\end{itemize}
+\begin{center}
+    \includegraphics[scale=0.6]{z-roc-cases.jpg}
+\end{center}
+\sheader{Inverse Z-Transforms} Generally, these are done with a Z-Transform table, but
+power series expansions are often a helpful tool, such as for $\log$ functions.
+\gap
+\sheader{Properties of the Z-Transform}\\
+\begin{tabular}{ | l | c | c | }
+    \hline
+    Property & Form & ROC\\
+    \hline
+    Linearity & $ax_1[n] + bx_2[n] \zarrow aX_1(z) + bX_2(z)$ & contains $R_1 \cap R_2$\\
+    \hline
+    Time Shift & $x[n - n_0] \zarrow x^{-n_0}X(z)$ & $R$, may add/delete $0$ or $\infty$\\
+    \hline
+    Time Reversal & $x[-n] \zarrow X\left(\frac{1}{z}\right)$ & $\frac{1}{R}$\\
+    \hline
+    Time Expansion (insertion of $k-1$ zeroes) & $X_{(k)}[n] \zarrow X(z^k)$ & $R^{\frac{1}{k}}$\\
+    \hline
+    $z$ Scaling & $z_0^n x[n] \zarrow X\left(\frac{z}{z_0}\right) $ & $|z_0|\cdot R$\\
+    \hline
+    Conjugation & $x^*[n] \zarrow X^*(z^*)$ & $R$\\
+    \hline
+\end{tabular}
+\gap
+\sheader{Z-Transform and Causality} A Discrete Time LTI system with a rational Z-Transform 
+is causal if:
+\begin{itemize}
+    \item The ROC is the exterior of circle outside the outermost pole.
+    \item The order of the numerator in the transfer function $H(z)$ does not exceed the denominator.
+\end{itemize}
+\sheader{Z-Transform and Stability} A Discrete Time LTI system is stable if:
+\begin{itemize}
+    \item The ROC includes the unit circle $|z| = 1$.
+\end{itemize}
+\sheader{Difference Equations}
+Similar to everything else:
+\begin{align*}
+    \sum_{k = 0}^N a_k y[n-k] &= \sum_{k = 0}^M b_k x[n -k]\\
+    H(z) = \frac{Y(z)}{X(z)} &= \frac{\sum_k x \textrm{ coeffs} \cdot z^{-k}}{\sum_k y \textrm{ coeffs} \cdot z^{-k}}
+\end{align*}
+Remeber: the sign of $k$ is important.
+\gap
+\header{Feedback Systems with Z-Tranforms}
+Very similarly to Laplace transforms, we can have feedback systems in Z-Transforms. 
+They generally take the following form:\\
+\begin{center}
+    \includegraphics[scale=0.35]{z-feedback.jpg}
+\end{center}
+Hence, the transfer function takes the same form:
+\begin{align*}
+    Q(z) = \frac{Y(z)}{X(z)} = \frac{H(z)}{1 + G(z)H(z)}.
+\end{align*}
+
+
 
 
 \end{document}
