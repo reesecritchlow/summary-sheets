@@ -208,4 +208,51 @@ We can also define two types of failiure criteria for a body:
     f_s = \frac{0.5S_y}{\tau_\textrm{max}}    
 \]
 
+\section*{Final Exam}
+
+\header{Castigliano's Theorem}
+
+Castigliano's theoerm originates from the existence of strain energy within a system.
+Since a form of Hooke's law exists for every single type of strain, whether that be 
+axial, shear, bending, or torsional loading. Hence, we can write the energy in a 
+system as $U = \frac{1}{2}kx^2$ where $k$ is generally a modulus of some sort, and $x$
+is the strain. Hence, we can accumulate all of this strain energy over a volume usin 
+integration. Hence, we define four different formulae for such energy:\\
+{\renewcommand{\arraystretch}{2}%
+\begin{tabular}{ | c | c | }
+    \hline
+    Axial Loading & $\displaystyle U = \int_0^l \frac{P^2}{2AE}dx$\\
+    \hline 
+    Bending & $\displaystyle U = \int_0^l \frac{M^2}{2EI}dx$\\
+    \hline 
+    Torsion & $\displaystyle U = \int_0^l \frac{T^2}{2GJ}dx$\\
+    \hline
+    Shearing & $\displaystyle U \approx 0$\\
+    \hline
+\end{tabular}}\gap
+With these definitions, then we can introduce the most important part of Castigliano's theorem:
+the notion that the displacement of any point $j$ on a structure, subjected to a load $P_j$,
+\underline{measured along the line of action of $P_j$} can be expressed as the partial 
+derivative of the strain energy of the strucutre with respect to the load $P_j$:
+\begin{align*}
+    \delta_J = \frac{\partial U}{\partial P_J}
+\end{align*}
+Hence, it often occurs that a load is not actually applied at a point, thus, we often apply
+an ``imaginary'' load at a point that agrees with a system, such that we can take the 
+derivative at the end, which will send a lot of things to zero.
+\gap
+It is also important to take the infinitesimal quantities of the strain at each point.
+\gap
+\header{Impact Loading}
+Given some loading with an initial height $h$ and weight $W$, we can define the effective load $P$
+in terms of an impact factor $f_i$:
+\begin{align*}
+    P &= W \left(1 + \sqrt{1 + \frac{2h}{\delta_{\textrm{st}}}}\right) & P &= Wf_i\\
+    f_i &= 1 + \sqrt{1 + \frac{2h}{\delta_\textrm{st}}}
+\end{align*}
+
+\pagebreak
+
+\header{Shear Center}
+
 \end{document}
