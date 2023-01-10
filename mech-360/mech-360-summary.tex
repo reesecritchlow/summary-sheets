@@ -255,4 +255,15 @@ in terms of an impact factor $f_i$:
 
 \header{Shear Center}
 
+Finding shear center is strange. Here's my general outline thusfar:
+\begin{enumerate}
+    \item Identify the relevant shear forces in the object under the applied load.
+    \item Find the expression for the shear flow in the member.
+    \item Divide the shear flow by the thickness to obtain the shear stress.
+    \item Multiply the shear stress by the area, $dA$ to obtain shear force.
+    \item Integrate the shear force times the distance to a chosen point (colinear with the point force application) 
+    through the member to obtain the entire shear force. 
+    \item Set $Ve = \int Fr\cdot da$ to solve for $e$.
+\end{enumerate}
+
 \end{document}
