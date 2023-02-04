@@ -1,0 +1,296 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{mdframed}
+\usepackage{multicol}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{soul}
+
+\title{Formula Sheet}
+\author{Reese Critchlow}
+\date{January 2021}
+
+\begin{document}
+
+\centering
+\huge 
+Chemistry 123/130 Formula Sheet\\
+\normalsize
+Reese Critchlow, 2021
+
+
+\begin{multicols*}{2}
+
+\begin{center}
+
+\section{Constants and Conversion Factors}
+
+
+\[
+    R = \frac{8.314 \textrm{ J}}{\textrm{mol}\cdot\textrm{K}}
+\]
+
+\[
+    R = \frac{0.08206 \textrm{ J}}{\textrm{mol}\cdot\textrm{K}}
+\]
+
+\[
+    101.33 \textrm{ L}\cdot\textrm{atm} = 1 \textrm{ J}
+\]
+
+\section{Acids and Bases}
+
+Henderson Hasselbalch Equation - Acidic
+
+\[
+    \textrm{pH} = \textrm{pK}_a + \log{\bigg(\frac{\textrm{[conjugate base]}}{\textrm{[weak acid]}}\bigg)}
+\]
+
+Henderson Hasselbalch Equation - Basic
+\[
+    \textrm{pOH} = \textrm{pK}_b + \log{\bigg(\frac{\textrm{[conjugate acid]}}{\textrm{[weak base]}}\bigg)}
+\]
+
+\section{Thermodynamics}
+
+Ideal Gas Law
+\[
+    \textrm{PV} = \textrm{nRT}
+\]
+
+First Law of Thermodynamics
+\[
+    \Delta\textrm{E} = \textrm{Q} + \textrm{W}
+\]
+
+Work
+\[
+    \textrm{W} = -\textrm{P}_{ext}\Delta\textrm{V}
+\]
+
+Internal Energy
+\[
+    \Delta\textrm{U} = \textrm{nC}_v\Delta\textrm{T}
+\]
+
+Heat/Energy at Constant Volume (Bomb Calorimeter)
+\[
+    \Delta \textrm{E} = \textrm{q} + \textrm{\st{w}} = \textrm{q}_v
+\]
+
+Molar Heat Capacity (per mol kg)
+\[
+    \Delta\textrm{U} = \textrm{nC}_n\Delta\textrm{T}
+\]
+
+Specific Heat Capacity (per kg)
+\[
+    \Delta\textrm{U} = \textrm{mC}_{sp}\Delta\textrm{T}
+\]
+
+\vfill\null\columnbreak
+
+Heat at Constant Pressure (Enthalpy)
+\[
+    \Delta\textrm{H} = \textrm{q}_p
+\]
+\[
+    \Delta \textrm{H} \neq \Delta \textrm{E}
+\]
+
+Hess's Law
+\[
+    \Delta\textrm{H}_{\textrm{rxn}}^{\textrm{o}} = \sum\Delta H_{f \textrm{  products}}^{o} - \sum\Delta H_{f \textrm{  reactants}}^{o}
+\]
+
+Second Law of Thermodynamics
+\[
+    \Delta S_{\textrm{universe}} = \Delta S_{\textrm{system}} + \Delta S_{\textrm{surroundings}} \geq 0
+\]
+Spontaneous Reaction
+\[
+    \Delta S_{\textrm{universe}} > 0
+\]
+
+Reversible/Equilibrium
+\[
+    \Delta S_{\textrm{universe}} = 0
+\]
+
+Impossible
+\[
+    \Delta S_{\textrm{universe}} < 0
+\]
+
+Boltzmann Equation
+\[
+S = k\ln{W}
+\]
+
+\footnotesize
+Where $k$ = $1.38\cdot10^{-23} \frac{J}{K}$\\
+\normalsize
+
+Enthalpy of Formation?
+\[
+    \Delta\textrm{S}_{\textrm{rxn}}^{\textrm{o}} = \sum\Delta S_{f \textrm{  products}}^{o} - \sum\Delta S_{f \textrm{  reactants}}^{o}
+\]
+
+Gibbs Free Energy
+\[
+    G = H - TS
+\]
+
+Gibbs Free Energy -- Constant Temperature
+\[
+    \Delta G = \Delta H - T\Delta S
+\]
+Standard Energy Change of a Reaction
+\[
+    \Delta G_{\textrm{rxn}}^o = \Delta H_{\textrm{rxn}}^o - T \Delta S_{\textrm{rxn}}^o
+\]
+
+Free Energy at Equilibrium
+\[
+    \Delta G^o = -RT\ln{K}
+\]
+\footnotesize
+Where $K$ is the equilibrium constant\\
+\normalsize
+
+Other Formula
+\[
+    \Delta G = \Delta G^o + RT \ln{Q}
+\]
+
+\vfill\null\columnbreak
+
+Q
+\[
+    Q = \frac{\textrm{[products]}}{\textrm{[reactants]}}
+\]
+
+K
+\[
+    K = \frac{\textrm{[products at equilibrium]}}{\textrm{[reactants at equilibrium]}}
+\]
+
+Van't Hoff Plot
+\[
+    \ln K = \frac{-\Delta H^o}{RT} + \frac{\Delta S^o}{R}
+\]
+
+Van't Hoff Plot Slope Analysis
+\[
+    \frac{\Delta \ln{K}}{\Delta\frac{1}{T}} = \frac{-\Delta H^o}{R}
+\]
+
+Entropy Change of the Universe
+\[
+    \Delta S_{\textrm{universe}} = \Delta S_{\textrm{system}} + \Delta S_{\textrm{surroundings}}
+\]
+
+or
+
+\[
+    \Delta S_{\textrm{universe}} = \Delta S_{\textrm{rxn}} + \Delta S_{\textrm{surroundings}}
+\]
+
+Saw this one in a problem set once soo uhhhh
+\[
+    \Delta H = \Delta E + nR \Delta T
+\]
+
+Enthalpy, Always
+\[
+    H = E + PV
+\]
+
+Enthalpy, Constant Pressure
+\[
+    \Delta H = \Delta E + P \Delta V
+\]
+\[
+    \Delta H = q_p
+\]
+
+Enthalpy, Constant Temperature
+\[
+    \Delta E = \Delta H = 9
+\]
+
+Enthalpy
+
+\small
+Heat transfer resulting from the transformation of reactants at some temperature and pressure to produts at the same temperature and pressure.
+
+\normalsize
+
+Percentage Calculation
+\[
+    \frac{A}{A + B} \cdot 100 = \% \textrm{ of }A
+\]
+
+Priority of Entropy
+\begin{enumerate}
+    \item Number of Moles of Gas
+    \item Phase Changes
+    \item Changes in Temperature
+    \item Increases in Complexity
+\end{enumerate}
+
+\vfill\null\columnbreak
+
+Sign Conventions -- Enthalpy
+\[
+    \textrm{Endothermic:  }\Delta H > (+) 
+\]
+\[
+    \textrm{Exothermic:  }\Delta H < (-) 
+\]
+Sign Conventions -- Entropy
+\[
+    \textrm{Spontaneous: }\Delta S_{\textrm{universe}} > 0
+\]
+\[
+    \textrm{Reversible/Equilibrium:   }\Delta S_{\textrm{universe}} = 0
+\]
+\[
+    \textrm{Impossible: }\Delta S_{\textrm{universe}} < 0
+\]
+Entropy in Reversible Processes
+\[
+    \Delta S = \frac{\Delta Q_{\textrm{rev}}}{T}
+\]
+
+Other:
+\[
+    Q = C\Delta T
+\]
+\[
+    \Delta G_{t, p} = -TS_{\textrm{univ}}
+\]
+
+\section{Reaction Kinetics}
+
+Arrhenius Equation
+\[
+    k = Ae^{\frac{-E_a}{RT}}
+\]
+
+Arrhenius Plot Equation
+\[
+    \frac{\Delta\ln{k}}{\Delta\left(\frac{1}{T}\right)} = \frac{-E_a}{R}
+\]
+
+
+
+
+    
+
+\end{center}
+
+
+\end{multicols*}
+
+
+\end{document}

@@ -1,0 +1,272 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=0.5in]{geometry}
+\usepackage{multicol}
+
+\begin{document}
+
+\noindent \large \textbf{Electric Force}\normalsize \qquad
+Units: N\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{center}
+\begin{multicols}{3}
+
+Coulombs Law\\*
+\footnotesize (Two Point Charges) \normalsize
+\[
+    \vec{F} = \frac{1}{4\pi\epsilon_0}\cdot\frac{|q_1q_2|}{r^2} = k\frac{|q_1q_2|}{r^2}
+\]
+
+Force Due to Electric Field
+\[
+    \vec{F} = q_0\vec{E}
+\]
+
+Force in a Uniform Field
+\[
+    F(z) = -\frac{dU}{dz}
+\]
+\end{multicols}
+\end{center}
+\medskip
+\large \textbf{Electric Fields}\normalsize \qquad
+Units: $\frac{\textrm{N}}{\textrm{C}}$ or $\frac{\textrm{V}}{\textrm{M}}$\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{center}
+    \begin{multicols}{4}
+        
+        Electric Field From a Point Charge
+        \[
+            E = \frac{kq}{r^2}
+        \]
+        
+        Electric Field From Force
+        \[
+            \vec{E} = \frac{\vec{F}_0}{q_0}
+        \]
+        
+        Gauss's Law
+        \[
+            E = \frac{Q_{\textrm{encl}}}{\epsilon_0A}
+        \]
+        
+        From Equipotential Lines
+        \[
+            E = -\nabla V
+        \]
+        
+    \end{multicols}
+    
+    \begin{multicols}{3}
+    
+    Electric Field of a Uniform Ring
+    \[
+        \vec{E} = E_x\hat{i} = \frac{1}{4\pi\epsilon_0}\frac{Qx}{(x^2+r^2)^{\frac{3}{2}}}\hat{i}
+    \]
+    
+    Electric Field of a Line Segment
+    \[
+        \vec{E} = \frac{1}{4\pi\epsilon_0}\frac{Q}{x\sqrt{x^2+a^2}}\hat{i}
+    \]
+    
+    Electric Field of a Charged Disk
+    \[
+        E_x = \frac{\sigma x}{2\epsilon_0}\left[  \frac{-1}{\sqrt{x^2+R^2}}+\frac{1}{x}  \right]
+    \]
+    
+    \end{multicols}
+\end{center}
+\medskip
+\large \textbf{Electric Potential Energy}\normalsize \qquad
+Units: J\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{center}
+
+    Note: Work of a field, $\Delta U = U_i - U_f$, \underline{not} $U_f - U_i$
+    
+    \begin{multicols}{3}
+        
+        EPE Given a Voltage Difference
+        \[
+            U = q_0V
+        \]
+        
+        EPE in an Electric Field
+        \[
+            U = q_0Ed
+        \]
+        
+        EPE for Two Point Charges
+        \[
+            U = \frac{kq_1q_0}{r}
+        \]
+        
+        
+    \end{multicols}
+    \begin{multicols}{3}
+    
+    EPE From a Force
+        \[
+            \int_{r_a}^{r_b}{F_r dr}
+        \]
+    
+    \columnbreak
+    
+    EPE Produced by a Collection of Point Charges on a Point Charge
+    \[
+        U = \frac{q_0}{4\pi\epsilon_0} \sum_{i = 1}^{n}{\frac{q_i}{r_i}}
+    \]
+    
+    Collective EPE of a Collection of Point Charges\\
+    \footnotesize
+    (With Respect to a Specified Origin)\normalsize
+    \[
+        U = \frac{1}{4\pi\epsilon_0}\sum_{i<j}{\frac{q_iq_j}{r_{ij}}}
+    \]
+    
+    \end{multicols}
+\end{center}
+\medskip
+\large \textbf{Electric Potential/Voltage}\normalsize \qquad
+Units: $\frac{\textrm{J}}{\textrm{C}}$ or V\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{center}
+    Note: Voltage, like electric potential energy is $\Delta V = V_i - V_f$, \underline{not} $V_f - V_i$
+\end{center}
+\begin{multicols}{5}
+\begin{center}
+Voltage Produced by a Point Charge
+\[
+    V = \frac{kq}{r}
+\]
+
+\vfill\null\columnbreak
+
+Voltage From EPE
+\[
+    V = \frac{U}{q_0}
+\]
+
+\vfill\null\columnbreak
+
+Voltage of a Collection of Point Charges
+\[
+    V = k \sum{\frac{q_i}{r_i}}
+\]
+
+Voltage of a Charge Distribution
+\[
+    V = k\int\frac{dQ}{r}
+\]
+
+Change in Voltage (Outwards)
+\[
+    V_{r_2}-V_{r_1} = -\int_{r_1}^{r_2}{\vec{E}\cdot dr}
+\]
+\end{center}
+\end{multicols}
+\large \textbf{Torque}\normalsize \qquad
+Units: $\textrm{N}\cdot\textrm{m}$\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{5}
+
+\begin{center}
+    
+    Electric Dipole Moment
+    \[
+        p = qd
+    \]
+    \footnotesize (In the direction of d)\normalsize
+    
+    \vfill\null\columnbreak
+    
+    Torque (Scalar)
+    \[
+        \tau = pE\sin\phi
+    \]
+    
+    \vfill\null\columnbreak
+    
+    Torque (Vector)
+    \[
+        \vec{\tau} = \vec{p}\times\vec{E}
+    \]
+    
+    \vfill\null\columnbreak
+    
+    Potential Energy (Scalar)
+    \[
+        U = -pE\cos\phi
+    \]
+    
+    \vfill\null\columnbreak
+    
+    Potential Energy (Vector)
+    \[
+        U = -\vec{p}\cdot\vec{E}
+    \]
+    
+    \vfill\null
+    
+\end{center}
+
+\end{multicols}
+
+\vfill\null\pagebreak
+\begin{center}
+
+Random
+\[
+    1\textrm{ eV} = 1.602\cdot10^{-19}\textrm{ J}
+\]
+
+Voltage of a Cylinder/Line
+\[
+    \Delta V_{ab} = \frac{\lambda}{2\pi\epsilon_0}\ln\frac{r_b}{r_a}
+\]
+
+Voltage Above a Ring of Charge
+\[
+    V = \frac{KQ}{\sqrt{x^2+a^2}}
+\]
+
+\footnotesize $x$: distance above ring\\
+$a$: radius of ring\normalsize\\
+
+Potential of a Line of Charge
+\[
+    V = \frac{KQ}{2a}\ln\left(\frac{\sqrt{a^2+x^2}+a}{\sqrt{a^2+x^2}-a}\right)
+\]
+
+Field of an Infinite Plane 
+\[
+    E = \frac{\sigma}{2\epsilon_0}
+\]
+
+Field of an Infinite Wire
+\[
+    E = \frac{\lambda}{2\pi r\epsilon_0}
+\]
+
+Field of an Infinite Cylinder (Interior)
+\[
+    E = \frac{\rho r}{2\epsilon_0}
+\]
+
+Field of an Infinite Slab (Interior)
+\[
+    E = \frac{\rho s}{2\epsilon_0}
+\]
+
+Field Inside a Sphere
+\[
+    E = \frac{\rho r}{3\epsilon_0}
+\]
+
+
+\end{center}
+
+\end{document}

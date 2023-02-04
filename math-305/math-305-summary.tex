@@ -1,0 +1,296 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\begin{document}
+    \begin{center}
+        \Large Math 305 Review Notes\\
+        \normalsize Reese Critchlow
+    \end{center}
+
+    \header{Complex Numbers}
+
+    At this point in the course, there we define only one representation of the 
+    the imaginary unit, $i$:
+    \begin{align*}
+        i^2 = -1.
+    \end{align*}
+    For the remainder of this document, we will represent complex numbers $z$ as:
+    \begin{align*}
+        z = x + iy,
+    \end{align*}
+    where $i$ is the imaginary unit.
+    \gap
+    Hence, with $i$, we can define some other important properties:
+    \begin{enumerate}
+        \item $\ds \overline{\overline{z}} = z$
+        \item $\ds \overline{z_1 \cdot z_2} = \overline{z_1}\cdot \overline{z_2}$ and
+        $\ds \overline{\left(\frac{z_1}{z_2}\right)} = \frac{\overline{z_1}}{\overline{z_2}}$
+        \item $\ds |z_1 \cdot z_2 | = |z_1| \cdot |z_2|$ and $\ds \left| \frac{z_1}{z_2} \right| = \frac{|z_1|}{|z_2|}$
+    \end{enumerate}
+
+    \sheader{Inequalities and Complex Numbers}
+    Building off of the triangle inequality, we can define inequalities 
+    for complex numbers:
+    \begin{align*}
+        &|z_1 + z_2| \leq |z_1| + |z_2| &|z_1 - z_2| &\geq \left||z_1| - |z_2|\right|\\
+        &\textrm{(triangle inequality)} &|z_1 + z_2| &\geq \left| |z_1| - |z_2| \right|
+    \end{align*}
+    As a result, we can bound the modulus of the sum of two complex numbers as:
+    \begin{align*}
+        \left| |z_1| - |z_2| \right| \leq |z_1 + z_2| \leq |z_1| + |z_2|.
+    \end{align*}
+    If trying to obtain a bound for the sum of multiple complex numbers, it is important
+    to always obtain the maximal/minimal bounds for each case when aggregating 
+    complex numbers.
+    \gap
+    \sheader{Representations of Planar Sets in Complex Numbers} Taking the 
+    prior definition of $z = x + iy$, and interpreting the $x$ value as an $x$ coordinate,
+    and the same for $y$, then we can define planar sets in terms of complex numbers.
+    To start off, we first define how to obtain the $x$ and $y$ values of a complex number:
+    \begin{align*}
+        \textrm{Re}(z) &= x = \frac{z + \overline{z}}{2} & \textrm{Im}(z) &= x = \frac{z - \overline{z}}{2i}
+    \end{align*}
+    With this definition, we can define some common representations:
+    \begin{enumerate}
+        \item \sheader{Circles in $\mathbb{R}^2$} 
+        \begin{align*}
+            (x - x_0)^2 + (y - y_0)^2 = r_0^2 &\iff |z - z_0| = r_0
+        \end{align*}
+        \item \sheader{Lines in $\mathbb{R}^2$}
+        \begin{align*}
+            ax + by = c \iff a \frac{z + \overline{z}}{2} + b \frac{z - \overline{z}}{2i} = c
+        \end{align*}
+        \item \sheader{Ellipses in $\mathbb{R}^2$}
+        \begin{align*}
+            \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 \iff |z - F| + |z + F| = 2a 
+        \end{align*}
+        Where $F = \sqrt{a^2 - b^2}$. 
+        \gap
+        It is to be noted that this representation only allows for horizontal shifts.
+        One can get vertical shifts by using an alternate form:
+        \begin{align*}
+            \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 \iff |z - Fi| + |z + Fi| = 2b.
+        \end{align*}
+        Shifting can be observed when some representation $|z - F_1| + |z + F_2| = 2a$,
+        where $F_1 \neq F_2$. The shift can be obtained by averaging $F_1$ and $F_2$. 
+    \end{enumerate}
+    A common example of a coordinate transform is to square both sides and convert 
+    into a circle. This is because we require $r_0$ to be squared.
+    \gap
+    
+    \header{Polar Coordinates and Arguments}
+
+    One can express a complex number $z$ in polar coordinates using Euler's formula:
+    \begin{align*}
+        e^{i \phi} = \cos \phi + i \sin \phi.
+    \end{align*}
+    Hence, it is implied that a representation of a complex number can be as follows:
+    \begin{align*}
+        z = re^{i \phi}.
+    \end{align*}
+    Where $r$ is known as the \underline{modulus} of $z$ and $\phi$ is known as the 
+    \underline{modulus} of $z$. 
+    \begin{align*}
+        r &= \sqrt{x^2 + y^2} & \phi &= \arg(z)
+    \end{align*}
+
+    \sheader{Arguments} There exist two different types of arguments:
+    \begin{enumerate}
+        \item \sheader{Principal Argument} $\textrm{Arg}(z) = \phi \in (-\pi, \pi]$. \\
+        The principal argument is single-valued and unique.
+        \item \sheader{General Argument*} $\arg(z) = \textrm{Arg}(z) \pm 2\pi k, k \in \mathbb{Z}$.\\
+        The general argument can attain infinite different values.  
+    \end{enumerate}
+    \sheader{Finding the Principal Argument} The Principal Argument, as a general 
+    form, is given by: 
+    \begin{align*}
+        \textrm{Arg}(z) = \arctan\left(\frac{y}{x}\right) + m\pi, m \in \curly{-1, 0, 1}.
+    \end{align*}
+    Hence, we define cases for the correct value of $m$, based on the location of $z$.
+    \begin{enumerate}
+        \item \sheader{Quadrant I} $m = 0$, $\textrm{Arg}(z) = \arctan\left(\frac{y}{x}\right)$
+        \item \sheader{Quadrant II} $m = 1$, $\textrm{Arg}(z) = \arctan\left(\frac{y}{x}\right) + \pi$
+        \item \sheader{Quadrant III} $m = -1$, $\textrm{Arg}(z) = \arctan\left(\frac{y}{x}\right) - \pi$.
+        \item \sheader{Quadrant IV} $m = 0$, $\textrm{Arg}(z) = \arctan\left(\frac{y}{x}\right)$
+    \end{enumerate}
+    It is important to note that the argument of zero is undefined.
+    \gap
+    \sheader{Properties of Complex Numbers in Polar Forms}
+    \begin{enumerate}
+        \item $e^{2k\pi i} = 1$
+        \item $e^{i\phi_1} e^{i \phi_2} = e^{i (\phi_1 + \phi_2)}$
+        \item $\overline{e^{i\phi}} = e^{-i \phi}$
+        \item $|e^{i \phi}| = 1$
+    \end{enumerate}
+    
+    \sheader{Properties of Arguments}
+    \begin{enumerate}
+        \item $\Arg(z_1 \cdot z_2) \neq \Arg(z_1) + \Arg(z_2)$
+        \item $\Arg(z_1 \cdot z_2) = \Arg(z_1) + \Arg(z_2) + 2k\pi, k \in \mathbb{Z}$
+        \item $\arg(z_1 \cdot z_2) = \arg(z_1) + \arg(z_2)$
+        \gap
+        It is important to note that (3) is \textit{set equality}, not value equality.
+    \end{enumerate}
+
+    \header{Powers of Complex Numbers}
+    Certain properties arise from taking powers of complex numbers.
+    \gap
+    \sheader{De Moirre's Formula}
+    \begin{align*}
+        (\cos \phi + i \sin \phi)^N = \cos(N \phi) + i\sin(N \phi)
+    \end{align*}
+
+    This can often be combined with the \underline{binomial theorem} to derive 
+    trig identities.
+    \gap
+    \sheader{Binomial Theorem}
+    \begin{align*}
+        (x + y)^n = \sum_{k = 0}^n \binom{n}{k} x^k y^{n-k}
+    \end{align*}
+    Where $\ds \binom{n}{k} = \frac{n!}{k!(n-k)!}$.
+
+    \sheader{Roots of $z$}
+    We can define the roots of $z$, $z^{\frac{1}{n}}$ as:
+    \begin{align*}
+        z_0^{\frac{1}{n}} &= r_0^{\frac{1}{n}}e^{i\left(\frac{\phi_0}{n} + \frac{2k\pi}{n}\right)} & k = 0, 1, \ldots , n-1
+    \end{align*}
+    We also define the \underline{principle value} of a root to be the one corresponding 
+    to $k = 0$.
+    \gap
+    \sheader{Raising Complex Numbers as Powers} There are also interesting consequences
+    of raising complex numbers as powers. Take a complex number $z = x + iy$:
+    \begin{align*}
+        e^z &= e^{x + iy}\\
+        e^z &= e^{x} \cdot e^{iy}\\
+        e^z &= e^x(\cos y + i\sin y).
+    \end{align*}
+    Thus, we also obtain some properties:
+    \begin{enumerate}
+        \item $\ds e^{z_1 + z_2} = e^{z_1}\cdot e^{z_2}$
+        \item $\ds e^{z_1 - z_2} = \frac{e^{z_1}}{e^{z_2}}$
+        \item $\ds e^{\overline{z}} = \overline{e^z}$
+        \item $|e^z| = e^x$
+    \end{enumerate}
+
+    \header{Functions of Complex Numbers}
+
+    We can describe functions of complex numbers as:
+    \begin{align*}
+        w = f(z),
+    \end{align*}
+    where $w = u + iv$ and $z = x + iy$. Different functions have different images.
+    To determine the image of a given function, we can use the following approach:
+    \begin{enumerate}
+        \item Solve for $z$ in terms of $w$ from $f(z) = w$.
+        \item Substitute each $z$ for the $z(w)$ expression in the set notation.
+    \end{enumerate}
+    \pagebreak
+    Different Transforms:
+    \begin{enumerate}
+        \item $w = Az + B$ transforms circles to circles, lines to lines.
+        \item $w = \frac{1}{z}$ transforms \{circles or lines\} to \{circles or lines\}.
+        \item Mobius Transform, $w = \frac{az + b}{cz + d}$ transforms \{circles or lines\} to \{circles or lines\}.
+        \item $w = z^n$ Power Transforms generally rotate sets.
+        \item $w = e^z$ Exponential Transofrms generally turn lines into circles and vice versa.
+    \end{enumerate}
+
+    \header{Derivatives of Complex Functions}
+    Like single-variable calculus, there are some basic definitions that need to 
+    be highlighted in complex-variable calculus.
+    \gap
+    \sheader{Limits}
+    We can define the limit of a complex function as:
+    \begin{align*}
+        \lim_{z \to z_0} f(z) = \lim_{(x, y) \to (x_0, y_0)}u(x, y) + i \lim_{(x, y) \to (x_0, y_0)}v(x, y)
+    \end{align*}
+    However, an additional layer of complexity is introduced here. $(x, y) \to (x_0, y_0)$
+    implies that any path can be taken to get to $(x,y)$. Thus, strange behaviours occur.
+    \gap
+    As an aside, we can note that usual properties of limits generally still hold 
+    with complex functions:
+    \begin{enumerate}
+        \item $\ds \lim \frac{f(z)}{g(z)} = \frac{\lim f(z)}{\lim g(z)}$
+        \item $\lim(c_1 f + c_2 g) = c_1 \lim f(z) + c_2 \lim g(z)$.
+    \end{enumerate}
+    \underline{Continuity of Functions}
+    \begin{align*}
+        f(z) \textrm{ is continuous at }z_0 \iff \lim_{z \to z_0} f(z) = f(z_0) \iff \left(\lim_{z \to z_0} u(z_0) = u(z_0) \wedge \lim_{z \to z_0} v(z_0) = v(z_0)\right)
+    \end{align*}
+    It is important to note that the choice of path is important here. 
+    If two different paths lead to different values in the limit, the limit does not 
+    exist.
+    
+    \sheader{Differentiability}
+    \begin{align*}
+        \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} \iff \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z} \iff f(z) \textrm{ is differentiable.}
+    \end{align*}
+    Where the inclusion of a limit means that the limits must exist.
+    \gap
+    \sheader{Cauchy-Riemann Equation}
+    A helpful tool for governing differentiability is the Cauchy-Riemann Equation:
+    \begin{align*}
+        \begin{cases}
+            \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}\\
+            \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+        \end{cases}
+    \end{align*}
+    Implications of the CRE:
+    \begin{itemize}
+        \item $(\implies)$: If some $f(z)$ is differentiable at some $z_0$, then 
+        the CRE is satisifed.
+        \item $(\impliedby)$: If some function $f(z)$ satisfies the CRE at some $z_0$,
+        AND the derivative is continuous, then $f(z)$ is differentiable.
+    \end{itemize}
+
+    There are some additional definitions here too:
+    \begin{enumerate}
+        \item A function $f$ is \underline{analytic} at a point $z_0$ \underline{if} $f$ is differentiable in a neigbourhood of $z_0$.
+        \item A function $f$ is \underline{entire} if it is analytic everywhere.
+    \end{enumerate}
+    Being differentiable at a single point is not analytic.
+    \gap
+    Taking the derivative of complex functions is the same as in 
+    non-complex functions. The product, quotient, and chain rules all hold.
+    \pagebreak
+    \sheader{Remark}
+    \begin{align*}
+        f \textrm{ is differentiable} \implies \frac{\partial f}{\partial \overline{z}} = 0 \textrm{ at } z_0
+    \end{align*}
+    \sheader{Consequences of the Cauchy-Riemann Equation}
+    \begin{enumerate}
+        \item The CRE guarantees the satisfaction of the laplace equation if a 
+        function is entire. Thus, we can say that $v$ is the \underline{harmonic conjugate}
+        of $u$, and vice versa.
+    \end{enumerate}
+
+\end{document}
