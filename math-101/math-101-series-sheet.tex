@@ -1,0 +1,425 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage{multicol}
+
+
+
+\begin{document}
+
+\begin{center}
+    \begin{Large}
+        Series and Series Tests
+    \end{Large}\\
+    Reese Critchlow, 2021
+\end{center}
+
+\begin{large}
+    Geometric Series
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}\smallskip\\
+\indent \underline{Infinite Sum}
+\begin{multicols}{4}
+\begin{center}
+    General Form
+    \[
+        S = \sum_{n=1}^{\infty}ar^{n-1}
+    \]
+    
+    Value if $|r| < 1$
+    \[
+        S = \frac{a}{1-r}
+    \]
+    
+    Value if $r = 1$
+    \[
+        S = \textrm{Divergent}
+    \]
+    
+    Value if $|r| > 1$
+    \[
+        S = \textrm{Divergent}
+    \]
+\end{center}
+\end{multicols}
+
+\indent \underline{Partial Sum}
+\begin{multicols}{3}
+\begin{center}
+    General Form
+    \[
+        S_N = \sum_{n=1}^{N}ar^{n-1}
+    \]
+    
+    Value if $|r| \neq 1$
+    \[
+        S_N = a\frac{1-r^{N+1}}{1-r}
+    \]
+    
+    Value if $r = 1$
+    \[
+        S_N = a(N+1)
+    \]
+    
+\end{center}
+\end{multicols}
+
+
+\begin{large}
+    Telescoping Series
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{2}
+    \underline{Infinite Sum}\\\columnbreak
+    \underline{Partial Sum}
+\end{multicols}
+
+\begin{multicols}{4}
+\begin{center}
+    General Form 
+    \[
+        S = \sum_{n = 1}^{\infty}{a_n - a_{n+1}}
+    \]
+    
+    Value
+    \[
+        S = a_1 - \lim_{n \to \infty}{a_n}
+    \]
+    
+    General Form 
+    \[
+        S_N = \sum_{n = 1}^{N}{a_n - a_{n+1}}
+    \]
+    
+    Value
+    \[
+        S = a_1 - {a_{N+1}}
+    \]
+    
+
+    
+\end{center}
+\end{multicols}
+
+\begin{large}
+    Divergence Test
+\end{large} -- Best for when the n\textsuperscript{th} term in the series \textit{fails} to converge to zero towards infinity\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{2}
+\begin{center}
+    \underline{Theorem}
+    \medskip
+    \[
+        \textrm{\textit{if  }} \lim_{n \to \infty}a_n \neq 0
+    \]
+    The series diverges.
+    \[
+        \textrm{\textit{if  }} \lim_{n \to \infty}a_n = 0
+    \]
+    The test is completely fucking useless.
+    \vfill\null\columnbreak
+    \underline{Conditions}\\\bigskip
+    No Conditions
+    \end{center}
+\end{multicols}
+
+\begin{large}
+    The Integral Test
+\end{large} -- Best for when $n$ can be easily substituted for $x$ and integrated\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{2}
+\begin{center}
+    \underline{Theorem}
+    \medskip
+    \[
+         \texterm{\textit{if }} \int_{N_0}^\infty{f(x)dx} \textrm{  converges, then }  \sum_{n = 1}^\infty{a_n}\textrm{  converges}
+    \]
+     - and -
+    \[
+        \texterm{\textit{if }} \int_{N_0}^\infty{f(x)dx} \textrm{  diverges, then }  \sum_{n = 1}^\infty{a_n}\textrm{  diverges}
+    \]
+
+    \vfill\null\columnbreak
+    \underline{Conditions}
+    \end{center}
+    \begin{enumerate}
+        \item $f(x) \geq 0$ for all $x \geq N_0$
+        \item $f(x)$ is a decreasing function
+        \item $f(n) = a_n$ for all $n \geq N_0$
+    \end{enumerate}
+    \begin{center}
+    \[
+        \int_N^\infty f(x)dx \leq \sum_{n=N}^\infty \leq a_N + \int_N^\infty f(x)dx \textrm{  or} \int_{N-1}^\infty f(x)dx
+    \]
+    \end{center}
+\end{multicols}
+\pagebreak
+\begin{large}
+    The P Test
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{multicols}{2}
+\begin{center}
+    \underline{Theorem}
+    \medskip
+    \[
+         \textrm{Given } S = \sum_{n = 1}^\infty{\frac{1}{n^p}}
+    \]
+    if $p > 1$, then $S$ converges.\\\smallskip
+    if not, $S$ is divergent.
+    \\
+    \vfill\null\columnbreak
+    \underline{Conditions}
+    \\\bigskip
+    No Conditions
+    \end{center}
+\end{multicols}
+
+\begin{large}
+    The Comparison Test
+\end{large} -- Best when $a_n$ can be easily simplified to a term, $b_n$ at $n$ very large\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{center}
+\underline{Theorem}
+
+\begin{multicols}{2}\noindent
+    \[
+         \textrm{Given } S = \sum_{n = 1}^\infty{a_n}
+    \]
+    
+    \[
+         \textrm{and some } S_c = \sum_{n = 1}^\infty{c_n}
+    \]
+    \\
+    \vfill\null\columnbreak
+    
+    \begin{enumerate}
+        \item if $|a_n| < c_n$ for all $n > N$, and $\sum_{n=1}^\infty{c_n}$\\ converges, then $\sum_{n = 1}^\infty{a_n}$ converges
+        \item if $a_n > c_n$ for all $n > N$, and $\sum_{n=1}^\infty{c_n}$\\ diverges, then $\sum_{n = 1}^\infty{a_n}$ diverges
+    \end{enumerate}
+    
+    \noindent Note: it is always a good choice to compare with a p-test-able sum.
+    
+\end{multicols}
+\end{center}
+
+\begin{large}
+    The Limit Comparison Test
+\end{large} -- Same applications as the \textit{Comparison Test}, but with a more definitive result\\\indent\hspace{2.13in} and more general use.\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{center}
+    \underline{Theorem}
+
+\begin{multicols}{2}\noindent
+    Given
+    \begin{multicols}{2}\noindent
+    \[
+         S_a = \sum_{n = 1}^\infty{a_n}
+    \]
+    \[
+         S_b = \sum_{n = 1}^\infty{b_n}
+    \]
+    \end{multicols}
+    and the limit
+    \medskip
+    \[
+        L = \lim_{n \to \infty}{\frac{a_n}{b_n}} \neq \textrm{DNE}
+    \]
+    
+    \vfill\null\columnbreak
+
+    \begin{enumerate}
+        \item if $S_b$ converges, then $S_a$ converges
+        \item if \underline{$L \neq 0$} and $S_b$ diverges, then $S_a$ diverges.\\\medskip
+        \indent Note: The Condition $L \neq 0$ is \underline{crucial}! 
+        \item When $L = 0$, no information can be provided on divergence.
+    \end{enumerate}
+
+\end{multicols}
+\end{center}
+
+\begin{large}
+    Alternating Series Test
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{center}
+\underline{Theorem}
+
+\begin{multicols}{2}\noindent
+    
+    The sum
+    \[
+        \sum_{n = 1}^\infty{(-1)^{n-1}b_n}
+    \]
+    
+    
+    \vfill\null\columnbreak
+
+    Converges \underline{if}
+    \begin{enumerate}
+        \item $b_n \geq b_{n+1}$ for $n \geq N$
+        \item $\lim_{n \to \infty}{b_n} = 0$
+    \end{enumerate}
+    \end{multicols}
+\end{center}
+
+\begin{large}
+    Remainders
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{center}
+\begin{multicols}{2}\noindent
+    \underline{Partial Sum Error (Alternating)}
+    \[
+        |R_n| \leq a_{N+1}
+    \]
+    \vfill\null\columnbreak
+    \underline{Partial Sum Error -- Integral Test}\\
+    \[
+    \int_{N+1}^\infty f(x)dx \leq S_\infty - S_N \leq \int_N^\infty{f(x) dx}
+    \]
+    
+\end{multicols}
+\end{center}
+
+\begin{large}
+    Conditional and Absolute Convergence
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{2}
+\begin{center}
+    \underline{Absolute Convergence}\\
+    \medskip
+    
+    Given a series $\sum_{n = 1}^\infty a_n$, if $\sum_{n = 1}^\infty |a_n|$ converges (the absolute value of that series), then $\sum_{n = 1}^\infty a_n$ converges.\\
+    
+    \vfill\null\columnbreak
+    
+    \underline{Conditional Convergence}\\\medskip
+    
+    If a series $\sum_{n=1}^\infty a_n$ converges, but its absolute value, $\sum_{n = 1}^\infty |a_n|$ diverges, then the series is conditionally convergent.
+    
+\end{center}
+\end{multicols}
+
+\begin{large}
+    The Ratio Test
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{multicols}{2}
+\begin{center}
+    \underline{Given}
+    \[
+        \lim_{n \to \infty}{\frac{|a_{n+1}|}{|a_n|}} = L
+    \]
+    \footnotesize Where $a_n \neq 0$\normalsize
+    
+    \vfill\null\columnbreak
+    \underline{Conclusions}
+     
+    \begin{enumerate}
+        \item If $L < 1$, then the sum is converges (absolutely).
+        \item If $L > 1$ or DNE, the sum diverges.
+        \item IF $L = 1$, use a different test.
+    \end{enumerate}
+\end{center}
+\end{multicols}
+
+\begin{large}
+    Power Series
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{3}
+\noindent
+\begin{center}
+Exponential
+\[
+    e^x = \sum_{n = 0}^\infty\frac{x^n}{n!}
+\]
+Geometric
+\[
+    \frac{1}{1-x}=\sum_{n = 0}^\infty x^n
+\]
+\vfill\null\columnbreak
+Geometric -- Derivative
+\[
+    \frac{1}{(1-x)^2}=\sum_{n = 1}^\infty nx^{n-1}
+\]
+Geometric -- Integral
+\[
+    \ln(1-x) = -\sum_{n = 0}^\infty\frac{x^{n+1}}{n+1}
+\]
+Geometric -- Negative Integral
+\[
+    \ln(1+x) = \sum_{n = 0}^\infty(-1)^n\frac{x^{n+1}}{n+1}
+\]
+\vfill\null\columnbreak
+Sine
+\[
+    \sin x = \sum_{n = 0}^\infty(-1)^n\frac{x^{(2n+1)}}{(2n+1)!}
+\]
+Cosine
+\[
+    \cos x = \sum_{n = 0}^\infty (-1)^n\frac{x^{2n}}{(2n)!}
+\]
+Arctangent
+\[
+    \arctan x = \sum_{n = 0}^\infty (-1)^n \frac{x^{2n+1}}{2n+1}
+\]
+\end{center}
+\end{multicols}
+
+\begin{large}
+    Taylor Series
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+\begin{multicols}{3}
+\noindent
+
+\begin{center}
+    \underline{General Formula}
+    \[
+        T_N(x) = \sum_{n = 1}^N\frac{f^{(n)}(c)}{n!}(x-c)^n
+    \]
+    
+    \vfill\null\columnbreak
+    
+    \underline{Error Formula}
+    \[
+        R_N(x) \leq \frac{f^{(N+1)}(\bar{c})}{(N+1)!}(x-c)^{N+1}
+    \]
+    
+    \vfill\null\columnbreak
+    
+    \underline{Remark}\\
+        \item If $R_N(x)$ reaches zero for some $N$, the series is said to be \underline{convergent}. This can also be proven by using the ratio test on the series. When a Taylor Series converges, the approximation equals the function when $N \to \infty$.
+\end{center}
+
+\end{multicols}
+
+\begin{large}
+    Binomial Expansions
+\end{large}\\
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{multicols}{2}
+\begin{center}
+\underline{General Form}
+
+\[
+    (a+b)^n = \sum_{k = 0}^n {n \choose k} a^{n-k}b^k
+\]
+
+Where:
+\[
+    {n \choose k} = \frac{n!}{k!(n-k)!}
+\]
+\end{center}
+\end{multicols}
+
+
+\end{document}
