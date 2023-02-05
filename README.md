@@ -8,7 +8,7 @@ This repo contains summary sheets for various courses in the UBC Engineering Phy
 
 | Institution | Course Code | Course Description | Term | Progress Status/Notes | Documents Available |
 | ---- | ------ | ----------- | --------- | ---- |  ------------ |
-| UBC | CHEM 123 (130) | Thermodynamics, Kinetics, and Organic Chemistry | Spring 2021 | Completed | [Reaction Kinetics Reference Sheet](chem-123/kinetics-reference/chem-123-kinetics-reference.pdf) <br> <br> [Reaction Kinetics Formula Sheet](chem-123/kinetics-reference/chem-123-kinetics-reference.pdf) |
+| UBC | CHEM 123 (130) | Thermodynamics, Kinetics, and Organic Chemistry | Spring 2021 | Completed | [Reaction Kinetics Reference Sheet](chem-123/kinetics-reference/chem-123-kinetics-reference.pdf) <br> <br> [Reaction Kinetics Formula Sheet](chem-123/kinetics-formulae/chem-123-kinetics-formulae.pdf) |
 | UBC | MATH 101 | Calculus II | Spring 2021 | Completed | [Sequences and Series Reference Sheet](math-101/math-101-series-sheet.pdf) | 
 | UBC | PHYS 158 | Introductory Physics for Engineers II | Spring 2021 | Completed | [Electricity and Magnetism Formula Sheet](phys-158/phys-158-em-fs.pdf) | 
 | UBC | MATH 257 | Partial Differential Equations | 2022 Summer | Complete | [A Guide for Solving PDEs](math-257/math-257-summary.pdf)
