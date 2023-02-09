@@ -18,6 +18,7 @@ This repo contains summary sheets for various courses in the UBC Engineering Phy
 | UBC | MECH 360 | Solid Mechanics | Fall 2022 | Needs Edits | [(Minimal) Course Notes](mech-360/mech-360-summary.pdf) | 
 | UBC | MATH 307 | Applied Linear Algebra | Fall 2022 | Needs Minor Revisions | [Course Notes](math-307/math-307-summary.pdf)
 | UBC | MATH 305 | Applied Complex Analysis | Spring 2023 | In Progress | [Course Notes](math-305/math-305-summary.pdf) | 
+| UBC | PHYS 304 | Introduction to Quantum Mechanics | Spring 2023 | In Progress | [Course Notes](phys-304/phys-304-summary.pdf) |
 
 ## Courses Without Documents
 
