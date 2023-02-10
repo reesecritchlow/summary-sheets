@@ -205,4 +205,34 @@
         P_{ab} = \int_a^b \rho(x) dx.
     \end{align*}
 
+    \pagebreak 
+
+    \header{Expected Values}
+
+    As alluded to prior, we can have certain \underline{expected values} for quantities,
+    that is, the average value for that quantity over all time. In general, for some quantity $Q$, this is given
+    by:
+    \begin{align*}
+        \langle Q(x, p) \rangle = \int_{-\infty}^{\infty} \Psi^* \left[Q\left(x, -i\hbar \frac{\partial}{\partial x}\right)\right]\Psi dx
+    \end{align*}
+    Where $Q(x,p)$ is some operator that can be described as a function of $x$ and $p$.
+    \gap
+    Hence, we can define some common operators:
+    \begin{itemize}
+        \item \sheader{Position Operator, $x$} $x$.
+        \item \sheader{Momentum Operator, $\hat{p}$} $\hat{p} = -i\hbar \frac{\partial}{\partial x}$.
+    \end{itemize}
+    Energy is another expected value, but obtaining it in bound states is a bit difficult.
+    It can be obtained as follows:
+    \begin{align*}
+        \langle E \rangle = \sum_{n = 1}^\infty |c_n|^2 E_n.
+    \end{align*}
+
+    \header{Important Integrals}
+
+    There are some important integrals that often come up:
+    \begin{align*}
+        \int_{-\infty}^\infty e^{-\frac{x^2}{a^2}}dx = \sqrt{\pi} a && \int_{-\infty}^\infty x^2 e^{-\frac{x^2}{a^2}} dx = \frac{\sqrt{\pi} a^3}{2}
+    \end{align*}
+
 \end{document}
