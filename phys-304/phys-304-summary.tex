@@ -55,7 +55,20 @@
     \begin{align*}
         \varphi_n(t) = e^{-iE_n t/\hbar},
     \end{align*}
-    where $E_n$ is the energy corresponding to the state.
+    where $E_n$ is the energy corresponding to the state. In addition, 
+    the bound state coefficients can be found according to:
+    \begin{align*}
+        c_n = \int_{-\infty}^\infty \psi_n(x) \Psi(x, 0)dx.
+    \end{align*}
+    These $c_n$ values can be interpreted as the probabilities of 
+    each energy state:
+    \begin{align*}
+        P(E_n) = |c_n|^2
+    \end{align*}
+    and as a consequence:
+    \begin{align*}
+        \sum_{n = 1}^\infty |c_n|^2  = 1 && \textrm{and} && \langle H \rangle  = \sum_{n = 1}^\infty |c_n|^2 E_n. 
+    \end{align*}
     \gap
     For the potentials that have been covered thus far in the course,
     there are two different stationery states corresponding to each 
@@ -85,9 +98,12 @@
             H_0(\xi) = 1 \\
             H_1(\xi) = 2\xi\\
             H_2(\xi) = 4\xi^2-2\\
-            H_3(\xi) = 8\xi^3 - 12\xi
+            H_3(\xi) = 8\xi^3 - 12\xi\\
+            \ldots
             \end{cases}
     \end{align*}
+
+    \pagebreak
 
     \sheader{Stationery States} Stationery states are states in which:
     \begin{enumerate}
@@ -97,7 +113,13 @@
         states.
     \end{enumerate}
 
-    \pagebreak
+    \sheader{Key features of the stationery states of the infinite square well}
+    \begin{itemize}
+        \item They are alternating even and odd.
+        \item Each successive energy state gains an additional zero 
+        crossing (node)
+        \item They are mutually orthogonal, which implies that $\ds \int \psi_m^*(x) \psi_n(x) = 0, m \neq n$.
+    \end{itemize}
 
     It is also useful to know what the bound states look like for
     the harmonic oscillator.
@@ -143,6 +165,44 @@
     \sheader{Heisenberg Uncertainty Principle}
     \begin{align*}
         \sigma_x \sigma_p \geq \frac{\hbar}{2}
+    \end{align*}
+
+    \header{Orthogonality}
+
+    \begin{itemize}
+        \item The stationery states in the infinite square well are orthogonal.
+        \item $\ds \int_{0}^{L} \sin \left(\frac{n\pi x}{L}\right) \sin \left(\frac{m\pi x}{L}\right) dx = 0 $
+        \item $\ds \int_{0}^{L} \cos \left(\frac{n \pi x}{L}\right) \cos \left(\frac{m \pi x}{L}\right) dx = 0$
+        \item $\ds \int_{0}^{L} \sin \left(\frac{n \pi x}{L}\right) \cos \left(\frac{m \pi x}{L}\right) dx = 0$
+        \item $\ds \int f_\textrm{even}(x) f_\textrm{odd}(x) dx = 0$
+        \item $\ds \int_{0}^{L} \sin \left(\frac{n\pi x}{L}\right) \sin \left(\frac{n\pi x}{L}\right) dx = \frac{L}{2}$
+        \item $\ds \int_{0}^{L} \cos \left(\frac{n\pi x}{L}\right) \cos \left(\frac{n\pi x}{L}\right) dx = \frac{L}{2}$
+    \end{itemize}
+
+    \header{Probabilites and Such}
+
+    We can define the probability of an event $j$ given the total number of 
+    events $N$ and the total number of times it occurs $N(j)$:
+    \begin{align*}
+        P(j) = \frac{N(j)}{N}.
+    \end{align*}
+    In discrete variables, if we seek to find the average event $j$, denoted by
+    $\langle j \rangle$, we can find it with:
+    \begin{align*}
+        \langle j \rangle = \frac{\sum j N(j)}{N} = \sum_{j = 0}^\infty j P(j).
+    \end{align*}
+
+    The \underline{standard deviation} of an event is important to define:
+    \begin{align*}
+        \sigma = \sqrt{\langle j^2 \rangle - \langle j \rangle^2}
+    \end{align*}
+
+    Similar formulae can also be applied to continuous variables. First, we 
+    define the \underline{probability density} of some quantity as $\rho(x) dx$,
+    that is $\rho(x)dx$ is the probability that an individual (chosen at random)
+    lies between $x$ and $(x + dx)$. Hence, it follows that:
+    \begin{align*}
+        P_{ab} = \int_a^b \rho(x) dx.
     \end{align*}
 
 \end{document}
