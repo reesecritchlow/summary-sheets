@@ -12,6 +12,7 @@
 \usepackage{fancyhdr}
 \usepackage{tcolorbox}
 \hyphenchar\font=-1
+\usepackage{tabularx}
 
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
 \newcommand{\gap}{\medskip\\}
@@ -28,6 +29,7 @@
 
 \newcommand{\ds}{\displaystyle}
 \newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\Log}{\textrm{Log}}
 
 \newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
 
@@ -292,5 +294,53 @@
         function is entire. Thus, we can say that $v$ is the \underline{harmonic conjugate}
         of $u$, and vice versa.
     \end{enumerate}
+
+    \header{Functions and Mappings}
+
+    We can define a variety of different functions which map various domains to 
+    various images. Expanding off of what was already stated in the ``Functions of
+    Complex Numbers'' section, we can state some more functions:
+    \gap
+    \bgroup
+    \def\arraystretch{1.5}% 
+    \begin{tabular}{ |l|l|l|l| } 
+        \hline
+        \underline{Name} & \underline{Function} & \underline{Mapping} & \underline{Expanded Form} \\
+        \hline
+        Square  & $w = z^2$  & Scales modulus and argument & $w = \begin{cases}
+            u = x^2 - y^2\\
+            v = 2xy
+        \end{cases}$   \\
+        \hline
+        Exponential & $w = e^z$ & Transforms planes/circles into planes/circles & $w = \begin{cases}
+            u = e^x \cos y\\
+            v = e^x \sin y\\
+        \end{cases}$  \\
+        \hline
+    \end{tabular}
+    \egroup
+    \gap
+    
+    \header{Inverse Functions}
+    \bgroup
+    \def\arraystretch{1.5}% 
+    \begin{tabular}{ |c|c| } 
+        \hline
+        \underline{Function} & \underline{Inverse} \\
+        \hline
+        $ \sin(z)$ & $\sin^{-1}z = -i\cdot\Log(iz + (1-z^2)^{\frac{1}{2}})$ \\
+        & where $(1 - z^2)^{\frac{1}{2}} = i|z-1|^\frac{1}{2} |z + 1|^\frac{1}{2}e^{i\left(\frac{\phi_1 + \phi_2}{2}\right)} $\\
+        & and $2\pi < \phi_1 < 4\pi$\\
+        & $ -\pi < \phi_2 < \pi$\\
+        \hline
+        $w = e^z$ & $z = \Log(w)$\\
+        \hline
+        $w = z^\alpha$ & $e^{\frac{1}{\alpha} \Log z} = z^{\frac{1}{\alpha}}$\\
+        \hline
+    \end{tabular}
+    \egroup
+    
+    
+
 
 \end{document}

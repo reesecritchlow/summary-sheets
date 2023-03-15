@@ -32,6 +32,9 @@
 
 \newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
 
+\usepackage{physics}
+% \usepackage{braket}
+
 \begin{document}
     \begin{center}
         \Large PHYS 304 Review Notes\\
@@ -234,5 +237,289 @@
     \begin{align*}
         \int_{-\infty}^\infty e^{-\frac{x^2}{a^2}}dx = \sqrt{\pi} a && \int_{-\infty}^\infty x^2 e^{-\frac{x^2}{a^2}} dx = \frac{\sqrt{\pi} a^3}{2}
     \end{align*}
+
+    \pagebreak
+
+    \header{Dirac Notation}
+
+    \sheader{Definitions}
+    \begin{itemize}
+        \item A \underline{ket}, denoted as $\ket{B}$ defines notation for a vector. Hence, it 
+        can be interpreted that:
+        \begin{align*}
+            \ket{B} &= \begin{bmatrix}
+                b_1 \\
+                b_2 \\
+                \vdots \\
+                b_n
+            \end{bmatrix}
+        \end{align*}
+        \item A \underline{bra}, denoted as $\bra{A}$ defines notation for the complex conjugate 
+        of a vector. Hence, it can be interpreted that:
+        \begin{align*}
+            \bra{A} &= \begin{bmatrix}
+                a_1 \\
+                a_2 \\
+                \vdots \\
+                a_n
+            \end{bmatrix}^\dagger = 
+            \begin{bmatrix}
+                a_1^* & a_2^* & \cdots & a_n^*
+            \end{bmatrix}
+        \end{align*}
+    \end{itemize}
+    \sheader{Mathematical Implications}
+    \begin{itemize}
+        \item Thus, it follows that the combination of a bra and ket in order yields the inner product 
+        of two vectors:
+        \begin{align*}
+            \braket{A}{B} = \begin{bmatrix} a_1^* & a_2^* & \cdots & a_n^* \end{bmatrix} \begin{bmatrix}
+                b_1 \\
+                b_2 \\
+                \vdots \\
+                b_n
+            \end{bmatrix} = a_1^* b_1 + a_2^* b_2 + \cdots + a_n^* b_n
+        \end{align*}
+        \item We can also define the ``ketbra'' operation, which is the reverse order of the braket,
+        and is also the \underline{outer product}. This is especially useful in the case of finding 
+        the \underline{identity matrix} for a system:
+        \begin{align*}
+            \sum_{i} = \ketbra{e_i}{e_i} = I
+        \end{align*}
+        Where $e_i$ denote all of the possible basis vectors for a system.
+
+
+    \end{itemize}
+
+    \sheader{Applications in Quantum Physics}
+    \gap
+    In quantum mechanics, we introduce the concept of \underline{Hilbert Space}, which 
+    under the viewpoint that a function can be described as an \underline{abstract vector},
+    is defined as the vector space of all square-integrable functions on specified intervals:
+    \begin{align*}
+        \curly{f(x) : \int_a^b |f(x)|^2 dx < \infty}
+    \end{align*}
+    Since most functions are map continuous functions to continuous functions in quantum 
+    physics, we can use braket notation and Hilbert Space to express the inner product 
+    for two functions:
+    \begin{align*}
+        \braket{f(x)}{g(x)} = \int_a^b f(x)^* g(x)dx
+    \end{align*}
+    where $a$ and $b$ denote endpoints of the $f(x)$ and $g(x)$ abstract vectors. Oftentimes,
+    these bounds are infinite. A corollary of this is that if both $f$ and $g$ are square integrable
+    functions, then the inner product between $f$ and $g$ $\braket{f}{g}$ is guaranteed to exist.
+    \pagebreak
+    \gap
+    There are some important implications that arise from these definitions:
+    \begin{itemize}
+        \item A function is said to be \underline{normalized} when its inner product with itself 
+        evaluates to 1.
+        \item Two functions are \underline{orthogonal} to each other when their inner product 
+        is zero.
+        \item Two functions are \underline{orthonormal} if their inner product is zero and they 
+        are normalized.
+        \item A set of functions is \underline{complete} if \textbf{any} other function $f$ in 
+        Hilbert Space can be expressed as a linear combination of the two:
+        \begin{align*}
+            f = \sum_{n=1}^\infty c_n f_n(x)
+        \end{align*}
+        where for an orthonormal set, $c_n = \braket{f_n}{f}$.
+        \begin{itemize}
+            \item Infinite Square Well states are complete on $(0, a)$.
+            \item Harmonic Oscillator states are complete on $(-\infty, \infty)$.
+        \end{itemize}
+    \end{itemize}
+
+    \sheader{Observables}
+    If we state that wavefunctions can be represented as abstract vectors, then 
+    we can state that observables correspond to linear transformations on wavefunctions.
+    Hence, to compute an observable, we can imagine the process as:
+    \begin{enumerate}
+        \item Transform the original wavefunction $\Psi$ using some linear transformation
+        representing the observable: $Q\ket{\Psi}$
+        \item Project the original wavefunction onto the transformed space to obtain 
+        the magnitude of the observable: $\bra{\Psi} Q \ket{\Psi}$
+    \end{enumerate}
+    Hence, we can state that for some observable $Q$: 
+    \begin{align*}
+        \langle Q \rangle = \expval{Q}{\Psi} = \int_{-\infty}^\infty \Psi^* \hat{Q} \Psi dx
+    \end{align*}
+    It is important to note that since we require observables to be real quantities, 
+    that all operators for an observable must be \underline{hermetian}, that is that 
+    $\hat{Q} = \hat{Q}^\dagger$, or for the purpose of proofs:
+    \begin{align*}
+        \braket{f}{\hat{Q} f} = \braket{\hat{Q} f}{f}
+    \end{align*}
+    \sheader{Determinate States and Eigenfunctions}
+    \gap 
+    It is known that \underline{determinate states of $Q$ are eigenfunctions of $\hat{Q}$}, that is:
+    \begin{align*}
+        \hat{Q}\psi = q \psi
+    \end{align*}
+    where $q = \langle Q \rangle$.
+    From this, we obtain two important definitions:
+    \begin{itemize}
+        \item \sheader{Spectrum} the collection of all of the eigenvalues for a given wavefunction.
+        \item \sheader{Degenerate Spectrums} spectrums where two or more linearly independent 
+        eigenfunctions share the same eigenvalue.  
+    \end{itemize}
+    It is to be noted that there exists two types of spectra:
+    \begin{itemize}
+        \item \sheader{Discrete Spectra} Eigenvalues are separated from each other
+        \begin{itemize}
+            \item Eigenfunctions lie in Hilbert space (normalizable) and constitute physically 
+            realizable states.
+            \item Eigenvalues are real.
+            \item Eigenfunctions are orthonormal to each other.
+        \end{itemize}
+        \item \sheader{Continuous Spectra} Eigenfunctions are non-countable, continuous, and 
+        are not normalizable. As a result, they do not represent possible wavefunctions, however,
+        a linear combination of them \textit{might} be.
+        \begin{itemize}
+            \item Eigenfunctions with real eigenvalues are said to be \underline{Dirac Normalizable} (notes on this later) 
+            and complete.
+        \end{itemize}
+    \end{itemize}
+    \sheader{Axiom ($\star$)} The eigenfunctions of an observable operator are \underline{complete}.
+
+    \pagebreak
+
+    \header{Generalized Statistical Interpretation}
+
+    \sheader{Core Concepts}
+    \begin{enumerate}
+        \item  If you measure a measure an observable $Q(x, p)$ on a particle in the 
+        state $\Psi(x, t)$, you are certain to get one of the eigenvalues of the 
+        Hermetian operator $\hat{Q}$ ($\star \star$).
+        \begin{enumerate}
+            \item If the spectrum is \underline{discrete}, then the probability of getting 
+            the particular eigenvalue $q_n$ associated with an orthonormal eigenfunction $f_n(x)$ is:
+            \begin{align*}
+                |c_n|^2 && \textrm{where} && c_n = \braket{f_n}{\Psi}, n \in \mathbb{N}
+            \end{align*}
+            \item If the spectrum is \underline{continuous}, with \textit{real} eigenvalues 
+            $q(z)$ and associated [Dirac-Normalized] eigenfunctions $f_z(x)$, the probability of 
+            getting a result in the range $dz$ is:
+            \begin{align*}
+                |c(z)|^2 dz && \textrm{where} && c(z) = \braket{f_z}{\Psi}, z \in \mathbb{R}
+            \end{align*}
+        \end{enumerate}
+        \item By means of $(\star)$ and $(\star\star)$, it is implied that $\Psi$ is a linear 
+        combination of functions for some basis:
+        \begin{align*}
+            \Psi = \sum_n c_n(t) f_n && \textrm{or} && \Psi = \int_{-\infty}^\infty c(z,t) f_z dz 
+        \end{align*}
+        \begin{enumerate}
+            \item Combined with the fact that $\sum_n |c_n|^2 = 1$, it is also implied that we can describe expectation values in terms of 
+            generalized probabilities:
+            \begin{align*}
+                \langle Q \rangle = \sum_n q_n |c_n|^2
+            \end{align*}
+        \end{enumerate}
+    \end{enumerate}
+
+    Given this, we can hypothesize what various different basis functions might 
+    look like for different observables. Some examples (in position space) include:
+    \begin{itemize}
+        \item Momentum-Space Eigenfunctions: $f_p(x) = \frac{1}{\sqrt{2\pi \hbar}} e^\frac{ipx}{\hbar}$
+        \item Position-Space Eigenfunctions: $g_y(x) = \delta(x-y)$
+    \end{itemize}
+    The existence of a momentum-space eigenfunction in position space provides us 
+    with the ability to find the \underline{momentum space wavefunction}. It is 
+    denoted as:
+    \begin{align*}
+        \Phi(p, t) = \frac{1}{\sqrt{2\pi \hbar}} \int_{-\infty}^\infty e^{\frac{-ipx}{\hbar}}\Psi(x,t)dx
+    \end{align*}
+    Which, if we look closer at, is actually a bra-ket in disguise:
+    \begin{align*}
+        \Phi(p, t) = \frac{1}{\sqrt{2\pi \hbar}} \int_{-\infty}^\infty e^{\frac{-ipx}{\hbar}}\Psi(x,t)dx
+        = \braket{f_p(x)}{\Psi(x,t)}
+    \end{align*}
+    This serves as a nice segue into the next concept, which are \underline{bases in Hilbert space}.
+    \gap
+    \sheader{Bases in Hilbert Space} Since the Hilbert space is a space of functions which 
+    can be expressed as abstract vectors, then there must be an arbitrary abstract vector in 
+    Hilbert space corresponding to every possible wavefunction. This is denoted by 
+    $\ket{\mathcal{S}(t)}$.
+    \gap
+    Before we move deeper, it is important to define some vectors that will be used 
+    frequently in the following text:
+    \begin{itemize}
+        \item $\ket{x}$: eigenfunction of $\hat{x}$ with arbitrary eigenvalue $x$...*
+        \item $\ket{p}$: eigenfunction of $\hat{p}$ with arbitrary eigenvalue $p$...*
+        \item $\ket{n}$: eigenfunction ($E_n$ [constant]) of $\hat{H}$ with arbitrary eigenvalue $E$...*
+    \end{itemize}
+    *... I wrote ellipses in my notes and think I'm missing something here.
+
+    \pagebreak
+
+    Which leads to the important property that the inner product/projection of one 
+    bases eigenfunctions with the arbitrary $\mathcal{S}(t)$ function yields the 
+    wavefunction in that respective basis:
+    \begin{itemize}
+        \item $\braket{x}{\mathcal{S}(t)} = \Psi(x,t)$
+        \item $\braket{p}{\mathcal{S}(t)} = \Phi(p,t)$
+        \item $\braket{n}{\mathcal{S}(t)} = c_n(t)$
+    \end{itemize}
+
+    Hence, it is also to be noted that different operators ``look different'' in 
+    different bases:
+    \begin{align*}
+        \hat{x} \to \begin{cases}
+            x & \textrm{ in position space}\\
+            i\hbar \frac{\partial}{\partial p} & \textrm{ in momentum space}
+        \end{cases} &&
+        \hat{p} \to \begin{cases}
+            -i\hbar \frac{\partial}{\partial x} & \textrm{ in position space}\\
+            p & \textrm{ in momentum space}
+        \end{cases}
+    \end{align*}
+
+    \sheader{Remark} We can determine the coefficients for a function in its basis by:
+    \begin{align*}
+        \braket{f'_n}{f_n}
+    \end{align*}
+    for some arbitrary eigenfunction $f_n$ for some observable $\hat{Q}$.
+    \gap
+    Moving backwards, we can also find $\ket{\mathcal{S}(t)}$ for various bases:
+    \begin{itemize}
+        \item $\braket{\Psi(p,t)^*}{p} = \int \Psi(p,t) \ket{p}dp$
+        \item $\braket{\Phi(x,t)^*}{x} = \int \Phi(x,t) \ket{x}dx$
+    \end{itemize}
+    However, since $\Phi(p, t) = \braket{p}{\mathcal{S}(t)}$ and $\Psi(x,t) = \braket{x}{\mathcal{S}(t)}$,
+    we can generalize:
+    \begin{align*}
+        \ket{\mathcal{S}(t)} = \int_{-\infty}^\infty \expval{\mathcal{S}(t)}{O_z} dz
+    \end{align*}
+    for some arbitrary basis $\curly{\ket{O_z}}$.
+    \gap
+    \sheader{Change of Bases in Dirac Notation}
+    Given everything that we know, it should make sense that we can measure observables 
+    in different bases. To generalize, we can write that:
+    \begin{align*}
+        \bra{\textrm{basis}}\textrm{operator} \ket{\textrm{state}}
+    \end{align*}
+    Examples:
+    \begin{itemize}
+        \item $\bra{x}\hat{x}\ket{\mathcal{S}(t)} = x \Psi(x, t)$: application of position operator in $x$ basis.
+        \item $\bra{p}\hat{x}\ket{\mathcal{S}(t)} = i\hbar\frac{\partial \Phi}{\partial p}$: application of position operator in $p$ basis.
+    \end{itemize}
+
+    \sheader{Notes on the concept of Dirac Orthonormality} In the case that eigenvalues are 
+    discrete, the condition holds that:
+    \begin{align*}
+        \braket{f_n}{f_m} = \delta_{nm} = \begin{cases}
+            0 & \textrm{if  } n \neq m\\
+            1 & \textrm{if  } n = m
+        \end{cases}
+    \end{align*}
+    However, since continuous states don't obey this kind of orthonormality with the Kronecker-Delta 
+    function, they still are able to find a sort of orthonormality with the Dirac-Delta function:
+    \begin{align*}
+        \braket{f_q'}{f_q} = \delta(q - q')
+    \end{align*}
+    This makes sense, since the physical solution for systems with discrete eigenvalues is obtained under discrete summation,
+    the Kronecker-Delta function fits the use case. Similarly, since the physical solution for 
+    systems with continuous eigenvalues is obtained by integration, the Dirac-Delta function fits the use case.
 
 \end{document}
