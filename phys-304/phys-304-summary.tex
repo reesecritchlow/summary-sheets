@@ -147,9 +147,9 @@
             \phi(k) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}\Psi(x, 0)e^{-ikx}dx.
         \end{align*}
         \item Transform the function out of the frequency domain using 
-        another Fourier transform:
+        another Fourier transform: 
         \begin{align*}
-            \Psi(x,t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \psi(k) e^{i\left(kx - \frac{\hbar k^2}{2m}t\right)} dk.
+            \Psi(x,t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \phi(k) e^{i\left(kx - \frac{\hbar k^2}{2m}t\right)} dk.
         \end{align*}
     \end{enumerate}
 
@@ -522,4 +522,17 @@
     the Kronecker-Delta function fits the use case. Similarly, since the physical solution for 
     systems with continuous eigenvalues is obtained by integration, the Dirac-Delta function fits the use case.
 
+    \pagebreak
+
+    \header{Midterm Prep}
+
+    In bra/ket notation, we generally see 5 main different types of ``things'':
+    \begin{itemize}
+        \item \sheader{States Associated with Bases} $\Psi(x,t)$, $\Phi(p, t)$, $n$
+        \item \sheader{Arbitrary State} $\mathcal{S}(t)$
+        \item \sheader{Eigenfunction Sets} $x, p, E_n, f_x, f_p$
+        \item \sheader{Operators} $\hat{x}, \hat{p}, \hat{H}$
+        \item \sheader{Stationery States} $\psi_n$
+    \end{itemize}
+    
 \end{document}

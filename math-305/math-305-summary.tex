@@ -13,7 +13,6 @@
 \usepackage{tcolorbox}
 \hyphenchar\font=-1
 \usepackage{tabularx}
-
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
 \newcommand{\gap}{\medskip\\}
 \newcommand{\centertext}[1]{\begin{center}#1\end{center}}
@@ -26,6 +25,14 @@
 \newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
 \newcommand{\curly}[1]{\left\{#1\right\}}
 \newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\subcell}[2]{\begin{tabular}{@{}c@{}}#1 \\ #2\end{tabular}}
+\newcommand{\threecell}[3]{\begin{tabular}{@{}c@{}}#1 \\ #2 \\ #3\end{tabular}}
+\newcommand{\fourcell}[4]{\begin{tabular}{@{}c@{}}#1 \\ #2 \\ #3 \\ #4\end{tabular}}
+
+\usepackage{tikz}
+
+\usepackage{scrextend}
+\usepackage{lipsum}% for demo only!
 
 \newcommand{\ds}{\displaystyle}
 \newcommand{\Arg}{\textrm{Arg}}
@@ -339,8 +346,407 @@
         \hline
     \end{tabular}
     \egroup
+
+    \pagebreak
+
+    \centertext{\Large Course Review}
+    \vspace{0.5cm}
+    \header{Elementary Functions and Mapping Properties}
+    \vspace{0.1cm}
+    \bgroup
+    \def\arraystretch{1.5}%
+
+    \begin{tabular}{ |l|l|p{5.5cm}|l| }
+        \hline
+        \underline{Name} & \underline{Function} & \underline{Description of Transform} & \underline{Expanded Form} \\
+        \hline
+        %% how can i make two rows in a single cell?
+        Linear & $w = az + b$ &  \subcell{Lines $\to$ Lines}{Circles $\to$ Circles} & $w = \begin{cases}
+            u = ax + b\\
+            v = ay + b
+        \end{cases}$ \\
+        \hline
+        Mobius Transform & $w = \frac{az + b}{cz + d}$ & Lines/Circles $\to$ Lines/Circles & $w = \begin{cases}
+            u = \frac{ax + b}{cx + d}\\
+            v = \frac{ay + b}{cy + d}
+        \end{cases}$ \\
+        \hline
+        Exponential & $w = e^z$ & \subcell{Lines $\to$ Cirlces}{Circles $\to$ Lines} & $w = \begin{cases}
+            u = e^x \cos y\\
+            v = e^x \sin y\\
+        \end{cases}$ \\
+        \hline
+        Joukowsky Map & $w = \frac{1}{2}\left(z + \frac{1}{z}\right)$ & Transforms a semi-circle of radius 1, centered at the origin to a flat line along the $x$-axis & 
+        \\\hline
+        Sine & $w = \sin z$ & Transforms an infinite 3-sided box with sides at $-\pi/2, \pi/2$ centered at $0$ into a line on the $x$-axis. & $w = \begin{cases}
+            u = \sin x \cosh y\\
+            v = \cos x \sinh y
+        \end{cases}$ \\
+        \hline
+        Cosine & $w = \cos z$ & I forgor & $w = \begin{cases}
+            u = \cos x \cosh y\\
+            v = -\sin x \sinh y
+        \end{cases}$ \\
+        \hline
+        Phase Rotation & $w = z \cdot e^{i\phi}$ & Rotates the plane by $\phi$ radians. & $w = \begin{cases}
+            u = x \cos \phi - y \sin \phi\\
+            v = x \sin \phi + y \cos \phi
+        \end{cases}$ \\
+        \hline
+        Polynomial & $w = z^n$ & Scales angles and magnitudes by $n$. & $w = \begin{cases}
+            u = x^n\\
+            v = y^n
+        \end{cases}$ \\
+        \hline
+    \end{tabular}
+    \egroup
+    \vspace{0.5cm}
+
+    \header{Inverse Functions and Branch Cuts}
+    \vspace{1pt}
+
+    \bgroup
+    \def\arraystretch{1.5}%
+    \begin{tabular}{ |l|l|l| }
+        \hline
+        \underline{Multi-Valued Function} & \underline{Single-Valued Function} & \underline{Inverse of:}\\
+        \hline
+        $\text{arg}(z)$ & $\text{Arg}(z), -\pi < \phi < \pi$ & -- \\
+        \hline 
+        $\text{log}(z) = \ln(|z|) + i(\text{Arg}(z) + 2\pi k)$ & $\text{Log}(z) = \ln(|z|) + i\cdot \text{Arg}(z)$ & $e^w = z$ \\ 
+        \hline
+        $\sin^{-1}(z)$ & \fourcell{$\sin^{-1}(z)= -i\cdot\Log(iz + i(z^2 - 1)^{\frac{1}{2}})$}{$(z^2 - 1)^{\frac{1}{2}} = |z-1|^\frac{1}{2}|z+1|^\frac{1}{2}e^{i\frac{\phi_1 + \phi_2}{2}}$}{$2\pi < \phi_1 < 4\pi$}{$ -\pi < \phi_2 < \pi$} & $\sin(w) = z$ \\
+        \hline
+        $\cos^{-1}(z)$ & \fourcell{$\cos^{-1}(z) = -i\cdot\Log(z + (z^2 - 1)^{\frac{1}{2}})$}{$(z^2 - 1)^{\frac{1}{2}} = |z-1|^\frac{1}{2}|z+1|^\frac{1}{2}e^{i\frac{\phi_1 + \phi_2}{2}}$}{$0 < \phi_1 < 2\pi$}{$ -\pi < \phi_2 < \pi$} & $\cos(w) = z$ \\
+        \hline
+    \end{tabular}
+
+    \pagebreak
+
+    \header{Inequality Reminders}
+    \begin{itemize}
+        \item $|e^z| \leq e^{\text{Re}(z)}$
+        \item $|z^n + \cdots | \leq |z|^n + \cdots $
+        \item $|z^n + \cdots | \geq |z|^n - \cdots $
+    \end{itemize}
     
+    \header{Differentiability, Analyticity, Cauchy-Riemann Equations}
+    Like single-variable calculus, there are some basic definitions that need to 
+    be highlighted in complex-variable calculus.
+    \gap
+    \sheader{Limits}
+    We can define the limit of a complex function as:
+    \begin{align*}
+        \lim_{z \to z_0} f(z) = \lim_{(x, y) \to (x_0, y_0)}u(x, y) + i \lim_{(x, y) \to (x_0, y_0)}v(x, y)
+    \end{align*}
+    However, an additional layer of complexity is introduced here. $(x, y) \to (x_0, y_0)$
+    implies that any path can be taken to get to $(x,y)$. Thus, strange behaviours occur.
+    \gap
+    As an aside, we can note that usual properties of limits generally still hold 
+    with complex functions:
+    \begin{enumerate}
+        \item $\ds \lim \frac{f(z)}{g(z)} = \frac{\lim f(z)}{\lim g(z)}$
+        \item $\lim(c_1 f + c_2 g) = c_1 \lim f(z) + c_2 \lim g(z)$.
+    \end{enumerate}
+    \underline{Continuity of Functions}
+    \begin{align*}
+        f(z) \textrm{ is continuous at }z_0 \iff \lim_{z \to z_0} f(z) = f(z_0) \iff \left(\lim_{z \to z_0} u(z_0) = u(z_0) \wedge \lim_{z \to z_0} v(z_0) = v(z_0)\right)
+    \end{align*}
+    It is important to note that the choice of path is important here. 
+    If two different paths lead to different values in the limit, the limit does not 
+    exist.
     
+    \sheader{Differentiability}
+    \begin{align*}
+        \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0} \iff \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z} \iff f(z) \textrm{ is differentiable.}
+    \end{align*}
+    Where the inclusion of a limit means that the limits must exist.
+    \gap
+    \sheader{Cauchy-Riemann Equation}
+    A helpful tool for governing differentiability is the Cauchy-Riemann Equation:
+    \begin{align*}
+        \begin{cases}
+            \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}\\
+            \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+        \end{cases}
+    \end{align*}
+    Implications of the CRE:
+    \begin{itemize}
+        \item $(\implies)$: If some $f(z)$ is differentiable at some $z_0$, then 
+        the CRE is satisifed.
+        \item $(\impliedby)$: If some function $f(z)$ satisfies the CRE at some $z_0$,
+        AND the derivative is continuous, then $f(z)$ is differentiable.
+    \end{itemize}
+
+    There are some additional definitions here too:
+    \begin{enumerate}
+        \item A function $f$ is \underline{analytic} at a point $z_0$ \underline{if} $f$ is differentiable in a neigbourhood of $z_0$.
+        \item A function $f$ is \underline{entire} if it is analytic everywhere.
+    \end{enumerate}
+    Being differentiable at a single point is not analytic.
+    \gap
+    Taking the derivative of complex functions is the same as in 
+    non-complex functions. The product, quotient, and chain rules all hold.
+    \\
+    \sheader{Remark}
+    \begin{align*}
+        f \textrm{ is differentiable} \implies \frac{\partial f}{\partial \overline{z}} = 0 \textrm{ at } z_0
+    \end{align*}
+    \sheader{Consequences of the Cauchy-Riemann Equation}
+    \begin{enumerate}
+        \item The CRE guarantees the satisfaction of the laplace equation if a 
+        function is entire. Thus, we can say that $v$ is the \underline{harmonic conjugate}
+        of $u$, and vice versa.
+        \item A function is said to be \underline{harmonic} if the laplace equation is 
+        satisfied, that is if:
+        \begin{align*}
+            \Delta u = u_{xx} + u_{yy} = 0 \hspace{0.5cm} \textrm{ or } \hspace{0.5cm} \Delta v = v_{xx} + v_{yy} =  0
+        \end{align*}
+    \end{enumerate}
+
+    \header{First Steps into Integrals: Path Integrals and the Fundamental Theorem of Calculs}
+    \sheader{Path Integrals}
+    We can take the \underline{path integral} of a complex function $f(z)$ over some 
+    path $C$:
+    \begin{align*}
+        \int_C f(z) dz = \int_{t_1}^{t_2} f(z(t)) \cdot z'(t)dt
+    \end{align*}
+    Where $f(t)$ is some parametrization of the path $C$.
+    \gap
+    \sheader{Fundamental Theorem of Calculus}
+    Like in real calculus, we can use antiderivatives to integrate a function.
+    \gap
+    Given if an antiderivative $F(z)$ exists for some function $f(z)$, then 
+    \begin{align*}
+        \int_C f(z) dz = F(z_f) - F(z_i)
+    \end{align*}
+    It is to be noted that in order for the antiderivative to exist, 
+    $f(z)$ must be analytic on $C$.
+    \gap
+    \header{The Cauchy Integral Formula}
+    \sheader{Cauchy's Theorem} Before the introduction of the Cauchy Integral Formula,
+    we first introduce \underline{Cauchy's Theorem}. It is as follows:
+    \gap
+    Let a path $C$ be a simple closed loop. Suppose a function $f(z)$ is analytic 
+    on and inside $C$. Then:
+    \begin{align*}
+        \int_C f(z)dz = 0
+    \end{align*}
+    Consequently, we can also obtain the fact that for some function $f(z)$ with a 
+    discontinuity at $z_0$, then it follows that:
+    \begin{align*}
+        \int_{|z - z_0| = r} f(z) dz = 2\pi i
+    \end{align*}
+
+    \sheader{Deformation of Path} If there are two paths $C_0$ and $C_1$ on/in some 
+    domain $C$, if $C$ is analytic and $C_0$ is contained in $C_1$ or vice versa, 
+    then:
+    \begin{align*}
+        \int_{C_0}f(z)dz = \int_{C_1}f(z)dz
+    \end{align*}
+    Expanding on this, given some domain $C$, with $N$ ``holes'' in it $C_1, \ldots, C_N$,
+    then the integral over $C$ can be expressed as:
+    \begin{align*}
+        \int_C f(z)dz = \sum_{j = 1}^N \int_{C_j}f(z)dz
+    \end{align*}
+
+    \pagebreak 
+
+    \sheader{Cauchy Integral Formula} Finally, we arrive at the Cauchy Integral Formula.
+    It is as follows:
+    \begin{align*}
+        f^{(m)}(z_0) = \frac{m!}{2\pi i} \int_C\frac{f(z)}{(z-z_0)^{m+1}}dz
+    \end{align*}
+    Consequently, we can rearrange this to be more applicable for integrals.
+    \begin{align*}
+        \int_C \frac{f(z)}{(z-z_0)^{m + 1}} = 2\pi i  \cdot \frac{f^{(m)}(z_0)}{m!}
+    \end{align*}
+    Finally, we can generalize:
+    \begin{align*}
+        \int_C f(z)dz = 2\pi i \sum_{j = 1}^N \frac{f^{(m_j)}_j(z_0)}{m_j!}
+    \end{align*}
+    Where each $f_j(z)$ is the original function $f(z)$ with the discontinuity component 
+    $\frac{1}{z-z_k}$ divided out.
+    \gap
+    It is important to note that the Cauchy Integral Formula is only really good for 
+    functions of the form:
+    \begin{align*}
+        f(z) = \frac{g(z)}{(z-z_0)^{m_0} \cdot (z-z_1)^{m_1} \cdot \cdots}
+    \end{align*}
+
+    \header{Applications and Consequences of the Cauchy Integral Formula}
+
+    \sheader{Pointwise Estimate} For some function $f(z)$ on a circular domain $C: |z - z_0| = R$, then we can 
+    establish an upper bound for the function and its derivatives evaluated at $z = z_0$:
+    \begin{align*}
+        f^{(m)}(z_0) \leq \frac{m!}{R^m}\max_{|z-z_0| = R}|f(z)|
+    \end{align*}
+
+    \sheader{Liouville Theorem} Given some function $f(z)$ that is entire and bounded, then 
+    it is a constant function.
+    \begin{align*}
+        |f(z)| \leq M \implies f(z)\equiv C
+    \end{align*}
+    There exist some important variants of the Liouville Theorem:
+    \begin{enumerate}
+        \item $f = u + iv \wedge (u \geq -M \vee u \leq K) \implies f \equiv C$ \\
+        Proof Mechanism: $g(z) = e^{-f(z)}$
+        \item $f = u + iv \wedge au + bv \geq 0 \implies f \equiv D$\\
+        Proof Mechanism: $g = e^{\alpha f}, |g| = |e^{\alpha f}| = e^{-(au + bv)}$
+        \item $|f(z)| \leq C\cdot (1 + |z|)^n \implies $ f(z) must be a polynomial of degree lesser than $n$.
+    \end{enumerate}
+
+    \sheader{Maximum Principle} For some function $f(z)$ which is analytic on some domain 
+    and its boundary $D \cup \partial D$, its maximum value is found on its boundary:
+    \begin{align*}
+        \max_{\overline{D}} |f(z)| = \max_{\partial D} |f(z)|.
+    \end{align*}
+
+    \sheader{Minimum Principle} For some function $f(z)$ which is analytic on some domain
+    and its boundary $D \cup \partial D$, its minimum value is either zero, or it is 
+    found on the boundary of the domain $\partial D$:
+    \begin{align*}
+        \left(\min_{\overline{D}} |f(z)| = 0 \right) \vee \left(\min_{\overline{D}}|f(z)| = \min_{\partial D} |f(z)|\right).
+    \end{align*}
+    
+    \sheader{Argument Principle}
+    For some function $f(z)$ which is analytic both on and inside $C$, with 
+    a finite number of roots inside $C$ with multiplicity $n_j$, then:
+    \begin{align*}
+        \int_C \frac{f'(z)}{f(z)} = 2\pi i \cdot \sum_{j = 1}^k n_j
+    \end{align*}
+    Conequently, the argument principle follows that:
+    \begin{align*}
+        \frac{1}{2\pi i} \int_C \frac{f'(z)}{f(z)} = N = \frac{arg(f)|_{f(C)}}{2\pi}
+    \end{align*}
+    However, this theorem is not very applicable, but its consequenting theorems are.
+    \gap
+    \sheader{Rouche's Theorem (Application of Argument Principle)} 
+    Given some function $f(z) = g(z) + h(z)$, if one of the terms inside $f(z)$
+    dominates the others, that is $|f(z)-g(z)| < |g(z)|$ on $C$, then 
+    the number of zeroes on $C$ for $f(z)$ is the same as that of the number of 
+    zeroes on $C$ for $g(z)$, $N_f = N_g$.
+    \gap
+    \sheader{Nyquist Criterion (Application of Argument Principle)} 
+    Given some polynomial function $p(z)$ with degree $n$, the number of zeroes on the right half plane $\curly{Re(z) > 0}$
+    is equal to:
+    \begin{align*}
+        N = \frac{1}{2\pi}\left(n\pi + 2\cdot \text{arg}(p(z))|_{\Gamma_1}\right)
+    \end{align*}
+    Where $\Gamma_1 = \curly{z = iy, 0 < y < +\infty}$.
+    \gap
+    \header{Taylor and Laurent Series}
+
+    In real calculus, the \underline{Taylor Series} was introduced:
+    \begin{align*}
+        f(z) = a_0 + a_1(z - z_0) + \cdots + a_n(z-z_0)^n \where a_n = \frac{f^{(n)}(z_0)}{n!} =
+        \frac{1}{2\pi i}\int_{|z-z_0 = r}\frac{f(\eta)}{(\eta - z_0)^{n + 1}}d\eta
+    \end{align*}
+    We can state that the Taylor Series held for a function $f(z)$ which was 
+    analytic on the domain $|z-z_0| < r_2$.
+    \gap
+    \sheader{Laurent Series} Complex analysis introduces the \underline{Laurent Series}, which
+    serves two purposes:
+    \begin{enumerate}
+        \item Computes the negative power components of a series expansion of a function (e.g. $z^-n$)
+        \item Computes an expansion for an annular domain: $C: r_1 < |z-z_0| < r_2$.
+    \end{enumerate}
+    Hence, the laurent series is as follows:
+    \begin{align*}
+        f(z) =&\,\, a_0 + a_1(z-z_0) + \cdots + a_n(z - z_0)^n + \cdots \\
+        & + a_{-1}(z - z_0)^{-1} + \cdots + a_{-n}(z - z_0)^{-n}
+    \end{align*}
+    Where $\displaystyle a_n = \frac{1}{2\pi i} \int_{|z-z_0| = r} \frac{f(\eta)}{(\eta - z_0)^{n + 1}}d\eta$.
+    \gap
+    We can use the Laurent Series to also classify singularities: for a singularity $z = z_0$
+    for some function $f(z)$, it follows that:
+    \begin{enumerate}
+        \item If there are no negative terms in the series $a_{-1} = \cdots = a_{-n} = 0$,
+        then we classify $z_0$ as a \underline{removable singularity}.
+        \item If the negative terms in the series terminate after some $a_{-m}$, then 
+        we classify $z_0$ as a \underline{singularity of order $m$}.
+        \item If the negative terms never terminate, then $z_0$ is classified as an \underline{essential singularity}.
+    \end{enumerate}
+
+    \pagebreak
+
+    \header{Residues and the Cauchy Residue Theorem}
+
+    \sheader{Residue} In the Laurent series, we call the $a_{-1}$ term the \underline{resiude}
+    of a function $f(z)$ and a singularity $z_0$. We can compute it in a multitude of ways:
+
+    \begin{addmargin}[2.5em]{0em}
+        \sheader{Removable Singularities} $\ds \text{Res}(f(z), z_0) = \frac{P(z_0)}{Q'(z_0)}$
+        \gap
+        \sheader{Poles with Order $\geq 2$} There are two options:
+        \begin{enumerate}
+            \item $\ds \text{Res}(f(z), z_0) = \frac{1}{(m-1)!}f_0^{(m - 1)}(z_0)$ (like prior)
+            \item Laurent Series
+        \end{enumerate}
+        \sheader{Essential Singularities} Laurent Series
+    \end{addmargin}
+    \vspace{0.5cm}
+    \sheader{Determining Pole Order}
+    \begin{enumerate}
+        \item If the pole is in an ``easy'' form $(z-z_j)^{m_j}$ in denominator, 
+        then the order of the pole is simply $m_j$.
+        \item If not, then there are two options:
+        \begin{enumerate}
+            \item Take the Laurent Series and find the order of the largest negative exponent.
+            \item (Hacky) Take successive derivatives of the denominator. The first 
+            $n$-th derivative which does not evaluate to zero is the order.
+        \end{enumerate}
+    \end{enumerate}
+
+    \sheader{Cauchy Residue Theorem}
+    \begin{align*}
+        \int_C f(z)dz = 2\pi i \sum_{j = 1}^N \text{Res}(f(z), z_j)
+    \end{align*}
+    \gap
+    \header{Real Integrals}
+
+    There exist some real integrals which are easily solvable using complex analysis.
+    For these integrals, a simple problem solving framework exists:
+    \begin{enumerate}
+        \item Choose a contour that will make computation simple, based on the 
+        form of the integrand.
+        \item Write out the integral over each segment of the contour. Terms that 
+        evaluate to the original integral, $I$, will appear.
+        \item Set this equal to the Cauchy Residue theorem for the domain that the 
+        contour encircles, and solve for $I$.
+    \end{enumerate}
+
+    \header{Fourier and Laplace Transforms} 
+    (under construction)
+
+    % \pagebreak
+
+
+    % \sheader{Contours}
+    % \bgroup
+    % \def\arraystretch{3}
+
+    % \begin{tabular}{|c|c|c|c|}
+    %     \hline
+    %     \underline{Integral Form} & \underline{Contour Name} & \underline{Function} & \underline{Solution}\\
+    %     \hline
+    %     $\displaystyle \int_0^{2\pi} F(\sin(\theta), \cos(\theta))d\theta$ & Full Circle & & $I = 2\pi i \sum_{j = 1}^N \text{Res}(f(z), z_j)$\\
+    %     \hline
+    %     \subcell{$\displaystyle \int_{-\infty}^{\infty}\frac{P(x)}{Q(x)}dx$}{$\deg(Q) \geq \deg(P) + 2$} & Upper Semi-Circle & & $ I = 2\pi i \sum_{j = 1}^N \text{Res}(f(z), z_j)$\\
+    %     \hline
+    %     \subcell{$\displaystyle \int_{-\infty}^{\infty} e^{i\beta x} \frac{P(x)}{Q(x)}dx$}{$\deg(Q) \geq \deg(P) + 1, \beta > 0 $} & & Upper Semi Circle & $ I = 2\pi i \sum_{j = 1}^N \text{Res}(f(z), z_j)$\\
+    %     \hline
+    %     \subcell{$\displaystyle \int_{-\infty}^\infty e^{i\beta x} \frac{P(x)}{Q(x)}dx$}{$\deg(Q) \geq \deg(P) + 1, \beta < 0 $} & Lower Semi Circle & & $ I = -2\pi i \sum_{j = 1}^N \text{Res}(f(z), z_j)$\\
+    %     \hline
+    %     $\int_{-\infty}^\infty F(e^x)dx $ & Box Contour &  \\
+
+    % \end{tabular}
+
+
+
+
+    \egroup
+
 
 
 \end{document}
