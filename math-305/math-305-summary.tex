@@ -92,10 +92,12 @@
             v = y^n
         \end{cases}$ \\
         \hline
+        Inverse Sine & $w = \sin^{-1}(z)$ & Transforms a L-Shape with ``wall'' at $x=0$ and value change at $x= 1$ to an infinite well with walls at $u= 0, \pi/2$. & \subcell{$ u = \sin^{-1}(\frac{1}{2}\left((x+1)^2+y^2\right)^{\frac{1}{2}}$}{$  - \left((x-1)^2 + y^2\right)^{\frac{1}{2}} )$}  \\
+        \hline
     \end{tabular}
     \egroup
-    \vspace{0.5cm}
 
+    \pagebreak
     \header{Inverse Functions and Branch Cuts}
     \vspace{1pt}
 
@@ -117,13 +119,23 @@
         \hline
     \end{tabular}
 
-    \pagebreak
 
-    \header{Inequality Reminders}
+
+    \header{Notes on Complex Numbers}
+    \sheader{Inequalities}
     \begin{itemize}
+        \setlength\itemsep{0em}
         \item $|e^z| \leq e^{\text{Re}(z)}$
         \item $|z^n + \cdots | \leq |z|^n + \cdots $
         \item $|z^n + \cdots | \geq |z|^n - \cdots $
+    \end{itemize}
+    \sheader{De Moivre's Theorem} $\displaystyle \cos(n\theta) + i\sin(n\theta) = (\cos(\theta) + i \sin(\theta))^n$
+    \begin{itemize}
+        \setlength\itemsep{0em}
+        \item Use the binomial theorem: $\displaystyle (a + b)^n = \sum_{k = 0}^n {n \choose k}a^{k}b^{n-k}$
+        \item Take the real or imaginary part depending on what you're looking for.
+        \item For some problems, you might have to make use of the geometric series: $\sum_{k = 0}^n z^k = \frac{z^{n + 1} - 1}{z - 1}$ for $z < 1$.
+        \item Some calculations (especially integrals) are better suited to use identities such as $\cos^n(\theta) = \left(\frac{e^{i\theta} + e^{-i\theta}}{2}\right)^n$.
     \end{itemize}
     
     \header{Differentiability, Analyticity, Cauchy-Riemann Equations}
@@ -245,8 +257,6 @@
     \begin{align*}
         \int_C f(z)dz = \sum_{j = 1}^N \int_{C_j}f(z)dz
     \end{align*}
-
-    \pagebreak 
 
     \sheader{Cauchy Integral Formula} Finally, we arrive at the Cauchy Integral Formula.
     It is as follows:
