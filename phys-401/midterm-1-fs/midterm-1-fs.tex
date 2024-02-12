@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=0.2in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{esint}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {../images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage[fontsize=7pt]{fontsize}
+\usepackage[none]{hyphenat}
+\usepackage[document]{ragged2e}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\usepackage{physics}
+
+\newcommand{\sepvec}{\vec{r_\textrm{sep}}}
+\newcommand{\sephat}{\hat{r}_{\textrm{sep}}}
+\newcommand{\kfrac}{\frac{1}{4\pi\epsilon_0}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\bhat}[1]{\hat{\textbf{#1}}}
+
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[2]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] $$#2$$\end{tcolorbox}\end{center}}
+\newcommand{\doubleformula}[3]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] $$#2$$\\$$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\formulax}[2]{\underline{#1}\smallskip\centering $#2$ \raggedleft}
+\newcommand{\tripleformula}[4]{\begin{center} \begin{tcolorbox}[title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] \begin{align*} #2 \\ #3 \\ #4\end{align*}
+    \end{tcolorbox}\end{center}}
+
+\newcommand{\formbox}[2]{\begin{center} \begin{tcolorbox}[colback=white, title = #1, boxrule=2pt,arc=3.4pt,boxsep=0mm] #2\end{tcolorbox}\end{center}}
+
+
+\newcommand{\where}{\hspace{0.3cm} \textrm{where} \hspace{0.3cm}}
+
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\usepackage{array}
+\begin{document}
+
+
+\begin{multicols*}{3}
+\formula{Continuity Equation}{\pfrac{\rho}{t} = -\nabla \cdot \mathbf{J}}
+\formula{Total Energy in EM Fields}{\frac{1}{2} \left(\epsilon_0 E^2 + \frac{1}{\mu_0} B^2\right)}
+\formula{Poynting Vector}{S \equiv \frac{1}{\mu_0} (\mathbf{E} \times \mathbf{B})}
+\formula{Continuity Equation 2}{\pfrac{u}{t} = - \nabla \cdot \mathbf{S}}
+\formula{Momentum Density}{\mu_o\epsilon_0 \textbf{S} = \epsilon_0 (\mathbf{E} \times \mathbf{B})}
+\formula{Angular Momentum}{\vec{\ell} = \vec{r} \times \vec{g}}
+\formula{Wave Equation}{\frac{\partial^2 f}{\partial z^2} = \frac{1}{v^2} \frac{\partial^2 f}{\partial t^2}}
+\formula{Wave Number}{\lambda = \frac{2\pi}{k}}
+\formula{Period}{T = \frac{2\pi}{kv}}
+\formula{Frequency}{f = \frac{1}{T} = \frac{kv}{2\pi} = \frac{v}{\lambda}}
+\formbox{Origins of Boundary Conditions}{
+    $\ds\int \vec{E}\cdot d\vec{l} = -\frac{d}{dt} \int \vec{B} \cdot d\vec{A} \implies E_1^\parallel - E_2^\parallel = 0$\\
+    $\ds\frac{1}{\mu}\left(\vec{\nabla} \times \vec{B}\right) = \epsilon \pfrac{E}{t} \implies \frac{1}{\mu_1}B_1^\parallel = \frac{1}{\mu_2}B_2^\parallel$\\
+    $\ds \vec{\nabla} \cdot \vec{B} = 0 \implies B_1^\perp = B_2^\perp$\\
+    $\ds \vec{\nabla} \cdot \vec{D} = 0 \implies \epsilon_1 E_1^\perp = \epsilon_2 E_2^\perp$
+}
+\formula{Polarization Vector}{\hat{n} = \cos\theta \hat{x} + \sin\theta \hat{y}}
+\formbox{Polarization Directions}{
+    \underline{Right Handed/Circular Polarization}: Clockwise Rotation about the $\vec{k}$ vector.\\
+    \underline{Left Handed/Circular Polarization}: Counter-Clockwise Rotation about the $\vec{k}$ vector.
+}
+\doubleformula{Maxwell's Foundation for EM Waves}{\nabla^2 \mathbf{E} = \mu_0\epsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2}}{\nabla^2\mathbf{B} = \mu_0 \epsilon_0 \frac{\partial^2 \mathbf{B}}{\partial t^2}}\
+\doubleformula{EM Waves}{\tilde{\mathbf{E}}{(\mathbf{r}, t)} = \tilde{E_0} e^{i(\mathbf{k} \cdot \mathbf{r} - \omega t)\hat{\mathbf{n}}}}{\tilde{\mathbf{B}}(\mathbf{r}, t) = \frac{1}{c} \tilde{E_0} e^{i(\mathbf{k} \cdot \mathbf{r} - \omega t)}(\bhat{k} \times \bhat{n}) = \frac{1}{c}\bhat{k} \times \tilde{\mathbf{E}}}
+\tripleformula{Averages}{\langle u\rangle = \frac{1}{2} \epsilon_0 E_0^2}{\langle\mathbf{S}\rangle = \frac{1}{2} c \epsilon_0 E_0^2 \bhat{z}}{\langle \mathbf{g} \rangle = \frac{1}{2c} \epsilon_0 E_0^2 \bhat{z}}
+\formula{Intensity}{\langle S\rangle = \frac{1}{2} c \epsilon_0 E_0^2}
+\formula{Radiation Pressure}{P = \frac{1}{A} \frac{\Delta p}{\Delta t} = \frac{1}{2} \epsilon_0 E_0^2 = \frac{I}{c}}
+\formula{Ohm's Law}{\vec{J} = \sigma \vec{E}}
+\end{multicols*}
+
+\end{document}
