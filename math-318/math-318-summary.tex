@@ -1,0 +1,428 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+\usepackage{tabularx}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\mheader}[1]{\textbf{{\sheader{#1}}}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\usepackage{physics}
+% \usepackage{braket}
+
+\begin{document}
+\begin{center}
+        \Large MATH 318 Review Notes\\
+        \normalsize Reese Critchlow
+\end{center}
+
+
+\header{Basic Concepts in Probability}
+
+\sheader{Permutations} For some set $S = \curly{a, b, c}$, the number of orderings of the set, or 
+the number of \textit{permutations} of the set is given by the \underline{factorial}, that is, that
+the number of permutations for a set of distinct elements of size $n$ is $n!$.
+
+\sheader{Redundancies in Permutations} It is important to note, that in a set of size $n$ where there are $m$ identical/redundant
+elements with count $m_i$, the number of permutations is given by:
+
+\begin{align*}
+    \frac{n!}{\prod_{i=1}^{m} m_i!}
+\end{align*}
+
+\sheader{Choosing and the Binomial Coefficient} The number of ways to choose $k$ unique objects from a set of size
+$n$ is given by the \underline{binomial coefficient}:
+\begin{align*}
+    \binom{n}{k} = \frac{n(n-1)(n - 1) \cdots (n - k + 1)}{k!} = \frac{n!}{k!(n-k)!}
+\end{align*}
+
+\sheader{Multinomial Coefficient} Let $b_1, \ldots, b_k$ be nonnegative integers, and let $n = b_1 + b_2 + \cdots b_k$.
+The multinomial coefficient $\binom{n}{b_1, b_2, \ldots, b_k}$ describes:
+\begin{itemize}
+    \item The number of ways to put $n$ interchangeable objects into $k$ boxes, such that box $i$ has $b_i$ 
+    objects in it, for $1 \leq i \leq k$.
+    \item The number of ways to choose $b_1$ interchangeable objects from $n$ objects, then $b_2$ from the remaining,
+    until you choose $b_{k-1}$ from what remains.
+    \item The number of unique permutations of a word with $n$ letters $k$ distinct letters, such that the
+    $i$-th letter occurs $b_i$ times.
+\end{itemize}
+The multinomial coefficient can be given by:
+\begin{align*}
+    \frac{n!}{b_1!b_2!\cdots b_k!}
+\end{align*}
+
+\sheader{Mathematical Definition of Probability}
+A \textit{probability} is a function that assigns to each $E$ contained in $S$, a number $P(E)$ such that:
+\begin{enumerate}
+    \item $0 \leq P(E) \leq 1$, $E \subseteq S$
+    \item $P(S) = 1$
+    \item $E_i \cap E_j = \emptyset, \forall i \neq j \implies P(E_1 \cup E_2 \cup \cdots E_n) = P(E_1) + P(E_2) + \cdots + P(E_n)$    
+\end{enumerate}
+
+\sheader{Basic Terminiology}
+\begin{itemize}
+    \item \textbf{Sample Space}, $S$, describes the set of all possible outcomes of an experiment.
+    It is either continuous or discrete, finite or infinite.
+    \item \textbf{Event}, $E$, is a subset of the sample space $E \subseteq S$.
+    \item A \textbf{Probability Space} is a triplet containing a sample space $S$, a set of events $E$,
+    and a probability function $P$, that is $(S, E, P)$.
+    \begin{itemize}
+        \item Often is the face that $S$ is finite, and every outcome is equally likely, such that \\
+        $P(E) = \frac{\textrm{\# of outcomes in } E}{\textrm{\# of outcomes in } S}$
+    \end{itemize}
+\end{itemize}
+
+\sheader{Properties of Probability}
+\begin{enumerate}
+    \item $\forall E, P(E) + P(E^C) = P(S) = 1$
+\end{enumerate}
+
+\pagebreak
+
+\sheader{Inclusion-Exclusion Formula} For a union of non-disjoint events, the probability of the union is given:
+\begin{align*}
+    P(E_1 \cup \cdots \cup E_n) = &\sum_{i = 1}^{n} P(E_i) - \sum_{i<j}P(E_i \cap E_j) + \\ 
+    &\sum_{i < j < k}P(E_i \cap E_j \cap E_k) - \cdots + (-1)^{n -1}\sum_{i < \cdots}P(E_1 \cap \cdots \cap E_n)
+\end{align*}
+
+\sheader{Conditional Probability}
+Two events $E$ and $F$ are said to be independent events if:
+\begin{align*}
+    P(E \cap F) = P(E)P(F) \iff P(E|F) = P(E)
+\end{align*}
+Hence, it is important to define the notation for a conditional probability:
+\begin{align*}
+    P(E|F)
+\end{align*}
+describes the probability of ``$E$ given $F$''.
+\sgap
+To generalize, events $E_1, \ldots, E_n$ are said to be independent if:
+\begin{align*}
+    P(E_i \cap \cdots \cap E_n) = P(E_1) \cdots P(E_n).
+\end{align*}
+Finally we can give some formulae:
+\begin{align*}
+    P(E \cap F) = P(E|F)P(F) && P(E|F) = \frac{P(E \cap F)}{P(F)}\\
+    P(A \cap B) = P(A|B)P(B) = P(B|A)P(A)
+\end{align*}
+
+\sheader{Law of Total Probability} Let $F_1, \cdots, F_n$ be a partition of $S$. Then,
+\begin{align*}
+    P(E) = \sum_{i = 1}^{n} P(E|F_i)P(F_i)
+\end{align*}
+
+\sheader{Bayes Formula} Building off of the law of total probability:
+\begin{align*}
+    P(F_j|E) = \frac{P(E|F_j)P(F_j)}{\sum_{i=1}^{n}P(E|F_i)P(F_i)}
+\end{align*}
+
+\header{Random Variables}
+
+\sheader{Definition} A random variable is a function that takes an event space $S$
+and produces an event.
+\begin{align*}
+    X: S \to E
+\end{align*}
+The event $E$ is often a real number $\mathbb{R}$.
+\gap
+\header{Discrete Random Variables} Discrete random variables are random variables that take on values in a countable set.
+\gap
+\sheader{Probability Mass Function} The probability mass function (p.m.f.) $P: E \to \mathbb{R}$ associated with a discrete 
+random variable defines the probability that the random variable takes certain values.
+
+\begin{align*}
+    P(E) = P(X=E)
+\end{align*}
+
+\sheader{Note} it is required that $\sum_i p(x_i) = 1$.
+\gap
+
+\sheader{Notation} We say that a random variable $X$ is distributed in a certain way with the notation $X \sim \textrm{dist}(p)$.
+\pagebreak
+
+\renewcommand{\arraystretch}{1.2} % Increase vertical spacing
+
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Geometric Random Variable}\\
+    \hline
+    Interpretation & The probability distribution of $i$ 
+    Bernoulli Trials (binary output) with probability $p$ of being successful before one success is obtained.\\
+    \hline
+    p.m.f. & $p(i) = (1-p)^{i - 1} p$\\
+    \hline
+    Symbol & $X \sim \textrm{geom}(p)$\\
+    \hline
+    Notes & Memoryless: $P(X > m + n | X > m) = P(x > n)$\\
+    \hline
+\end{tabularx} 
+\gap
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Binomial Random Variable}\\
+    \hline
+    Interpretation & The binomial random variable describes the distribution of successful Bernoulli
+    trials with probability of success $p$ over $n$ trials.\\
+    \hline
+    p.m.f. & $p(i) = \binom{n}{i}p^i(1-p)^i$\\
+    \hline
+    Symbol & $X \sim \textrm{Bin}(n,p)$\\
+    \hline
+\end{tabularx} 
+\gap
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Poisson Random Variable (with parameter $\lambda > 0$)}\\
+    \hline
+    Interpretation & Arises as a simplification to the Binomial Random Variable.
+    For some parameter $\lambda$, with the expectation of $\lambda$ events in a given interval, it give the probability of $k$
+    events occuring in the same interval.\\
+    \hline
+    p.m.f. & $p(k) = \frac{\lambda^k e^{-\lambda}}{k!}$\\
+    \hline
+    Symbol & $X \sim \textrm{Bin}(n,p)$\\
+    \hline
+    Examples & 
+        \sheader{Radioactive Decay} For $n$ atoms, each atom has probability $p$ of 
+        decaying in a 1 second interval. Thus $\lambda = np$: the average number of 
+        decays in 1 second (determined emperically).\\
+    \hline
+\end{tabularx}
+\gap
+\header{Continuous Random Variables}
+\sheader{Definition} $X$ is a continuous random variable if 
+\begin{enumerate}
+    \item There exists a function $f$ with $f(x) \geq 0$.
+    \item $P(x\in B) = \int_B f(x)dx, \,\, \forall B\subseteq \mathbb{R}, x \in \mathbb{R}$.
+\end{enumerate}
+In this case $f$ is called the probability density function for the random variable $X$,
+and $f(a)$ indicates how likely it is for $x$ to be near $a$, but importantly,
+$f(a) \neq P(a)$.
+\gap
+\sheader{Cumulative Distribution Function} We can also define the Cumulative Distribution Function,
+or the c.d.f. for a random variable $X$:
+\begin{align*}
+    F(a) = P(x \leq a) = P(x \in (-\infty, a]) = \int_{-\infty}^a f(x)dx.
+\end{align*}
+Importantly, it follows that the relationship between the c.d.f. and the p.d.f. is that
+the p.d.f. is the derivative of the c.d.f., that is:
+\begin{align*}
+    F'(x) = f(x).
+\end{align*}
+\sheader{Common Continuous Random Variables}
+
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Uniform Random Variable}\\
+    \hline
+    Interpretation & All values in a range $[a, b]$ are equally likely.\\
+    \hline
+    p.m.f. & $p(x) = \frac{1}{b - a}$\\
+    \hline
+    Symbol & $X \sim \textrm{Unif}(a,b)$\\\hline
+\end{tabularx}
+\gap
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Exponential Random Variable}\\
+    \hline
+    Interpretation & Time of occurrence for an unpredictable event.\\
+    \hline
+    p.m.f. & $p(x) = \lambda e^{-\lambda x}$\\
+    \hline
+    Symbol & $X \sim \textrm{Exp}(a,b)$\\\hline
+    Notes & 
+        \sheader{Memoryless} $P(x > 2\tau\, |\, x > \tau) = P(x > \tau) = \frac{1}{2}$\linebreak\smallskip
+
+        \sheader{Half Life, etc} Exponential RVs are good for modelling exponential decay.
+        We can then find the half life, such that $P(x > \tau) = \frac{1}{2}$, which 
+        is the time where it is equally likely for the material to have decayed than for 
+        it to have not. 
+    \\\hline
+\end{tabularx}
+\gap
+\begin{tabularx}{\textwidth}{|>{\hsize=0.25\hsize\raggedright\arraybackslash}X|>{\hsize=0.75\hsize\raggedright\arraybackslash}X|}
+    \hline
+    \multicolumn{2}{|c|}{Gaussian Random Variable}\\
+    \hline
+    Interpretation & Unsure\\
+    \hline
+    p.m.f. & $\ds f(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{\frac{-(x-\mu)^2}{2\sigma^2}}$\\
+    \hline
+    Symbol & $X \sim \textrm{N}(\mu, \sigma^2)$\\\hline
+    Notes & 
+        \sheader{Scaling Property} If $X$ is normal $(X \sim N(\mu, \sigma^2))$,
+        then $Y \sim N(0, 1)$, where $Y = \frac{X - \mu}{\sigma}$, and $X$ is the 
+        value of the random variable. An example of this would be, if one is trying to 
+        find the probability that $X \in [a, b]$, with $X \sim N(\mu, \sigma^2)$, then
+        the equivalent form would be to find the probability that $Y \in [\frac{a - \mu}{\sigma}, \frac{b - \mu}{\sigma}]$.
+    \\\hline
+\end{tabularx}
+\gap
+\header{Expectation Value}
+
+We can define the \underline{expectation value} $\mathbb{E}$ for a continuous random variable $X$ as:
+\begin{align*}
+    \mathbb{E}X = \int_{-\infty}^{\infty} xf(x)dx.
+\end{align*}
+Similarly, for a discrete random variable, we have:
+\begin{align*}
+    \mathbb{E}X = \sum_{\textrm{all } i} k_ip(k_i)
+\end{align*}
+\sheader{Lemma} Suppose $X$ is a continuous RV with p.d.f. $f$ and $f(x) = 0$ $\forall x < 0$,
+then:
+\begin{align*}
+    \mathbb{E}X = \int_0^\infty P(X > x)dx.
+\end{align*}
+Similarly, for a discrete RV:
+\begin{align*}
+    \mathbb{E}X = \int_{n = 0}^\infty P(X > n).
+\end{align*}
+\header{Compositions of Random Variables}
+\sheader{Theorem (Law of the Unconcious Statistician)} For a continuous RV $X$ with 
+p.d.f. $f(x)$ and a function $g: \mathbb{R} \to \mathbb{R}$, then:
+\begin{align*}
+    \mathbb{E}g(X) = \int g(x)f(x) dx
+\end{align*}
+This can also be applied to discrete RVs:
+\begin{align*}
+    \mathbb{E}g(X) = \sum_i g(x_i) p(x_i)
+\end{align*}
+\sheader{Linearity of Expectation}
+Expectation values are linear, that is:
+\begin{align*}
+    \mathbb{E}(aX + b) = a\mathbb{E}X + b
+\end{align*}
+
+\header{Moments of Random Variables and Related Values}
+We can define the \underline{$\textrm{n}^\textrm{th}$ moment} of $X$ to be:
+\begin{align*}
+    \mathbb{E}X^n = \int_{-\infty}^{\infty}x^n f(x) dx
+\end{align*}
+or, in the discrete case:
+\begin{align*}
+    \sum_i x_i^n p(x_i).
+\end{align*}
+
+\sheader{Variance} We define variance as:
+\begin{align*}
+    \textrm{Var}(X) = \sigma^2 &=  \mathbb{E} \left[(X - \mathbb{E}X)^2\right]\\
+    &= \mathbb{E}(X^2) - \left(\mathbb{E}(X)\right)^2.
+\end{align*}
+\sheader{Standard Deviation} Is the square root of the variance:
+\begin{align*}
+    \sigma = \sqrt{\textrm{Var}(x)}
+\end{align*}
+
+\header{Joint Distributions}
+
+Discrete random variables $X, Y$ have a joint p.m.f. 
+\begin{align*}
+    p(x, y) = P\left(\curly{X = x} \cap \curly{Y = y}\right).
+\end{align*}
+They also have \underline{marginal p.m.f.s}:
+\begin{align*}
+    P_X(x) = \sum_y p(x, y) = P(X = x) && P_Y(y) = \sum_x p(x, y) = P(Y = y).
+\end{align*}
+
+In the continuous case, $X$ and $Y$ are jointly continuous with p.m.f. $f(x, y)$ if $P((X, Y) \in C) = \iint_C f(x, y)dxdy$.
+Thus, we can also define the marginal p.m.f. for continuous distributions:
+\begin{align*}
+    P(x \in A) = P(X \in A, y \in \mathbb{R}) = \int_{D_X} f(x, y)dy
+\end{align*}
+where $D_X$ is the domain of $X$ for a given $y$. And thus, similarly,
+\begin{align*}
+    P(y \in B) = \int_{D_Y} f(x, y)dx
+\end{align*}
+
+\sheader{Law of the Unconcious Statistician for 2 Random Variables} Let $X, Y$ be R.V.s and $g$ a function, then:
+\begin{align*}
+    \mathbb{E}g(x, y) = \iint g(x, y)f(x, y)dxdy && \mathbb{E}g(x, y) = \sum_x\sum_y g(x, y)f(x, y)
+\end{align*}
+This implies that $\mathbb{E}(X + Y) = \mathbb{E}X + \mathbb{E}Y$.
+\gap
+\sheader{Independence of Random Variables} Two independent random variables $X, Y$ are independent if
+for any $a, b \in \mathbb{R}$,
+\begin{align*}
+    P\left(\curly{X \leq a} \cap \curly{Y \leq b}\right) = P\left(\curly{X \leq a}\right) P\left(\curly{Y \leq b}\right)
+\end{align*}
+It also follows that $X, Y$ are independent iff:
+\begin{align*}
+    p(x, y) &= p_X(x)p_Y(y)\\
+    f(x, y) &= f_X(x)f_Y(y)
+\end{align*}
+Finally, one can also say that $X, Y$ are independent if the matrix of the values is full rank.
+\gap
+\sheader{Compositions of Functions with 2 Random Variables} Suppose that 
+$X, Y$ are independent RVs. Then,
+\begin{align*}
+    \mathbb{E}\left(g(X)h(Y)\right) = \mathbb{E}g(X) \cdot \mathbb{E}h(Y).
+\end{align*}
+\sheader{Covariance} We can define the covariance of two RVs as: 
+\begin{align*}
+    \textrm{Cov}(X, Y) = \mathbb{E}(XY) - \mathbb{E}X \cdot \mathbb{E}Y.
+\end{align*}
+From this, it is implied that if $X, Y$ are independent, then $\textrm{Cov}(X, Y) = 0$,
+but importantly, for only the forwards direction. Covariance describes the nature 
+of random variables to grow or shrink together.
+\gap
+\sheader{Correlation Coefficient} The correlation coefficient is defined to be:
+\begin{align*}
+    \rho(X, Y) \equiv \frac{\textrm{Cov}(X, Y)}{\sqrt{\textrm{Var}(X) \textrm{Var}(Y)}}.
+\end{align*}
+It can be interpreted as a ``normalized'' covariance.
+\gap
+\sheader{Theorem (Cauchy Schwartz Inequality)}
+\begin{align*}
+    \left|\mathbb{E}(XY)\right|^2 \leq \mathbb{E}X^2 \cdot \mathbb{E}Y^2.
+\end{align*}
+\sheader{Sum of Variance} For two RVs $X, Y$, we can obtain the variance of their sum:
+\begin{align*}
+    \textrm{Var}(X + Y) = \textrm{Var}(X) + \textrm{Var}(Y) + 2\textrm{Cov}(X, Y),
+\end{align*}
+for which if $X, Y$ are independent, then the covariance term is zero, so
+\begin{align*}
+    \textrm{Var}(X + Y) = \textrm{Var}(X) + \textrm{Var}(Y)
+\end{align*}
+\sheader{Sums of Random Variables} For continuous RVs, we can find the
+p.m.f. of their sum under the convolution:
+\begin{align*}
+    f_{X + Y}(a) = \int_{-\infty}^{\infty} f_X(a-y)f_Y(y)dy.
+\end{align*}
+\sheader{Gamma Distribution} We define another distribution, the gamma distribution, $X \sim \textrm{gamma}(n, \lambda)$ with 
+p.m.f.:
+\begin{align*}
+    f(x) = \frac{\lambda^n x^{n - 1} e^{-\lambda x}}{(n - 1)!}
+\end{align*}
+
+
+\end{document}
