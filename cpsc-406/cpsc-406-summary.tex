@@ -1,0 +1,525 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+\usepackage{tabularx}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\mheader}[1]{\textbf{#1}\\\rule{0.33\textwidth}{0.5pt}\\}
+\newcommand{\norm}[2]{\left\lvert\left\lvert#1\right\rvert\right\rvert}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\sgap}{\smallskip\\}
+\newcommand{\range}{\textrm{range}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\usepackage{physics}
+% \usepackage{braket}
+
+\begin{document}
+\begin{center}
+        \Large CPSC 406 Review Notes\\
+        \normalsize Reese Critchlow\\
+        \textit{Any Distribution for Commercial Use Without the Expressed Consent of the Creator is Strictly Forbidden.}
+\end{center}
+
+\header{Linear Algebra Review}
+\sheader{Orthogonality} A $n \times m$ matrix is said to be \underline{orthonormal} if its columns are pairwise orthonormal:
+\begin{align*}
+    Q = [q_1 | \cdots | q_m].
+\end{align*}
+It follows that then, for an orthonormal matrix, then:
+\begin{align*}
+    Q^TQ = I_m.
+\end{align*}
+In addition, if $n = m$, that is if $Q$ is square, then $Q$ is said to be \underline{orthogonal}.
+From this, it follows that:
+\begin{align*}
+    Q^{-1} = Q^T && Q^TQ = QQ^T = I_n.
+\end{align*}
+It is to be also noted that orthogonal transformations preserve lengths and angles.
+\gap
+\sheader{Nonsingularity} A matrix is said to be \textbf{nonsingular} if it has a matrix inverse and 
+is square. A square matrix is nonsingular iff its determinant is nonzero.
+\gap
+\sheader{Condition Number} The condition number of an $n \times n$ positive definite matrix
+$H$ is 
+\begin{align*}
+    \kappa(H) = \frac{\lambda_{\max} (H)}{\lambda_{\min} (H)} \geq 1.
+\end{align*}
+It is said that a matrix is \underline{ill-conditioned} if $\kappa(H) \gg 1$. If $f$
+is twice continuously differentiable, the condition number of $f$ at solution $x^*$ is 
+given by:
+\begin{align*}
+    \kappa(f) = \kappa(\nabla^2 f(x^*))
+\end{align*}
+\gap
+\header{Linear Least Squares}
+
+A basic linear least squares problem has the form:
+\begin{align*}
+    \min_x \norm*{Ax - b}^2_2.
+\end{align*}
+In essence, linear least squares seeks to find the vector $x$ that, when multiplied by 
+the matrix $A$, returns the closest result to $b$. The $ij$-th entry of the $A$ matrix can be 
+interpreted as the $i$-th observation of the $j$-th independent variable.
+\gap
+\sheader{Normal Equations}
+We can write the least squares problem as a function $f$ of $x$, thus, the solution to the least 
+squares problem must be a stationery point of $f$:
+\begin{align*}
+    x^* = \textrm{arg}\min_{x} f(x) := \frac{1}{2} \norm*{Ax-b}^2_2\\
+    \implies \nabla f(x) = A^T - A^Tb\\
+    \nabla f(x^*) = 0 \iff A^TAx^* - A^Tb = 0 \iff A^TAx^* = A^Tb
+\end{align*}
+If $A$ is full rank, then the solution $x^*$ is unique.
+\gap
+\sheader{Geometric Interpretation}
+If the $n \times m$ matrix $A$ has range $\textrm{range}(A)$, and for some vector $b \in \mathbb{R}^m$
+then the vector $Ax^*$, where $x^*$ is the solution to the least squares problem is the 
+projection of $b$ onto the $\textrm{range}(A)$. Hence, we can also define the residual $r$ to be 
+vector which is the difference between $Ax^*$ and $b$, $r = b - Ax^*$.\\
+\smallskip
+Hence, it must be that $r \in \textrm{null}(A^T)$, such that $A^Tr=0$.
+\gap
+\header{QR Factorization}
+We can obtain the QR factorization for an $m \times n$ matrix, with $m > n$:
+\begin{align*}
+    A = [Q_1 | Q_2] \begin{bmatrix}
+        R_1\\
+        0
+    \end{bmatrix}
+\end{align*}
+Where: 
+\begin{itemize}
+    \item $Q$ is orthogonal
+    \item $R_1$ is [right] upper triangular
+    \item $\textrm{range}(Q_1) = \textrm{range}(A)$
+    \item $\textrm{range}(Q_2) = \textrm{range}(A)^\perp \equiv \textrm{null}(A^T)$.
+\end{itemize}
+We can use the QR factorization to solve $n \times n$ nonsingular matricies:
+\begin{align*}
+    x = A^{-1}b = R^{-1}Q^Tb
+\end{align*}
+This can also be used to solve least squares problems. Due to the condition number, it is said that
+QR is a more numerically stable solution rather than the normal equations approach.
+\gap
+\header{Singular Value Decomposition (SVD)}
+For any $m \times n$ matrix $A$ with rank $r$: 
+\begin{align*}
+    A = U\Sigma V^T = [u_1 | u_2 | \cdots | u_r] \begin{bmatrix}
+        \sigma_1 & & &\\
+        & \sigma_2 & & \\
+        & & \ddots & \\
+        & & & \sigma_r 
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_1^T \\
+        v_2^T \\
+        \vdots \\
+        v_r^T \\
+    \end{bmatrix}
+\end{align*}
+A simple interpretation of the components of the SVD are as follows:
+\begin{itemize}
+    \item $U$ is a basis for $\textrm{range}(A)$
+    \item $V$ is a basis for $\textrm{range}(A^T)$
+    \item $\Sigma$ contains all of the roots of the eigenvalues of $A$.
+\end{itemize}
+It is also nice to define two other norms for matricies given the SVD:
+\begin{itemize}
+    \item Spectral Norm: $\ds \norm*{A}_2 = \max_{\norm*{x}_2 = 1}\norm*{Ax}_2 = \sigma_1$
+    \item Frobenious Norm: $\ds \norm*{A}_F = \sqrt{\textrm{trace}(A^TA)}= \sqrt{\sum_{i=1}^{r}\sigma_i^2}$
+\end{itemize}
+We can say that the SVD decomposes any matrix $A$ with rank $r$ into a sum of rank-1 matricies. Hence,
+we can describe the best rank-k approximation by the following:
+\begin{align*}
+    A_k = \sum_{j = 1}^{k} \sigma_j u_j v_j^T.
+\end{align*}
+We can also say that the full SVD provides orthogonal bases for all four fundamental subspaces for an $m \times n$ matrix:
+\begin{itemize}
+    \item $\range(A) = \textrm{span}\curly{u_1, \ldots, u_r}$
+    \item $\textrm{null}(A^T) = \textrm{span}\curly{u_{r + 1}, \ldots, u_m}$
+    \item $\range(A^T) = \textrm{span}\curly{v_1, \ldots, v_r}$
+    \item $\textrm{null}(A) = \textrm{span}\curly{v_{r + 1}, \ldots, v_n}$
+\end{itemize}
+
+\sheader{Minimum norm least-squares solution} Building off of the prior result of the fundamental 
+subspaces, we obtain that:
+\begin{align*}
+    \overline{x} = Vy = \sum_{r}^{j=1}\frac{u_j^T b}{\sigma_j}v_j, \,\,\, \sigma_j y_j = \begin{cases}
+        \overline{b}_j/ \sigma_j & j = 1:r \\
+        0 & j = r + 1 : n
+    \end{cases}
+\end{align*}
+\pagebreak
+
+\header{Regularized Least Squares}
+Regularized Least Squares is motivated by multi-objective optimization problems, where 
+one must choose some $x$ to minimize $f_1(x)$ and $f_2(x)$, but they do not get small together.
+Commonly, the solution space is divided into two parts, one containing possible solutions, and 
+one containing impossible solutions. The boundary between these two sets is called the \underline{Pareto Frontier}.
+\gap
+\sheader{Weighted-Sum Objective} Commonly, the approach to a multi-objective optimization is 
+to weight the sum of objectives:
+\begin{align*}
+    \min_{x} \alpha_1f_1(x) + \alpha_2f_2(x)
+\end{align*}
+Hence, the negative ratio of the two $\alpha$s ends up becoming the slope of the Pareto Frontier
+at each given solution point on the curve $-\left(\frac{\alpha_1}{\alpha_2}\right)$.
+\gap
+\sheader{Tikhonov Regularization/Ridge Regression} This form of the least squares problem 
+is generally employed for the case that the standard least-squares problem is ill-posed, and 
+thus requires some sort of bias. It can also be applied for a case in which one would like 
+to have a solution with particular characteristics be favoured. It is as follows:
+\begin{align*}
+    \min_x \frac{1}{2} \norm*{Ax - b}^2 + \frac{1}{2} \lambda \norm*{Dx}^2
+\end{align*}
+Where:
+\begin{itemize}
+    \item $\norm*{Dx^2}$ is the regularization penalty (often $D = I$)
+    \item $\lambda$ is the positive regularization parameter
+\end{itemize}
+Hence, we can say that an equivalent expression for the objective is:
+\begin{align*}
+    \norm*{Ax - b}^2 + \lambda\norm*{Dx}^2 = \norm{\begin{bmatrix}
+        A \\
+        \sqrt{\lambda}D
+    \end{bmatrix}x - \begin{bmatrix}
+        b\\
+        0
+    \end{bmatrix}}^2.
+\end{align*}
+Hence, the normal equations then become:
+\begin{align*}
+    (A^TA + \lambda D^T D)x = A^T b.
+\end{align*}
+
+\header{Gradients, Linearizations, and Optimality}
+For some function $f: \mathbb{R}^n \to \mathbb{R}$, then $x^* \in \mathbb{R}^n$ is a:
+\begin{itemize}
+    \item \textbf{Global Minimizer} if $f(x^*) \leq f(x), \,\, \forall x$.
+    \item \textbf{Strict Global Minimizer} if $f(x^*) \leq f(x), \,\, \forall x$.
+    \item \textbf{Local Minimizer} if $f(x^*) \leq f(x), \,\, \forall x \in \epsilon \mathbf{B}(x^*)$.
+    \item \textbf{Strict Local Minimizer} if $f(X^*) < f(x), \,\, \forall x \in \epsilon \mathbf{B}(x^*)$.
+\end{itemize}
+
+\sheader{1-Dimensional Optimization} Standard Calc 1 definitions:
+\begin{itemize}
+    \item \textbf{Local Minimizer}: $f'(x) = 0 \wedge f''(x) > 0$
+    \item \textbf{Local Maximizer}: $f'(x) = 0 \wedge f''(x) < 0$
+\end{itemize}
+
+\mheader{Multidimensional Optimization}\\
+\sheader{Directional Derivatives} A directional derivative of $f: \mathbb{R}^n \to \mathbb{R}$ 
+at $x \in \mathbb{R}^n$ in the direction $d \in \mathbb{R}^n$ is:
+\begin{align*}
+    f'(x;d) = \lim_{\alpha \to 0^+} \frac{f(x + \alpha d) - f(x)}{\alpha}
+\end{align*}
+\sheader{Descent Directions} A nonzero vector $d$ is a descent direction of $f$ at $x$ if:
+\begin{align*}
+    f(x + \alpha d) < f(x), \,\, \forall \alpha \in (0, \epsilon) \textrm{  for some  } \epsilon > 0 \iff f'(x;d) < 0
+\end{align*}
+\pagebreak
+
+\sheader{Gradients} If $f: \mathbb{R}^n \to \mathbb{R}$ is continuously differentiable,
+the gradient of $f$ at $x$ is the vector:
+\begin{align*}
+    \nabla f(x) = \begin{bmatrix}
+        \frac{\partial f}{\partial x_1}(x) \\
+        \vdots\\
+        \frac{\partial f}{\partial x_n}
+    \end{bmatrix}
+    \in \mathbb{R}^n
+\end{align*}
+It is also implied that: $f'(x; d) = \nabla f(x)^T d$. And, if $\norm{d} = 1$, then the projection 
+of the gradient onto $d$ is given by $f'(x;d) \cdot d$.
+\gap
+\sheader{Level Set (definition)} The $\alpha$-level set of $f$ is the set of points of $x$ where
+the function value is at most $\alpha$. A direction $d$ points into the level set $[f \leq f(x)]$
+if $f'(x;d) < 0$.
+\gap
+\header{Multidimensional Conditions}
+\sheader{Matrix Definiteness} Let $A$ be an $n \times n$ matrix with $A = A^T$ (symmetric).
+\begin{itemize}
+    \item \textbf{Positive Semidefinite}: $A$ is positive semidefinite $(H \succeq 0)$ if:
+    \begin{itemize}
+        \item $x^T A x \geq 0 \,\, \forall \,\, x\in \mathbb{R}^n$
+        \item For a diagonal matrix $D \succeq 0 \iff d_i \geq 0 \,\, \forall i$
+        \item All eigenvalues are greater than or equal to zero.
+        \item $A = R^TR$ for some $n \times n$ matrix $R$.
+    \end{itemize}
+    \item \textbf{Positive Definite} $(A \succ 0)$ if
+    \begin{itemize}
+        \item $x^T A x > 0 \,\, \forall \,\, 0 \neq x \in \mathbb{R}^n$
+        \item For a diagonal matrix $D \succ 0 \iff d_i > 0 \,\, \forall i$
+        \item All eigenvalues are strictly greater than zero.
+        \item $A = R^TR$ for some nonsingular $n \times n$ matrix $R$.
+    \end{itemize}
+    \item \textbf{Indefinite} if:
+    \begin{itemize}
+        \item $\exists x \neq y \in \mathbb{R}^n \textrm{ such that } x^TA(x) > 0 \wedge y^TAy < 0$.
+    \end{itemize}
+\end{itemize}
+\sheader{Hessians} For $f: \mathbb{R}^n \to \mathbb{R}$, twice continuously differentiable, the \textbf{Hessian}
+of $f$ at $x \in \mathbb{R}^n$ is the $n\times n$ symmetric matrix:
+\begin{align*}
+    H(x) = \begin{bmatrix}
+        \frac{\partial^2 f}{\partial x_1^2}(x) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(x)\\
+        \vdots & \ddots &\vdots \\
+        \frac{\partial^2 f}{\partial x_n \partial x_1}(x) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(x)
+    \end{bmatrix}
+\end{align*}
+
+\sheader{Quadratic Functions} Quadratic functions take the following forms:
+\begin{itemize}
+    \item $f(x) = \frac{1}{2} x^T Hx + b^T x + \gamma$
+    \item $\nabla f(x) = Hx + b$
+    \item $\nabla^2 f(x) = H$
+\end{itemize}
+
+\sheader{Directional Second Derivatives} The directional second derivative of $f$ at $x$ in the 
+direction $d$ is given by:
+\begin{align*}
+    f''(x;d) = \lim_{\alpha \to 0^+} \frac{f'(x + \alpha d; d) - f'(x; d)}{\alpha} = d^T \nabla^2 f(x)d
+\end{align*}
+
+\sheader{Linear and Quadratic Approximations}
+\begin{itemize}
+    \item Linear Approximation: $f(y) = f(x) + \nabla f(x)^T (y - x) + \frac{1}{2} (y - x)^T \nabla^2 f(z) (y-x)$
+    \item Quadratic Approximation: $f(x + d) = f(x) + \nabla f(x)^T d + \frac{1}{2} d^T \nabla^2 f(x)d + o(\norm{d}^2)$
+\end{itemize}
+\pagebreak 
+
+\sheader{Sufficient Conditions for Optimality} For $f: \mathbb{R}^n \to \mathbb{R}$ twice 
+continuously differentiable and $\overline{x} \in \mathbb{R}^n$ stationery ($\nabla f(\overline{x}) = 0$), if:
+\begin{itemize}
+    \item $\nabla^2 f(\overline{x}) \succeq 0 \implies \overline{x}$ is a local min.
+    \item $\nabla^2 f(\overline{x}) \preceq 0 \implies \overline{x}$ is a local max.
+    \item $\nabla^2 f(\overline{x}) \succ 0 \implies \overline{x}$ is a \textit{strict} local min.
+    \item $\nabla^2 f(\overline{x}) \prec 0 \implies \overline{x}$ is a \textit{strict} local max.
+    \item $\nabla^2 f(\overline{x})$ indefinite, then $\overline{x}$ is undetermined. (test does not tell us anything)
+\end{itemize}
+
+\header{Nonlinear Least Squares}
+We define the nonlinear least-square problem (NLLS) to be:
+\begin{align*}
+    \min_{x\in \mathbb{R}^n} f(x) := \frac{1}{2}\norm{r(x)}_2^2 && r: \mathbb{R}^n \to \mathbb{R}^m
+\end{align*}
+Where $r$ is the residual function is given by:
+\begin{align*}
+    r(x) = \begin{bmatrix}
+        r_1(x)\\
+        r_2(x)\\
+        \vdots \\
+        r_m(x)
+    \end{bmatrix}, &&
+    J(x) = \begin{bmatrix}
+        \nabla r_1(x)^T\\
+        \nabla r_2(x)^T\\
+        \vdots\\
+        \nabla r_m(x)^T
+    \end{bmatrix},
+    &&
+    \nabla f(x) = J(x)^T r(x)
+\end{align*}
+This reduces to linear least-squares when $r$ is \underline{affine}.
+\gap
+\header{Descent Methods}
+\sheader{Gradient Descent}
+Intialization: Choose $x_0 \in \mathbb{R}^n$ and tolerance $\epsilon > 0$.\\
+Iterations:
+\begin{enumerate}
+    \item Choose step size $\alpha^{(k)}$ to approximatley minimize $\ds \phi(\alpha) = f(x^k - \alpha \nabla f(x^k))$
+    \item Update: $x^{(k + 1)} = x^{(k)} - \alpha^{(k)}\nabla f(x^{(k)})$
+    \item Stop: if $\norm*{\nabla f(x^{(k)})} < \epsilon$.
+\end{enumerate}
+
+\sheader{Scaled Descent} Scaled descent is motivated by the zig-zagging behaviour of gradient 
+descent, where exact linesearch implies that descent ``steps'' must be orthogonal to each other.
+Specifically, if the condition number $\kappa$ is large, $\kappa \gg 1$, then the zig-zagging is 
+exacerbated. Hence, scaled gradient seeks to make a change of variables $x = Sy$ for some 
+nonsingular $S$. Hence, for an original minimization problem:
+\begin{align*}
+    \min_{x}f(x) && f: \mathbb{R}^n \to \mathbb{R}
+\end{align*}
+The change of variables implies:
+\begin{align*}
+    \min_y g(y) = f(Sy).
+\end{align*}
+The gradient of $g$ is given by:
+\begin{align*}
+    \nabla g(y) = S^T\nabla f(Sy).
+\end{align*}
+And thus, we get that the scaled gradient method is:
+\begin{align*}
+    x^{(k + 1)} = x^{(k)} + \alpha^{(k)}d^{(k)} && d^{(k)} = -SS^T \nabla f(x^{(k)}).
+\end{align*}
+Where $SS^T \succ 0$ (given earlier in Matrix Deefiniteness).
+\gap
+Hence, we can give a method for scaled gradient descent:
+\begin{enumerate}
+    \item Choose some scaling matrix $D^{(k)} = SS^T \succ 0$.
+    \begin{itemize}
+        \item Remark: choosing a scaling matrix $S$ is generally done in a way which makes 
+        the condition number of the rescaled matrix as close to 1 as possible ($\kappa(\nabla^2 g) \approx 1$).
+        \item Some common scalings include:
+        \begin{align*}
+            S^{(k)} (S^{(k)})^T = \begin{cases}
+                (\nabla f(x^{(k)}))^{-1} & \textrm{Newton } (\kappa = 1)\\
+                (\nabla f(x^{(k)}) + \lambda I)^{-1} & \textrm{Damped Newton}\\
+                \textbf{Diag}(\frac{\partial f(x^{(k)})}{\partial x_i^2})^{-1} & \textrm{diagonal scaling}
+            \end{cases}
+        \end{align*}
+    \end{itemize}
+    \item Compute $d^{(k)} = -D^{(k)}\nabla f(x^{(k)})$. 
+    \item Choose stepsize $\alpha^{(k)} > 0$ through linesearch.
+    \item Update $x^{(k + 1)} = x^{(k)} + \alpha^{(k)}d^{(k)}$.
+\end{enumerate}
+\sheader{Gauss Newton for NLLS}\\
+Objective: $\ds \min_{x} f(x) = \frac{1}{2} \norm{r(x)}_2^2$\\
+Step: $\ds x^{(k + 1)} = x^{(k)} + \alpha^{(k)} d^{(k)}$\\
+Procedure:
+\begin{enumerate}
+    \item Compute residual $r_k = r(x^{(k)})$ and Jacobian $J_k = J(x^{(k)})$
+    \item Compute step $d^{(k)} = \textrm{argmin}_d \norm{J_k d + r_k}^2$, $(d^{(k)} = -J_k \backslash r_k)$.
+    \item Choose stepsize $\alpha^{(k)} \in (0, 1]$ via linesearch on $f(x)$.
+    \item Update $x^{(k + 1)} = x^{(k)} + \alpha^{(k)}d^{(k)}$.
+    \item Stop if $\norm{r(x^{(k + 1)})} < \epsilon$ or $\norm{\nabla f(x^{(k)})} = \norm{J_k^T r_k} < \epsilon$.
+\end{enumerate}
+\sheader{Step Size Selection}
+\begin{itemize}
+    \item \textbf{Exact} (hard/expensive except for quadratic case): $\ds \alpha^{(k)} \in \textrm{argmin}_{\alpha \geq 0} \phi(\alpha)$.
+    \begin{itemize}
+        \item Quadratic Case: Choose $\ds \alpha^* = - \frac{\nabla f(x)^T d}{d^T Hd}$
+    \end{itemize}
+    \item \textbf{Constant} (cheap/easy, but requires analysis of $f$): $\ds \alpha^{(k)} = \overline{\alpha} > 0, \,\, \forall k$.
+    \begin{itemize}
+        \item Quadratic Case: Choose $\ds \alpha \in \left(0, \frac{2}{\lambda_{\textrm{max}}(H)}\right)$
+    \end{itemize}
+    \item \textbf{Approximate} [Backtracking/Armijo] (cheap, no analysis):
+    \begin{enumerate}
+        \item Set $\alpha^{(k)} > 0$
+        \item Until $f(x^{(k)} + \alpha^{(k)}d^{(k)} < f(x^k) + \mu \alpha f'(x;d))$, $\mu \in (0, 1)$.
+        \begin{itemize}
+            \item $\alpha^{(k)} \leftarrow \alpha^k \cdot \rho$, $\rho \in (0, 1)$.
+        \end{itemize}
+        \item Return $\alpha^{(k)}$
+    \end{enumerate}
+
+\end{itemize}
+
+\sheader{Lipschitz Smooth Functions}
+A function $f: \mathbb{R}^n \to \mathbb{R}$ is said to be $L$-Lipschitz smooth if:
+\begin{align*}
+    \norm{\nabla f(x) - \nabla f(y)} \leq L\norm{x - y}\,\,\, \forall x, y \in \mathbb{R}^n
+\end{align*}
+For quadratic functions, we can say that $L = \lambda_{\max} (H)$.
+\sgap
+\sheader{Second-order L-smooth characterization} If $f$ is twice continuously differentiable,
+then $f$ is $L$-Lipschitz smooth iff its Hessian is bounded by $L\,\, \forall x \in \mathbb{R}^n$:
+\begin{align*}
+    LI - \nabla^2 f(x) \succeq 0.
+\end{align*}
+\pagebreak
+
+\header{Cholesky Factorization}
+
+Cholesky factorization is another way of obtaining a LU-like decomposition, however, it only works
+if the matrix is positive definite. In relation to the LU decomposition, it uses $(1/3)n^3$ flops
+vs $(2/3)n^3$ for LU factorization. It is as follows:
+
+\begin{align*}
+    A = R^T R
+\end{align*}
+
+Where $R$ is some positive definite upper triangular matrix.
+\gap
+\header{Newton's Method}
+Newton's method arises as a product from the second order approximation of $f$ at $x^{(k)}$. Hence,
+we get two forms of Newton's method:
+\gap
+\sheader{Pure Newton's Method}
+\begin{align*}
+    x^{(k + 1)} = x^{(k)} + d_N^{(k)} && H_k d_N^{(k)} = - \nabla f(x^{(k)})
+\end{align*}
+\sheader{Damped Newton's Method}
+\begin{align*}
+    x^{(k + 1)} = x^{(k)} + \alpha d_N^{(k)} && \alpha \in (0, 1]
+\end{align*}
+
+For Newton's method to converge, we require that $\nabla^2 f(x^{(k)}) \succ 0 \,\, \forall k$ 
+to ensure descent. However, it is important to note that this does not always hold, such 
+as in the case that $\lambda_{\min} (H_k)$ is small.
+\gap 
+We can also use the Cholesky factorization for Newton's method. This process looks like:
+\begin{enumerate}
+    \item Choose $\tau = 0$
+    \item Find the Cholesky factorization: $(H_k + \tau I) = R^TR$
+    \begin{itemize}
+        \item If the Cholesky fails, increase $\tau$ and repeat.
+    \end{itemize}
+    \item Solve $R^TR d_N^k = -g_k$.
+\end{enumerate}
+
+\header{Linear Constraints}
+
+We can define a linearly constrained problem to be one such that:
+\begin{align*}
+    \min_{x \in \mathbb{R}^n} \curly{f(x) \,|\, Ax = b}
+\end{align*}
+Where:
+\begin{itemize}
+    \item $f: \mathbb{R}^n \to \mathbb{R}$ is a smooth function
+    \item $A$ is $m \times n$, $m < n$
+    \item $b \in \mathbb{R}^m$
+    \item A has full rank.
+\end{itemize}
+\sheader{Feasible Set} A feasible set is the set of all vectors which satisfy the equation 
+$Ax = b$:
+\begin{align*}
+    \mathcal{F} = \curly{x \in \mathbb{R}^n \,|\, Ax = b}.
+\end{align*}
+We can also represent the feasible set in an alternative fashion:
+\begin{align*}
+    \mathcal{F} = \curly{x \in \mathbb{R}^n \, | \, Ax = b} = \curly{\overline{x} + Zp \,| \, p \in \mathbb{R}^{n - m}}
+\end{align*}
+Where: \begin{itemize}
+    \item $\overline{x}$ is a particular solution ($A\overline{x} = b$)
+    \item $Z$ is a basis for the null space of $A$ ($AZ = 0$)
+\end{itemize}
+Hence the problem becomes unconstrained in $n - m$ variables:
+\begin{align*}
+    \min_{p \in \mathbb{R}^{n -m}} f(\overline{x} + Zp).
+\end{align*}
+We can then apply any optimization to obtain the solution $p^*$, and $x^*= \overline{x} + Zp^*$
+is the solution to the original problem.
+
+
+\end{document}
