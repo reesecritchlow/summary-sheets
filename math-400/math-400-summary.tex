@@ -1,0 +1,481 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+\usepackage{tabularx}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\mheader}[1]{\textbf{{\sheader{#1}}}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\usepackage{physics}
+% \usepackage{braket}
+
+\begin{document}
+\begin{center}
+        \Large MATH 400 Cookbook\\
+        \normalsize Reese Critchlow\\
+        \textit{Any Distribution for Commercial Use Without the Expressed Consent of the Creator is Strictly Forbidden.}
+\end{center}
+
+\header{First Order PDEs}
+
+Given some PDE of the form:
+
+\begin{align*}
+    \begin{cases}
+        u_t + c(x, t, u)u_x = s(x, t, u)\\
+        u(x, 0) = f(x)
+    \end{cases}
+\end{align*}
+We solve by the following:
+\begin{enumerate}
+    \item Obtain the system of ODEs corresponding to the original PDE:
+    \begin{align*}
+        \frac{dx}{dt} &= c(x, t, u) && \frac{du}{dt} = s(x, t, u).
+    \end{align*}
+    \item Solve whichever equation has no variables that do not appear in derivative term.
+    \item Depending on which equation was solved in step 2, impose the corresponding initial conditions:
+    \begin{align*}
+        x(0) &= \xi && u(x, 0) = f(\xi).
+    \end{align*}
+    \item Use the result of step 3 to substitute back into the incomplete equation.
+    \item Solve for $\xi$, and substitute it back into the result for $u$.
+\end{enumerate}
+
+\sheader{Alternate Strategy}
+\gap
+Given some PDE of the form:
+\begin{align*}
+    \begin{cases}
+        a(x, t, u)u_t + b(x, t, u)u_x = c(x, t, u)\\
+        u(x, 0) = f(x) \textrm{ on } t = g(x).
+    \end{cases}
+\end{align*}
+
+We solve the following system of ODEs:
+\begin{align*}
+    \frac{dt}{ds} &= a(x, t, u) && t(0) = g(\xi)\\
+    \frac{dx}{ds} &= b(x, t, u) && x(0) = \xi\\
+    \frac{du}{ds} &= c(x, t, u) && u(x=0) = f(\xi)
+\end{align*}
+
+\sheader{Data Curves and Characteristic Curves}
+Through solving these PDEs, we obtain the following:
+\begin{itemize}
+    \item Data Curve: the intitial condition $t = g(x)$ is called the \textit{data curve},
+    as it contains the original data from the IC.
+    \item Characteristic Curves: the characteristic curves are given by $\xi = h(x, y)$.
+    They describe the curves on the space where the PDE reduces to the ODE $\frac{du}{dt} = 0$.
+\end{itemize}
+
+There exist some complications when special cases of the data curves and the 
+characteristic curves:
+\begin{itemize}
+    \item Two Characteristics Intersect
+    \begin{itemize}
+        \item Cannot solve $s(x, y), \xi(x, y)$.
+        \item $u$ may be multi-valued.
+    \end{itemize}
+    \item Characteristic Intersects the Data Curve Twice
+    \begin{itemize}
+        \item No solution in general.
+    \end{itemize}
+    \item Data Curve is a Characteristic Curve
+    \begin{itemize}
+        \item Need to choose some special $u = f(\xi)$ to avoid contradiction,
+        and cannot determine $u$ outside the data curve.
+        \item $u$ cannot be determined outside the data curve.
+    \end{itemize}
+\end{itemize}
+
+\header{Breaking}
+
+For some problems, we get that multiple characteristics intersecting at some 
+certain point. The first point at which characteristics intersect is called 
+the ``breaking point''. This generally is most seen in PDEs of the form:
+\begin{align*}
+    \begin{cases}
+        u_t + uu_x = 0\\
+        u(x, 0) = \phi(x)
+    \end{cases}
+\end{align*}
+Breaking [allegedly] occurs when $u_x \to \infty$, so to find this, we take
+\begin{align*}
+    \frac{d}{dx} x(\xi, t),
+\end{align*}
+and solve for the condition which makes $\xi_x \to \infty$. 
+\gap
+\header{Traffic Flow Problems}
+Traffic flow problems arise from integral conservation laws. They assume the 
+general form:
+\begin{align*}
+    \begin{cases}
+        \rho_t + c(\rho) \rho_x = 0\\
+        \rho(x, 0) = f,
+    \end{cases}
+\end{align*}
+where $f$ is generally a piecewise constant function. For demonstration, let 
+\begin{align*}
+    f(x) = \begin{cases}
+        A, & x < a\\
+        B, & a < x < b\\
+        C, & x > b
+    \end{cases}
+\end{align*}
+
+\sheader{General Solution Strategy}
+
+\begin{enumerate}
+    \item Convert the PDE into a system of ODEs:
+    \begin{align*}
+        \frac{dx}{dt} = c(\rho) && \frac{d\rho}{dt} = 0.
+    \end{align*}
+    The latter of the two equations implies that $\rho = \textrm{constant}$,
+    and with the condition that $u(x, 0) = f$, then $u(x, t) = f$. However, 
+    we still need to re-translate the bounds of the piecewise function.
+    \item Hence, we then solve the first equation in the ODE with initial condition
+    $x(0) = x_0 = \xi$ to obtain the form:
+    \begin{align*}
+        x(t, \xi) = c(\rho)t + \xi.
+    \end{align*}
+    Actually, it is more elegant to view this in terms of $x_0$.
+    \begin{align*}
+        x(t, x_0) = c(\rho(x_0))t + x_0
+    \end{align*}
+    We can then use this to readjust all of the terms in the piecewise function. 
+    Looking back at $f(x)$, since these points are all at $t = 0 \implies x = x_0$,
+    then, we can rewrite the bounds of $f$:
+    \begin{align*}
+        x<a &\implies x_0 < a\\
+        &\implies x < c(\rho(a))t + a
+    \end{align*}
+    Hence, we get a full solution with these results, and so on.
+    \item Lastly, it is often the case that there are discontinuities in the result 
+    $u$. There are two cases in which this happens:
+    \begin{enumerate}
+        \item \sheader{Fanlike Characteristics} In this case,
+        one will end up with a solution where there are regions with undefined 
+        values in the solution. To find the full solution, we do the following:
+        \begin{enumerate}
+            \item Identify the points of $(x_0)_i$ from where the discontinuity
+            arises from. (i.e. $a$, $b$)
+            \item Sub in $(x_0)_i$ into the $x$ equation and solve for $f(x_0) = \rho((x_0)_i)$:
+            \begin{align*}
+                x = c(\rho((x_0)_i))t + x_0.
+            \end{align*}
+        \end{enumerate}
+        \item \sheader{Shock Characteristics} In this case, one will end up with a solution
+        where characteristics cross. This also corresponds to solutions which are
+        piecewise and boundaries overlap. In these cases one must do the following:
+        \begin{enumerate}
+            \item Determine the shock point, which is the point where the shock 
+            first occurs $(s_0)$.
+            \item Determine the shock function, which can be determined by the 
+            following equation:
+            \begin{align*}
+                \frac{ds}{dt} = \frac{Q(\rho_+)  - Q(\rho_-)}{\rho_+ - \rho_-},
+            \end{align*}
+            where $q_x(\rho) = \rho_x c(\rho)$ (generally have to solve that before).
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\header{Second Order Linear PDEs}
+\sheader{Well-posed-ness} There are three conditions that need to hold for an Initial Boundary Value Problem 
+(IBVP) for a PDE that need to hold in order for it to be well-posed. They 
+are as follows:
+\begin{enumerate}
+    \item \sheader{Existence} There exists at least one solution $u(x, t)$,
+    satisfying all conditions.
+    \item \sheader{Uniqueness} There exists at most one solution $u(x, t)$,
+    satisfying all conditions.
+    \item \sheader{Stability} The solution depends in a stable manner on the 
+    initial data, that is if the data changes by a small amount, then the solution 
+    changes by only a small amount as well.
+\end{enumerate}
+\sheader{Methods for Proving Stability}
+\begin{enumerate}
+    \item Let $u(x, t)$ be a solution for the IBVP with data $f(x)$. Let 
+    $\Tilde{u}(x, t)$ be a solution for the IBVP with data $\Tilde{f}(x)$.
+    Show that if $\max_x |f(x) - \Tilde{f}(x)|$ is bounded by a small amount, 
+    then $\max_x |u(x, t) - \Tilde{u}(x, t)|$ is also bounded by a small amount,
+    for any $t > 0$.
+    \item If a sequence of inital data of the form $f_n(x)$ has that 
+    $\max_x |f_n(x)| \to 0$ as $n\to \infty$, then prove that $\max_x|u_n(x, t)| \to 0$,
+    as $n\to \infty, \,\, \forall t > 0$.
+    
+\end{enumerate}
+
+\header{Classifications and Transformations of PDEs} Second Order Linear PDEs 
+of the following form:
+\begin{align*}
+    au_{xx} + 2bu_{xy} + cu_{yy} + du_x + eu_y + fu = g(x, y)
+\end{align*}
+with \underline{determinant} $D = b^2 - ac$ can be classified into the following forms:
+\begin{enumerate}
+    \item Elliptic $(D < 0)$:
+    $
+        \ds u_{xx} + u_{yy} = \textrm{Lower Order Terms}
+    $
+    \item Hyperbolic $(D > 0)$:
+    $\ds
+        u_{xx} - u_{yy} = \textrm{Lower Order Terms}
+    $
+    \item Parabolic $(D = 0)$:
+    $\ds
+        u_{xx} = \textrm{Lower Order Terms}
+    $
+\end{enumerate}
+\pagebreak
+\sheader{General Form for Classifying and Transforming PDEs}
+\begin{enumerate}
+    \item Classify the PDE using the determinant.
+    \item Rewrite the PDE into an operator form, i.e.:
+    \begin{align*}
+        u_{xx} + 8u_{xy} = (\partial_x^2 + 8 \partial_x \partial_y) u.
+    \end{align*}
+    \item Complete the square with the partials.
+    \item Substitute operators such that the PDE takes the classified form, with 
+    new variables.
+    \item With the coordinate transform from $x, y \to \xi, \eta$, 
+    write the matrix $B^T$, which fits the following form:
+    \begin{align*}
+        \begin{pmatrix}
+            \partial_x\\
+            \partial_y
+        \end{pmatrix}
+        = B^T
+        \begin{pmatrix}
+            \partial_\xi\\
+            \partial_\eta
+        \end{pmatrix}.
+    \end{align*}
+    \item Use the matrix $B$ to obtain $\xi$ and $\eta$ in terms of $x, y$:
+    \begin{align*}
+        \begin{pmatrix}
+            \xi\\\eta
+        \end{pmatrix} = B
+        \begin{pmatrix}
+            x\\y
+        \end{pmatrix}
+    \end{align*}
+\end{enumerate}
+
+\header{Wave Equation}
+
+\sheader{General Form Solution}
+\begin{align*}
+    \begin{cases}
+        u_{tt} - c^2 u_{xx} = f(x, t)\\
+        u(x, 0) = u_0(x)\\
+        u_t(x, 0) = u_1(x).
+    \end{cases}
+\end{align*}
+For a problem of this type, the solution is of the form:
+\begin{align*}
+    u(x, t) = \frac{1}{2} \left[u_0(x+ct) + u_0(x - ct)\right] + \frac{1}{2c} \int_{x-ct}^{x + ct} u_1(y)dy
+    + \frac{1}{2c} \int_{0}^{t}\int_{x-c(t-s)}^{x+c(t-s)}f(y, s)dyds.
+\end{align*}
+\raggedleft\qedsymbol\\
+\raggedright
+There are other forms of the wave equation for which the solution is 
+not as trivial.\gap
+\sheader{Constant BC}
+\begin{align*}
+    \begin{cases}
+        u_{tt} - c^2 u_{xx} = 0, &  x > 0, t > 0\\
+        u(x, 0) = u_0(x), \,\, u_t(x, 0) = u_1(x), &  x > 0\\
+        u(0, t) = c & t > 0.
+    \end{cases}
+\end{align*}
+To solve this form, we know that the general solution to the wave equation is 
+always:
+\begin{align*}
+    u(x, t) = f(x + ct) + g(x - ct)
+\end{align*}
+Hence, we can set up two systems of equations to solve:
+\begin{align*}
+    \begin{cases}
+        u(x, 0) = u_0(x) = f(x) + g(x)\\
+        u_t(x, 0) = u_1(x) = cf'(x) + c'g(x)
+    \end{cases}
+    &&
+    \textrm{for}\,\, x \geq ct\\
+    \begin{cases}
+        u(x, 0) = u_0 = f(x) + g(x)\\
+        u(0, t) = c = f(ct) + g(-ct) = f(ct=x) + g(-ct = -x) 
+    \end{cases} && 
+    \textrm{for} \,\, 0 < x < ct.
+\end{align*}
+
+\pagebreak
+
+\sheader{Factored Wave Equation}
+
+Given some wave equation of the form:
+\begin{align*}
+    \begin{cases}
+        (a\partial_x + b\partial_y)(c\partial_x - d\partial_y) u = 0,\\
+        u(x, 0) = u_0(x),\\
+        u_t(x, 0) = e^x
+    \end{cases}
+\end{align*}
+The general solution reduces to:
+\begin{align*}
+    u(x, t) = f(ax + bt) + g(cx - dt).
+\end{align*}
+Which can be solved using a system of equations similar to the prior case.
+\gap
+\sheader{Energy and Waves}
+Since energy in a system should be conserved, we can calculate the total 
+energy of a wave PDE with the general form:
+\begin{align*}
+    \rho u_{tt} = Tu_{xx},
+\end{align*}
+the energy is given by:
+\begin{align*}
+    E = \frac{1}{2} \int_{-\infty}^{\infty} \rho u_t^2(x, 0) + Tu_x^2(x, 0) dx
+\end{align*}
+
+\sheader{Method of Reflections}
+
+For equations of the form:
+\begin{align*}
+    \begin{cases}
+        u_{tt} - c^2 u_{xx} = f(x, t), & x > 0\\
+        u(x, 0) = u_0(x), & x > 0\\
+        u_t(x, 0) = u_1(x), & x > 0
+    \end{cases}
+\end{align*}
+
+The solution is of the form:
+\begin{align*} u(x, t) = 
+    \begin{cases}
+        \frac{1}{2}\left[u_0(x +ct) + u_0(x-ct)\right] + \frac{1}{2c}\int_{x-ct}^{x+ct}u_1(y)dy
+        + \frac{1}{2c}\int_{0}^{t}\int_{x-c(t-s)}^{x+c(t-s)} f(y, s)dyds, & x > ct\\
+        \frac{1}{2}\left[u_0(x +ct) + u_0(x-ct)\right] \\ + \frac{1}{2c}\left(\int_{x-ct}^{0}u_1^{\textrm{ext}}(y)dy + \int_{0}^{x+ct}u_1^{\textrm{ext}}(y)dy\right)
+        \\+ \frac{1}{2c}\left(\int_{0}^{t - \frac{x}{c}}\int_{-x+c(t-s)}^{x+c(t-s)} f^{\textrm{ext}}(y, s)dyds + \int_{t-\frac{x}{c}}^{t}\int_{x-c(t-s)}^{x+c(t-s)} f^{\textrm{ext}}(y, s)dyds \right), & 0 < x < ct
+    \end{cases}
+\end{align*}
+
+In the case that the equation has the form: 
+\begin{align*}
+    \begin{cases}
+        u_{tt} - c^2 u_{xx} = f(x, t), & x > 0 \\
+        u(x, 0) = u_0(x), & x > 0\\
+        u_t(x, 0) = u_1(x), & x > 0\\
+        u(0, t) = h(t)
+    \end{cases}
+\end{align*}
+
+Then it is the same as the standard method of reflections, just with the addition 
+of an extra term:
+\begin{align*}
+    u(x, t) = u_0 \textrm{ term } + u_1 \textrm{ term } + h\left(t - \frac{x}{c}\right) + \frac{1}{2c} \iint_\Delta f.
+\end{align*}
+
+\sheader{Reflections on the Finite Interval} For reflections on the finite interval,
+we take the odd periodic extension of all functions and proceed the same as prior.
+Generally, questions of this nature will ask for a value at a point instead of 
+a general solution.
+
+\pagebreak
+
+\header{Heat Equation}
+\sheader{General Form} Given a heat equation of the form:
+\begin{align*}
+    \begin{cases}
+        u_t = k u_{xx},\\
+        u(0, t) = u_0(x),
+    \end{cases}
+\end{align*}
+a solution to the heat equation is:
+\begin{align*}
+    u(x, t) = \int_{-\infty}^{\infty}S(x - y, t)u_0(y)dy.
+\end{align*}
+
+\sheader{Heat Equation with a Source} Given a heat equation of the following form:
+\begin{align*}
+    \begin{cases}
+        u_t = ku_{xx},\\
+        u(0, t) = u_0(x),
+    \end{cases}
+\end{align*}
+a solution to the heat equation is:
+\begin{align*}
+    u(x, t) = \int_{-\infty}^{\infty} S(x - y, t)u_0(y)dy + \int_{0}^{t}\int_{-\infty}^{\infty} S(x -y, t-s)f(y, s)dyds.
+\end{align*}
+
+\sheader{Well-posedness} Given a heat equation on the whole line:
+\begin{align*}
+    \begin{cases}
+        u_t = ku_{xx},\\
+        u(0, t) = u_0(x),
+    \end{cases}
+\end{align*}
+it follows that the following criteria must hold for a IBVP to be \textit{well-posed}:
+\begin{enumerate}
+    \item Existence: There is at least one solution.
+    \item Uniqueness: The solution is unique and bounded.
+    \item Stability: We prove stability by the following method: let
+    \begin{align*}
+        M = \max_{y \in \mathbb{R}} |u_0(y)|, && F = \max_{y \in \mathbb{R}, 0 \leq s \leq T} |f(y, s)|,
+    \end{align*}
+    then, it follows that:
+    \begin{align*}
+        \max_{0 \leq t \leq T, x \in \mathbb{R}}|u(x, t)| \leq M + FT.
+    \end{align*}
+    This implies stability, such that if $u_0 - \Tilde{u_0}$ and $f - \Tilde{f}$ are small, then $u-\Tilde{u}$ is also small, as:
+    \begin{align*}
+        \max_{x \in \mathbb{R}, \,\, 0 \leq t \leq T} |u(x, t) - \Tilde u(x, t) | \leq \max_{x \in \mathbb{R}} |u_0(x) - \Tilde{u_0}(x)| 
+        + T \max_{x\in \mathbb{R}, \, 0 \leq t \leq T}|f(x, t) - \Tilde{f}(x, t) |.
+    \end{align*}
+\end{enumerate}
+
+\sheader{Maximal Principle for Heat Equation} If some $u(x,t)$ satisfies the heat 
+equation in a rectangle, then the maximum value of $u(x, t)$ is assumed either 
+initially or on the lateral sides ($x=0$ or $x=l$).
+\gap
+\sheader{Comparison Principle} If, for the domain $U = (a, b) \times (0, T)$,
+then if 
+\begin{align*}
+   u_t \leq ku_{xx} \textrm{ (subsolution)}, && v_t \geq ku_{xx} \textrm{ (supersolution)}
+\end{align*}
+and $u \leq v$ on $\partial U$, then
+\begin{align*}
+    u(x,t) \leq v(x, t)
+\end{align*}
+for all of $U$.
+
+
+\end{document}
