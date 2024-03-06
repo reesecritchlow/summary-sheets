@@ -345,14 +345,14 @@ Hence, we can set up two systems of equations to solve:
 Given some wave equation of the form:
 \begin{align*}
     \begin{cases}
-        (a\partial_x + b\partial_y)(c\partial_x - d\partial_y) u = 0,\\
+        (a\partial_t + b\partial_x)(c\partial_t - d\partial_x) u = 0,\\
         u(x, 0) = u_0(x),\\
-        u_t(x, 0) = e^x
+        u_t(x, 0) = u_1(x)
     \end{cases}
 \end{align*}
 The general solution reduces to:
 \begin{align*}
-    u(x, t) = f(ax + bt) + g(cx - dt).
+    u(x, t) = f(cx + dt) + g(ax - bt).
 \end{align*}
 Which can be solved using a system of equations similar to the prior case.
 \gap
