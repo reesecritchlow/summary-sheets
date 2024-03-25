@@ -424,5 +424,163 @@ p.m.f.:
     f(x) = \frac{\lambda^n x^{n - 1} e^{-\lambda x}}{(n - 1)!}
 \end{align*}
 
+\textbf{Midterm 1 Cutoff}
+
+\pagebreak
+
+\header{Poisson Processes}
+
+Given some random variable $N_t$, which describes the number of 
+events to occur by some time $t$, where each event happens sequentially,
+and has the the time to complete of $X_i \sim \textrm{Exp}(\lambda)$,
+this is called a Poisson Process:
+\begin{itemize}
+    \item $\mathbb{E}N_t = \lambda t$.
+    \item $P(N_t = m) = \frac{(\lambda t)^m e^{-\lambda t}}{m!}$.
+\end{itemize}
+Alternatively, we can also say that $S_n$ is RV that represents the time 
+it takes for the $n$-th event to occur. Hence, it follows that:
+\begin{align*}
+    P(S_N = T) = P(S_T = N).
+\end{align*}
+
+\header{Moment Generating Functions and Characteristic Functions}
+
+We define the \underline{characteristic function} of a random variable 
+to be the following:
+
+\begin{align*}
+    \phi(t) = \mathbb{E}e^{itx} = M(it) = \begin{cases}
+        \sum_{n = - \infty}^\infty p(n)e^{itn}\\
+        \int_{-\infty}^{\infty}e^{itx}f(x)dx.
+    \end{cases}
+\end{align*}
+
+The terminology ``moment generating functions'' comes from the following 
+property:
+\begin{align*}
+    \left[\frac{d^n}{dt^n}\right]_{t=0} \phi(t) = i^n \mathbb{E}X^n.
+\end{align*}
+
+We can also extract the pdf from a characteristic function:
+\begin{align*}
+    f(x) = \frac{1}{2\pi}\int_{-\infty}^{\infty} e^{-itx} \phi(t)dt.
+\end{align*}
+
+\sheader{Properties of Characteristic Functions}
+\begin{itemize}
+    \item $\ds\phi_{aX + b} (t) = e^{itb}\phi_X(at)$
+    \item $P(X = c) = 1 \implies \phi_X(t) = e^{itc}$.
+\end{itemize}
+
+\sheader{Continuity Theorem} Let $X_1, X_2, \ldots $ be rvs with 
+CDFs $F_1, F_2, \ldots$ and characteristic functions $\phi_1, \phi_2, \ldots$,
+then:
+\begin{enumerate}[(a)]
+    \item If $F_n \to F$ where $F$ is the cdf of some rv $X_i$, 
+    with char fn. $\phi$, then:
+    \begin{align*}
+        \lim_{n \to \infty}\phi_n(t) = \phi(t)\,\,\, \forall t \in \mathbb{R}.
+    \end{align*}
+    \item If $\ds \lim_{n \to \infty} \phi_n(t)= \phi(t)$ exists $\forall t \in \mathbb{R}$,
+    then $\phi$ is the char. fn. of some RV $X$ (with cdf $F$), and 
+    $F_n \to F$ and $X_n \to X$.
+\end{enumerate}
+
+\header{Large Things}
+
+\sheader{(Weak) Law of Large Numbers} Let $X_i$ be i.i.d.. Assume 
+$\mu = \mathbb{E}X_i < \infty$ and $Var(X_i) < \infty$. Let $S_n = X_1 + \cdots + X_n$.
+Then:
+\begin{align*}
+    \frac{S_n}{n} \xrightarrow{\text{D}} \mu.
+\end{align*}
+
+\pagebreak
+
+\sheader{Central Limit Theorem} Let $X_i$ be i.i.d. RVs with 
+$\mathbb{E}X_i$ and $\textrm{Var}(X_i)$ finite. Let $S_n = X_1 + \cdots + X_n$.
+Then,
+\begin{align*}
+    \frac{S_n - n \mu }{\sigma \sqrt{n}} \xrightarrow{D} N(0, 1)
+\end{align*}
+
+We can interpret this by saying that $S_n - n\mu $ has fluctuations of 
+$\sigma \sqrt{n}$.
+\gap
+\sheader{Applying the Central Limit Theorem} Let $X_i$ be some random variable 
+with $\mathbb{E}X_i = \mu$ and $\textrm{Var}(X_i) = \sigma^2$, and $S_n = \sum_{i=1}^{n}X_i$. 
+Then, it follows that:
+\begin{align*}
+    P(S_n > a) \approx P\left(Z > \frac{a - n \mu}{\sigma \sqrt{n}}\right)
+\end{align*}
+
+\header{Statistical Estimation}
+
+\sheader{Statistical Estimator} A statistical estimator is a 
+function of the data:
+\begin{itemize}
+    \item \sheader{Sample Mean} $\ds \overline{X} = \frac{1}{n} \sum_{i = 1}^{n}X_i$
+    \item \sheader{Sample Variance} $\ds S^2 = \frac{1}{n - 1} \sum_{min}^{max}(X_i - \overline{X})^2$.
+\end{itemize}
+
+\sheader{Unbiased Estimate} Given some data with parameter $\gamma$,
+if an estimate from the data for $\gamma$ is $\hat{\gamma}$, then 
+if $\mathbb{E}\hat{\gamma} = \gamma$, then $\hat{\gamma}$ is an 
+unbiased estimate of $\gamma$.
+\gap
+\sheader{Hypothesis Testing} Given some hypothesis of a mean value $\mu = b$,
+if $\mu$ is not in some confidence interval of probability $p$, then we 
+reject the hypothesis that $\mu = b$.
+\gap 
+\sheader{Scenario 1} Given some i.i.d. data with known variance $\sigma^2$, but unknown mean $\mu$,
+We can utilize the CLT to find the probability that the mean $\mu$ is in some
+range, with a given probability $p$ (confidience interval).
+
+\begin{align*}
+    P(|Z| < a) = p \implies \overline{X} \in \left[\mu - \frac{\sigma}{\sqrt{n}} a, \mu + \frac{\sigma}{\sqrt{n}} a \right] \iff \mu \in \left[\overline{X} - \frac{\sigma}{\sqrt{n}} a, \overline{X} + \frac{\sigma}{\sqrt{n}}\right]
+\end{align*}
+
+\sheader{Scenario 2} Given some i.i.d. data with both unkonwn mean $\mu$ and 
+variance $\sigma^2$, then we utilize the CLT and the students-t distribution 
+to determine the significance of the data.
+
+\begin{align*}
+    P(|T| < a) = p \implies \mu \in \left[\overline{X} - a \frac{S}{\sqrt{n}}, \overline{X} + a \frac{S}{\sqrt{n}}\right].
+\end{align*}
+
+\header{Random Walks}
+
+Given some random walk in where each step by $\pm \vec{e}_i$ in $\mathbb{R}^n$ is equally likley,
+that is:
+\begin{align*}
+    P(\vec{x}_i = \vec{e}_j) = \frac{1}{2d}
+\end{align*}
+
+We say that the probability of returning to the origin is (where $M$ is the number of visits to the origin):
+\begin{itemize}
+    \item \sheader{Recurrent} if $u =1 \implies M = \infty$ (you always come back)
+    \item \sheader{Transient} if $u < 1 \implies M < \infty$
+\end{itemize}
+It is known that a random walk in $\mathbb{Z}^d$ is recurrent for 
+$d = \curly{1, 2}$ and transient for $d > 2$.
+
+\pagebreak
+
+\header{Gambler's Ruin}
+
+Assume that a ``gambler'' has $k$ dollars and a ``banker'' has $b$ dollars.
+They play games with probability $p$ that the gambler wins, and play 
+until one of the two goes broke. It follows that for $k$ initial dollars
+for the gambler, and $N = k + b$ total dollars, then:
+\begin{align*}
+    P(\textrm{gambler wins}) = \frac{\alpha^k - 1}{\alpha^N - 1} && \alpha = \frac{1-p}{p}
+\end{align*}
+
+\header{Conditional Probability}
+
+
+
+
 
 \end{document}
