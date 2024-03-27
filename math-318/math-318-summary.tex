@@ -441,7 +441,7 @@ this is called a Poisson Process:
 Alternatively, we can also say that $S_n$ is RV that represents the time 
 it takes for the $n$-th event to occur. Hence, it follows that:
 \begin{align*}
-    P(S_N = T) = P(S_T = N).
+    P(S_N > T) = P(N_T < N).
 \end{align*}
 
 \header{Moment Generating Functions and Characteristic Functions}
@@ -487,7 +487,7 @@ then:
     $F_n \to F$ and $X_n \to X$.
 \end{enumerate}
 
-\header{Large Things}
+\header{Limit Theorems}
 
 \sheader{(Weak) Law of Large Numbers} Let $X_i$ be i.i.d.. Assume 
 $\mu = \mathbb{E}X_i < \infty$ and $Var(X_i) < \infty$. Let $S_n = X_1 + \cdots + X_n$.
@@ -578,9 +578,33 @@ for the gambler, and $N = k + b$ total dollars, then:
 \end{align*}
 
 \header{Conditional Probability}
+\sheader{Definition} The conditional pmf of $X$ given that $Y=y$ is:
+\begin{align*}
+    P_{X|Y}(x | y) = P(X=x | Y=y) = \frac{P(X = x \cap Y = y)}{P(Y = y)} = \frac{P(x, y)}{P_Y(y)}
+\end{align*}
+Therefore, the conditional expectation can be described as:
+\begin{align*}
+    \mathbb{E}[X|Y = y] = \sum_{x}xp_{X|Y}(x|y)
+\end{align*}
 
+\sheader{Theorem} For $X, Y$ discrete RVs:
+\begin{align*}
+    \mathbb{E}X = \mathbb{E}\left[\mathbb{E}[X|Y]\right] = \sum \mathbb{E}\left[X | Y = y\right]P_Y(y).
+\end{align*}
 
-
-
+For the continuous case:
+\gap
+\sheader{Definition} The conditional pdf of $X$ given that $Y =y$ is:
+\begin{align*}
+    f_{X|Y}(x, y) = \frac{f_{X, Y}(x, y)}{f_Y(y)}
+\end{align*}
+Therefore, it follows that:
+\begin{align*}
+    \mathbb{E}[X|Y = y] = \int_{-\infty}^{\infty}xf_{X|Y}(x|y)dx.
+\end{align*}
+As well as that:
+\begin{align*}
+    \mathbb{E}X = \int_{-\infty}^{\infty}\mathbb{E}[X|Y=y]f_Y(y)dy
+\end{align*}
 
 \end{document}
