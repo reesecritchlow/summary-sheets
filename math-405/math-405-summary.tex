@@ -1,0 +1,859 @@
+\documentclass{article}
+
+\usepackage{rtex}
+\usepackage{minted}
+\usepackage{amsthm}
+
+\newcommand{\R}{\mathbb{R}}
+
+\begin{document}
+\rtitle{MATH 405 Summary}{Reese Critchlow}
+
+\header{Introductory Concepts}
+
+\sheader{Discretization of Functions} Given some function $f: \mathbb{R} \to \mathbb{R}$ in some specified domain $D = [a, b]$, we can \textit{discretize} the function over the domain $D$ over $N$ points:
+
+\begin{align*}
+    f \approx 
+  \begin{bmatrix}
+    f(x_1)\\
+    f(x_2)\\
+    \vdots\\
+    f(x_N)
+  \end{bmatrix}
+\end{align*}
+
+\sheader{Bisection Search/Scalar Problem} Say for some $f: \R \to \R$, we wish to find the point $\alpha$ where $f(\alpha) = 0$.
+\gap
+Hence, we can perform a bisection search on a ``root bracket'', which is define by some $[a, b]$ such that $f(a)f(b) < 0$, provided that $f$ is a continuous function.
+\gap
+
+\sheader{Bisection Search Algorithm}
+
+\begin{minted}{python3}
+  while not |b - a| < eps:
+      m = (a - b) / 2
+      if f(m) * f(b) < 0:
+          a = m
+      else:
+          b = m    
+\end{minted}
+
+The analysis of this function supports that $m_k \to \alpha$ as $k \to \infty$.
+\gap
+\sheader{Linear Convergence} We define a linearly convergent method to obey the following rule:
+
+\begin{align*}
+  \lim_{k \to \infty} \frac{|e_{k+1}|}{|e_k|} \leq \gamma \leq 1
+\end{align*}
+
+If $\gamma = 0$, this would be called ``super-linear''.
+\gap
+\sheader{Quadratic Convergence}
+\begin{align*}
+  \lim_{k \to \infty} \frac{|e_{k+1}|}{|e_k|^2} \leq k
+\end{align*}
+
+\sheader{Newton's Method} From a second order Taylor expansion, we can find a quadratically converging method, \textit{Newton's Method} for root finding. It is as follows:
+
+\begin{align*}
+  x_{k + 1} = x_k - \frac{1}{f'(x_k)}f(x_k)
+\end{align*}
+
+We can also apply this to systems of equations or vector-valued functions:
+\gap
+For some $\vec{x_k}$, solve $J(\vec{x_k})\vec{\delta} = - f(\vec{x_k})$, then:
+\begin{align*}
+  \vec{x}_{k + 1} = \vec{x}_k + \vec{\delta}
+\end{align*}
+Where $J(\vec{x})$ is the \textit{Jacobian}:
+\begin{align*}
+  \begin{bmatrix}
+    (f_1)_{x_1} & \cdots & (f_1)_{x_d}\\
+    \vdots & \ddots & \vdots\\
+    (f_n)_{x_1} & \cdots & (f_n)_{x_d}
+  \end{bmatrix}
+\end{align*}
+\sheader{Lipschitz Continuity} We say that a function $f: D \to R$ is \textit{Lipschitz Continuous} with value $L$, if it holds that:
+\begin{align*}
+  \forall u,\, v \in D,\,\,\, |f(u) - f(v)| \leq L |u-v|.
+\end{align*}
+\sheader{Convergence of Newton's Method} If $f(\vec{\alpha}) = \vec{0}$ and $J(\vec{x})$ is invertible and Lipschitz continuous in a neighbourhood of $\vec{\alpha}$, then there exists some $\epsilon > 0$ such that for $\vec{x_0} \in B_\epsilon(\vec{\alpha})$, the Newton's method iteration $\vec{x_k}$ converges quadratically to $\vec{\alpha}$.
+\gap
+\sheader{Drawbacks of Newton's Method}
+\begin{itemize}
+\item $\epsilon$ is unknown.
+\item Relies on the invertability of $J$.
+\item Lack of robustness.
+\item Computation of derivatives is expensive.
+\end{itemize}
+
+\header{Optimization}
+
+Generally, we can define an optimization problem in the following way:
+
+\begin{align*}
+  \min_{(x, y, z, \ldots)} f(x, y, z, \ldots)
+\end{align*}
+Subject to:
+\begin{align*}
+  \vec{h_{eq}} (x, y, z, \ldots) = \vec{0} && \vec{h}_{i-eq}(x, y, z, \ldots) \geq \vec{0}
+\end{align*}
+
+To solve this problem, we could use Newton's method again, however, our linear algebra problem takes a different form:
+\begin{align*}
+  H(x_k) \vec{\delta} = -\nabla f(x_k) && x_{k + 1} = x_k + t \delta
+\end{align*}
+Our choice of $t$ in this case can take many different forms:
+\begin{itemize}
+\item Exact Linesearch: $\ds t = \operatorname*{argmin}_\tau f(x_k + \tau \delta)$
+\item Fixed Linesearch
+\item Backtracking Linesearch
+\end{itemize}
+
+\sheader{Quasi-Newton Methods} Often, computing $H$ is expensive, or the backsolve comes with complications. Hence, we can define some other methods to subsitute our $H_k = H(x_k)$ for some $B_k$.
+\begin{itemize}
+\item $B_k = H(x_k)$ (Newton's Method)
+\item $B_k = H(x_k) + \lambda I$ (Regularized NM), most commonly $\lambda \geq - \sigma$.
+\item $B_k = I$ (Steepest Descenet)
+  \item $B_{k + 1}= B_k + \text{``low rank update''}$ (BFGS)
+\end{itemize}
+
+\pagebreak
+\header{Interpolation}
+
+\sheader{Notation} First, we define some notation:
+\begin{align*}
+  \Pi_n = \curly{\text{All 1-D real polynomials of degree} \leq n}
+\end{align*}
+
+\sheader{Lagrange Polynomial Interpolation Problem} Suppose we have $n+1$ \underline{distinct} points $x_i, i \in 0, 1, \ldots, n$, and values $f_i = f(x_i)$ for some unknown function $f: \R \to \R$. We wish to find some function $g(x)$ that interpolates $f_i \forall i$.
+\gap
+\sheader{Cardinal Polynomials} We can define the \textit{Cardinal Polynomials} for a set of points as the following:
+
+\begin{align*}
+  L_{n, k} (x) = \frac{(x-x_0) (x-x_1) \cdots (x-x_{k-1})(x-x_{k + 1}) \cdots (x- x_n)}{(x_k-x_0) (x_k-x_1) \cdots (x_k-x_{k-1})(x_k-x_{k + 1}) \cdots (x_k - x_n)}
+\end{align*}
+
+For all $k \in 0, 1, \ldots, n$.
+
+We note that:
+\begin{itemize}
+\item $L_{n,k} (x_i)= 0, \forall i \neq k$.
+\item $L_{n, k} (x_k) = 1$
+\end{itemize}
+
+Hence, we can define the interpolating polynomial in the following way:
+\begin{align*}
+  p_n \equiv \sum_{k=0}^{n}f_i L_{n, k} (x) \in \Pi_n
+\end{align*}
+
+It is known that for these interpolating polynomials that the following conditions hold:
+\begin{itemize}
+\item Uniqueness (By Contradiction)
+\item Existence
+\end{itemize}
+
+\sheader{Error in Lagrange Polynomial Interpolation}
+\gap
+\sheader{Theorem} Suppose $f$ has $n+1$ continuous derivatives in $(x_0, x_n)$ and $p_n$ is \underline{the} interpolating polynomial through $x_0 < x_1 < \ldots < x_n$ (ordered), then $\exists\, \xi = \xi(x)$ such that:
+
+\begin{align*}
+  e(x) = f(x) - p_n(x) = \frac{(x-x_0)(x-x_1) \cdots (x-x_n)}{(n+1)!}f^{(n+1)}(\xi(x))
+\end{align*}
+
+\begin{proof} (sketch)
+  We define some function $\phi(t)$:
+  \begin{align*}
+    \phi(t) \equiv e(t) - \frac{e(x)}{\pi(x)}\pi(t)
+  \end{align*}
+  If we take that $\phi(t)$ has $n+2$ zeroes, and $p_n$ has $n$ zeroes, then it follows that taking successive derivatives of $\phi(t)$ yields the following:
+  \begin{align*}
+    \phi^{(n+1)}(t) = e^{(n + 1)}(t) - \frac{e(x)}{\pi(x)}\pi^{(n + 1)}(t)
+  \end{align*}
+  However, since $e^{(n + 1)}(t) = f^{(n + 1)}(t) - p_n^{(n + 1)}(t)$ and $p_n^{(n + 1)}(t) = 0$ since $p_n \in \Pi_n$, then $e^{(n + 1)}(t) = f^{(n + 1)}(t)$. Hence, if we take some $\xi(x)$ where $\phi^{(n + 1)}(t) = 0$, then we get that:
+  \begin{align*}
+    0 &= \phi^{(n + 1)}(\xi(x)) = f^{(n + 1)}(\xi(x)) - \frac{e(x)}{\pi(x)}(n + 1)!\\
+      &\implies e(x) = \frac{\pi(x)}{(n+1)!}f^{(n + 1)}(\xi(x))
+  \end{align*}
+\end{proof}
+
+\sheader{Chebyshev Points} Equispaced points can often to lead to large errors in interpolation. Hence, we can employ \textit{Chebyshev Points}, which follow from the x components of points on the unit circle.
+\gap
+\sheader{An aside on instability and stability} Small errors can be magnified by an \underline{unstable algorithm}, even for a well-conditioned problem!
+\gap
+\sheader{Barycentric Formula for Lagrange Polynomial Interpolation} This can prove to be a much more stable method of computing Lagrange polynomial interpolants.
+
+\begin{align*}
+  p_n(x) &= \frac{\sum_{k=0}^{n} \frac{w_k}{x-x_k}}{\sum_{k=0}^{n} \frac{w_k}{x-x_k}}\\
+  w_k &= \frac{1}{(x_k-x_0)(x_k - x_1) \cdots (x_k - x_{k-1}) (x_k-x_{k+1}) \cdots (x_k - x_n)}
+\end{align*}
+
+There exists other methods as well, such a recursive approach.
+\pagebreak
+
+\header{Quadrature}
+
+\sheader{Problem} Suppose we have data on equispaced points/nodes/grid. We wish th approximate the definite integral:
+\begin{align*}
+  \int_{x_0=a}^{x_n=b} f(x)dx
+\end{align*}
+We will explore two different ways of computing this integral:
+\begin{enumerate}
+\item Construction of an interpolant, then integrating the interpolant.
+\item Subdividing the domain and computing a discrete composite sum.
+\end{enumerate}
+
+Starting off with case (1), formally, we are saying that we would like to demonstrate the following:
+\gap
+\underline{\textit{Note:}} the following section is heavily taken from the professor's notes.
+\gap
+Given $f(x_k)$ at $n+1$ equally spaced points $x_k = x_0 + k \cdot h, k = 0, 1, \ldots, n$, where $h = \frac{(x_n - x_0)}{n}$, and suppose that $p_n(x)$ interpolates the data. Hence, we wish to find some form such that:
+\begin{align*}
+  \int_{x_0}^{x_n}f(x)dx \approx \int{x_0}^{x_n}p_n(x)dx
+\end{align*}
+We can note that:
+\begin{align*}
+  \int_{x_0}^{x_n}p_n(x)dx &= \int_{x_0}^{x_n}\sum_{k=0}^{n}f(x_k)\cdot L_{n,k}(x)dx\\
+                           &= \sum_{k=0}^{n}f(x_k)\cdot L_{n, k}(x)dx = \sum_{k=0}^{n}w_kf(x_k)
+\end{align*}
+where the coefficients
+\begin{align*}
+  w_k = \int_{x_0}^{x_n}L_{n,k}(x)dx
+\end{align*}
+$k= 0,1,\ldots,n$ are independent of $f$.
+\gap
+A formula of the form:
+\begin{align*}
+  \int_{a}^{b}f(x)dx \approx \sum_{k=0}^{n}w_k f(x_k)
+\end{align*}
+
+with $x_k \in [a, b]$ is called a \textit{quadrature formula}, with the coefficients $w_k$ known as \textit{weights}.
+
+There are two common quadrature formulae, called the Newton-Cotes formulae:
+\begin{itemize}
+\item Trapezoidal Rule $(n=1)$:
+  \begin{align*}
+    \int_{x_1}^{x_0}f(x)dx \approx \frac{h}{2} \left[f(x_0) + f(x_1)\right]
+  \end{align*}
+  Error:
+  \begin{align*}
+    e_1(x) \leq \frac{(x_1 - x_0)^3}{12}\max_{\xi \in [x_0, x_1]}|f''(\xi)|
+  \end{align*}
+\item Simpson's Rule $(n=2)$:
+  \begin{align*}
+    \int_{x_0}^{x_2}f(x)dx \approx \frac{h}{3} \left[f(x_0)+4f(x_1) + f(x_2)\right]
+  \end{align*}
+  Error:
+  \begin{align*}
+    e_2(x) &\leq \frac{(x_2 - x_0)^5}{720}\max_{\xi \in [x_0, x_2]}|f''''(\xi)|\\
+           &\leq \frac{x_2-x_0}{6} \left[f(x_0) + 4f(x_1) + f(x_2)\right] - \frac{(x_2 - x_0)^5}{2880}f''''(\xi)
+  \end{align*}
+\end{itemize}
+
+\sheader{Composite Quadrature} Knowing that the formulations in (1) only account for 1 or 2 point cases, we can guess that as $n$ increases, we will be susceptible to the Runge phenomenon. Hence, instead of increasing the degree of the polynomial, we subdivide the domain of integration: split $[a, b]$ into $n$ equal intervals $[x_{i-1}, x_i]$, for $i = 1, \ldots, n$.
+
+For the integral between the subdivisions, we can use a Newton-Cotes formula:
+\begin{itemize}
+\item Trapezoidal Rule
+\begin{align*}
+  \int_{x_0}^{x_n}f(x)dx = \sum_{i=1}^{n} \left[\frac{h}{2} \left[f(x_{i-1} +x_i)\right] - \frac{h^3}{12}f''(\xi_i) \right]
+\end{align*}
+\item Simpson's Rule
+  \begin{align*}
+    \int_{x_0}^{x_{2n}}f(x)dx = \sum_{i=1}^{n} \left[\frac{h}{3} \left[f(x_{2i - 2}) + 4f(x_{2i - 1}) + f(x_{2i})\right] - \frac{(2h)^5}{2880}f''''(\xi_i)\right]    
+  \end{align*}
+\end{itemize}
+
+\sheader{Errors in Composite Quadrature}
+\begin{itemize}
+\item Composite Trapezoidal Rule:
+  \begin{align*}
+    e_n^{\text{TR}} = \frac{(b-a)}{12}h^2 f''(\xi)
+  \end{align*}
+\item Composite Simspon's Rule:
+  \begin{align*}
+    e_h^\text{S} = \frac{(b-a)h^4}{180}f''''(\xi)
+  \end{align*}
+\end{itemize}
+
+\sheader{Adaptivity} It can be observed that specifying $n$ nor $h$ are not very intuitive, nor user friendly. Instead, it would be easier to specify a \textit{tolerance}. We can take steps towards deriving a tolerance in the following example:
+\begin{align*}
+  S_n - S_{n/2} &= I + e_n^\text{S} - (I + e_{n/2}^\text{S})\\
+                &\approx e_n^\text{S} - \frac{1}{16}e_n^\text{S} = \frac{15}{16}e_n^\text{S}
+\end{align*}
+From an algorithmic standpoint, this would mean that if we want an absolute error of $\epsilon$, we would want to compute the sequence $S_n, S_{\frac{1}{2}n}, S_{\frac{1}{4}n}, \ldots$ and then stop when the difference between the two consecutive values is smaller than $\frac{16}{15}\epsilon$. This will insure that approximately $|e_h^\text{S}| \leq \epsilon$.
+
+\pagebreak
+
+\header{Finite Differences}
+
+Like we did with functions earlier, we can discretize the second derivative with something called a \textit{differencing scheme}:
+
+\begin{align*}
+  u_{xx}(x_j) = \frac{u_{j + 1} - 2u_j + u_{j - 1}}{h^2} + \mathcal{O}(h^2)
+\end{align*}
+
+\sheader{Matrix Form} Following from the earlier discretizations, if we have some $x$ on an interval $[a, b]$, with boundary values of $u(a) = u_0 = \alpha$ and $u(b) = u_{m + 1} = \beta$, then we can construct a matrix representation:
+
+\begin{align*}
+  u_{xx} \approx \frac{1}{h^2} \begin{bmatrix}
+    -2 & 1 & & & \\
+    1 & -2 & 1 & & \\
+       & \ddots &  & & \\
+       &  & \ddots &  & \\
+       & &  & \ddots &  \\
+       & & 1 & -2 & 1\\
+       & & & 1 & -2
+  \end{bmatrix}
+  \begin{bmatrix}
+    u_1\\
+    u_2\\
+    \vdots\\
+    u_m
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    \frac{\alpha}{h^2}\\
+    0\\
+    \vdots\\
+    0\\
+    \frac{\beta}{h^2}
+  \end{bmatrix}
+\end{align*}
+
+If we wanted to solve the steady problem $u_{xx} = f$, we would have that:
+\begin{align*}
+  \frac{1}{h^2} \begin{bmatrix}
+    -2 & 1 & & & \\
+    1 & -2 & 1 & & \\
+       & \ddots &  & & \\
+       &  & \ddots &  & \\
+       & &  & \ddots &  \\
+       & & 1 & -2 & 1\\
+       & & & 1 & -2
+  \end{bmatrix}
+  \begin{bmatrix}
+    u_1\\
+    u_2\\
+    \vdots\\
+    u_m
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    f_1 - \frac{\alpha}{h^2}\\
+    f_2\\
+    \vdots\\
+    f_{m-1}\\
+    f_m - \frac{\beta}{h^2}
+  \end{bmatrix}
+\end{align*}
+which would be an easily backsolve-able problem.
+
+\sheader{Local Truncation Error (LTE)} For the steady state problem $u_{xx} = f$, we can get the LTE $\tau$ at point $x_j$:
+
+\begin{align*}
+  \tau_j = \frac{1}{h^2} \left[u(x_{j-1}) - 2u(x_j) + u(x_{j + 1}))\right] - f(x_j)
+\end{align*}
+More generally, for some scheme $s(t_i, ...) = f(u(t_j))$ we can derive the LTE in the following manner:
+\begin{enumerate}
+\item Setting it up as the stepwise difference: $\ds \tau_j = s(t_i, ...) - f(u(t_j))$
+\item Taylor expand the differencing scheme and look for the original problem, i.e. $u = f$ to cancel out.
+\item Cancel out terms until you get a big-O form.
+\end{enumerate}
+\sheader{Consistency} We say a method is \textit{consistent} if the LTE $\tau_j \to 0$, as $h \to 0$. We can do this by using the Taylor Series. Generally, terms will cancel, and one must also look out for the original problem popping up in the expansion, i.e. $u''(x_j) - f(x_j) = 0$, since $u_{xx} = f$.
+\gap
+\sheader{Convergence} \textit{Convergence} is when error $E \to 0$, as $h \to 0$. $\tau \to 0$ does not imply convergence. We can see this in the following relationship:
+
+\begin{align*}
+  E = D^{-1}\vec{\tau}
+\end{align*}
+
+Hence, if we wish to have that $E \to 0$, we need certain properties of the matrix $D$, provided that our method is consistent.
+\gap
+\sheader{Stability} We can say that a method is \textit{stable} if it does not amplify small errors. For the case of a linear BVP with form $DU = F$, then we can say that there exists some constant $C$ such that:
+
+\begin{align*}
+  \norm{(D_h)^{-1}} \leq C
+\end{align*}
+
+for sufficiently small $h$.
+
+Given that $\norm{D} = \max(\lambda) = \lambda_\text{max}$, it follows that $\norm{D^{-1}} = \frac{1}{\lambda_\text{min}}$. Hence, we wish that $\lambda_\text{min} \neq 0$ as $h \to 0$.
+
+\sheader{Dalhquist Theorem} Every one-step method that is consistent $\ds \left(\lim_{k\to \infty} \tau^i \to 0\right)$, is convergent.
+\gap
+\header{Forms of Stability (For ODEs)}
+
+\sheader{Zero Stability} Apply the method to the problem: $u' = 0$, $u(0) = 1$.
+\begin{itemize}
+\item \sheader{Definition} if $U^n$ does not grow, we call the method zero-stable. If $U^n$ grows in n, it is \underline{not} zero-stable.
+\item \sheader{Theorem} All consistent one-step methods are zero-stable.
+\item \sheader{Method} Let $U^{(n)} = \xi^n$ as a solution to the problem. Insert
+  $\xi^n$ as a solution into the differencing scheme, and solve for $\xi$. If $|\xi| \leq 1$, then the method is zero-stable.
+  \begin{itemize}
+  \item Note that if $\xi = 1$, it is required that $\xi_i$ are unique, that is, that there are no repeated roots.
+  \end{itemize}
+\end{itemize}
+
+\sheader{Dahlquist Test Problem} Let $u' = \lambda u$, $u(0) = 1$, $\lambda \in \mathbb{C}$. We expect the solution to take the form $u(t) = \exp(\lambda t)$. The method is as follows:
+\begin{enumerate}
+\item Write out the problem with the differencing scheme.
+\item Substitute $f(U^{(i)})$ for $\lambda U^{i}$.
+\item Let $z = k\lambda$ and substitute.
+\item Factor out some $U^{j}$ such that you have a non-variable exponent polynomial of $U$, and that the entire equation $=0$..
+\item Let $U = G$. Solve for the roots of $G$ to find $G(z)$, or the \textit{growth factor}.
+\item Given this $G(z)$ function, you can conclude different forms of stability:
+  \begin{itemize}
+  \item \sheader{$A$-Stability or Absolute Stability} Need that $|G_1(z)| \leq 1$ and $|G_2| \leq 1$, and $G_1(z) \neq G_2(z)$.
+    \begin{itemize}
+    \item We can then discuss the \underline{stability region} as:
+      \begin{align*}
+        \curly{z : |G_1(z)| \leq 1 \wedge |G_2(z)| \leq 1}
+      \end{align*}
+    \item Caution: if there are repeated roots, that is $G_1(z) = G_2(z)$, then this does not hold!
+    \end{itemize}
+    \item \sheader{$L$-Stability or Asymptotic Stability} Requires that $G(z) \to 0$ as $\text{Re}(z) \to -\infty$.
+  \end{itemize}
+
+\end{enumerate}
+
+\sheader{Stiffness} 
+
+\pagebreak
+
+\header{Methods for Solving PDEs}
+
+\sheader{Full Discretization} Take for example, the heat equation, where we have that $u_t = u_{xx}$. We can proceed like we did in prior methods, by treating $u_{xx}$ as an operator on $u$. In this case, let $L$ be the finite differencing matrix for the second derivative in space. Hence, it folows that we can do the following:
+\begin{itemize}
+\item Forward Euler:
+  \begin{align*}
+    v^{n+ 1} = v^{n} + kLv^{n}
+  \end{align*}
+\item Backward Euler:
+  \begin{align*}
+    v^{n + 1} = v^n + kLv^{n + 1}
+  \end{align*}
+\end{itemize}
+
+\sheader{Method of Lines} A similar concept, we can use finite differencing to make a system of ODEs:
+\begin{align*}
+  u_t = u_{xx} \to \vec{v}(t)' = L\vec{v}(t).
+\end{align*}
+Hence, one is left with a system of ODEs in each ``row'', which can then be solved for using whichever method you choose to step in time.
+\gap
+\sheader{Stability in Method of Lines} One can combine the stability criteria from the time-differencing method, as well as the space-differencing (matrix) to get a relationship between your spatial spacing $h$ and time spacing $k$.
+
+\sheader{von Neumann Stability Analysis} We can analyze the stability of a PDE method given the fully-discretized method, with the following procedure:
+\begin{enumerate}
+\item With the full-discretized method, make the following substitution:
+  \begin{align*}
+    v_j^n = \exp(i \xi x_j) = \exp(i \xi jh)
+  \end{align*}
+\item Factor out $\exp(i \xi h)$ to get an equation of the form:
+  \begin{align*}
+    v_j^{n + 1} = g(\xi)v_j^n
+  \end{align*}
+  We then call the function $g(\xi)$ the \textit{amplification factor}.
+\item Analyzing the amplification factor $g(\xi)$, we attempt to get it into a sinusoidal
+  form, such that we can place a bound on $g(\xi)$.
+\item Finally, we can rearrange and do more analysis to find inequalities of $h$ and $k$ which satisfy $|g(\xi)| \leq 1$.
+\end{enumerate}
+
+\clearpage
+
+\header{Floating Point Arithmetic}
+
+Reals are represented discretely on computers. Numbers are spaced evenly amongs intervals
+of powers of two, i.e; $\curly{[1,2), [2, 4), [4, 16), \ldots}$. Hence, for each of these intervals, there are the same number of discrete representations.
+\gap
+\sheader{Storage}
+\begin{itemize}
+\item 1 floating point number = 64 bits = 8 bytes
+  \begin{itemize}
+  \item 1 bit for sign
+  \item 11 bits for exponent (base 2)
+  \item 53 bits for fraction (52 stored, 1 implicit)
+  \end{itemize}
+\end{itemize}
+We then call the distance between two numbers ``machine epsilon'', which is:
+$2^{-52} \approx 2.2 \times 10^{-16}$.
+\gap
+\sheader{IEEE Standard} According to the IEEE standard for floating point computing,
+each calculation should obey the following:
+\begin{align*}
+  a ? b = (a ? b)(1 + \epsilon)
+\end{align*}
+Where ? is some operator, and $|\epsilon| \leq \epsilon_\text{mach} / 2 \approx 1.1 \times 10^{-16}$. Hence, for every operation, it is quantized to the nearest discrete machine value.
+\gap
+\sheader{Subtraction of Nearly Equal Numbers} When subtracting two nearly equal numbers,
+we lose out on bits of precision/information in the binary representation of the number.
+Hence, we wish to avoid this as much as possible. For example:
+\begin{minted}{octave}
+octave:30> x = 103.42
+x = 0100000001011001110110101110000101000111101011100001010001111011
+octave:31> y = x + 10 * eps(x)
+y = 0100000001011001110110101110000101000111101011100001010010000101
+octave:32> y - x
+ans = 0011110101000100000000000000000000000000000000000000000000000000
+octave:33> format long g
+octave:34> y - x
+ans = 1.4210854715202e-13
+\end{minted}
+So instead of having order $10^{-16}$ precision in the operation, we only have $10^{-13}$.
+\gap
+\sheader{Backwards Stability Analysis} A backwards stable algorithm is one that gives the exact solution to a nearby problem, i.e.:
+\begin{align*}
+  \texttt{sin}(x) = \sin(x + \delta)
+\end{align*}
+\textit{Example}: $\sin(n \pi)$ should be zero. However, $\sin(10^{20} \pi) = -0.394$.
+However, it holds that:
+\begin{align*}
+  \sin(10^{20} \pi + \delta) = \sin(10^{20} \pi + 0.4) = 0
+\end{align*}
+And hence, we can say that the \textit{relative pertubation} is still small:
+\begin{align*}
+  \frac{\delta}{|x|} = \frac{0.4}{10^{20}} = 4\times 10^{-21}.
+\end{align*}
+
+\pagebreak
+
+\header{Spectral Methods}
+We can exploit the Fourier transform in order to solve differential equations. This allows
+one to have a method that has ``infinite accuracy'', and through the convolution, uses
+all points in the domain. Using Fourier transforms generally has the following procedure:
+\begin{enumerate}
+\item Compute the FFT.
+\item Multiply the FFT by $(ik)^n$ to take the $n$-th derivative.
+\item Take the IFFT to get out the differentiated function.
+\end{enumerate}
+\textit{Example}: Solve $u_t = u_{xx} + u^2$. For every timestep, we do the following:
+\begin{align*}
+  w &= \text{ifft}\left( (ik)^2 \cdot \text{fft}(u) \right)\\
+  u_{n + 1} &= u_n + \Delta t (w + u_n^2)
+\end{align*}
+\sheader{Time Complexity} $\mathcal{O}(N \log N)$.
+\gap
+\sheader{Limitations} When using spectral methods and the Fourier transform, one must
+be concerned with the following:
+\begin{itemize}
+\item \textit{Periodicity of Boundary Conditions}: The Fourier transform needs periodic
+  boundary conditions. Hence, one must extend their function to support this, and
+  this extension should be well behaved/smooth (see next).
+\item \textit{Smoothness of Function}: Due to Gibb's Phenomena, discontinuous or ``sharp''
+  functions tend to not be well-behaved under the Fourier transform. Hence, using
+  spectral methods is not recommended for these types of functions or solutions.
+\end{itemize}
+
+\header{Radial Basis Functions}
+
+Instead of the the approaches seen with Lagrange interpolants earlier with polynomials,
+we can suggest other methods of interpolating functions. One of these methods is by means
+of \textit{Radial Basis Functions}, which use radial distance to the points as a primary
+input:
+\begin{align*}
+  S(\vec{x}) = \sum_{i=1}^{N}\lambda_i \phi\left(\norm{\vec{x} - \vec{x}_i}_2\right).
+\end{align*}
+Where:
+\begin{itemize}
+\item $\phi$ is some radial function (i.e. Gaussian)
+\item $\vec{x}_i$ are sample points
+\item $\lambda_i$ are weights
+\end{itemize}
+And hence, this all becomes a linear algebra problem:
+\begin{align*}
+  \begin{bmatrix}
+\phi(\|\vec{x}_1 - \vec{x}_1\|) & \phi(\|\vec{x}_1 - \vec{x}_2\|) & \phi(\|\vec{x}_1 - \vec{x}_3\|) & \cdots & \phi(\|\vec{x}_1 - \vec{x}_N\|) \\
+\phi(\|\vec{x}_2 - \vec{x}_1\|) & \phi(\|\vec{x}_2 - \vec{x}_2\|) & \phi(\|\vec{x}_2 - \vec{x}_3\|) & \cdots & \phi(\|\vec{x}_2 - \vec{x}_N\|) \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\phi(\|\vec{x}_N - \vec{x}_1\|) & \phi(\|\vec{x}_N - \vec{x}_2\|) & \phi(\|\vec{x}_N - \vec{x}_3\|) & \cdots & \phi(\|\vec{x}_N - \vec{x}_N\|)
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1 \\
+\lambda_2 \\
+\vdots \\
+\lambda_N
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_1 \\
+f_2 \\
+\vdots \\
+f_N
+\end{bmatrix}
+\end{align*}
+We call the matrix with all of the $\phi$s in it the ``colocation matrix'' $A$.
+\clearpage
+\sheader{Common Radial Functions}
+\begin{itemize}
+  \item Infinity Smooth Radial Functions
+  \begin{itemize}
+\item GA: Gaussian $\phi(r) = e^{-\epsilon^2 r^2}$
+\item IQ: Inverse Quadratic $\phi(r) = \frac{1}{1+e^2r^2}$
+\item IMQ: Inverse Multiquadratic $\phi(r) = \frac{1}{\sqrt{1 + \epsilon^2 r^2}}$
+  \end{itemize}
+\item Piecewise Smooth Radial Functions
+  \begin{itemize}
+  \item Polyharmonic Splines: $\phi(r) = r^k$, $k$ odd
+  \item Thin Plate Spline: $\phi(r) = r^2 \log r$
+  \end{itemize}
+\end{itemize}
+There are other methods, but the prof likes ``RBF Finite Differences'' the best.
+\gap
+\sheader{Accuracy/Error} The error of RBFs is of order $\mathcal{O}(e^{-CN})$
+\begin{itemize}
+\item Pros:
+  \begin{itemize}
+  \item Flexible Geometry
+  \item No Meshing
+  \item Spectral Accuracy
+  \item Interpretable
+  \end{itemize}
+\item Cons:
+  \begin{itemize}
+  \item Dense Matricies
+  \item Stability Issues due to condition number of $A$ and the shape parameter/weights.
+  \end{itemize}  
+\end{itemize}
+
+\sheader{RBFs for Discretizing Differentiation Operators} We can use RBFs to approximate
+solutions for PDEs. Take some differential operator $L$, which could be anything like: $\frac{\partial}{\partial x}, \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}$, etc. Hence, for some differential equation of the form:
+\begin{align*}
+  Lu = g
+\end{align*}
+We can then apply $L$ to the interpolant:
+\begin{align*}
+  B = L \circ A = \begin{bmatrix}
+    L(\phi(\norm{x_1 - x_1})) & L(\phi(\norm{x_2 - x_1})) & \cdots & L(\phi(\norm{x_N - x_1}))\\
+    & \ddots & & \vdots\\
+    & & & L(\phi(\norm{x_N - X_N}))
+  \end{bmatrix}
+\end{align*}
+And then we can get that:
+\begin{align*}
+  B \lambda = g
+\end{align*}
+Knowing that $A\lambda = u$, then it follows that $\lambda = A^{-1} u$, so:
+\begin{align*}
+  BA^{-1}u = g
+\end{align*}
+This is known as Kansa's method.
+
+\clearpage
+
+\header{Conservation Laws}
+We find conservation law style PDEs in the form:
+\begin{align*}
+  q_t + \left[f(q)\right]_x = 0
+\end{align*}
+Where:
+\begin{itemize}
+\item $q$ is a vector of conserved quantities
+\item $f(q)$ is a flux function
+\end{itemize}
+With initial conditions $q(x, 0) = q_0(x)$.
+\gap
+\sheader{Traffic Flow Problems} The classic form of these problems are traffic flow problems. I don't think we need to know too much, but just in case, here's the shock equation again:
+\begin{align*}
+  s = \frac{f(q_l) - f(q_r)}{q_l - q_r}
+\end{align*}
+We can come up with methods to solve these types of problems. First, consider the
+\textit{integral form of the conservation law}:
+\begin{align*}
+  \frac{d}{dt}\int_{x_l}^{x_r}q(x, t)dx = f(q(x_l, t)) - f(q(x_r, t)).
+\end{align*}
+For methods to work, we divide the domain by midpoints on cells, instead of boundaries.
+Hence, we can call these ``finite volume methods''. From this, we can also define
+cell-centered averages:
+\begin{align*}
+  Q_j(t) = \frac{1}{h}\int_{x_{j - \frac{1}{2}}}^{x_{j - \frac{1}{2}}}q(x, t)dx.
+\end{align*}
+Finite volume methods find how these $Q_j$s evolve over time.
+\gap
+\sheader{Lax Friedrichs Method} From this, we get the \textit{Lax-Friedrichs Method} for
+solving conservation law problems:
+\begin{align*}
+  Q_j^{n + 1} = \frac{1}{2}(Q_{j-1}^n - Q^n_{j+ 1}) - \frac{k}{2h}a \left(Q_{j+1}^n - Q_{j-1}^n\right).
+\end{align*}
+\sheader{Conservative Form} We can suggest a ``simple and natural way'' to ensure that
+we do non converge for non-solutions (particularly helpful for nonlinear problems with discontinuities):
+\begin{align*}
+  Q_j^{n+1} = Q_j^n - \frac{k}{h} \left(F^n_{j+ \frac{1}{2}} - F^n_{j - \frac{1}{2}}\right) = Q_j^n - \frac{k}{h} \left[F(Q_j^n, Q_{j+1}^n) - F(Q_{j-1}^n, Q_j^n)\right]
+\end{align*}
+In this case, we call $F$ the \textit{numerical flux function}.
+\gap
+\sheader{Numerical Flux Functions} are some mythical beasts that can be derived in
+different ways and can take different forms depending on the nature of the problem.
+At a basis, for consistency, it is required that:
+\begin{align*}
+  F_{j + \frac{1}{2}}^n (u, u) = f(u).
+\end{align*}
+\textit{Example:} The numerical flux function in the Lax-Friedrichs Method is:
+\begin{align*}
+  F_{j+\frac{1}{2}}^n = \frac{f(Q_{j+1}^n) + f(Q_j^n)}{2} + \frac{h}{k} \left(\frac{Q_{j + 1}^n - Q_j^n}{2}\right)
+\end{align*}
+We can also do better on these numerical flux functions, i.e., instead of taking just $Q_{j+1}^n$ or $Q_j^n$, we could take a linear interpolation.
+% \gap
+\pagebreak
+\sheader{Lax-Wendroff Theorem} If a consistent and conservative method converges,
+then it converges to a weak solution.
+\begin{itemize}
+\item \textit{Consistency}: $F(u,u) = u$
+\item \textit{Stability}: Not investigated in this course.
+\end{itemize}
+\sheader{Norms} Max-norm error ($\infty$-norm) is problematic for discontinuous solutions.
+Hence, a better choice is the functional 1-norm:
+\begin{align*}
+  |v|_1 = \int_{-\infty}^{\infty}|v(x)|dx.
+\end{align*}
+\sheader{Riemann Solvers} Numerical methods/subroutines specialized for solving
+discontinuous problems.
+\gap
+\header{Weak/Variational Forms of PDEs}
+Take a PDE of some form:
+\begin{align}
+  \begin{cases}
+    Lu = f \\
+    u(a) = u(b) = 0
+  \end{cases}  
+\end{align}
+Where $L$ is some differential operator of highest degree 2,
+a classic solution (sometimes called a \textit{strong solution}) to the PDE would be $u \in C^2([a, b])$ such that it satisfies (1). However, if we multiply the problem by some
+arbitrary function $\phi \in C^1([a, b])$, $\phi(a) = \phi(b) = 0$ and integrate, we can
+get something of the following form:
+\begin{align}
+  \int_{a}^{b}Lu(x)\phi(x) = \int_{a}^{b}f(x)\phi(x)dx, \,\, \forall \, \phi \in C^1([a, b]), \, \phi(a) = \phi(b) = 0
+\end{align}
+Since this is a general form, $L$ is not defined, but, in general, integration by parts
+and the boundary conditions are employed to shift derivatives to other terms. Hence, if
+we can find some $u(x)$ that satisfies (2), then $u$ is considered to be a \textit{weak solution} of the PDE (1).
+\gap
+\sheader{Notation} We define some notation for variational problems:
+
+\[
+\begin{array}{c@{\hspace{3em}}c}
+    \text{Inner Product} & \text{Bilinear Form} \\[1em]
+    \ds (v, w) = \int_{a}^{b}v(x)w(x)dx & \ds a(v, w) = \int_{a}^{b}v'(x)w'(x)dx
+\end{array}
+\]
+
+And don't forget your integration by parts!!!
+\begin{align*}
+  -\int_{a}^{b}u''(x)v(x) = - \left[u'(x)v(x)\right]^b_a + \int_{a}^{b}u'(x)v'(x)dx
+\end{align*}
+
+\sheader{Aside} Minimization Problem: Find $u \in V$ such that $F(u) \leq F(v)$ for all $v \in V$, where $F(v) = \frac{1}{2} a(v, v) - (f, v)$.
+\gap
+
+\header{Finite Element Problems}
+\sheader{Grid} Domain is divided into intervals that are not necessarily equal in size.
+We can define notation for everything:
+\begin{itemize}
+\item Domain divisions: $x_0 < x_1 < \ldots < x_M < x_{M+1}$
+\item Intervals: $I_j = (x_{j-1}, x_j)$
+\item Interval Length: $h_i = x_j - x_{j-1}$
+\item $h = \max{h_j}$
+\end{itemize}
+\sheader{Basis Functions} Basis functions are the choice of $v$, however in this case
+(and from what I gather, most cases), the choice for $\phi_j(x)$ is the ``hat function''.
+Hence, for some value of $h$, we can write $u_h(x)$ as a weighted sum of the basis functions.
+\gap
+We denote the \textit{stiffness matrix} $A$ as:
+\begin{align*}
+  a_{ij} = a(\phi_i, \phi_j) = (\phi_i', \phi_j'),
+\end{align*}
+and the load vector $b$:
+\begin{align*}
+  b_i = (f, \phi_i).
+\end{align*}
+And then solve the following linear algebra problem:
+\begin{align*}
+  A \xi = b
+\end{align*}
+Where then the solution $u$ can be reconstructed:
+\begin{align*}
+  u_h(x) = \sum_{i=1}^{m}\xi_i \phi_i (x)
+\end{align*}
+
+\sheader{2D Case for the Poisson Problem} In the 2D case, we have the problem $-\nabla^2 u = f$ on a domain $\Omega$ and with $u=0$ on the boundary $\partial \Omega = \Gamma$.
+\gap
+In this form, the weak form still is as follows:
+\begin{align*}
+  a(u, v) = (f, v)
+\end{align*}
+However, the bilinear form is different:
+\begin{align*}
+  a(u, v) = \int_{\Omega}\nabla u \nabla v \,d\Omega
+\end{align*}
+Now, instead of 1d line segment intervals, we have non-overlapping triangles $K_i$ that
+are our ``intervals''. Additionally, instead of the  ``hat functions'' that we had in the
+prior case, now we have ``tent functions'' to support the additional dimension.
+\begin{itemize}
+\item Tent functions have 1 at node $j$, and $0$ at neighbours (and everywhere else). (hexagonal!)
+\end{itemize}
+
+\pagebreak
+
+\header{Level Set Functions}
+
+Consider some function $\phi(x, y)$ which is continuous and has negative and positive
+values. Then, we can say that $\phi < 0$ is ``inside'' and $\phi > 0$ is ``outside'' and
+$\phi =0$ is the ``boundary''. With this, we can describe interface motion by use of PDEs:
+\begin{itemize}
+\item Advection by a velocity field: $\phi_t + V \cdot \nabla \phi = 0$
+\item Motion in the normal direction: $\phi_t + V_n \norm{\nabla \phi}_2 = 0$.
+\item Motion by mean curvature: $\phi_t + \nabla \cdot \left(\frac{\nabla \phi}{\norm{\nabla \phi}_2}\right) \norm{\nabla \phi}_2 = 0$
+\end{itemize}
+
+\sheader{Hamilton-Jacobi Equations} Hamilton-Jacobi equations bear the following form:
+\begin{align*}
+  \phi_t + H(\nabla\phi) = 0.
+\end{align*}
+Some level set equations are examples of HJ equations. In this case, $H$ is a Hamiltonian.
+\gap
+There exists a connection between HJ equations and conservation laws. If one differentiates
+w.r.t. $x$ and set $u = \phi_x$, then we get that:
+\begin{align*}
+  u_t + H(u)_x = 0.
+\end{align*}
+Thus, the solution to an HJ equation is the integral of a conservation law solution. HJ
+solutions are generally ``kinked''.
+\gap
+\sheader{Numerical Methods for HJ equations} Build a ``numerical Hamiltonian''.
+\bigskip\\
+\header{Numerical Linear Algebra}
+\sheader{Notation}
+
+\[
+M(i, j, \lambda) = I + 
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & \lambda & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+Where $i$ is the row position and $j$ is the column position.
+
+\sheader{Gaussian Elimination and Backsolving}
+For some 3x3 matrix, it follow that:
+\begin{align*}
+  M(2, 1, -l_{21}) \cdot M(3, 1, -l_{31}) \cdot M(3, 2, -l_{32}) \cdot A = U \text{  (upper triangular)}
+\end{align*}
+Hence, consequentially, we get that:
+\begin{align*}
+  M(2, 1, -l_{21}) \cdot M(3, 1, -l_{31}) \cdot M(3, 2, -l_{32}) = L = \begin{bmatrix}
+    1 & 0 & 0 \\
+    l_{21} & 1 & 0\\
+    l_{31} & l_{32} & 1
+  \end{bmatrix}
+\end{align*}
+\textit{Note:} each value of $l_{ij}$ is derived from each \textit{successive} matrix multiplication.
+\begin{align*}
+  l_{ij} = \frac{a_{ij}}{a_{jj}}
+\end{align*}
+However, this can fail with zero division. Thus, we can do \textit{partial pivoting}.
+
+
+
+
+\end{document}

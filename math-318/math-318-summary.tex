@@ -14,6 +14,7 @@
 \hyphenchar\font=-1
 \usepackage{tabularx}
 
+
 \newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
 \newcommand{\sheader}[1]{\underline{#1:}}
 \newcommand{\mheader}[1]{\textbf{{\sheader{#1}}}}
@@ -606,5 +607,175 @@ As well as that:
 \begin{align*}
     \mathbb{E}X = \int_{-\infty}^{\infty}\mathbb{E}[X|Y=y]f_Y(y)dy
 \end{align*}
+
+\header{Markov Chains}
+
+Markov Chains are able to model complex physical phenomena that are 
+random in some way on a ``finite state space''.
+\gap 
+\sheader{Markov Property} The Markov Property states that the 
+system is memoryless, that is, the future is independent of the independent, 
+given the present.
+\gap
+We also assume that $P_{ij}$ do not change with $n$.
+\gap
+\sheader{Transition Probability Matrix} We say that the probability 
+of transitioning from state $i$ to state $j$ is:
+\begin{align*}
+    P_{ij} = P(X_{n+1} = j \,|\, X_n = i)
+\end{align*}
+This then allows for the definition of the \underline{transition probability matrix} $\widetilde{P}$.
+\gap 
+Assuming that $\widetilde{P}$ does not change with $n$, then it follows 
+that: 
+\begin{align*}
+    P_{ij}^n = P(X_{l + n}=j \,|\, X_l = i)
+\end{align*}
+
+\pagebreak 
+
+\sheader{Sample Transition Probability Matricies}
+\begin{itemize}
+    \item Simple Random Walk on $\mathbb{Z}$: $P_{i, i+1} = p$, 
+    $P_{i, i-1} = 1-p$, $P_{ij} = 0$.
+    \item Simple Random Walk on $\mathbb{Z}$: $P_{00} = P_{NN} = 0$, $P_{i, i+1} = p$, 
+    $P_{i, i-1} = 1-p$, $P_{ij} = 0$ otherwise.
+    \item Branching Process: $P_{00} = 1$, $P_{0j}= 0$, $P_{ij} = \binom{2i}{j}\frac{1}{2^{2i}}$.
+\end{itemize}
+
+\sheader{Chapman-Kolomgorov Equation}
+\begin{align*}
+    P_{ij}^{n+m} = \sum_{k}P_{ik}^nP_{kj}^m
+\end{align*}
+
+\sheader{Classification of Markov States}
+\begin{itemize}
+    \item \sheader{Absorbing} A state $i$ is said to be absorbing if 
+    $P_ii = 1$.
+    \item \sheader{Accessible} State $j$ is accessible from state $i$
+    if $P_{ij}^n > 0$ for some $n \geq 0$.
+    \item \sheader{Communicative} States $i$ and $j$ are said to communicate 
+    if $j$ is accessible from $i$, and $i$ is accessible from $j$. This 
+    is written by $i \leftrightarrow j$.
+    \item \sheader{Periodic} State $i$ is said to be periodic with 
+    period $d = \gcd\curly{n \geq 1: P_{ii}^n > 0}$.
+    \item \sheader{Transient} State $i$ is said to be transient if:
+    \begin{align*}
+        P(\exists n \geq 1 \textrm{ s.t. } X_n = i \,|\, X_0 = 1) < 1 \iff \sum_{n=0}^{\infty} P_{ii}^n < \infty
+    \end{align*}
+    \item \sheader{Recurrent} State $i$ is said to be recurrent if:
+    \begin{align*}
+        P(\exists n \geq 1 \textrm{ s.t. } X_n = i \,|\, X_0 = 1) = 1 \iff \sum_{n=0}^{\infty} P_{ii}^n = \infty
+    \end{align*}
+    We can provide further classifications for a recurrent class.
+    Let $T_i$ be the time of return to state $i$. It follows that a state is:
+    \begin{itemize}
+        \item \sheader{Positive Recurrent} if and only if $\mathbb{E}\left[T_i \,|\, X_0=i\right] < \infty$.
+        \item \sheader{Null Recurrent} if and only if $\mathbb{E}\left[T_i \,|\, X_0 =i\right] = \infty$.
+        If a state space is finite, then all recurrent states are positive recurrent.
+    \end{itemize}
+    \sheader{Theorem} If $i$ is recurrent and $i \leftrightarrow j$, then $j$
+    is recurrent.
+    \gap
+    \sheader{Corollary} Recurrence and transience are both class properties.
+    \item \sheader{Ergodic} If a state is both aperiodic and positive 
+    recurrent, then the state is said to be ergodic.
+\end{itemize}
+It is important to note that communication is an \textit{equivalence relation},
+which implies that the state space can be partitioned into \textbf{classes}.
+Within each class, each state communicates with every other. 
+\gap 
+\sheader{Classification of Markov Chains}
+\begin{itemize}
+    \item \sheader{Irreducibility} A Markov Chain is said to be \textit{irreducible}
+    if there is only one equivalence class (all states communicate).
+    \item \sheader{Ergodic} A Markov Chain is said to be \textit{Ergodic} 
+    if all of its states are ergodic.
+\end{itemize}
+
+\sheader{Equilibrium States} Given some Markov chain with transition 
+probability matrix $\widetilde{P}$, we can say that the initial state 
+probability is given by ${\pi}^{(0)}$, where each ${\pi}_i^{(0)}$
+describes the probability that the Markov chain is in state $i$ at time $0$.
+Hence, to find the long-run state, or equilibrium state, we would have that:
+\begin{align*}
+    {\pi}^{(n)} = {\pi}^{(0)}\widetilde{P}^n.
+\end{align*}
+We can determine this distribution by finding the eigenvalues and 
+eigenvectors of the matrix $\widetilde{P}$. Let $\widetilde{\pi}$ be 
+the eigenvector corresponding to the eigenvalue $1$. Through calculations,
+it is found that all other eigenvalues are $<1$, thus, we get that:
+\begin{align*}
+    \lim_{n\to \infty}\pi^{(n)} = \widetilde{\pi}.
+\end{align*}
+We can also note that the fraction of time that the system spends in 
+state $j$ over a long time is given by $\widetilde{\pi}_j$.
+\gap
+\sheader{Theorem (on the existance of an equilibrium distribution)}
+For an irreducible, ergodic Markov Chain, the limit $\ds \pi_j = \lim_{n\to\infty} P_{ij}^n$
+exists for all $j$, and does not depend on $i$. Moreover, it holds that:
+\begin{enumerate}[(1)]
+    \item $\widetilde{\pi} = \widetilde{\pi}\widetilde{P}$.
+    \item $\ds \sum_{j} \widetilde{\pi}_j = 1$.
+    \item Let $N_j(n)$ be the number of visits to state $j$ up to 
+    time $n$. Then $\ds \widetilde{\pi}_j = \lim_{n\to\infty}\frac{N_j(n)}{n}$.
+    \item $\pi_j = \frac{1}{m_j}$, where $m_j = \mathbb{E}\left[T_j \,|\, X_0 = j\right]$.
+    This also implies that $\forall j, \, \widetilde{\pi}_j > 0$.
+\end{enumerate}
+
+
+\sheader{Doubly Stochastic Matricies} If a transition probability matrix $\widetilde{P}$ has that \textit{both} the rows and the columns sum to 1, 
+then the matrix $\widetilde{P}$ is called ``\underline{doubly stochastic}''.
+If a matrix is doubly stochastic, then it follows that the stationery 
+distribution is equal and constant:
+\begin{align*}
+    \widetilde{\pi} = \begin{bmatrix}
+        \frac{1}{N}, \ldots, \frac{1}{N}
+    \end{bmatrix}
+\end{align*}
+
+\header{Time Reversal}
+
+\sheader{Theorem} Given a Markov Chain $(X_n)_{n=0}^N$ with 
+stationery distribution $\pi$ and with $P(X_0=j) = \pi_j$ 
+(start in equilibrium), let $Y_n = X_{N-n}$. Then $(Y_n)_{n=0}^N$:
+\begin{enumerate}
+    \item Is a Markov Chain.
+    \item Has transition probabilities $Q_{ij} = P_{ji}\frac{\pi_j}{\pi_i}$.
+    \item Has a stationery distribution $\widetilde{\pi}$.
+\end{enumerate}
+\sheader{Definition} A Markov Chain is time-reversible if $Q_{ij} = P_{ij} \, \forall\, i,j$.
+This implies that: 
+\begin{align*}
+    \pi_i P_{ij} = \pi_j P_{ji}.
+\end{align*}
+\sheader{Alternatively} Let $X_n$ be an irreducible and ergodic Markov Chian.
+If we can find numbers $z_i >0$ such that:
+\begin{align*}
+    z_i P_{ij} = z_j P_{ji} \,\textrm{   and   }\, \sum_{i}z_i = 1,
+\end{align*}
+Then $z_i = \pi_i$ and the Markov Chain is reversible.
+
+\pagebreak
+
+\sheader{Ehrenfest Chain} Let a box be partitioned into two parts of equal 
+volume, with $M$ molecules total. Let $X_n = \#$ of molecules on the left 
+side of the box, and such there are $M-i$ molecules on the right of the box.
+At each step, choose a molecule at random, and move it ot the other 
+side of the box. Hence, the transition probabilities are as follows:
+\begin{align*}
+    P_{i, i+1} = \frac{M-i}{M} && P_{i, i-1} = \frac{i}{M}.
+\end{align*}
+There are two methods that we could go about this:
+\begin{enumerate}
+    \item Guess and check. Since we can think of this as a series of coin 
+    flips on whether we select the a particle in the left side or the right 
+    side of the box, we can estimate a Binomial distribution:
+    \begin{align*}
+        \pi_j = \binom{M}{j} \frac{1}{2^M}.
+    \end{align*}
+    \item Direct Calculation. This is particularly heinous, involving 
+    a recursive solve.
+\end{enumerate}
 
 \end{document}

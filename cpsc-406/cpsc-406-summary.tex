@@ -34,6 +34,8 @@
 \newcommand{\ds}{\displaystyle}
 \newcommand{\Arg}{\textrm{Arg}}
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newcommand{\oper}[2]{\underset{#2}{\operatorname{#1}}}
+
 
 
 
@@ -521,5 +523,770 @@ Hence the problem becomes unconstrained in $n - m$ variables:
 We can then apply any optimization to obtain the solution $p^*$, and $x^*= \overline{x} + Zp^*$
 is the solution to the original problem.
 
+\pagebreak
+
+\begin{center}
+    \Large Second Half of the Course\\
+    \normalsize
+\end{center}
+
+\header{Convex Sets}
+
+\sheader{Definition} A set $C \subseteq \mathbb{R}^n$ is said to be \textit{convex} if for 
+any $\mathbf{x}, \mathbf{y} \in C,\,\, \lambda \in [0, 1]$, the point 
+$\lambda \mathbf{x} + (1-\lambda)\mathbf{y}\in C$.
+\gap
+\sheader{Convex Hull} The convex hull of a set of points $\mathcal{S}$
+contains all convex combinations of points in $\mathcal{S}$:
+\begin{align*}
+    \textrm{conv}(\mathcal{S}) = \curly{\sum_{i=1}^k \theta_i x_i \,|\, x_i \in \mathcal{S}, \, \sum_{i = 1}^k \theta_i = 1, \theta_i \geq 0}
+\end{align*}
+Equivalently, we can say that $\mathcal{C} \subset \mathbb{R}^n$ is 
+convex if it contains all convex combinations of its elements, i.e. 
+$\mathcal{C} = \textrm{conv}(\mathcal{C})$.
+\gap
+\sheader{Subspace} $\mathcal{S} \subset \mathbb{R}^n$ is a subspace 
+if it contains all linear combinations of points in the set, i.e.
+\begin{align*}
+    \alpha x + \beta y \in \mathcal{S}, \forall x, y \in \mathcal{S}, \forall \alpha, \beta \in \mathbb{R}
+\end{align*}
+For any $m \times n$ matrix $A$, its range and nullspace are 
+subspaces of $\mathbb{R}^n$:
+\begin{align*}
+    \textbf{range}(A) = \curly{Ax \,|\, x \in \mathbb{R}^n} && \textrm{and} &&
+    \textbf{null}(A^T) = \curly{z \,|\, A^Tz = 0}
+\end{align*}
+
+\sheader{Affine Sets} $\mathcal{L}$ is an affine set if it's a translated 
+subspace, that is, for fixed $x_0 \in \mathbb{R}^n$ and subspace $\mathcal{S}$:
+\begin{align*}
+    \mathcal{L}= \curly{x_0 + v \,|\, v \in \mathcal{S}} \equiv x_0 + \mathcal{S}
+\end{align*}
+
+\sheader{Halfspaces and Hyperplanes} For some fixed nonzero vector
+$a \in \mathbb{R}^n$ and scalar $\beta$, a hyperplane is given by:
+\begin{align*}
+    \mathcal{H} = \curly{x \,|\, a^Tx = \beta}
+\end{align*}
+and a halfspace is given by:
+\begin{align*}
+    \mathcal{H}_- = \curly{x \,|\, a^Tx \leq \beta}
+\end{align*}
+\begin{itemize}
+    \item $a$ is normal to the hyperplane.
+    \item Hyperplanes are both \textbf{affine} and \textbf{convex}.
+    \item Halfspaces are convex but \textbf{not affine}.
+\end{itemize}
+
+\sheader{Cones} A set $\mathcal{K} \subset \mathbb{R}^n$ is a 
+\textbf{cone} if $x \in \mathcal{K} \iff ax \in \mathcal{K},\,\, \forall \alpha \geq 0$.
+\gap 
+\sheader{Convex Cones} A convex cone is a cone that is 
+also convex:
+\begin{align*}
+    x, y \in \mathcal{K} \wedge \alpha, \beta \geq 0 \implies \alpha x + \beta y \in \mathcal{K}
+\end{align*}
+
+Some examples of convex cones include:
+\begin{itemize}
+    \item Nonnegative Orthant: $\ds \mathbb{R}^n_+ = \curly{x \,|\, x_i \geq 0, i = 1, \ldots, n}$
+    \item Second-Order Cone: $\ds \mathcal{L}_+^n = \curly{\begin{bmatrix}
+        x\\t
+    \end{bmatrix} \in \mathbb{R}^{n+1} \,\biggr\rvert\, \norm*{x}_2 \leq t, x \in \mathbb{R}^n, t \in \mathbb{R}}$
+    \item Positive Semidefinite Cone
+\end{itemize}
+
+\sheader{Operations that Preserve Convexity} Let $\mathcal{C}_1, \mathcal{C}_2$ 
+be convex sets in $\mathbb{R}^n$.
+\begin{itemize}
+    \item Nonnegative Scaling: $\theta \mathcal{C}_1 = \curly{\theta x \,|\, x \in C_1}, \,\, \theta \geq 0$.
+    \item Intersection: $\mathcal{C}_1 \cap \mathcal{C}_2$.
+    \item Sum: $\mathcal{C}_1 + \mathcal{C}_2 = \curly{x + y \,|\, x \in \mathcal{C}_1, \, y \in \mathcal{C}_2}$.
+\end{itemize}
+
+\sheader{Convex Polytopes} $\mathcal{S}$ is a \textbf{convex polytope} 
+if it is the intersection of a fininte number of halfspaces:
+\begin{align*}
+    \mathcal{S} = \bigcap\limits_{i=1}^m \curly{x \,|\, a_i^T x \leq \beta_i} = \curly{x \,|\, Ax \leq b}
+\end{align*}
+where:
+\begin{align*}
+    A = \begin{bmatrix}
+        a_1^T \\ \vdots \\ a_m^T 
+    \end{bmatrix} \in \mathbb{R}^{m \times n} && \textrm{and}&& b \in \mathbb{R}^m
+\end{align*}
+\sheader{$n$-dimensional simplex} Is the intersection of $n$ halfspaces and a 
+hyperplane:
+\begin{align*}
+    \mathcal{C} = \curly{x \,\biggr\rvert\, \sum_{i=1}^{n}= 1, \, x_i \geq 0}.
+\end{align*}
+
+\header{Convex Functions}
+\sheader{Convexity} A function $f\,:\, C \to \mathbb{R}$ is \textbf{convex}
+if $\mathcal{C} \subset \mathbb{R}^n$ is convex for all $x, y \in \mathcal{C}$
+and $\theta \in [0, 1]$:
+\begin{align*}
+    f(\theta x + (1- \theta) y)\leq \theta f(x) + (1-\theta)f(y).
+\end{align*}
+\sheader{Strict Convexity} A function $f$ is strictly convex if the 
+inequality is strict for $x \neq y$ and $\theta \in (0, 1)$:
+\begin{align*}
+    f(\theta x + (1-\theta)y) < \theta f(x) + (1- \theta)f(y).
+\end{align*}
+\sheader{Concavity} $f$ is concave if $(-f)$ is convex.
+\gap
+\sheader{Examples of Convex Functions}
+\begin{itemize}
+    \item Exponential: $e^{ax}$
+    \item Powers: $x^\alpha$ over $x\geq $ for any $\alpha \geq 1$ or $\alpha \leq 0$
+    \item Absolute Value: $|x|^\alpha$ for any $\alpha \geq 1$
+    \item Norms: $\norm*{x}_p$ for any $p \geq 1$
+\end{itemize}
+\sheader{Examples of Concave Functions}
+\begin{itemize}
+    \item Powers: $x^\alpha$ over $x\leq 0$ for any $0 < \alpha < 1$
+    \item Logarithm: $\log x$ over $x>0$
+\end{itemize}
+\sheader{Convex and Concave}
+\begin{itemize}
+    \item Affine: $a^Tx + \beta$ for any $a \in \mathbb{R}^n$ and $\beta \in\mathbb{R}$
+\end{itemize}
+
+\sheader{Restriction to Lines} $f : \mathbb{R}^n \to \mathbb{R}$ is 
+\textbf{convex} if and only if 
+\begin{align*}
+    \phi(a) = f(x + \alpha d)
+\end{align*}
+is convex over $\alpha \in \mathbb{R}$ for all points $x$ and 
+directions $d$.
+\gap
+\sheader{Operations that Preserve Convexity}
+\begin{itemize}
+    \item Nonnegative Scaling
+    \item Sums
+    \item Composition with Affine Function
+\end{itemize}
+
+\sheader{Convex Optimization}
+\begin{align*}
+    \min_{x \in \mathcal{C}} f(x), \,\,\, \mathcal{C} \subset \mathbb{R}^n \textrm{ convex}, \,\,\, f: \mathcal{C}\to \mathbb{R} \textrm{ convex}
+\end{align*}
+If $x^*$ is a \textbf{local minimizer}, it is also a \textbf{global minimizer}.
+\pagebreak
+
+\sheader{Convexity and Level Sets} Given the \underline{level set} of $f : \mathbb{R}^n \to \mathbb{R}$
+at level $\alpha \in \mathbb{R}$:
+\begin{align*}
+    [f \leq \alpha] := \curly{x \in \mathbb{R}^n \,|\, f(x) \leq \alpha}
+\end{align*}
+If $f$ is convex, then all level sets are convex.
+\gap
+\sheader{First-Order Characterizations} Let $f : \mathcal{C} \to \mathbb{R}$
+be differentiable over $\mathcal{C} \subset \mathbb{R}^n$. Then $f$ is 
+convex if and only if:
+\begin{align*}
+    f(y) \geq f(x) + \nabla f(x)^T(y-x) \forall x, y \in \mathcal{C}.
+\end{align*}
+
+\sheader{Second-Order Characterization} Let $f : \mathcal{C} \to \mathbb{R}$
+be twice differentiable over $\mathcal{C} \subset \mathbb{R}^n$. Then 
+$f$ is convex if and only if:
+\begin{align*}
+    \nabla^2 f(x) \succeq 0\,\,\,\, \forall x \in \mathcal{C}.
+\end{align*}
+
+\header{Projected Gradient Descent}
+
+For a set ${C} \subset \mathbb{R}^n$ closed convex, the 
+\textbf{projection} of a point $x \in \mathbb{R}^n$ onto 
+$C$ is the point:
+\begin{align*}
+    \mathbf{proj}_C(x) = \underset{z\in C}{\operatorname{argmin}}\norm*{x-z}.
+\end{align*}
+It is also important to note that:
+\begin{align*}
+    z = \mathbf{proj}_C(x) &\iff z\in C \wedge (x-z)^T(y-z)\leq 0\,\, \forall y\in C\\
+    z = \mathbf{proj}_C(x) &\iff -\nabla g(z) = x- z \in \mathcal{N}_C(z)
+\end{align*}
+\sheader{Projection onto Affine Set} Given some set 
+$C = \curly{z \in \mathbb{R}^n \,|\, Az = b}$ for $A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m$, 
+then:
+\begin{align*}
+    \mathbf{proj}_C(x) = \textrm{argmin}\curly{\frac{1}{2} \norm*{z-x}^2 \,|\, Az = b}.
+\end{align*}
+
+Because $\mathcal{N}_C = \mathbf{range}(A^T)$, the optimality condition 
+is such that:
+\begin{align*}
+    x - \mathbf{proj}_C(x) \in \mathbf{range}(A^T)
+\end{align*}
+
+\sheader{Projected Gradient Descent} Projected gradient 
+descent proceeds as follows:
+\begin{align*}
+    \min_x \curly{f(x) \,|\, x \in C},
+\end{align*}
+for some $f : \mathbb{R}^n \to \mathbb{R}$ convex and smooth
+and $C \subset \mathbb{R}^n$.
+
+Hence, the algorithm for this is as follows:
+\begin{itemize}
+    \item Start from $x_0 \in C$
+    \item For $k = 0, 1, 2, \ldots$
+    \begin{itemize}
+        \item $g_k = \nabla f(x_k)$
+        \item Linesearch on $\phi(\alpha) = f(\mathbf{proj}_C(x_k - \alpha g_k))$
+        \item $x_{k+1} = \mathbf{proj}_C(x_k - \alpha_k g_k)$
+        \item Stop if $||x_{k+1} - x_k||$ is small.
+    \end{itemize}
+\end{itemize}
+
+\sheader{Stationarity}
+\begin{align*}
+    x^* \oper{argmin}{x\in C} f(x) \iff x^* = \mathbf{proj}_C(x^* - \alpha \nabla f(x^*))\,\,\, \forall \alpha >0
+\end{align*}
+By the projection theorem:
+\begin{align*}
+    (x^* - \alpha \nabla f(x^*) - x^*)^T (z-x^*)\leq 0 \,\, \forall z \in C\\
+    -\alpha \nabla f(x^*)^T(z-x^*) \leq 0\,\,\, \forall z \in C
+\end{align*}
+Given the definition of a normal cone, we obtain that:
+\begin{align*}
+    -\nabla f(x^*) \in \mathcal{N}_C(x^*).
+\end{align*}
+
+\pagebreak
+
+\header{Convex Optimality}
+
+Given some convex optimization problem:
+\begin{align*}
+    \min_x \curly{f(x) \,|\, x \in C},
+\end{align*}
+we say that:
+\begin{itemize}
+    \item if $C = \mathbb{R}^n$ the problem is \textbf{unconstrained}, so $\nabla f(x^*) = 0$.
+    \item however, if $C \neq \mathbb{R}^n$, then this does not imply that $\nabla f(x^*) = 0$.
+\end{itemize}
+
+\sheader{Normal Cone} The normal cone to the set $C \subset \mathbb{R}^n$
+at the point $x \in C$ is the set:
+\begin{align*}
+    \mathcal{N}_C(x) = \curly{d \in \mathbb{R}^n \,|\, d^T(z-x) \leq 0, \,\, \forall z \in C}
+\end{align*}
+
+\sheader{Necessary and Sufficient Optimality}
+A point $x^* \in \textrm{argmin}_{x\in C} f(x)$ if and only if:
+\begin{align*}
+    \nabla f(x^*)^T (x- x^*)\geq 0 \forall x \in C.
+\end{align*}
+Using the definition of the normal cone we can deduce the equivalent condition:
+\begin{align*}
+    -\nabla f(x^*) \in \mathcal{N}_C(x^*).
+\end{align*}
+
+\sheader{Interior Point} It is implied that points in the interior 
+have empty sets as normal cones.
+
+This implies for unconstrained optimality that $\nabla f(x^*) = 0$.
+\gap
+\sheader{Normal Cone to an Affine Set} Given some 
+\begin{align*}
+    C = \curly{x \in \mathbb{R}^n \,|\, Ax = b}.
+\end{align*}
+Then for any $x \in C$, define the translated set as:
+\begin{align*}
+    C_x = \curly{z - x \,|\, z \in C}.
+\end{align*}
+Then,
+\begin{align*}
+    \mathcal{N}_C(x) = \mathbf{range}(A^T) = A^Ty
+\end{align*}
+So $x^*$ is optimal iff $Ax^* = b$ and $-\nabla f(x^*) = A^Ty$ for some 
+$y \in \mathbb{R}^n$.
+\gap
+And such, the vector $y \in \mathbb{R}^m$ contains all of the 
+\textbf{Lagrange Multipliers} for each constraint: $a_i^Tx = b_i$.
+\gap
+\header{Convergence of Gradient Descent}
+\begin{itemize}
+    \item Quadratic functions with $f(x) = \frac{1}{2}x^TAx + b^Tx + \gamma$,
+    with $A \succeq 0$, has $L = \norm*{A}_2 = \lambda_{\textrm{max}}(A)$
+    \item If $f$ twice continuously differentiable, then $f$ is $L$-smooth
+    if and only if, for all $x$:
+    \begin{align*}
+        \nabla^2f(x)\preceq LI \iff \norm*{\nabla^2 f(x)}_2 \leq L.
+    \end{align*}
+\end{itemize}
+
+\sheader{Descent Lemma}
+If $f$ is $L$-smooth, then for all $x, z$, then $f$ is \textbf{globally majorized}
+by a quadratic approximation.
+\begin{align*}
+    f(z) \leq f(x) + \nabla f(x)^T (z-x) + \frac{L}{2} \norm*{z-x}^2
+\end{align*}
+
+From prior it is known that we get decreasing objecitive values if we 
+choose some stepsize $\alpha \in \left(0, \frac{2}{L}\right)$.
+
+\pagebreak
+
+\header{Strong Convexity}
+A function $f : \mathbb{R}^n \to \mathbb{R}$ is $\mu$-strongly convex (with $\mu > 0$)
+if for all $x, y$:
+\begin{align*}
+    f(z) \geq f(x) + \nabla f(x)^T(z-x) + \frac{\mu}{2}\norm*{z-x}^2
+\end{align*}
+
+If $f$ is \textbf{twice continuously differentiable}, then $f$ 
+is $\mu$-strongly convex if and only if for all $x$:
+\begin{align*}
+    d^T\nabla^2 f(x) d \geq \mu \norm*{d}^2\,\,\, \forall d \in \mathbb{R}^n \iff \nabla^2 f(x) \succeq I\mu
+\end{align*}
+
+Alternatively, one can say that a function $f$ is $\mu$-strongly convex 
+if and only if for all $x$,
+\begin{align*}
+    g(x) = f(x) - \frac{\mu}{2}\norm*{x}^2
+\end{align*}
+This also implies that Tikhonov regularization induces strong convexity.
+
+\sheader{Distance to Solution} Some important lemmas arise out of this.
+\begin{enumerate}
+    \item If $f$ is $L$-smooth, then for all $x$ and all minimizers $x^*$
+    with $f^* = f(x^*)$:
+    \begin{align*}
+        \frac{1}{2L} \norm*{\nabla f(x)}^2 \leq f^* \leq \frac{L}{2}\norm*{x-x^*}^2
+    \end{align*}
+    \item If $f$ is $\mu$-strongly convex, then for all $x$ and all 
+    minimizers $x^*$ with $f^* = f(x^*)$:
+    \begin{align*}
+        \frac{\mu}{2}\norm*{x-x^*}^2 \leq f(x) - f^* \leq \frac{1}{2\mu} \norm*{\nabla f(x)}^2
+    \end{align*}
+\end{enumerate}
+
+The sum of all of these conclusions implies that the Hessian eigenvalues 
+can be bounded from above and below:
+\begin{align*}
+    \mu I \preceq \nabla^2 f(x) \preceq LI
+\end{align*}
+
+We can also deduce the number of iterations $T$ it would take 
+to get down to a desireable error:
+\begin{align*}
+    T \leq \frac{L}{\mu}\log\left(\frac{f_0 - f^*}{\epsilon}\right)
+\end{align*}
+
+\header{Stochastic Gradient Descent}
+
+For some least-squares gradient descent problem, where one would have that:
+\begin{align*}
+    \nabla f(x) = \sum_{i=1}^{N}\nabla f_i(x)
+\end{align*}
+
+However, we could take samples $j = 1, \ldots, N$ that occur with 
+equal probability $\frac{1}{N}$ to get that:
+\begin{align*}
+    f(x) = \frac{1}{N}\sum_{j=1}^{N}f_j(x)= \mathbb{E}_j f_j(x)
+\end{align*}
+Hence, tha gradient is that:
+\begin{align*}
+    \nabla f(x) = \frac{1}{N}\sum_{j=1}^{N}\nabla f_j(x) = \mathbb{E}_j \nabla f_j(x)
+\end{align*}
+
+Hence, we randomly sample a small patch of observations $\mathcal{B} \subseteq \curly{1, \ldots, N}$,
+then:
+\begin{align*}
+    g_\mathcal{B}(x) = \frac{1}{|\mathcal{B}|}\sum_{i\in \mathbb{B}}\nabla f_i(x) \implies \mathbb{E}_\mathcal{B}g_\mathcal{B}(x) = \nabla f(x)
+\end{align*}
+
+This is called a ``stochastic approximation''.
+
+\pagebreak
+
+\sheader{Stochastic Gradient Descent}
+
+\begin{align*}
+    \min_{x\in \mathbb{R}^n} f(x) = \frac{1}{N}\sum_{i=1}^{N}f_i(x)
+\end{align*}
+
+So each step we have that:
+\begin{align*}
+    x_{k+1} = x_k - \alpha_k \nabla g_k
+\end{align*}
+
+Where:
+\begin{align*}
+    g_k := \frac{1}{B_k}\sum_{i \in B_k} \nabla f_i(x_k)
+\end{align*}
+Where $B_k$ is a batch of uniformly random iid samples from $\curly{1, \ldots, N}$
+\begin{itemize}
+    \item Step length $\alpha_k$ often called ``Learning Rate'' in this context.
+    \item Need to assume mean-squared error in stochastic approximation is bounded:
+    \begin{align*}
+        \mathbb{E}\left[\norm*{g_k - \nabla f(x_k)}^2\right] =
+        \mathbb{E}\left[\norm*{g_k}^2\right] - \norm*{\nabla f(x)}^2 \leq \sigma^2
+    \end{align*}
+\end{itemize}
+
+\sheader{Convergence in Expectation (constant steplength)} It works 
+out such that:
+\begin{align*}
+    \mathbb{E}f_{k+1} \leq \mathbb{E} f_k - \frac{\alpha}{2} \mathbb{E} \norm*{\nabla f_k}^2 + \frac{\alpha^2 \sigma^2 L}{2}
+\end{align*}
+If we sum over $k = 0, 1, 2, \ldots, T$ and recurse, rearranging, we get that:
+\begin{align*}
+    \frac{1}{T}\sum_{k=1}^{T}\mathbb{E}\norm*{\nabla f(x_k)}^2 \leq \frac{2(f(x_0) - f^*)}{\alpha T} + \frac{\alpha \sigma L}{2}
+\end{align*}
+
+\header{Linear Programming}
+\sheader{Conventional Program} Given $A \in \mathbb{R}^{m\times n}, b\in \mathbb{R}^m, c \in \mathbb{R}^n$:
+\begin{align*}
+    \oper{minimize}{x}\,\,\, &c^Tx\\
+    \textrm{subject to } &Ax=b\\
+    &x \geq 0
+\end{align*}
+
+\sheader{Diet Problem} 
+\begin{itemize}
+    \item Minimum-cost diet
+    \item $x_i$ represents how many servings of food group $i$ to eat
+    \item $c_i$ gives cost of 1 serving of food from group $i$
+    \item $a_i^Tx = b_i$ encodes nutritional recommendations
+    \item $x\geq 0$ since you can't eat negative food
+\end{itemize}
+
+\sheader{Geometry}
+
+Consider a linear program to be in a polyhedron:
+\begin{align*}
+    \mathcal{P} = \curly{x \,|\, Ax \leq b}
+\end{align*}
+
+Then, an extreme point $x\in \mathcal{P}$ is if there \underline{does not exist}
+two vectors $y, z \in \mathcal{P}$ such that:
+\begin{align*}
+    x = \lambda y  + (1-\lambda)z \textrm{  for any  } \lambda \in (0, 1).
+\end{align*}
+
+\sheader{Verticies} $x\in \mathcal{P}$ is a vertex of $\mathcal{P}$ 
+if there exists a vector $c \neq 0$ such that:
+\begin{align*}
+    c^Tx < c^Ty \textrm{  for all  } y \in \mathcal{P}, y\neq x
+\end{align*}
+\begin{itemize}
+    \item Given a vertex $x$, find $c$ such that $c^Tx < c^Ty$ for all $y \in \mathcal{P}$, $y\neq x$.
+    \item Given a vector $c$, find $x$ such that $c^Tx < c^Ty$ for all $y \in \mathcal{P}, y\neq x$:
+    \begin{align*}
+        \oper{minimize}{x} \,\,\,c^Tx \textrm{  subject to  } x \in \mathcal{P}.
+    \end{align*}
+\end{itemize}
+
+\sheader{Active Constraints} Define $\mathcal{B}$ as the set of 
+\textbf{active} or \textbf{binding} constraints (at $x^*$):
+\begin{itemize}
+    \item Active Constraints: $a_i^Tx^* = b_i, i \in \mathcal{B}$
+    \item Inactive Feasible Constraints: $a_i^Tx^* < b_i, i \in \mathcal{N}$
+    \item Inactive Infeasible Constraints $a_i^Tx^* > b_i, i \notin \mathcal{B} \cup \mathcal{N}$
+\end{itemize}
+
+Hence, the subset of active constraints are as follows:
+\begin{align*}
+    A_\mathcal{B} = \overline{A} = \begin{bmatrix}
+        a_{i_1}^T\\
+        \vdots\\
+        a_{i_k}^T
+    \end{bmatrix} &&
+    b_\mathcal{B} = \overline{b} = \begin{bmatrix}
+        b_{i_1}\\
+        \vdots\\
+        b_{i_k}
+    \end{bmatrix} && 
+    \mathcal{B} = \curly{i_1, \ldots, i_k}
+\end{align*}
+
+\sheader{Basic Solutions} $x^*$ is a \textbf{basic solution} if one 
+of the following equivalent conditions hold:
+\begin{itemize}
+    \item $a_{i_1}, a_{i_2}, \ldots, a_{i_n}$ are linearly independent
+    \item $\overline{A}x^* = \overline{b}$ has a unique solution
+    \item $\textrm{rank}(\overline{A}) = n$
+\end{itemize}
+\sheader{Basic Feasible Solution} $x^*$ is a basic solution and $x^* \in \mathcal{P}$.
+\gap
+The following are equivalent:
+\begin{itemize}
+    \item $x^*$ is a vertex
+    \item $x^*$ is an extreme point 
+    \item $x^*$ is a basic feasible solution
+\end{itemize}
+
+\sheader{Unbounded Directions} $\mathcal{P}$ contains a \textbf{half-line}
+if there exists $d \neq 0$, $x_0$ such that:
+\begin{align*}
+    x_0 + \alpha d \in \mathcal{P} \textrm{  for all  } \alpha \geq 0
+\end{align*}
+\begin{itemize}
+    \item $\mathcal{P}$ unbounded $\iff \mathcal{P}$ contains a half-line
+    \item $\mathcal{P}$ has no extreme points $\iff \mathcal{P}$ contains a line
+    \item $p^* = -\infty$ if and only if there exists a feasible half line
+    \item $p^* = + \infty$ if and only if $\mathcal{P} = \emptyset$
+    \item $p^*$ is finite if and only if $X^* \neq \emptyset$
+\end{itemize}
+
+\header{Simplex Method}
+
+Assume standard form of an LP problem:
+\begin{align*}
+    \oper{minimize}{x} \,\,\, &c^Tx\\
+    \textrm{subject to}\,\,\, &Ax=b, x\geq 0
+\end{align*}
+Assuming that:
+\begin{itemize}
+    \item $A$ has full row rank (no redundant rows)
+    \item The LP is feasible
+    \item All basic feasible solutions are nondegenerate
+\end{itemize}
+\pagebreak
+
+We also define two variable index sets:
+\begin{itemize}
+    \item $\mathcal{B} = \curly{\beta_1, \beta_2, \ldots, \beta_m}$
+    \item $\mathcal{N} = \curly{\eta_1, \eta_2, \ldots, \eta_{n-m}}$
+\end{itemize}
+
+\sheader{Feasible Directions} A direction $d$ is \textbf{feasible} at 
+$x \in \mathcal{P}$ if there exists $\alpha > 0$ such that:
+\begin{align*}
+    x + \alpha d \in \mathcal{P}
+\end{align*}
+
+\sheader{Constructing Feasible Directions} Given some $x \in \mathcal{P}$
+and $Ax = b$, $x\geq 0$, require that for all $\alpha \geq 0$ that:
+\begin{align*}
+    b = A(x + \alpha d) = Ax + \alpha A d = b + \alpha Ad
+\end{align*}
+
+Thus, we require that $Ad = 0$. Suppose that $x$ is a basic feasible solution,
+such that:
+\begin{align*}
+    0 = Ad = \begin{bmatrix}
+        B & N
+    \end{bmatrix} \begin{bmatrix}
+        d_b \\ d_n
+    \end{bmatrix}
+    = Bd_B + Nd_N \implies Bd_B = -Nd_N
+\end{align*}
+
+We then construct search directions by moving a \textbf{single} nonbasic
+variable $\eta_k \in \mathcal{N}$:
+\begin{align*}
+    d_N = e_k \textrm{  and  } Bd_B = -Ne_k = -a_{\eta_k}
+\end{align*}
+This goes on with swapping variables inside and outside of the basic set.
+\gap
+\sheader{Choosing Swaps}
+\begin{itemize}
+    \item For choosing $d_N = e_p$, choose $p$ such that $z_{n_p} < 0$ (most negative) (for some $z = c - A^Ty$, $B^Ty = c_B$)
+    \item Some basic variable $\beta_q$ must exit the basis, choose: $\ds q = \oper{argmin}{q|d_{\beta_q} < 0} \,\,\left( -\frac{x_{\beta_q}}{d_{\beta_q}}\right)$
+\end{itemize}
+Hence, the new basic and nonbasic variables are as follows:
+\begin{itemize}
+    \item $\mathcal{B} \leftarrow \mathcal{B} \setminus \curly{\beta_q} \cup \curly{\eta_p}$
+    \item $\mathcal{N} \leftarrow \mathcal{N} \setminus \curly{\eta_p} \cup \curly{\beta_q}$
+\end{itemize}
+
+\header{Converting Linear Programs to Standard Form}
+
+A generic polyhedron has the form:
+\begin{align*}
+    \mathcal{P} = \curly{x \,\Biggr\lvert\, \begin{matrix}
+        Ax = b \\ Cx \leq d
+    \end{matrix}}
+\end{align*}
+However, it follows that a standard-form polyhedron has the form:
+\begin{align*}
+    \mathcal{P} = \curly{x \,\Biggr\lvert\, \begin{matrix}
+        Ax = b\\ x\geq 0
+    \end{matrix}} \textrm{  with  } b \geq 0.
+\end{align*}
+\sheader{Converting to Standard Form}
+\begin{enumerate}
+    \item Positive $b$ and positive $d$:
+    \begin{enumerate}
+        \item For $b_i < 0$, replace:
+        \begin{align*}
+            a_i x = b_i \to (-a_i)x = (-b_i)
+        \end{align*}
+        \item For $d_i < 0$, replace:
+        \begin{align*}
+            c_i^Tx \leq d_i \to (-c_i)^T x \geq (-d_i)\\
+            c_i^Tx \geq d_i \to (-c_i)^Tx \leq (-d_i)
+        \end{align*}
+    \end{enumerate}
+    \item Free Variables 
+    \begin{itemize}
+        \item $x_i$ is called a \textbf{free variable} if it has 
+        no constraints
+        \item There are no free variables in standard form -- every 
+        variable must be nonnegative
+    \end{itemize}
+    Converting Free Variables: Every free variable $x_i$ is replaced
+    with two new variables $x_i'$ and $x_i''$:
+    \begin{align*}
+        x_i = x_i' - x_i'', \,\, x_i' \geq 0 \textrm{  and  } x_i'' \geq 0
+    \end{align*}
+    \begin{itemize}
+        \item $x_i'$ encodes the positive part of $x_i$
+        \item $x_i''$ encodes the negative part of $x_i$
+        \item optimal solution must have that $x_i' \cdot x_i'' = 0$
+    \end{itemize}
+    \item Slack and Surplus
+    \gap 
+    For every inequality constraint of the form:
+    \begin{align*}
+        c_i^Tx \leq d_i && (c_i^Tx \geq d_i)
+    \end{align*}
+    Introduce a new \textbf{slack} (or \textbf{surplus}) variable $s_i$, 
+    replacing the inequality with two constraints:
+    \begin{align*}
+        \begin{cases}
+            c_i^Tx + s_i = d_i\\
+            s_i \geq 0
+        \end{cases}
+        &&
+        \left(
+            \begin{cases}
+                c_i^Tx - s_i = d_i\\
+                s_i \geq 0
+            \end{cases}
+        \right)
+    \end{align*}
+\end{enumerate}
+In standard form, there are:
+\begin{itemize}
+    \item $n$ variables $(x_1, \ldots, x_n)$
+    \item $m + n$ total constraints
+    \begin{itemize}
+        \item $m$ equality constraints ($Ax = b$)
+        \item $n$ inequality constraints ($x\geq 0$)
+    \end{itemize}
+\end{itemize}
+For any basic solution $x$:
+\begin{itemize}
+    \item The basic set $\mathcal{B}$ must have $n$ elements
+    \item Thus, exactly $n$ of the constraints need to be active at $x$
+    \item $m$ equality constraints are always satisfied
+    \item $n-m$ of the inequality constraints $x\geq 0$ should be ``active''
+\end{itemize}
+
+\header{Duality}
+\sheader{Primal Problem}
+\begin{align*}
+    \oper{minimize}{x}\,\,\, c^Tx \textrm{  subject to  } Ax = b, \, x\geq 0
+\end{align*}
+\begin{itemize}
+    \item $n$ variables, $m$ constraints
+    \item optimal solution $x^*$
+    \item optimal value $p^* \equiv c^T x^*$
+\end{itemize}
+
+\sheader{Relaxed Problem}
+\begin{align*}
+    \oper{minimize}{x}\,\,\, c^Tx + y^T(b-Ax) \textrm{  subj to  } x\geq 0
+\end{align*}
+\begin{itemize}
+    \item the relaxed problem provides a lower bound for $p^*$:
+    \begin{align*}
+        g(y) := \min_{x\geq 0}\curly{c^T x + y^T(b-Ax)} \leq c^T x^* + y^T(b-Ax^*) = c^Tx^* = p^*
+    \end{align*}
+\end{itemize}
+\sheader{Tightest Lower Bound} Find $y$ that solves
+\begin{align*}
+    \oper{maximize}{y}\,\,\, g(y).
+\end{align*}
+It follows that:
+\begin{align*}
+    g(y) = \begin{cases}
+        b^Ty & \textrm{if } c - A^Ty \geq 0\\
+        -\infty & \textrm{otherwise}
+    \end{cases}
+\end{align*}
+
+Because we want to \textbf{maximize} $g(y)$, we must have that:
+\begin{align*}
+    \oper{maximize}{y} \,\,\, b^Ty && \iff && \oper{maximize}{y, z}\,\,\, b^Ty\\
+    \textrm{subject to}\,\,\, c-A^Ty \geq 0 && && \textrm{subject to} \,\,\, A^Ty + z = c, z\geq 0
+\end{align*}
+This is the \textbf{dual} LP.
+\gap
+\sheader{Weak Duality} Suppose that $x$ is primal feasible:
+\begin{align*}
+    Ax = b,\,\, x\geq 0
+\end{align*}
+Suppose that $(y,z)$ is dual feasible:
+\begin{align*}
+    A^Ty + z = c, \,\, z \geq 0
+\end{align*}
+Then the primal objective is bounded below by the dual objective.
+\begin{align*}
+    c^Tx \geq y^T b.
+\end{align*}
+\sheader{Weak Duality Theorem} If $(x, y, z)$ is primal/dual feasible,
+then:
+\begin{itemize}
+    \item The primal value is an upper bound for the dual value
+    \item The dual value is a lower bound for the primal value
+\end{itemize}
+
+\sheader{Complementarity}
+\begin{itemize}
+    \item If $x^Tz= 0$ we say the bound is ``tight''.
+\end{itemize}
+
+\sheader{Strong Duality Theorem} If an LP has an optimal solution, so 
+does its dual, and the optimal values are equal, ie, $p^* = d^*$.
+\gap
+\sheader{Theorem} The primal-dual triple $(x, y, z)$ is optimal if and 
+only if:
+\begin{enumerate}[(1)]
+    \item $Ax = b, x\geq 0$
+    \item $A^Ty + z = c, z\geq 0$
+    \item $x^Tz = 0$
+\end{enumerate}
+\header{Matrix Games}
+\begin{center}
+    \begin{tabular}{|l|l|}
+        \hline
+        Player X & Player Y \\
+        \hline
+        $\oper{maximize}{x, \lambda}\,\,\, \lambda$ & $\oper{minimize}{y, \nu} \,\,\, \nu $\\
+        $\textrm{subject to} \,\,\, \lambda e \leq Ax$ & $\textrm{subject to} \,\,\, \nu e \geq A^Ty$\\
+        \hspace{1.7cm}$e^Tx$, $x\geq 0$ &\hspace{1.7cm}$e^Ty$, $y\geq 0$\\
+        \hline
+    \end{tabular}
+\end{center}
+\pagebreak
+
+\header{Multiplicative Weights Update Method}
+Given some game, where on round $t$:
+\begin{itemize}
+    \item Player picks weights $p_t$ in the \textbf{simplex} 
+    \begin{align*}
+        p_t \in \Delta_n = \curly{p \in [0, 1]^n : \sum_{i=1}^n p_i =1}
+    \end{align*}
+    \item Adversary picks losses $\ell_t \in [-1, 1]^n$ for the experts
+    \item By the end of the round, player loses $p_t(i)\cdot \ell_t(i)$ for 
+    stock/expert $i$:
+    \begin{align*}
+        \textrm{Loss on round }t = \sum_{i=1}^{n}\ell_t (i) \cdot p_t(i) = l_t^T p_t
+    \end{align*}
+\end{itemize}
+
+We can evaluate the player through regret:
+\begin{align*}
+    \textrm{Regret}(T) = \sum_{t=1}^{T}\ell_t^T p_t - \min_{i\in [n]}\sum_{t=1}^{T}\ell_t(i)
+\end{align*}
+\textit{Note: Average regret goes to 0.}
 
 \end{document}

@@ -476,6 +476,71 @@ and $u \leq v$ on $\partial U$, then
     u(x,t) \leq v(x, t)
 \end{align*}
 for all of $U$.
+\pagebreak
+
+\sheader{Heat Equation with a Reflection and a Source} Given a PDE of the form:
+\begin{align*}
+    \begin{cases}
+        u_t = ku_{xx}\\
+        0<x<\infty,\,\, t> 0\\
+        u(0, t) = f(t)\\
+        u(x, 0) = 0\\
+        \lim_{x \to + \infty} u(x, t) = 0
+    \end{cases}
+\end{align*}
+
+We can use the \underline{Poisson Kernel}, derived from the 
+Laplace transform:
+
+\begin{align*}
+    P(x, t) = S(x, t) \frac{x}{t} = \frac{x}{t\sqrt{4\pi kt}}e^{\frac{-x^2}{4kt}}.
+\end{align*}
+
+And such, the solution is the convolution of $f(t)$ and the Poisson Kernel:
+\begin{align*}
+    u(x, t) = f(t) \star_t P(x, t)
+\end{align*}
+
+\header{The Laplace Equation}
+
+We can also use the \underline{Separation of Variables} technique for 
+solving PDEs. The separation of variables technique relies on assuming 
+a separable solution, that is for some PDE with both spatial and 
+temporal dependance:
+\begin{align*}
+    u(\vec{x}, t) = V(\vec{x}\,)T(t).
+\end{align*}
+
+\sheader{Laplace Equation} Let $D$ be a bounded domain in $\mathbb{R}^n$
+with boundary $\partial D$ and unit outer normal $\hat{n}$. The 
+\textit{Laplace Operator} is then given by:
+\begin{align*}
+    \Delta u = \begin{cases}
+        u_{xx}, & n=1\\
+        u_{xx} + u_{yy}, & n = 2\\
+        u_{xx} + u_{yy} + u_{zz}, & n = 3
+    \end{cases}
+\end{align*}
+It is said a function $u$ is harmonic if $\Delta u = 0$.
+\gap
+\sheader{Maximal Principle for Harmonic Functions} For 
+$D \in \mathbb{R}^n$, $D$ connected and $u$ continuous on $D$,
+and $\Delta u \geq 0$ in $D$ (subsolution), then:
+\begin{align*}
+    \max_{\overline{D}} \leq \max_{\partial D}u
+\end{align*}
+
+\sheader{Separation of Variables in Radial Coordinates} For an IBVP where 
+radial coordinates is preferable, the Laplacian can take the form:
+\begin{align*}
+    \Delta = \partial_x^2 + \partial_y^2 = \partial_r^2 + \frac{1}{r} \partial_r + \frac{1}{r^2} \partial_\theta^2
+\end{align*}
+
+Which, assuming a separable solution $u(r, \theta, t) = R(r)\Theta(\theta)T(t)$, yields the form:
+\begin{align*}
+    \frac{r^2 R'' + rR}{R} = -\frac{\Theta''}{\Theta} = \lambda.
+\end{align*}
+
 
 
 \end{document}
