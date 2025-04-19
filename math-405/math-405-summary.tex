@@ -178,14 +178,14 @@ It is known that for these interpolating polynomials that the following conditio
   \end{align*}
 \end{proof}
 
-\sheader{Chebyshev Points} Equispaced points can often to lead to large errors in interpolation. Hence, we can employ \textit{Chebyshev Points}, which follow from the x components of points on the unit circle.
+\sheader{Chebyshev Points} Equispaced points can often to lead to large errors in interpolation. Hence, we can employ \textit{Chebyshev Points}, which follow from the $x$ components of points on the unit circle.
 \gap
 \sheader{An aside on instability and stability} Small errors can be magnified by an \underline{unstable algorithm}, even for a well-conditioned problem!
 \gap
 \sheader{Barycentric Formula for Lagrange Polynomial Interpolation} This can prove to be a much more stable method of computing Lagrange polynomial interpolants.
 
 \begin{align*}
-  p_n(x) &= \frac{\sum_{k=0}^{n} \frac{w_k}{x-x_k}}{\sum_{k=0}^{n} \frac{w_k}{x-x_k}}\\
+  p_n(x) &= \frac{\sum_{k=0}^{n} \frac{w_k}{x-x_k} f_k}{\sum_{k=0}^{n} \frac{w_k}{x-x_k}}\\
   w_k &= \frac{1}{(x_k-x_0)(x_k - x_1) \cdots (x_k - x_{k-1}) (x_k-x_{k+1}) \cdots (x_k - x_n)}
 \end{align*}
 
