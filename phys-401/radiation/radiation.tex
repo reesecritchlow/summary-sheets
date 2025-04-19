@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+\usepackage{tabularx}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\mheader}[1]{\textbf{{\sheader{#1}}}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\usepackage{physics}
+% \usepackage{braket}
+
+\begin{document}
+\begin{center}
+    \Large PHYS 401 Radiation Notes\\
+    \normalsize Reese Critchlow
+\end{center}
+    
+We can separate the calculations for radiation in three main ways:
+\gap
+\header{Ideal Electric Dipole}
+For an ideal electric dipole in the $\hat{z}$ direction, $\vec{p}\,(t) = p_0\cos(\omega t)\hat{\pmb{z}}$ we get that:
+\begin{align*}
+    V(r, \theta, t) &\approx -\frac{p_0 \omega}{4\pi \epsilon_0c}\left(\frac{\cos \theta}{r}\right) \sin \left[\omega(t- r/c)\right]
+    && \mathbf{A}(r, \theta, t) \approx -\frac{\mu_0 p_0 \omega}{4\pi r} \sin \left[\omega(t - r/c)\right]\hat{\pmb{z}}\\
+    \mathbf{E}(\vec{r}, t) &\approx -\frac{\mu_0 p_0 \omega^2}{4\pi}\left(\frac{\sin\theta}{r}\right)\cos\left[\omega(t- r/c)\right] \hat{\pmb{\theta}}
+    && \mathbf{B}(\vec{r}, t) = - \frac{\mu_0 p_0 \omega^2}{4\pi c}\left(\frac{\sin\theta}{r}\right)\cos\left[\omega(t- r/c)\right]\hat{\pmb{\phi}}\\
+    \mathbf{S}(\vec{r}, t) &\approx \frac{\mu_0}{c}\curly{\frac{p_0\omega^2}{4\pi} \left(\frac{\sin\theta}{r}\right)\cos[\omega(t-r/c)]}^2 \hat{\pmb{r}}
+\end{align*}
+
+We can attempt to generalize this in more ``general coordinates'':
+\begin{align*}
+    V(\vec{r}, t) &\approx \frac{1}{4\pi \epsilon} \frac{\vec{n} \cdot \dot{\vec{p}}\,(t_0)}{rc} && \vec{A}(\vec{r}, t) \approx \frac{\mu_0 }{4\pi} \frac{\dot{\vec{p}}\,(t_0)}{r}\\
+    \vec{E}(\vec{r}, t) &\approx \frac{\mu_0}{4\pi r}\left[\vec{n} \times (\vec{n} \times \ddot{\vec{p}}\,)\right]&&
+    \vec{B}(\vec{r}, t) \approx -\frac{\mu_0}{4\pi rc}\left(\vec{n} \times \ddot{\vec{p}}\right)\\
+    \vec{S}(\vec{r}, t) &\approx \frac{\mathbf{E} \times \mathbf{B}}{\mu_0} = \frac{\mu_0 \vec{n}}{16\pi^2 r^2c^2}\left[\ddot{\vec{p}}\,^2 - (\vec{n} \cdot \ddot{\vec{p}}\,)^2\right]
+\end{align*}
+\gap 
+For all dipole orientations, one can also use the following:
+\begin{align*}
+    \langle \mathbf{S} \rangle &= \left(\frac{\mu_0 p_0^2 \omega^4}{32 \pi^2 c}\right)\frac{\sin^2\theta}{r^2}\pmb{\hat{r}}\\
+    \langle P \rangle &= \int \langle \mathbf{S} \rangle \cdot d \mathbf{a} = \frac{\mu_0 p_0^2 \omega^4}{12 \pi c^3}
+\end{align*}
+
+\header{General Radiation Formulae}
+Recall the formula for generalized dipole moment:
+\begin{align*}
+    \mathbf{p}(t) = \int \mathbf{r}' \rho(\mathbf{r}', t_0) d^3 \mathbf{r}'
+\end{align*}
+
+Given this, we can use the generalized coordinates formula from the prior section.
+\gap
+This also extends to the \underline{total radiated power}:
+\begin{align*}
+    P_\textrm{rad}(t_0) \approxeq \frac{\mu_0}{6\pi c}\left[\ddot{p}(t_0)\right]^2
+\end{align*}
+
+Note that this power $P$ is energy per unit time, so we can also write $P = \frac{dW}{dt}$, where $W$ is energy.
+\gap 
+We also introduce the Larmor Formula, which gives the power of an arbitrary moving charge 
+with acceleration $a(t)$:
+\begin{align*}
+    P = \frac{\mu_0q^2}{6\pi c}[a(t)]^2
+\end{align*}
+\pagebreak
+
+\header{Magnetic Dipole Radiation}
+Given some magnetic dipole formed from some oscillating current $I(t) = I_0 \cos(\omega t)$ in a wire loop fo radius $b$,
+the dipole takes the form:
+\begin{align*}
+    \mathbf{m}(t) = \pi b^2 I(t)\pmb{\hat{z}} = m_0 \cos(\omega t)\pmb{\hat{z}}
+\end{align*}
+Thus, we get some similar equations:
+\begin{align*}
+    \mathbf{A}(r, \theta, t) &\approx - \frac{\mu_0 m_0 \omega}{4\pi c}\left(\frac{\sin\theta}{r}\right)\sin \left[\omega(t-r/c)\right]\pmb{\hat{\phi}}\\
+    \mathbf{E}(\mathbf{r}, t) &\approx \frac{\mu_0 m_0 \omega^2}{4\pi c} \left(\frac{\sin \theta}{r}\right) \cos\left[\omega(t- r/c)\right]\pmb{\hat{\phi}} &&
+    \mathbf{B}(\mathbf{r}, t) \approx \frac{-\mu_0 m_0 \omega^2}{4\pi c^2}\left(\frac{\sin \theta}{r}\right) \cos \left[\omega(t- r/c)\right] \pmb{\hat{\theta}}
+\end{align*}
+
+We can actually generalize this as in the same way to the electric case:
+\begin{align*}
+    V &= 0\\
+    \mathbf{A}(\mathbf{r}, t) &\approx \frac{\mu_0}{4\pi}\frac{\vec{m} \times \vec{n}}{r^2} = \frac{\mu_0}{4\pi} \frac{\vec{m} \times \vec{r}}{r^3}\\
+    \mathbf{E}(\mathbf{r}, t) &\approx - \frac{\mu_0}{4\pi rc} (\vec{n} \times \ddot{\vec{m}}) \\
+    \mathbf{B}(\mathbf{r}, t) &\approx \frac{\mu_0}{4\pi rc^2} \left[\vec{n} \times (\vec{n} \times \ddot{\vec{m}})\right]\\
+    \mathbf{S}(\mathbf{r}, t) &\approx \frac{\mu_0\vec{n}}{16\pi^2 r^2 c^3}\left[\ddot{\vec{m}}\,^2 - (\vec{n} \cdot \ddot{\vec{m}}\,)^2\right]
+\end{align*}
+
+\begin{align*}
+    \omega = kv
+\end{align*}
+
+\end{document}
+      

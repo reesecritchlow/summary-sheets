@@ -1,0 +1,295 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\setlength\parindent{0pt}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\hyphenchar\font=-1
+\usepackage{tabularx}
+
+\newcommand{\header}[1]{\begin{large}\noindent #1\end{large}\\\rule{\textwidth}{0.5pt}}
+\newcommand{\sheader}[1]{\underline{#1:}}
+\newcommand{\mheader}[1]{\textbf{{\sheader{#1}}}}
+\newcommand{\gap}{\medskip\\}
+\newcommand{\centertext}[1]{\begin{center}#1\end{center}}
+\newcommand{\bfrac}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\formula}[3]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\end{tcolorbox}\end{center}}
+\newcommand{\where}{\hspace{0.5cm} \textrm{where} \hspace{0.5cm}}
+\newcommand{\hgap}{\hspace{0.5cm}}
+\newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\doubleformula}[4]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\end{tcolorbox}\end{center}}
+\newcommand{\curly}[1]{\left\{#1\right\}}
+\newcommand{\proj}[2]{{}\textrm{proj}_{#1}\left(#2\right)}
+\newcommand{\sgap}{\smallskip\\}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\Arg}{\textrm{Arg}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+\newcommand{\tripleformula}[5]{\begin{center} \begin{tcolorbox}[title = #2] $$#3$$\\$$#4$$\\$$#5$$\end{tcolorbox}\end{center}}
+
+\usepackage{physics}
+% \usepackage{braket}
+
+\begin{document}
+
+\begin{center}
+        \Large PHYS 401 Relativity Notes\\
+        \normalsize Reese Critchlow
+\end{center}
+
+\header{Lorentz Transformations}
+
+For any frame $\mathcal{S}'$ travelling at velocity $v$ relative to some other
+frame $\mathcal{S}$ along the $x$-axis, the new coordinates of the new frame $\mathcal{S}'$
+are given by the following:
+\begin{align*}
+    t' &= \frac{t- \frac{v}{c^2}x}{\sqrt{1- \frac{v^2}{c^2}}}\\
+    x' &= \frac{x- vt}{\sqrt{1 - \frac{v^2}{c^2}}}\\
+    y' &= y\\
+    z' &= z
+\end{align*}
+
+We can then also derive the inverse Lorentz transformations:
+\begin{align*}
+    t &= \gamma \left(t' + \frac{v}{c^2} x'\right)\\
+    x &= \gamma (x' + vt')\\
+    y &= y'\\
+    z &= z'\\
+\end{align*}
+
+\underline{Lorentz Invariance} are any quantities that remain the same under a Lorentz transformation. These include:
+\begin{itemize}
+    \item The speed of light.
+    \item The spacetime interval between any two points in Minkowski space.
+    \item The scalar product of any two four-vectors.
+    \item $\vec{E} \cdot \vec{B}$ is invariant.
+    \item $\frac{1}{c^2}\vec{E} - \vec{B}$
+\end{itemize}
+
+Where $\ds \gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}$.
+\gap
+This can also be represented using matricies:
+\begin{align*}
+    \begin{pmatrix}
+        ct'\\
+        x_1'\\
+        x_2'\\
+        x_3'\\
+    \end{pmatrix}
+    = \begin{pmatrix}
+        \gamma & - \gamma \beta & 0 & 0\\
+        -\gamma \beta & \gamma & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1\\
+    \end{pmatrix}\begin{pmatrix}
+        ct\\x_1\\x_2\\x_3
+    \end{pmatrix}
+\end{align*}
+\header{4-Vectors}
+In the notion of Minkowski space, we have that each point in the 
+universe has a position and a time. Hence, like in simple positional/3-space,
+we can define a 4-vector to capture both space and time.
+
+\begin{align*}
+    A_\mu = \mathbf{A} &= (A_t, A_x, A_y, A_z)\\
+    &= (A_t, A_i)\\
+    &= (a_t, \mathbf{a})
+\end{align*}
+
+Thus, we define the dot product for a four-vector to be the following:
+\begin{align*}
+    a_\mu b_\mu &= a_tb_t - \mathbf{a} \cdot \mathbf{b}.
+\end{align*}
+
+This dot product makes it such that the 4-vector is invariant under 
+rotations or frame changes.
+
+\sheader{Common 4-vectors}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|}
+    \hline
+    \underline{Quantity} & \underline{Form} \\
+    \hline
+    4-velocity & $\ds X_\mu = (ct, \vec{x}) = (ct, x, y, z)$ \\
+    \hline
+    4-velocity & $\ds \gamma(c, \vec{u}) = \gamma\left(c, \frac{dx}{dt}, \frac{dy}{dt}, \frac{dz}{dt}\right)$ \\
+    \hline
+    4-momentum & $\ds P_\mu = (\gamma m c, \gamma m \vec{v}) = \left(\frac{E}{c}, \vec{p}\right) = \left(\frac{E}{c}, p_x, p_y, p_z\right)$\\
+    \hline
+    4-current & $\ds J_\mu = (c\rho, \vec{j}) = (c\rho, j_x, j_y, j_z)$ \\
+    \hline
+    4-potential & $\ds \left(\frac{V}{c}, \vec{A}\right) = \left(\frac{V}{c}, A_x, A_y, A_z\right)$\\
+    \hline
+\end{tabular}
+\gap
+\sheader{Four-Dimensional Gradient}
+
+We can define the four-dimensional gradient to be the following:
+
+\begin{align*}
+    \nabla_\mu = \left(\frac{\partial}{\partial t}, -\pmb{\nabla} \right),
+\end{align*}
+
+which, when applied to a 4-vector yields the following:
+\begin{align*}
+    \nabla_\mu a_\mu = \frac{\partial}{\partial t} a_t + \pmb{\nabla} \cdot \mathbf{a}.
+\end{align*}
+
+\renewcommand{\arraystretch}{3}
+\begin{tabular}{|c|c|}
+    \hline
+    \underline{Derivative} & \underline{Form} \\
+    \hline
+    4-divergence & $\ds \nabla_\mu a_\mu = \frac{\partial a_t}{\partial t} + \pmb{\nabla} \cdot{a}$ \\
+    \hline
+    4-gradient & $\ds \nabla_\mu \lambda = \left(\frac{\partial \lambda}{\partial t}, - \pmb{\nabla} \lambda\right)$ \\
+    \hline
+    4-laplacian (d'Alembertian) & $\ds \nabla_\mu \nabla_\mu = \frac{\partial^2}{\partial t^2} - \nabla^2 = \Box^2$\\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+\header{Applying 4-Dimensional Quantities to Electrodynamics}
+
+As we knew from the 3-dimensional case:
+
+\begin{align*}
+    \Box^2 V = \frac{\rho}{\epsilon_0} && \Box^2 \mathbf{A} = \frac{\mathbf{J}}{\epsilon_0}.
+\end{align*}
+
+Hence, we can generalize to get the following form:
+
+\begin{align}
+    \Box^2 A_\mu = \frac{j_\mu}{\epsilon_0}
+\end{align}
+
+We can also say that these equations hold only if the Lorentz 
+gauge is obeyed. This is called the \underline{Lorenz Condition} and 
+can be written $\nabla_\mu A_\mu = 0$. The Lorenz Condition is said 
+to be an invariant condition and thus, for all frames (1) holds.
+\gap
+
+We can also say that the charage conservation equation can be 
+written in similar terms:
+\begin{align*}
+    \nabla_\mu j_\mu = \frac{\partial \rho}{\partial t} + \pmb{\nabla} \cdot \mathbf{J} = 0
+\end{align*}
+and that gauge invariance has that:
+\begin{align*}
+    A_\mu' = A_\mu - \nabla_\mu f
+\end{align*}
+Maxwell's equations can also be rewritten in terms of four-vectors:
+\begin{align*}
+    \Box^2 A_\mu = j_\mu \mu_0
+\end{align*}
+We can also look at the lorentz transformations for $V$ and $A_x$:\\
+\textit{Note: these give $V'$ and $A_x'$ in the \underline{unprimed} coordinates, not the primed ones.}
+\begin{align*}
+    \frac{V'}{c} = \gamma \left(\frac{V}{c} - \beta A_x\right) && A_x' = \gamma\left(A_x - \beta \frac{V}{c}\right)
+\end{align*}
+For a moving point charge in the $x$ direction, we can say that:
+\begin{align*}
+    V &= \frac{q}{4\pi \epsilon_0} \frac{1}{\sqrt{(x-vt)^2 + \left(1 - \frac{v^2}{c^2}\right) (y^2 + z^2)}}\\
+    A_x &=\frac{v}{c^2}\frac{q}{4\pi \epsilon_0} \frac{1}{\sqrt{(x-vt)^2 + \left(1 - \frac{v^2}{c^2}\right) (y^2 + z^2)}}\\
+    \vec{E} &= \frac{q}{4\pi \epsilon_0}\left(1 - \frac{v^2}{c^2}\right) \left[
+        \frac{(x-vt) \hat{x} + y\hat{y} + z \hat{z}}
+        {\left[(x-vt)^2 + \left(1- \frac{v^2}{c^2}\right)(y^2 + z^2)\right]^{\frac{3}{2}}}
+    \right]
+    \\
+    \vec{B} &= \frac{\vec{v} \times \vec{E}}{c^2}\\
+    \vec{S} &= \frac{-\vec{E} (\vec{E} \cdot \vec{v}\,) + \vec{v}\vec{E}\,^2}{\mu_0 c^2}
+\end{align*}
+
+\sheader{Field Tensor} Since we cannot possibly contain all of the 
+information of the fields within a simple 4-vector, we use a tensor to 
+describe the fields. This tensor $F$ is an antisymmetric tensor 
+such that $-F = F$. Each entry in $F$ is given by:
+\begin{align*}
+    F_{\mu\nu} = \nabla_\mu A_\nu - \nabla_\nu A_\mu
+\end{align*}
+and thus, we can define the tensor as:
+\begin{align*}
+    F = 
+    \renewcommand{\arraystretch}{1.25}
+    \begin{bmatrix}
+        0 & -E_x / c & -E_y/c & -E_z/c \\
+        E_x/c & 0 & -B_z & B_y\\
+        E_y/c & B_z & 0 & -B_x\\
+        E_z/c & -B_y & B_x & 0
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        0 & F_{0x} & F_{0y} & F_{0z} \\
+        F_{x0} & 0 & F_{xy} & F_{xz}\\
+        F_{y0} & F_{yx} & 0 & F{yz}\\
+        F_{z0} & F_{zx} & F_{zy} & 0
+    \end{bmatrix}
+\end{align*}
+\pagebreak
+
+\sheader{Generalized Relativistic Transformations}
+
+Generalizing this, we can write the transforms for $\mathbf{E}$ and $\mathbf{B}$ fields in a generalized sense, given some 
+$\mathcal{S}'$ frame with velocity $v_x$ relative to some $\mathcal{S}$ frame.
+Again, these all give results in the \underline{\textit{unprimed}} coordinates.
+\begin{align*}
+    E_x' &= E_x && B_x' = B_x\\
+    E_y' &= \gamma(E_y - v B_z) && B_y' = \gamma\left(B_y + \frac{v}{c^2} E_z\right)\\
+    E_z' &= \gamma(E_z + vB_y) && B_z' = \gamma\left(B_z - \frac{v}{c^2} E_y\right)
+\end{align*}
+
+We can generalize this further using the following forms:
+\begin{align*}
+    E_x' &= E_x && B_x' = B_x\\
+    E_y' &= \gamma (\mathbf{E} + \mathbf{v} \times \mathbf{B})_y && B_y' = \gamma (\mathbf{B} - \mathbf{v} \times \mathbf{E})_y\\
+    E_z' &= \gamma (\mathbf{E} + \mathbf{v} \times \mathbf{B})_z && B_y' = \gamma (\mathbf{B} - \mathbf{v} \times \mathbf{E})_z
+\end{align*}
+
+\sheader{4-Force}
+
+\begin{align*}
+    f_\mu = \left(\frac{\mathbf{F} \cdot \frac{\mathbf{v}}{c}}{\sqrt{1 - \frac{v^2}{c^2}}}, \frac{\mathbf{F}}{\sqrt{1 - \frac{v^2}{c^2}}}\right)
+\end{align*}
+
+Can be generalized:
+
+\begin{align*}
+    ds = dt \sqrt{1 - \frac{v^2}{c^2}}
+\end{align*}
+and we can rewrite as:
+\begin{align*}
+    \frac{dx_\mu}{ds} = u_\mu
+\end{align*}
+as well as:
+\begin{align*}
+    \frac{dp_\mu}{ds}= f_\mu
+\end{align*}
+Or, lastly:
+\begin{align*}
+    m_0 \frac{d^2x_\mu}{ds^2} = f_\mu = qu_\nu F_{\mu \nu}
+\end{align*}
+
+\sheader{Generalizing, even further}
+
+For some:
+\begin{align*}
+    F_{\mu\nu} = a_\mu b_\nu - a_\nu b_\mu
+\end{align*}
+
+We get that:
+\begin{align*}
+    a_0' &= \frac{a_0 - \frac{v}{c} a_x}{\sqrt{1 - \frac{v^2}{c^2}}} && b_0' = \frac{b_0 - \frac{v}{c} b_x}{\sqrt{1 - \frac{v^2}{c^2}}}\\
+    a_x' &= \frac{a_x - \frac{v}{c} a_0}{\sqrt{1 - \frac{v^2}{c^2}}} && b_x' = \frac{b_x - \frac{v}{c} b_0}{\sqrt{1 - \frac{v^2}{c^2}}}\\
+    a_{y, z}' &= a_{y, z}  && b_{y, z}' = b_{y, z}
+\end{align*}
+
+\end{document}
